@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<!-- saved from url=(0014)about:internet -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title:@Resources.Res.System_FrontName</title>
+    <script src="~/Scripts/cdn/BrowerInfo.js"></script>
+    <script>
+        var gb_approot = '@Url.Content("~")';
+    </script>
+    @if (ViewBag.IsFirstPage)
+    {
+        <link href="~/Content/css/index.css" rel="stylesheet">
+    }
+    else
+    {
+        <link href="~/Content/css/page.css" rel="stylesheet">
+    }
+    @RenderSection("css", false)
+</head>
+
+<body class="@ViewBag.BodyClass">
+
+    <div id="wrapper">
+
+        <header id="header">
+            <div class="wrap">
+                <h1 class="logo"><a href="~/Index" title="回首頁">1komo 萬客摩</a></h1>
+                <nav id="menu">
+                    <h2 class="hidden">主選單</h2>
+                    <a href="~/AboutUs">關於我們</a>
+                    <a href="~/News/list">最新消息</a>
+                    <a href="~/Products/list">商品介紹</a>
+                    <a href="~/QA">常見問答</a>
+                    <a href="~/ContactUs">聯絡我們</a>
+                    <a href="~/History">歷史訂單查詢</a>
+                </nav>
+                <ul class="topNav list-inline">
+                    @if ((Boolean)ViewBag.isLogin == true)
+                    {
+                        <li class="hello">
+                            HI! @ViewBag.MName 您好
+                            (<a href="~/Active/Purchase/PersonalView">會員資料管理</a>)
+                        </li>
+                        <li><a href="~/Login/ajax_MemberLogout" title="會員登出"><i class="icon-exit"></i><span>會員登出</span></a></li>
+                    }
+                    else
+                    {
+                        <li><a href="~/Member/Login" title="會員登入"><i class="icon-login"></i><span>會員登入</span></a></li>
+                    }
+                    <li class="cart"><a href="~/Cart" title="購物車"><i class="icon-cart"></i><span>購物車</span><em id="p_count">@ViewBag.ProductCount</em></a></li>
+                </ul>
+            </div><!-- wrap //-->
+        </header><!-- header //-->
+
+        <main id="main">
+            @if (ViewBag.IsFirstPage)
+            {
+                @RenderBody()
+            }
+            else
+            {
+                @RenderBody()
+                <aside id="sidebar">
+                    @Html.Partial("~/Views/Products/Sidebar.cshtml")
+                </aside>
+            }
+        </main>
+
+    </div><!-- wrapper //-->
+
+    <footer id="footer">
+        <div class="wrap">
+            <section class="about">
+                <h2 class="title"><span>About Us</span></h2>
+                <p>
+                關於我們內容
+                </p>
+            </section>
+            <section class="info">
+                <h2 class="title"><span>Information</span></h2>
+                <ul class="list-inline">
+                    <li><a href="~/News/list">最新消息</a></li>
+                    <li><a href="~/QA">常見問答</a></li>
+                    <li><a href="~/QA/#qa-1">加入會員</a></li>
+                    <li><a href="~/QA/#qa-2">購物須知</a></li>
+                    <li><a href="~/QA/#qa-3">招商專區</a></li>
+                </ul>
+            </section>
+            <section class="contact">
+                <h2 class="title"><span>Contact Us</span></h2>
+                <ul class="list-unstyled">
+                    <li>桃園市中壢區東興街121號</li>
+                    <li>Tel: <strong>(03) 468-9493</strong> Fax: <strong>(03) 428-3055</strong></li>
+                    <li>統一編號: 54307745</li>
+                </ul>
+            </section>
+            <aside class="fb">
+                <h2 class="hidden">Facebook</h2>
+                <img src="~/Content/images/FB.jpg" alt="">
+            </aside>
+            <div class="copyright">1KOMO.com &copy; 2015</div>
+            <a href="#header" class="goTop scroll">TOP</a>
+        </div>
+    </footer><!-- footer -->
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
+        // 回頂端
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.goTop').fadeIn();
+            } else {
+                $('.goTop').fadeOut();
+            }
+        });
+        $('.scroll').click(function (event) {
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 1000);
+            event.preventDefault();
+        });
+
+        // 行動裝置的主選單
+        $(".menu-trigger").click(function (event) {
+            $("#menu").fadeToggle();
+            // $("#menu").toggleClass("toggled");
+            event.preventDefault();
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+    <script src="~/Scripts/GoogleAnalytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@charset "utf-8";
+
+
+/*  客製化
+--------------------------------*/
+$custom: (
+	login-bg: (
+		bg:          '../../images/bg.gif',
+		color:       transparent,
+		bg2:         '../../images/bg2.gif'
+	),
+	login-title: (
+		img:         '../../images/logo.gif',
+		width:       471px,
+		height:      100px,
+		sub-color:   #0D4D4B,
+		sub-gutter:  50px
+	),
+	login-box: (
+		bg:          '../../images/loginBox.png',
+		width:       506px,
+		height:      367px,
+		gap:         30px
+	),
+	login-form: (
+		width:       450px,
+		padding:     25px,
+		label-align: left,
+		label-color: #fff,
+		label-size:  16px,
+		btn-img:     '../../images/btn.png',
+		btn-width:   113px,
+		btn-height:  47px
+	),
+	banner:(
+		img:         '../../images/banner.jpg',
+		bg:          '../../images/bannerBg.gif',
+		height:      80px,
+		btn-color:   #69BB3F
+	)
+);
+
+
+/*  編輯器 - 自訂樣式
+--------------------------------*/
+$editor:(
+	a: (
+		color:#c9323c,
+		hover:#2aa5b5
+	),
+	p: (
+		line-height: 140%,
+		lead-size:16px,
+		lead-lineheight:150%
+	),
+	strong: (
+		
+	),
+);

@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+// 產生 content
+@mixin make-content($content:'', $display: block, $position: absolute, $width: 100%, $height:$width) {
+    content:$content;
+    display: $display;
+    width: $width;
+    height: $height;
+    position: $position;
+}
+
+// Sizing 只輸入一個值時是正方形
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+// 做圓形
+@mixin circle($size, $align:center, $display:inline-block) {
+    display: $display;
+
+    @extend %circle;
+    @include size($size);
+
+    @if $align == "center" {
+        @extend %text-center;
+        line-height: $size;
+    }
+}
+
+// 做三角形
+@mixin caret($direction, $width, $height:$width/2, $color: inherit, $display:inline-block) {
+    content: '';
+    display: $display;
+    border: $width/2 solid transparent;
+
+    @include size(0);
+
+    @if $direction == "up" {
+        border-bottom-color:$color;
+        border-bottom-width:$height;
+        border-top-width:0;
+    }
+    @else if $direction == "down" {
+        border-top-color:$color;
+        border-top-width:$height;
+        border-bottom-width:0;
+    }
+    @else if $direction == "left" {
+        border-right-color:$color;
+        border-right-width:$height;
+        border-left-width:0;
+    }
+    @else if $direction == "right" {
+        border-left-color:$color;
+        border-left-width:$height;
+        border-right-width:0;
+    }
+}
+
+// 做正三角形
+@mixin arrow($dir:right, $size:5px, $color: inherit) {
+    content: '';
+    display: block;
+    border: $size solid transparent;
+
+    @include size(0);
+
+    @if ($dir == "top" or $dir =="up") {
+        border-bottom: $size solid $color;
+    }
+    @else if ($dir == "bottom" or $dir == "down") {
+        border-top: $size solid $color;
+    }
+    @else if ($dir == "right") {
+        border-left: $size solid $color;
+    }
+    @else if ($dir == "left") {
+        border-right: $size solid $color;
+    }
+}

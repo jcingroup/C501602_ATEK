@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+@using ProcCore.NetExtension;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@Resources.Res.System_Name</title>
+    <link href="~/Content/css/_admin/page.css" rel="stylesheet" />
+    <link href="~/Content/css/_admin/vendors/toastr.css" rel="stylesheet" />
+    <link href="~/Content/css/_admin/vendors/jquery.loadmask.css" rel="stylesheet" />
+    <script>
+        var debug_account = '@ViewData["username"]';
+        var debug_password = '@ViewData["password"]';
+        var debug_validate = '@ViewData["validate"]';;
+        var gb_approot = '@Url.Content("~")';
+    </script>
+
+</head>
+<body class="login">
+    <div id="container">
+        <div id="main">
+            <h1 class="logo">
+                <span>@Resources.Res.System_Name</span>Web Manager
+            </h1>
+            <p class="copyright">@Html.Lang("copyright")</p>
+            <div class="login-box" id="login-box"></div>
+        </div>
+    </div>
+    <script src="~/Scripts/cdn/jquery.min.js"></script>
+    <script src="~/Scripts/build/app/vendors.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/build/app/m_login.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/cdn/jquery.loadmask.min.js"></script>
+</body>
+</html>

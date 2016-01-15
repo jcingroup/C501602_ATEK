@@ -1,0 +1,1 @@
+[{"Action":"","Area":"Active","Clickable":false,"Controller":"","Key":39,"ParentKey":0,"sort":1,"Title":"會員資料管理","Checked":false,"IconClass":"fa-user"},{"Action":"PersonalInfo","Area":"Active","Clickable":true,"Controller":"Sales","Key":40,"ParentKey":39,"sort":1,"Title":"個人資料編輯","Checked":false}]

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+// common 通用
+@import "mixins/shape";
+@import "mixins/position";
+
+// utils
+@import "mixins/text";
+@import "mixins/state";
+@import "mixins/tab-focus";
+@import "mixins/table";
+@import "mixins/form";
+@import "mixins/media";
+
+// css3 前綴(動畫.漸層)
+@import "mixins/prefix";
+@import "mixins/animation";
+@import "mixins/gradient";
