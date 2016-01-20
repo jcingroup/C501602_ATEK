@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-// 產生 content
-@mixin make-content($content:'', $display: block, $position: absolute, $width: 100%, $height:$width) {
-    content:$content;
-    display: $display;
-    width: $width;
-    height: $height;
-    position: $position;
-}
-
 // Sizing 只輸入一個值時是正方形
 @mixin size($width, $height: $width) {
     width: $width;
@@ -23,59 +14,74 @@
     @include size($size);
 
     @if $align == "center" {
-        @extend %text-center;
+        text-align: center;
         line-height: $size;
     }
 }
 
 // 做三角形
 @mixin caret($direction, $width, $height:$width/2, $color: inherit, $display:inline-block) {
-    content: '';
     display: $display;
-    border: $width/2 solid transparent;
+    border: $width solid transparent;
 
     @include size(0);
 
-    @if $direction == "up" {
+    @if ($direction == "top" or $direction =="up") {
         border-bottom-color:$color;
         border-bottom-width:$height;
-        border-top-width:0;
+        border-top-width:$width - $height;
     }
-    @else if $direction == "down" {
+    @else if ($direction == "bottom" or $direction == "down") {
         border-top-color:$color;
         border-top-width:$height;
-        border-bottom-width:0;
+        border-bottom-width:$width - $height;
     }
     @else if $direction == "left" {
         border-right-color:$color;
         border-right-width:$height;
-        border-left-width:0;
+        border-left-width:$width - $height;
     }
     @else if $direction == "right" {
         border-left-color:$color;
         border-left-width:$height;
-        border-right-width:0;
+        border-right-width:$width - $height;
     }
 }
 
-// 做正三角形
-@mixin arrow($dir:right, $size:5px, $color: inherit) {
+// 用偽類做三角形
+@mixin arrow($dir:right, $width:5px, $height: $width, $color: inherit) {
     content: '';
     display: block;
-    border: $size solid transparent;
+    border: $width solid transparent;
 
     @include size(0);
 
     @if ($dir == "top" or $dir =="up") {
-        border-bottom: $size solid $color;
+        border-bottom: $height solid $color;
+
+        @if $height != $width {
+            border-top-width: $height;
+        }
     }
     @else if ($dir == "bottom" or $dir == "down") {
-        border-top: $size solid $color;
+        border-top: $height solid $color;
+
+        @if $height != $width {
+            border-bottom-width: $height;
+        }
     }
     @else if ($dir == "right") {
-        border-left: $size solid $color;
+        border-left: $height solid $color;
+
+        @if $height != $width {
+            border-right-width: $height;
+        }
     }
     @else if ($dir == "left") {
-        border-right: $size solid $color;
+        border-right: $width solid $color;
+
+        @if $height != $width {
+            border-left-width: $height;
+        }
     }
 }

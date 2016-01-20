@@ -3,14 +3,15 @@
 // common 通用
 @import "mixins/shape";
 @import "mixins/position";
+@import "mixins/align";
 
 // utils
 @import "mixins/text";
-@import "mixins/state";
+// @import "mixins/state";
 @import "mixins/tab-focus";
-@import "mixins/table";
-@import "mixins/form";
-@import "mixins/media";
+// @import "mixins/table";
+// @import "mixins/form";
+@import "mixins/mq";
 
 // css3 前綴(動畫.漸層)
 @import "mixins/prefix";

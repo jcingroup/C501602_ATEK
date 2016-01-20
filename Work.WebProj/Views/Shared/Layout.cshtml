@@ -5,11 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <title>@ViewBag.Title:@Resources.Res.System_FrontName</title>
     <script src="~/Scripts/cdn/BrowerInfo.js"></script>
     <script>
         var gb_approot = '@Url.Content("~")';
     </script>
+    <!--[if lt IE 9]><script src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><![endif]-->
+    <link rel="stylesheet" href="~/Content/css/grid.css">
     @if (ViewBag.IsFirstPage)
     {
         <link href="~/Content/css/index.css" rel="stylesheet">
@@ -26,33 +31,23 @@
     <div id="wrapper">
 
         <header id="header">
-            <div class="wrap">
-                <h1 class="logo"><a href="~/Index" title="回首頁">1komo 萬客摩</a></h1>
-                <nav id="menu">
-                    <h2 class="hidden">主選單</h2>
-                    <a href="~/AboutUs">關於我們</a>
-                    <a href="~/News/list">最新消息</a>
-                    <a href="~/Products/list">商品介紹</a>
-                    <a href="~/QA">常見問答</a>
-                    <a href="~/ContactUs">聯絡我們</a>
-                    <a href="~/History">歷史訂單查詢</a>
+            <h1 onclick="location.href='@Url.Content("~/index")'" title="回首頁">ATEK JAPAN</h1>
+            <button class="menu-trigger">MENU</button>
+            <nav id="menu">
+                <h2 class="toggle hidden">MENU</h2>
+                <a href="~/Products/PSU_list">PRODUCTS</a>
+                <a href="~/AboutUs">ABOUT US</a>
+                <a href="~/Support">SUPPORT</a>
+                <a href="~/News/list">NEW</a>
+                <a href="~/ContactUs">CONTACT</a>
+            </nav>
+            <div class="dropdown">
+                <button class="dropbtn">Language</button>
+                <nav class="dropdown-content">
+                    <a href="#">English</a>
+                    <a href="#">日本語</a>
                 </nav>
-                <ul class="topNav list-inline">
-                    @if ((Boolean)ViewBag.isLogin == true)
-                    {
-                        <li class="hello">
-                            HI! @ViewBag.MName 您好
-                            (<a href="~/Active/Purchase/PersonalView">會員資料管理</a>)
-                        </li>
-                        <li><a href="~/Login/ajax_MemberLogout" title="會員登出"><i class="icon-exit"></i><span>會員登出</span></a></li>
-                    }
-                    else
-                    {
-                        <li><a href="~/Member/Login" title="會員登入"><i class="icon-login"></i><span>會員登入</span></a></li>
-                    }
-                    <li class="cart"><a href="~/Cart" title="購物車"><i class="icon-cart"></i><span>購物車</span><em id="p_count">@ViewBag.ProductCount</em></a></li>
-                </ul>
-            </div><!-- wrap //-->
+            </div>
         </header><!-- header //-->
 
         <main id="main">
@@ -106,30 +101,8 @@
         </div>
     </footer><!-- footer -->
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript">
-        // 回頂端
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 100) {
-                $('.goTop').fadeIn();
-            } else {
-                $('.goTop').fadeOut();
-            }
-        });
-        $('.scroll').click(function (event) {
-            $('html, body').animate({
-                scrollTop: $($.attr(this, 'href')).offset().top
-            }, 1000);
-            event.preventDefault();
-        });
-
-        // 行動裝置的主選單
-        $(".menu-trigger").click(function (event) {
-            $("#menu").fadeToggle();
-            // $("#menu").toggleClass("toggled");
-            event.preventDefault();
-        });
-    </script>
+    <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/Content/js/common.js"></script>
     @RenderSection("Scripts", required: false)
     <script src="~/Scripts/GoogleAnalytics.js"></script>
 </body>
