@@ -1,88 +1,61 @@
 @charset "UTF-8";
 
-//
-// Dropdown menus
-// --------------------------------------------------
+$dropdown-width:            170px !default;
+$dropdown-color:            #C2E57E !default;
 
 
-// Dropdown arrow/caret
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top:   nth($caret-width,1) dashed;
-    border-top:   nth($caret-width,1) solid \9; // IE8
-    border-right: nth($caret-width,1) solid transparent;
-    border-left:  nth($caret-width,1) solid transparent;
-}
+// 顯示隱藏按鈕
+.dropbtn {
+    cursor: pointer;
+    transition: all .5s ease;
 
-// The dropdown wrapper (div)
-.dropup, .dropdown {
-    position: relative;
-}
+    background: none;
+    border: 1px solid #93C336;
+    color: $dropdown-color;
+    font-size: em(12px);
+    text-align: left;
 
-// Prevent the focus on the dropdown toggle when closing dropdowns
-.dropdown-toggle:focus {
-    outline: 0;
-}
+    padding: 5px 10px;
+    width: $dropdown-width;
 
-// The dropdown menu (ul)
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  // z-index: $zindex-dropdown;
-  display: none; // none by default, but block on "open" of the menu
-  float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0; // override default ul
-  list-style: none;
-  font-size: $font-size-base;
-  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
-  background-color: color('dropdown','bg');
-  border: 1px solid color('dropdown','fallback-border'); // IE8 fallback
-  border: 1px solid color('dropdown','border');
-  border-radius: nth($border-radius,1);
-  box-shadow: 0 6px 12px rgba(0,0,0,.175);
-  background-clip: padding-box;
+    &::after {
+        @include arrow(down,5px,7px,#93C336);
+        @include absolute(right 8px top 10px);
+    }
 
-  // Aligns the dropdown menu to right
-  //
-  // Deprecated as of 3.1.0 in favor of `.dropdown-menu-[dir]`
-  &.pull-right {
-    right: 0;
-    left: auto;
-  }
+    &:hover, &:focus {
+        border-color: lighten(#93c336,5%);
+        color: lighten($dropdown-color,15%);
 
-  // Dividers (basically an hr) within the dropdown
-  // .divider {
-  //   @include nav-divider($dropdown-divider-bg);
-  // }
-
-  // // Links within the dropdown menu
-  // > li > a {
-  //   display: block;
-  //   padding: 3px 20px;
-  //   clear: both;
-  //   font-weight: normal;
-  //   line-height: $line-height-base;
-  //   color: $dropdown-link-color;
-  //   white-space: nowrap; // prevent links from randomly breaking onto new lines
-  // }
-}
-
-@include mq(phone) {
-    .navbar-right {
-        .dropdown-menu {
-            right: 0; left: auto;
-        }
-        // Necessary for overrides of the default right aligned menu.
-        // Will remove come v4 in all likelihood.
-        .dropdown-menu-left {
-            left: 0; right: auto;
-        }
+        &::after { border-top-color: lighten(#93c336,15%); }
     }
 }
+
+
+// 下拉最外層容器
+.dropdown {
+    // position: relative;
+    // display: inline-block;
+
+    z-index: z(logo)-1;
+    @include absolute(right 0 top 13px);
+}
+
+// 隱藏內容
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: $dropdown-width;
+
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+    a {
+        color: #333;
+        padding: 8px 0;
+        display: block;
+
+        &:hover { background-color: #f1f1f1 }
+    }
+}
+

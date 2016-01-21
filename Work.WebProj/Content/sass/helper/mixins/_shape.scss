@@ -21,10 +21,10 @@
 
 // 做三角形
 @mixin caret($direction, $width, $height:$width/2, $color: inherit, $display:inline-block) {
+    @include size(0);
+
     display: $display;
     border: $width solid transparent;
-
-    @include size(0);
 
     @if ($direction == "top" or $direction =="up") {
         border-bottom-color:$color;
@@ -49,12 +49,11 @@
 }
 
 // 用偽類做三角形
-@mixin arrow($dir:right, $width:5px, $height: $width, $color: inherit) {
-    content: '';
-    display: block;
-    border: $width solid transparent;
-
+@mixin arrow($dir:right, $width:5px, $height: $width/2, $color: inherit, $display: inline-block) {
     @include size(0);
+    content: '';
+    display: $display;
+    border: $width solid transparent;
 
     @if ($dir == "top" or $dir =="up") {
         border-bottom: $height solid $color;

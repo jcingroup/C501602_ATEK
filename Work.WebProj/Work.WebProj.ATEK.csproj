@@ -270,12 +270,17 @@
     <Content Include="ckfinder\core\connector\aspx\lang\vi.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\Api\GetActionController.cs" />
     <Compile Include="Controllers\Api\BannerController.cs" />
     <Compile Include="Controllers\Api\NewsController.cs" />
     <Compile Include="Controllers\Api\RolesController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -310,10 +315,23 @@
       <DependentUpon>ValidateCode.ashx</DependentUpon>
     </Compile>
     <Content Include="Content\css\bootstrap-datetimepicker-build.css" />
+    <Content Include="Content\css\editor.css" />
+    <Content Include="Content\css\grid.css" />
+    <Content Include="Content\css\index.css" />
+    <Content Include="Content\css\page.css" />
     <Content Include="Content\css\swiper.min.css" />
     <Content Include="Content\font\fontAwesome\fontawesome-webfont.svg" />
+    <Content Include="Content\images\goTop.png" />
+    <Content Include="Content\images\icon-club.gif" />
+    <Content Include="Content\images\icon-contact.gif" />
+    <Content Include="Content\images\Index\banner1.jpg" />
+    <Content Include="Content\images\Index\banner2.jpg" />
+    <Content Include="Content\images\Index\infoBg.gif" />
+    <Content Include="Content\images\Index\infoPic.png" />
+    <Content Include="Content\images\Index\newProduct.jpg" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\logo.gif" />
+    <Content Include="Content\images\menuBg.gif" />
     <Content Include="Content\images\no-pic.gif" />
     <Content Include="Content\sass\editor.scss" />
     <Content Include="Content\sass\grid.scss" />
@@ -466,6 +484,12 @@
     <Content Include="Scripts\cdn\shadowbox\shadowbox.js" />
     <Content Include="Scripts\cdn\shadowbox\LICENSE" />
     <Content Include="Scripts\cdn\shadowbox\README" />
+    <Content Include="Views\Products\PSU_list.cshtml" />
+    <Content Include="Views\Products\PSU_content.cshtml" />
+    <Content Include="Views\AboutUs\AboutUs.cshtml" />
+    <Content Include="Views\Support\Support.cshtml" />
+    <Content Include="Views\News\list.cshtml" />
+    <Content Include="Views\ContactUs\ContactUs.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -597,7 +621,6 @@
     <Folder Include="Areas\Base\Views\Shared\" />
     <Folder Include="Content\images\ContactUs\" />
     <Folder Include="Content\images\Email\" />
-    <Folder Include="Content\images\Index\" />
     <Folder Include="Content\images\Products\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="_Code\CReport\" />

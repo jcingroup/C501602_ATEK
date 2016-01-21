@@ -36,15 +36,7 @@ $(document).ready(function() {
     });
 
     // 下拉選單
-    $(".dropdown-content").click(function(){
-        $(this).slideToggle("fast");
+    $(".dropbtn").click(function(){
+        $(".dropdown-content").toggle("300");
     });
 });
-
-$(document).on("click", function(event){
-    var $trigger = $(".dropbtn");
-    if($trigger !== event.target && !$trigger.has(event.target).length){
-        $(".dropdown-content").slideUp("fast");
-    }
-});
-

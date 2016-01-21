@@ -34,11 +34,10 @@
             <h1 onclick="location.href='@Url.Content("~/index")'" title="回首頁">ATEK JAPAN</h1>
             <button class="menu-trigger">MENU</button>
             <nav id="menu">
-                <h2 class="toggle hidden">MENU</h2>
-                <a href="~/Products/PSU_list">PRODUCTS</a>
+                <a href="~/Products">PRODUCTS</a>
                 <a href="~/AboutUs">ABOUT US</a>
                 <a href="~/Support">SUPPORT</a>
-                <a href="~/News/list">NEW</a>
+                <a href="~/News">NEWS</a>
                 <a href="~/ContactUs">CONTACT</a>
             </nav>
             <div class="dropdown">
@@ -50,53 +49,48 @@
             </div>
         </header><!-- header //-->
 
-        <main id="main">
-            @if (ViewBag.IsFirstPage)
-            {
-                @RenderBody()
-            }
-            else
-            {
-                @RenderBody()
-                <aside id="sidebar">
+        @if (ViewBag.IsFirstPage)
+        {
+            @RenderBody()
+        }
+        else
+        {
+            <main id="main">
+                <!-- <aside>
                     @Html.Partial("~/Views/Products/Sidebar.cshtml")
-                </aside>
-            }
-        </main>
+                </aside> -->
+                <ul class="breadcrumb">
+                    <li><a href="~/index">Home</a></li>
+                    @RenderSection("breadCrumb", required: false)
+                    <li>@ViewBag.Title</li> @* 當前頁名稱 EX.藍光DVD播放機 *@
+                </ul>
+
+                @RenderBody()
+
+            </main>
+        }
 
     </div><!-- wrapper //-->
 
     <footer id="footer">
         <div class="wrap">
-            <section class="about">
-                <h2 class="title"><span>About Us</span></h2>
-                <p>
-                關於我們內容
-                </p>
-            </section>
-            <section class="info">
-                <h2 class="title"><span>Information</span></h2>
-                <ul class="list-inline">
-                    <li><a href="~/News/list">最新消息</a></li>
-                    <li><a href="~/QA">常見問答</a></li>
-                    <li><a href="~/QA/#qa-1">加入會員</a></li>
-                    <li><a href="~/QA/#qa-2">購物須知</a></li>
-                    <li><a href="~/QA/#qa-3">招商專區</a></li>
+            <section class="contact col-9">
+                <ul class="list-unstyled col-5">
+                    <li><em>TEL</em>+886 3 439-3588</li>
+                    <li><em>FAX</em>+886 3 439-5090</li>
+                </ul>
+                <ul class="list-unstyled col-7">
+                    <li>Taiwan (R.O.C.) Alder Optomechanical Corp.</li>
+                    <li>Address: No. 171, Tianjing St., Pingzhen Dist., Taoyuan City 32458,  Taiwan (R.O.C.)</li>
+                    <li>E-mail: <a href="mailto:sales@alder.com.tw">sales@alder.com.tw</a></li>
                 </ul>
             </section>
-            <section class="contact">
-                <h2 class="title"><span>Contact Us</span></h2>
-                <ul class="list-unstyled">
-                    <li>桃園市中壢區東興街121號</li>
-                    <li>Tel: <strong>(03) 468-9493</strong> Fax: <strong>(03) 428-3055</strong></li>
-                    <li>統一編號: 54307745</li>
-                </ul>
-            </section>
-            <aside class="fb">
-                <h2 class="hidden">Facebook</h2>
-                <img src="~/Content/images/FB.jpg" alt="">
-            </aside>
-            <div class="copyright">1KOMO.com &copy; 2015</div>
+            <nav class="club">
+                <a href="">Twitter</a>
+                <a href="">FaceBook</a>
+                <a href="">YouTube</a>
+            </nav>
+            <div class="copyright">ATEK JAPAN &copy; 2016</div>
             <a href="#header" class="goTop scroll">TOP</a>
         </div>
     </footer><!-- footer -->
