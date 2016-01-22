@@ -209,7 +209,8 @@ body {
 a {
   color: #191919;
   text-decoration: none;
-  transition: all .35s ease; }
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease; }
   a:hover, a:active, a.active {
     color: #79B229; }
   a:focus {
@@ -280,11 +281,6 @@ hr {
   height: 0;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #f9f9f9; }
-
-ul, ol {
-  margin-bottom: 10px; }
-  ul ul, ul ol, ol ul, ol ol {
-    margin-bottom: 0; }
 
 address {
   margin-bottom: 20px;

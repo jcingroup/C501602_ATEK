@@ -326,6 +326,10 @@
     <Content Include="Content\images\icon-contact.gif" />
     <Content Include="Content\images\Index\banner1.jpg" />
     <Content Include="Content\images\Index\banner2.jpg" />
+    <Content Include="Content\images\Index\info1.jpg" />
+    <Content Include="Content\images\Index\info2.jpg" />
+    <Content Include="Content\images\Index\info3.jpg" />
+    <Content Include="Content\images\Index\info4.jpg" />
     <Content Include="Content\images\Index\infoBg.gif" />
     <Content Include="Content\images\Index\infoPic.png" />
     <Content Include="Content\images\Index\newProduct.jpg" />
@@ -490,6 +494,7 @@
     <Content Include="Views\Support\Support.cshtml" />
     <Content Include="Views\News\list.cshtml" />
     <Content Include="Views\ContactUs\ContactUs.cshtml" />
+    <Content Include="Views\Products\PSU_sidebar.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

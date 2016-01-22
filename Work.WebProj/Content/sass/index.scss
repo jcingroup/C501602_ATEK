@@ -65,15 +65,15 @@ $btn-padding:       12px 20px;
 // == main
 .new-product {
     float: left;
+    display: block;
 }
 
 #main {
     ul {
         float: right;
         width: cp(769px);
-        padding: 0;
 
-        @include mq(wider) { width: cp(834px); }
+        @include mq(wider) { width: cp(845px); }
 
         a {
             background-attachment: fixed;
@@ -92,7 +92,7 @@ $btn-padding:       12px 20px;
 
             &:hover, &:active {
                 color: $brand-primary;
-                box-shadow: 3px 10px 15px rgba(0,0,0,0.2);
+                box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
             }
         }
     }
@@ -102,12 +102,12 @@ $btn-padding:       12px 20px;
         width: 48.6%;
         margin-bottom: 10px;
 
-        transition: all .35s ease;
+        @include prefix(transition, all .35s ease, webkit);
 
         &:nth-child(even) { margin-left: 8px; }
 
         &:hover, &:active {
-            @include prefix(transform,translate(-3px,-5px))
+            @include prefix(transform, translate(1px,2px))
         }
 
         &:nth-of-type(2) a { background-position: right -210px; }

@@ -14,10 +14,13 @@ namespace DotWeb.WebApp.Controllers
         {
             return View("PSU_list");
         }
-
         public ActionResult PSU_content()
         {
             return View();
         }
-}
+        public ActionResult PSU_sidebar()
+        {
+            return View();
+        }
+    }
 }

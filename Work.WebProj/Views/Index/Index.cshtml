@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "首頁";
+    ViewBag.Title = "index";
     ViewBag.IsFirstPage = true;
     ViewBag.BodyClass = "index";
     Layout = "~/Views/Shared/Layout.cshtml";
@@ -29,14 +29,14 @@
 
 <section id="main">
 
-    <div class="new-product">
+    <a class="new-product" href="~/Products/PSU_list">
         <img src="~/Content/images/index/newProduct.jpg" alt="新產品範例圖">
-    </div>
+    </a>
     <ul class="list-inline">
-        <li><a href="">FEATURE</a></li>
-        <li><a href="">OEM/ODM</a></li>
-        <li><a href="">EXHIBITION</a></li>
-        <li><a href="">CASE STUDIES</a></li>
+        <li><a href="~/AboutUs">ABOUT ATEK</a></li>
+        <li><a href="~/Support">OEM/ODM</a></li>
+        <li><a href="~/News/list">EXHIBITION</a></li>
+        <li><a href="~/Support">SUPPORT</a></li>
     </ul>
 
 </section><!-- main //-->

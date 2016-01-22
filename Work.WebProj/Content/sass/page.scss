@@ -14,6 +14,7 @@
 
 @import "module/btn";
 @import "module/figure";
+@import "module/dropdown";
 
 
 // main
@@ -40,66 +41,9 @@ main {
     &:hover, &:active { background-color: darken(#e5e5e5,5%); }
 }
 aside {
-    float: left;
-    width: cp(250px);
-    margin-top: -35px;
 
-    header {
-        @include text-pic('title.gif',245px,97px,fixed);
-
-        @for $i from 2 through length($pages) {
-            $item: nth($pages, $i);
-            .#{$item} & {
-                background-position: 0 (-(119px * $i - 119px));
-            }
-        }
-    }
-    nav { max-width: 230px; }
-    a {
-        display: block;
-        border-bottom: 1px solid #E5E5E5;
-        font-size: em(18px);
-        padding: $gutter 8px;
-
-        &:hover, &:active, &.current,
-        .order &:first-child {
-            color: $error;
-        }
-    }
-
-    @include mq-max(tablet) {
-        width: 270px;
-        margin-top: 0;
-
-        header { display: none; }
-        .pro-menu { display: block; }
-
-        nav {
-            background: #fff;
-            border-radius: 5px 5px 0 0;
-            width: 100%; max-width: 270px;
-            position: absolute;
-            z-index: z(dropdown);
-            transition: all .3s;
-
-            opacity: 0;
-            visibility: hidden;
-
-            &.open { opacity: 1; visibility: visible; }
-
-            a {
-                &:hover, &:active, &.current { background: lighten($gray,63%);}
-            }
-        }
-    }
 }
 
-.breadcrumb, #content {
-    float: right;
-    width: cp(1115px);
-
-    @include mq(wider) { width: cp(1160px); }
-}
 .breadcrumb {
     @extend %list-inline;
 

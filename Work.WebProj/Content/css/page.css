@@ -209,7 +209,8 @@ body {
 a {
   color: #191919;
   text-decoration: none;
-  transition: all .35s ease; }
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease; }
   a:hover, a:active, a.active {
     color: #79B229; }
   a:focus {
@@ -280,11 +281,6 @@ hr {
   height: 0;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #f9f9f9; }
-
-ul, ol {
-  margin-bottom: 10px; }
-  ul ul, ul ol, ol ul, ol ol {
-    margin-bottom: 0; }
 
 address {
   margin-bottom: 20px;
@@ -453,7 +449,7 @@ figure::before, .pro-pic::before {
   vertical-align: middle;
   height: 100%; }
 
-#header h1, #footer .contact em, .club a, .goTop, aside header {
+#header h1, #footer .contact em, .club a, .goTop {
   font: 0/0 a;
   color: transparent;
   text-shadow: none;
@@ -492,12 +488,12 @@ figure::before, .pro-pic::before {
     padding-left: 15px;
     padding-right: 15px; } }
 
-#wrapper, #header, #footer, #main {
+#wrapper, #header, #footer, #main, .wrap {
   position: relative; }
 
 #wrapper {
   min-height: 100%;
-  padding-bottom: 292px; }
+  padding-bottom: 298px; }
   #wrapper::before {
     content: '';
     display: block;
@@ -574,7 +570,7 @@ body {
     font-family: "trebuc";
     letter-spacing: 2px;
     line-height: 19px;
-    padding: 0 60px 0 17px;
+    padding: 0 70px 0 17px;
     margin-left: 1px; }
     #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
       background: url(../images/menuBg.gif) right 0 no-repeat;
@@ -584,13 +580,13 @@ body {
   z-index: 2;
   background: #ECECEC;
   color: #808080;
-  min-height: 242px;
-  margin-top: -242px;
+  min-height: 248px;
+  margin-top: -248px;
   padding: 43px 0;
   text-align: left; }
   #footer .contact {
     border: 1px solid #fff;
-    padding: 30px;
+    padding: 20px 30px;
     margin-right: 3%; }
     #footer .contact em {
       background-attachment: fixed;
@@ -619,7 +615,6 @@ body {
         -o-transform-origin: 50%;
         transform-origin: 50%;
         -webkit-transition: transform 0.35s ease-out;
-        -o-transition: transform 0.35s ease-out;
         transition: transform 0.35s ease-out; }
       #footer .contact a:hover::before, #footer .contact a:active::before {
         -webkit-transform: scaleX(1);
@@ -628,19 +623,21 @@ body {
     #footer .contact .col-5 {
       color: #545454;
       font-size: 1.875em;
-      line-height: 2; }
+      line-height: 1.85; }
       #footer .contact .col-5 li:nth-of-type(2) em {
         background-position: 0 -54px; }
     #footer .contact .col-7 {
       font-size: 0.8125em;
-      line-height: 1.5; }
+      line-height: 1.75; }
       #footer .contact .col-7 li {
         margin: 10px 0; }
 
 .copyright {
   color: #B5B5B5;
   font-size: 0.875em;
-  margin-top: 15px; }
+  position: absolute;
+  right: 15px;
+  bottom: 20px; }
 
 .club a {
   background-attachment: fixed;
@@ -649,8 +646,7 @@ body {
   height: 55px;
   display: inline-block;
   background-color: #79B229;
-  margin-right: 18px;
-  margin-bottom: 15px; }
+  margin: 25px 18px 20px 0; }
   .club a:nth-child(2) {
     background-position: -62px center; }
   .club a:nth-child(3) {
@@ -784,6 +780,52 @@ figure {
       color: #fff;
       font-size: 1.375em; }
 
+.dropbtn {
+  cursor: pointer;
+  transition: all .5s ease;
+  background: none;
+  border: 1px solid #93C336;
+  color: #C2E57E;
+  font-size: 0.75em;
+  text-align: left;
+  padding: 5px 10px;
+  width: 180px; }
+  .dropbtn::after {
+    width: 0;
+    height: 0;
+    content: '';
+    display: inline-block;
+    border: 5px solid transparent;
+    border-top: 7px solid #93C336;
+    border-bottom-width: 7px;
+    position: absolute;
+    top: 10px;
+    right: 8px; }
+  .dropbtn:hover, .dropbtn:focus {
+    border-color: #9fcc47;
+    color: #e0f2be; }
+    .dropbtn:hover::after, .dropbtn:focus::after {
+      border-top-color: #b3d76f; }
+
+.dropdown {
+  z-index: 49;
+  position: absolute;
+  top: 13px;
+  right: 0; }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 180px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); }
+  .dropdown-content a {
+    color: #333;
+    padding: 8px 0;
+    display: block; }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1; }
+
 main {
   text-align: left;
   padding-top: 10px;
@@ -802,63 +844,6 @@ main {
   border-radius: 5px; }
   .pro-menu:hover, .pro-menu:active {
     background-color: #d8d8d8; }
-
-aside {
-  float: left;
-  width: 18%;
-  margin-top: -35px; }
-  aside header {
-    background-attachment: fixed;
-    background: url(../images/title.gif) 0 0 no-repeat;
-    width: 245px;
-    height: 97px; }
-    .AboutUs aside header {
-      background-position: 0 -119px; }
-    .Support aside header {
-      background-position: 0 -238px; }
-    .News aside header {
-      background-position: 0 -357px; }
-    .ContactUs aside header {
-      background-position: 0 -476px; }
-  aside nav {
-    max-width: 230px; }
-  aside a {
-    display: block;
-    border-bottom: 1px solid #E5E5E5;
-    font-size: 1.125em;
-    padding: 15px 8px; }
-    aside a:hover, aside a:active, aside a.current, .order aside a:first-child {
-      color: #F24030; }
-  @media (max-width: 48em) {
-    aside {
-      width: 270px;
-      margin-top: 0; }
-      aside header {
-        display: none; }
-      aside .pro-menu {
-        display: block; }
-      aside nav {
-        background: #fff;
-        border-radius: 5px 5px 0 0;
-        width: 100%;
-        max-width: 270px;
-        position: absolute;
-        z-index: 80;
-        transition: all .3s;
-        opacity: 0;
-        visibility: hidden; }
-        aside nav.open {
-          opacity: 1;
-          visibility: visible; }
-        aside nav a:hover, aside nav a:active, aside nav a.current {
-          background: #f6f6f6; } }
-
-.breadcrumb, #content {
-  float: right;
-  width: 80%; }
-  @media (min-width: 87.5em) {
-    .breadcrumb, #content {
-      width: 83%; } }
 
 .breadcrumb a {
   color: #656565;

@@ -19,7 +19,7 @@ $menu-link-hover:       #fff;
 $menu-trigger-width:    250px !default;
 
 // footer
-$footer-height:         242px !default;
+$footer-height:         248px !default;
 $footer-height-sm:      100px;
 $footer-transY:         $footer-height !default;
 $footer-bg:             #ECECEC;
@@ -53,7 +53,7 @@ $goTop-position:        bottom 30px right 10px !default;
     @extend %contain;
 }
 
-#wrapper, #header, #footer, #main {
+#wrapper, #header, #footer, #main, .wrap {
     position: relative;
 }
 #header, #footer {
@@ -168,7 +168,7 @@ body {
         letter-spacing: 2px;
         line-height: 19px;
 
-        padding: 0 60px 0 17px;
+        padding: 0 70px 0 17px;
         margin-left: 1px;
 
         &:hover, &:active,
@@ -241,7 +241,7 @@ body {
 
     .contact {
         border: 1px solid #fff;
-        padding: 30px;
+        padding: 20px 30px;
         margin-right: 3%;
 
         em {
@@ -262,7 +262,7 @@ body {
                 @include absolute(bottom 0 right 0);
                 @include prefix(transform, scaleX(0));
                 @include prefix(transform-origin, 50%);
-                @include prefix(transition, transform .35s ease-out);
+                @include prefix(transition, transform .35s ease-out, webkit);
             }
 
             &:hover, &:active {
@@ -275,7 +275,7 @@ body {
         .col-5 {
             color: #545454;
             font-size: em(30px);
-            line-height: 2;
+            line-height: 1.85;
 
             li {
                 &:nth-of-type(2) em { background-position: 0 -54px; }
@@ -283,7 +283,7 @@ body {
         }
         .col-7 {
             font-size: em(13px);
-            line-height: 1.5;
+            line-height: 1.75;
 
             li { margin: 10px 0; }
         }
@@ -293,7 +293,8 @@ body {
 .copyright {
     color: #B5B5B5;
     font-size: em(14px);
-    margin-top: 15px;
+
+    @include absolute(right 15px bottom 20px);
 }
 
 .club {
@@ -303,8 +304,7 @@ body {
 
         display: inline-block;
         background-color: $brand-primary;
-        margin-right: 18px;
-        margin-bottom: 15px;
+        margin: 25px 18px 20px 0;
 
         &:nth-child(2) { background-position: -62px center; }
         &:nth-child(3) { background-position: -138px center; }

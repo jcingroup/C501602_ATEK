@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "LED POWER SUPPLY";
-    ViewBag.BodyClass = "index";
+    ViewBag.BodyClass = "Products";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
@@ -9,4 +9,6 @@
     <li><a href="~/Products">PRODUCTS</a></li>
 }
 
-<h2>PSU_list</h2>
+<aside>
+	@Html.Partial("~/Views/Products/PSU_Sidebar.cshtml")
+</aside>

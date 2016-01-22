@@ -56,13 +56,13 @@
         else
         {
             <main id="main">
-                <!-- <aside>
+                @* <aside>
                     @Html.Partial("~/Views/Products/Sidebar.cshtml")
-                </aside> -->
+                </aside> *@
                 <ul class="breadcrumb">
                     <li><a href="~/index">Home</a></li>
                     @RenderSection("breadCrumb", required: false)
-                    <li>@ViewBag.Title</li> @* 當前頁名稱 EX.藍光DVD播放機 *@
+                    <li>@ViewBag.Title</li> @* 當前頁名稱 *@
                 </ul>
 
                 @RenderBody()
@@ -74,23 +74,23 @@
 
     <footer id="footer">
         <div class="wrap">
-            <section class="contact col-9">
+            <section class="contact col-10">
                 <ul class="list-unstyled col-5">
-                    <li><em>TEL</em>+886 3 439-3588</li>
-                    <li><em>FAX</em>+886 3 439-5090</li>
+                    <li><em>TEL</em>+81-43-312-3738</li>
+                    <li><em>FAX</em>+81-43-312-3738</li>
                 </ul>
                 <ul class="list-unstyled col-7">
-                    <li>Taiwan (R.O.C.) Alder Optomechanical Corp.</li>
-                    <li>Address: No. 171, Tianjing St., Pingzhen Dist., Taoyuan City 32458,  Taiwan (R.O.C.)</li>
-                    <li>E-mail: <a href="mailto:sales@alder.com.tw">sales@alder.com.tw</a></li>
+                    <li>Atek JAPAN | high quality LED power supply</li>
+                    <li>Address: Kakura Bill #403 1-3-3, Omote-Cho Sakura-Shi, 285-0811 Chiba, JAPAN </li>
+                    <li>E-mail: <a href="mailto:lingling@atek-japan.com">lingling@atek-japan.com</a></li>
                 </ul>
             </section>
-            <nav class="club">
+            <!-- <nav class="club">
                 <a href="">Twitter</a>
                 <a href="">FaceBook</a>
                 <a href="">YouTube</a>
-            </nav>
-            <div class="copyright">ATEK JAPAN &copy; 2016</div>
+            </nav> -->
+            <div class="copyright">Atek JAPAN &copy; 2016</div>
             <a href="#header" class="goTop scroll">TOP</a>
         </div>
     </footer><!-- footer -->
