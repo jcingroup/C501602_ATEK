@@ -1,16 +1,22 @@
-﻿
-<nav>
-	<header>AC-DC</header>
-	<a href="~/Products/PSU_list">
-		C.C / C.V (SELV)
-		<em>Constant current / Constant Voltage</em>
-	</a>
-	<a href="~/Products/PSU_list">
-		C.C
-		<em>Constant current</em>
-	</a>
-	<a href="~/Products/PSU_list">
-		DALI
-		<em>Constant current / Constant Voltage</em>
-	</a>
-</nav>
+﻿<aside id="sub-nav">
+    <nav>
+        @* 分類名稱 *@
+        <header class="font-sp">AC-DC</header>
+
+        @* 當前頁選單 + class="active"
+        <a href="#p1" class="active">Constant Voltage</a>
+        <em>Wireless</em> tag標籤 後台可新增修改或不使用*@
+
+        <a href="#p1">Constant Voltage</a>
+        <a href="#p2">DALI</a>
+        <a href="#p3"><em>Wireless</em>Zigbee</a>
+        <a href="#p4"><em>Wireless</em>Sub-GHZ</a>
+    </nav>
+
+    @* 有其他分類時如下
+    <nav>
+        <header class="font-sp">DC-DC</header>
+        <a href="~/Products/PSU_list.cshtml#p1">test</a>
+        <a href="~/Products/PSU_list.cshtml#p1">test2</a>
+    </nav> *@
+</aside>

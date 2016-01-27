@@ -202,12 +202,12 @@ html, body {
 
 body {
   background: #f5f5f5;
-  color: #191919;
+  color: #656565;
   font-family: "Microsoft Jhenghei", \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif;
   line-height: 1.25; }
 
 a {
-  color: #191919;
+  color: #656565;
   text-decoration: none;
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease; }
@@ -230,14 +230,17 @@ img {
 @font-face {
   font-family: 'trebuc';
   src: local("Trebuchet MS"), url(../font/trebucit.ttf) format("truetype"); }
+.font-sp {
+  font-family: "trebuc"; }
+
 h2, h3, h4, h5, h6 {
   font-weight: 500;
   line-height: 1.1;
-  color: #79B229; }
+  color: #559543; }
   h2 small, h3 small, h4 small, h5 small, h6 small {
     font-weight: normal;
     line-height: 1;
-    color: #759c3f; }
+    color: #617f59; }
 
 h2, h3 {
   margin-top: 1.25em;
@@ -289,35 +292,57 @@ address {
 
 /*      table
 -----------------------------------------------------------------------*/
+table {
+  border: 1px solid #D8DF2B; }
+
 th, td {
-  border: 1px solid #eff8e2;
-  color: #191919;
+  color: #5C6054;
+  font-size: 1.0625em;
   line-height: 1.25;
   text-align: center;
-  vertical-align: middle; }
+  vertical-align: middle;
+  padding: 14px; }
 
 th {
+  border: 1px solid #D8DF2B;
   background: #79B229;
-  padding: 10px;
-  color: #fff;
-  font-size: 1.1875em;
-  font-weight: bold; }
+  color: #243F1C;
+  font-weight: normal; }
 
 td {
-  padding: 3px 5px; }
-
-caption {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: #6b9d24;
-  font-size: 1.375em;
-  line-height: 1.5;
-  text-align: center; }
+  border-right: 1px solid #79B226;
+  border-top: 1px solid #79B226;
+  text-align: left; }
+  td:last-child {
+    border-right: none; }
+  td.item {
+    background: #ECECEC;
+    color: #243F1C;
+    font-size: 0.9375em;
+    text-align: center; }
 
 .fixed {
   table-layout: fixed;
   word-wrap: break-word;
   word-break: break-all; }
+
+tr:nth-of-type(odd) {
+  background-color: #E5F4D8; }
+
+.table-rwd {
+  overflow-x: auto;
+  min-height: 0.01%;
+  max-width: 1400px; }
+  @media (max-width: 48em) {
+    .table-rwd {
+      width: 100%;
+      margin-bottom: 15px;
+      overflow-y: hidden;
+      -ms-overflow-style: -ms-autohiding-scrollbar; }
+      .table-rwd table {
+        margin-bottom: 0; }
+        .table-rwd table th, .table-rwd table td {
+          white-space: nowrap; } }
 
 p, ul, ol, li {
   text-align: left; }

@@ -6,15 +6,15 @@ $btn-state-color:    #fff !default;
 $btn-color:          $btn-state-color !default;
 $btn-hover-color:    $btn-state-color !default;
 $btn-bg-color:       $brand-primary !default;
-$btn-bg-hover:       $brand-secondary !default;
-$btn-shadow:         0px 2px 2px hsla(0,0,0,0.2);
+$btn-bg-hover:       darken($brand-primary,5%) !default;
+$btn-shadow:         1px 1px 2px hsla(0,0,0,0.2);
 
 $btn-width:          100px !default;
-$btn-padding:        18px 38px !default;
+$btn-padding:        23px 55px !default;
 $btn-border:         1px solid $link-color;
-$btn-border-radius:  5px !default;
+$btn-border-radius:  3px !default;
 
-$btn-font-size:      15px !default;
+$btn-font-size:      20px !default;
 $btn-line-height:    1.01 !default;
 
 
@@ -29,16 +29,14 @@ $btn-line-height:    1.01 !default;
 
     background: $btn-bg-color;
     border-radius: $btn-border-radius;
-    // border: $btn-border;
-    // box-shadow: $btn-shadow;
+    box-shadow: $btn-shadow;
 
     color: $btn-color;
-    // font-family: $font-family-base;
     font-size: em($btn-font-size);
-    font-weight: bold;
     line-height: $btn-line-height;
+    letter-spacing: 1px;
 
-    transition: all 0.3s;
+    @extend %effect-all;
 
     &, &:active, &.active {
         &:focus, &.focus {
@@ -47,7 +45,7 @@ $btn-line-height:    1.01 !default;
     }
     &:hover, &:active, &.active {
     // &:hover, &:focus, &.focus {
-        background: $btn-bg-hover;
+        background-color: $btn-bg-hover;
         border-color: $btn-hover-color;
         color: $btn-hover-color;
     }
@@ -71,4 +69,13 @@ $btn-line-height:    1.01 !default;
             border-color: $color;
         }
     }
+}
+
+.btn-download {
+    background: $btn-bg-color url(#{$img-path}/icon-download.png) right center no-repeat;
+    padding-right: 65px;
+}
+
+.btn-small {
+    padding: 10px 40px;
 }

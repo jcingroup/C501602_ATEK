@@ -8,17 +8,12 @@
     }
     @if $lte7 { zoom: 1 }
 }
-
-%full   { width: 100%; max-width: 100%; }
-%half   { width: 49.6% }
-%clear  { clear: both }
-%hidden { display: none; }
 %circle { border-radius: 50%; } // 圓形
 
-%list-unstyled {
-    list-style: none;
-}
+%full { width: 100%; max-width: 100%; }
+%half { width: 49.6%; }
 
+%list-unstyled { list-style: none; }
 %list-inline {
     @extend %list-unstyled;
 
@@ -46,4 +41,8 @@
     text-shadow: none;
     background-color: transparent;
     border: 0;
+}
+
+%effect-all {
+    @include prefix(transition, all .35s);
 }

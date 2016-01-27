@@ -4,16 +4,17 @@
 // ------------------------------------------------------------
 .clearfix { @extend %clearfix; }
 
-.full { @extend %full; }
+.circle { @extend %circle; } // 圓形
+
+.full { @extend %full;  }
 .half { @extend %half; }
 
 .float-l { float: left; }
 .float-r { float: right; }
-.clear { @extend %clear;  }
+.clear { clear: both  }
 
-.hidden { @extend %hidden; }
+.hidden { display: none; }
 
-.circle { @extend %circle; } // 圓形
 
 
 // text
@@ -24,6 +25,27 @@
 
 .list-unstyled { @extend %list-unstyled; }
 .list-inline { @extend %list-inline; }
+
+.text-list {
+	@extend %list-unstyled;
+
+	font-size: em(18px);
+	line-height: 1.23;
+
+	li {
+		position: relative;
+		margin-bottom: 15px;
+		padding-left: 18px;
+
+		&::before {
+			content: '';
+			background: #D8DF2B;
+			@include size(6px);
+			@include absolute(top 50% left 0);
+			margin-top: -3px;
+		}
+	}
+}
 
 // 情境: var.scss> $states: true
 // @if $states {

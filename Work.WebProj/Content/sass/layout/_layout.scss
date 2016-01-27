@@ -250,27 +250,7 @@ body {
             vertical-align: middle;
             margin-right: 7px;
         }
-        a {
-            color: $footer-color;
-            position: relative;
-
-            &::before {
-                display: block;
-                content: '';
-                height: 1px; width: 100%;
-                background: $footer-color;
-                @include absolute(bottom 0 right 0);
-                @include prefix(transform, scaleX(0));
-                @include prefix(transform-origin, 50%);
-                @include prefix(transition, transform .35s ease-out, webkit);
-            }
-
-            &:hover, &:active {
-                &::before {
-                    @include prefix(transform, scaleX(1));
-                }
-            }
-        }
+        a { color: $footer-color; }
 
         .col-5 {
             color: #545454;

@@ -5,7 +5,7 @@
 $img-path:              '../images' !default;
 $font-path:             '../font' !default;
 $lte7:                  false !default;           // 是否兼容IE6-7
-$states:                true !default;           // 情境文字是否輸出
+$states:                false !default;           // 情境文字是否輸出
 
 
 // == color
@@ -21,7 +21,7 @@ $gray-lighter:          lighten($gray-base, 93.5%);   // #eee
 // 抽象色
 $brand-primary:         #79B229;             // 主色
 $brand-secondary:       #559543;             // 輔色
-$success:               #CAD72F !default;             // 綠
+$success:               #368B39 !default;             // 綠
 $info:                  #37BCEE !default;             // 藍
 $warning:               #F2B63D !default;             // 黃
 $error:                 #F24030 !default;             // 紅
@@ -31,7 +31,7 @@ $error:                 #F24030 !default;             // 紅
 // ----------------------------------------------------------------------
 // <body> 背景 & 文字色
 $body-bg:               #fff !default;
-$text-color:            #191919 !default;
+$text-color:            #656565 !default;
 
 // 文字鏈結色&滑鼠移過色
 $link-color:            $text-color;
@@ -70,7 +70,7 @@ $heading-font-family:   inherit !default;
 $heading-font-weight:   500 !default;
 $heading-line-height:   1.1 !default;
 
-$heading-color:         $brand-primary !default;
+$heading-color:         $brand-secondary !default;
 $heading-small-color:   desaturate($heading-color, 20%) !default;
 
 
@@ -111,10 +111,10 @@ $z-index: (
     banner:     4,
     logo:       50,
     menu:       60,
-    goTop:      70,
+    goTop:      1001,
     dropdown:   80,
     tooltip:    90,
-    modal:      1000,
-    overlay:    1001,
-    toggle:     999,
+    modal:      998,
+    overlay:    999,
+    toggle:     99,
 );

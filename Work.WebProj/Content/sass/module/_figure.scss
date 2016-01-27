@@ -1,66 +1,32 @@
 @charset "UTF-8";
 
 $figure-bg:             #fff !default;
+$figure-border-color:   #9CD217 !default;
 $figure-text-align:     center !default;
 
-$figure-min-width:      310px !default;
-$figure-max-width:      480px !default;
-$figure-width:          32% !default;
+$figure-min-width:      290px !default;
+$figure-max-width:      290px !default;
+$figure-width:          33.3% !default;
 $figure-height:         220px !default;
-$figure-margin:         0 0 85px 7px!default;
+$figure-margin:         0 7px 30px 7px!default;
 
-// common
+// common style
 figure {
     position: relative;
-    // overflow: hidden;
+    overflow: hidden;
     cursor: pointer;
+    float: left;
 
-    margin: $figure-margin;
-    min-width: $figure-min-width;
-    // max-width: $figure-max-width;
-    // max-height: $figure-height;
     width: $figure-width;
+    height: $figure-height;
+    max-width: $figure-max-width;
+    margin: $figure-margin;
 
-    background: $figure-bg;
     text-align: $figure-text-align;
 
-    img {
-        position: relative;
-        display: block;
-        // min-height: 100%;
-        max-width: 95%;
-        // opacity: 0.8;
-    }
-}
-figcaption {
-    text-transform: uppercase;
+    img { position: relative; }
 
-    @include prefix(backface-visibility, hidden, webkit);
-
-    &::before, &::after { pointer-events: none; }
-
-    &, > a {
-        @include absolute(top 0 left 0);
-        width: 100%; height: 100%;
-    }
-    // 預設為覆蓋整個figure
-    > a {
-        z-index: 1000;
-        // text-indent: 200%;
-        white-space: nowrap;
-        font-size: 0;
-        opacity: 0;
-    }
-}
-
-// theme
-figure {
-    float: left;
-    height: $figure-height;
-    border: 1px solid #EBEBEB;
-
-    @include middle(img) { max-height: $figure-height - 20px; }
-
+    @include mq(wider) { max-width: 335px; }
     @include mq-max(tablet) {
         display: inline-block;
         float: none;
@@ -68,44 +34,101 @@ figure {
         width: 49.6%;
         min-width: auto;
     }
-    @include mq-max(phone) {
-        width: 100%;
+    @include mq-max(phone) { width: 100%; }
+}
+
+figcaption {
+    text-transform: uppercase;
+
+    @include prefix(backface-visibility, hidden);
+
+    &::before, &::after { pointer-events: none; }
+
+    &, > a {
+        @include size(100%);
+        @include absolute(left 0 top 0);
     }
 
-    figcaption {
-        height: 0;
-        &, h3 { transition: all .5s ease; }
-        > a {
-            line-height: $figure-height;
-            height: $figure-height + 55px;
-        }
+    > a {
+        z-index: z(tooltip) - 1;
+        white-space: nowrap;
+        opacity: 0;
+    }
+}
+
+// theme
+figcaption {
+    @extend %effect-all;
+
+    > a {
+        line-height: $figure-height;
+        height: $figure-height;
+    }
+}
+figure {
+    @extend %effect-all;
+
+    @include middle(img) {
+        max-width: 95%;
+        max-height: $figure-height - 45px;
+        margin-bottom: 35px;
+
+        @include prefix(transition, transform .7s);
+        @include prefix(transform-origin, 50% 50%);
     }
 
-    h3 {
-        color: #323232;
-        font-size: em(18px);
-        margin-top: 10px;
+    h4 {
+        @extend %effect-all;
+        @include absolute(bottom 10px left 0 right 0);
+        color: $brand-primary;
+        font-size: em(22px);
+        margin: 0;
     }
-    small {
-        color: #656565;
-        font-size: em(16px,18px);
-        display: block;
-        margin-top: 8px;
+    span {
+        @extend %effect-all;
+        @include prefix(transform, translateY(45px));
+        opacity: 0;
+        display: inline-block;
+
+        font-size: em(15px);
+        line-height: 1;
+        padding: 0 7px;
+        margin: 7px 0;
+
+        &:nth-of-type(odd) { border-right: 1px solid #D8DF2B; }
+        &:last-of-type { border: none; }
     }
 
     &:hover, &:active {
-        h3 { color: $brand-primary; }
-        small { color: $brand-secondary; }
+        border-color: #D7DD19;
 
-        figcaption {
-            background: rgba(#002A36,.7);
-            height: 100%;
-
-            > a {
-                opacity: 1;
-                color: #fff;
-                font-size: em(22px);
-            }
+        img {
+            @include prefix(transform, scale3d(1.2,1.2,1));
         }
+        h4 {
+            @include prefix(transform, translateY(-($figure-height - 85px)));
+            font-size: em(34px);
+        }
+        span {
+            @include prefix(transform, translateY(85px));
+            opacity: 1;
+        }
+        figcaption {
+            background: rgba(#fff,.8);
+        }
+    }
+}
+
+.kind figure {
+    border: 1px solid $figure-border-color;
+
+    span { color: #D8DF2B;}
+
+    &:hover, &:active {
+        border: 4px solid #D7DD19;
+
+        h4 { color: #fff;}
+        span { @include prefix(transform, translateY(70px)); }
+        figcaption { background: rgba(#053A04,.9); }
     }
 }

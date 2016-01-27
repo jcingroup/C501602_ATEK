@@ -2,19 +2,19 @@
 
 // var
 // -----------------------------------------------------------------
-$table-padding: 5px 10px 15px !default;
-$font-size-caption: 22px !default;
-$font-size-th: 19px !default;
-$font-size-td: 17px !default;
+$table-padding:             14px !default;
+$font-size-caption:         22px !default;
+$font-size-th:              19px !default;
+$font-size-td:              17px !default;
 
 $table-color: (
     table-bg:               $brand-primary,
-    table-bg-accent:        #f9f9f9,
+    table-bg-accent:        #E5F4D8,
     table-bg-hover:         #fff,
     table-bg-active:        #D6FAFC,
-    table-border:           lighten($brand-primary,50%),
-    table-th:               #fff,
-    table-td:               $text-color,
+    table-border:           #D8DF2B,
+    table-th:               #243F1C,
+    table-td:               #5C6054,
     table-caption:          darken($brand-primary,5%),
 );
 
@@ -50,27 +50,36 @@ $color: map-extend($color, $table-color);
 -----------------------------------------------------------------------*/
 table {
     // margin: $line-height-computed 0;
+    border: 1px solid color(table-border);
 }
 th, td {
-    border: 1px solid color(table-border);
-
     color: color(table-td);
-    // font-size: em($font-size-td);
+    font-size: em($font-size-td);
     line-height: $line-height-base;
 
     text-align: center;
     vertical-align: middle;
+    padding: $table-padding;
 }
 
 th {
+    border: 1px solid color(table-border);
     background: color(table-bg);
-    padding: nth($table-padding, 2);
     color: color(table-th);
-    font-size: em($font-size-th);
-    font-weight: bold;
+    font-weight: normal;
 }
 td {
-    padding: 3px nth($table-padding, 1);
+    border-right: 1px solid #79B226;
+    border-top: 1px solid #79B226;
+    text-align: left;
+
+    &:last-child { border-right: none;}
+    &.item {
+        background: #ECECEC;
+        color: color(table-th);
+        font-size: em(15px);
+        text-align: center;
+    }
 }
 
 // 滑鼠移過變色
@@ -79,13 +88,13 @@ tr:hover {
 }
 
 caption {
-    padding-top: nth($table-padding, 1);
-    padding-bottom: nth($table-padding, 1);
+    // padding-top: nth($table-padding, 1);
+    // padding-bottom: nth($table-padding, 1);
 
-    color: color(table-caption);
-    font-size: em($font-size-caption);
-    line-height: $line-height-sm;
-    text-align: center;
+    // color: color(table-caption);
+    // font-size: em($font-size-caption);
+    // line-height: $line-height-sm;
+    // text-align: center;
 }
 
 // 固定欄寬度
@@ -96,60 +105,31 @@ caption {
 }
 
 // 斑馬紋條列式表格
-// tr:nth-of-type(odd) {
-//     background-color: color(table-bg-accent);
-// }
-
-// 背景色
-// @include table-row-variant('active', color(table-bg-active));
-// @include table-row-variant('green', $green-bg);
-// @include table-row-variant('blue', $blue-bg);
-// @include table-row-variant('yellow', $yellow-bg);
-// @include table-row-variant('red', $red-bg);
-
+tr:nth-of-type(odd) {
+    background-color: color(table-bg-accent);
+}
 
 // 響應式表格
 //
-// '.table-responsive' < 768 時會出現水平卷軸
+// '.table-rwd' < 768 時會出現水平卷軸
 
-// .table-responsive {
-//     overflow-x: auto;
-//     min-height: 0.01%; // Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837)
+.table-rwd {
+    overflow-x: auto;
+    min-height: 0.01%; // Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837)
+    max-width: $max-width;
 
-//     @include media(sm) {
-//         width: 100%;
-//         margin-bottom: ($line-height-computed * 0.75);
-//         overflow-y: hidden;
-//         -ms-overflow-style: -ms-autohiding-scrollbar;
-//         border: 1px solid color(table-border);
+    @include mq-max(tablet) {
+        width: 100%;
+        margin-bottom: ($line-height-computed * 0.75);
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
 
-//         table {
-//             margin-bottom: 0;
-//             th, td {
-//                 white-space: nowrap;
-//             }
-//         }
-
-//         .table-bordered {
-//             border: 0;
-
-//             > tr {
-//                 > th:first-child,
-//                 > td:first-child {
-//                     border-left: 0;
-//                 }
-//                 > th:last-child,
-//                 > td:last-child {
-//                     border-right: 0;
-//                 }
-//             }
-
-//             > tr:last-child {
-//                 > th, > td {
-//                     border-bottom: 0;
-//                 }
-//             }
-//         }
-//     }
-// }
+        table {
+            margin-bottom: 0;
+            th, td {
+                white-space: nowrap;
+            }
+        }
+    }
+}
 

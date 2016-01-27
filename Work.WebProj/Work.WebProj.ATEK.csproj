@@ -337,6 +337,10 @@
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\menuBg.gif" />
     <Content Include="Content\images\no-pic.gif" />
+    <Content Include="Content\images\Products\intro.jpg" />
+    <Content Include="Content\images\Products\pic.jpg" />
+    <Content Include="Content\js\classie.js" />
+    <Content Include="Content\js\scrollspy.js" />
     <Content Include="Content\sass\editor.scss" />
     <Content Include="Content\sass\grid.scss" />
     <Content Include="Content\sass\index.scss" />
@@ -374,6 +378,7 @@
     <Content Include="Content\sass\helper\_function.scss" />
     <Content Include="Content\sass\helper\_mixins.scss" />
     <Content Include="Content\sass\helper\_var.scss" />
+    <Content Include="Content\font\trebucit.ttf" />
     <None Include="gulpfile.js" />
     <Content Include="Content\images\noIE\bg.gif" />
     <Content Include="Content\images\noIE\brow.gif" />
@@ -626,7 +631,6 @@
     <Folder Include="Areas\Base\Views\Shared\" />
     <Folder Include="Content\images\ContactUs\" />
     <Folder Include="Content\images\Email\" />
-    <Folder Include="Content\images\Products\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="_Code\CReport\" />
   </ItemGroup>
