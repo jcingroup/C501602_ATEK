@@ -12,7 +12,6 @@ namespace Banner {
         banner_id?: string;
         check_del?: boolean,
         banner_name?: string;
-        type?: number;
         sort?: number;
         i_Hide?: boolean;
     }
@@ -47,7 +46,6 @@ namespace Banner {
             return <tr>
                        <td className="text-center"><CommCmpt.GridCheckDel iKey={this.props.ikey} chd={this.props.itemData.check_del} delCheck={this.delCheck} /></td>
                        <td className="text-center"><CommCmpt.GridButtonModify modify={this.modify} /></td>
-                       <td><StateForGird id={this.props.itemData.type} stateData={DT.BannerType} /></td>
                        <td>{this.props.itemData.banner_name}</td>
                        <td>{this.props.itemData.sort }</td>
                        <td>{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
@@ -201,7 +199,7 @@ namespace Banner {
             this.setState(newState);
         }
         insertType() {
-            this.setState({ edit_type: 1, fieldData: { i_Hide: false, sort: 0, type: BanngerType.banner, show_name: false } });
+            this.setState({ edit_type: 1, fieldData: { i_Hide: false, sort: 0 } });
         }
         updateType(id: number | string) {
 
@@ -286,7 +284,6 @@ namespace Banner {
                                                 </label>
                                             </th>
                                         <th className="col-xs-1 text-center">修改</th>
-                                        <th className="col-xs-2">分類</th>
                                         <th className="col-xs-4">名稱</th>
                                         <th className="col-xs-2">排序</th>
                                         <th className="col-xs-2">狀態</th>
@@ -324,72 +321,6 @@ namespace Banner {
             else if (this.state.edit_type == 1 || this.state.edit_type == 2) {
                 let fieldData = this.state.fieldData;
                 let InputDate = CommCmpt.InputDate;
-                let imgHtml: JSX.Element = null;
-                let showNameHtml: JSX.Element = null;
-                let styleHtml: JSX.Element = null;
-
-                if (fieldData.type == BanngerType.banner) {
-                    imgHtml = (
-                        <div className="form-group">
-                        <label className="col-xs-2 control-label">首頁輪播圖</label>
-                        <div className="col-xs-8">
-                            <CommCmpt.MasterImageUpload FileKind="Banner" MainId={fieldData.banner_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
-                                url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
-                            <small className="help-block">最多1張圖，建議尺寸 1360*320 px, 每張圖最大不可超過2MB</small>
-                            </div>
-                            </div>
-                    );
-                    showNameHtml = (
-                        <div className="form-group">
-                        <label className="col-xs-2 control-label">顯示名稱於圖片中</label>
-                        <div className="col-xs-4">
-                           <div className="radio-inline">
-                               <label>
-                                    <input type="radio"
-                                        name="show_name"
-                                        value={false}
-                                        checked={fieldData.show_name === false}
-                                        onChange={this.changeFDValue.bind(this, 'show_name') }
-                                        />
-                                    <span>隱藏</span>
-                                   </label>
-                               </div>
-                           <div className="radio-inline">
-                               <label>
-                                    <input type="radio"
-                                        name="show_name"
-                                        value={true}
-                                        checked={fieldData.show_name === true}
-                                        onChange={this.changeFDValue.bind(this, 'show_name') }
-                                        />
-                                    <span>顯示</span>
-                                   </label>
-                               </div>
-                            </div>
-                            </div>
-                    );
-                    if (gb_roles == "Admins") {
-                        styleHtml = (
-                            <div className="form-group">
-                        <label className="col-xs-2 control-label">名稱style</label>
-                        <div className="col-xs-8">
-                            <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'style_string') } value={fieldData.style_string} maxLength={256} />
-                            </div>
-                                </div>
-                        );
-                    }
-                } else if (fieldData.type == BanngerType.firm) {
-                    imgHtml = (
-                        <div className="form-group">
-                        <label className="col-xs-2 control-label">首頁下方廠商輪播圖</label>
-                        <div className="col-xs-8">
-                            <CommCmpt.MasterImageUpload FileKind="Firm" MainId={fieldData.banner_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
-                                url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
-                            <small className="help-block">最多1張圖，建議尺寸 140*65 px, 每張圖最大不可超過2MB</small>
-                            </div>
-                            </div>
-                    );
-                }
 
 
                 outHtml = (
@@ -402,35 +333,28 @@ namespace Banner {
     <h4 className="title"> {this.props.caption} 基本資料維護</h4>
     <form className="form-horizontal" onSubmit={this.handleSubmit}>
         <div className="col-xs-10">
-            {imgHtml}
+           <div className="form-group">
+                <label className="col-xs-2 control-label">首頁輪播圖</label>
+                <div className="col-xs-8">
+                <CommCmpt.MasterImageUpload FileKind="Banner" MainId={fieldData.banner_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
+                    url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
+                <small className="help-block">最多1張圖，建議尺寸 1360*320 px, 每張圖最大不可超過2MB</small>
+                    </div>
+               </div>
             <div className="form-group">
                 <label className="col-xs-2 control-label">名稱</label>
                 <div className="col-xs-8">
                     <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'banner_name') } value={fieldData.banner_name} maxLength={64} />
                     </div>
+                <small className="col-xs-2 help-inline">最多64字</small>
                 </div>
-            {styleHtml}
-            <div className="form-group">
-                <label className="col-xs-2 control-label">分類</label>
-                <div className="col-xs-8">
-                    <select className="form-control"
-                        onChange={this.changeFDValue.bind(this, 'type') }
-                        value={fieldData.type} >
-                        {
-                        DT.BannerType.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
-                        }
-                        </select>
-                    </div>
-                </div>
-
             <div className="form-group">
                 <label className="col-xs-2 control-label">排序</label>
                 <div className="col-xs-8">
                     <input type="number" className="form-control" onChange={this.changeFDValue.bind(this, 'sort') } value={fieldData.sort}  />
                     </div>
+                <small className="col-xs-2 help-inline">數字越大越前面</small>
                 </div>
-
-            {showNameHtml}
             <div className="form-group">
                 <label className="col-xs-2 control-label">狀態</label>
                 <div className="col-xs-4">
@@ -461,7 +385,7 @@ namespace Banner {
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-2">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
-                    {}
+                    { }
                     <button type="button" onClick={this.noneType}><i className="fa-times"></i> 回前頁</button>
                     </div>
                 </div>

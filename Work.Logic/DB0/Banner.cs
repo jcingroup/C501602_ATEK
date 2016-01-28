@@ -17,10 +17,7 @@ namespace ProcCore.Business.DB0
     {
         public int banner_id { get; set; }
         public string banner_name { get; set; }
-        public int type { get; set; }
         public int sort { get; set; }
-        public bool show_name { get; set; }
-        public string style_string { get; set; }
         public bool i_Hide { get; set; }
         public string i_InsertUserID { get; set; }
         public Nullable<int> i_InsertDeptID { get; set; }

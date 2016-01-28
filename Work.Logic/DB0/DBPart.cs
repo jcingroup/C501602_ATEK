@@ -176,67 +176,13 @@ namespace ProcCore.Business.DB0
 
     }
     #region Model Expand
-
-    public partial class Sales
-    {
-        public string share_name { get; set; }
-    }
-    public partial class m_Sales
-    {
-        public int? rise_type { get; set; }
-        public int sub_count { get; set; }
-    }
-    public partial class Purchase
-    {
-        public string sales_name { get; set; }
-        public bool is_mail { get; set; }
-        public IList<PurchaseDetail> detail { get; set; }
-    }
-    public partial class m_Purchase
-    {
-        public string sales_name { get; set; }
-    }
-    public partial class PurchaseDetail
-    {
-        public string imgsrc { get; set; }
-    }
-    public partial class m_Product
-    {
-        public string imgsrc { get; set; }
-    }
-    public partial class Product
-    {
-        public string[] imgsrcs { get; set; }
-        public string category_l1_name { get; set; }
-        public string category_l2_name { get; set; }
-    }
     public partial class m_News
     {
         public string imgsrc { get; set; }
     }
-    public partial class m_ProductCategory_l2
-    {
-        public string category_l1_name { get; set; }
-    }
-    public partial class PaymentReply
-    {
-        public string day_string { get; set; }
-        public string sales_name { get; set; }
-    }
-    public partial class m_PaymentReply
-    {
-        public int state { get; set; }
-        public string sales_name { get; set; }
-    }
     public partial class m_Banner
     {
         public string imgsrc { get; set; }
-    }
-    public class PutPurchaseCheckPram
-    {
-        public string id { get; set; }
-        public int state { get; set; }
-        public bool is_mail { get; set; }
     }
     public class L1
     {
