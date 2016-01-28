@@ -4,9 +4,9 @@ $figure-bg:             #fff !default;
 $figure-border-color:   #9CD217 !default;
 $figure-text-align:     center !default;
 
-$figure-min-width:      290px !default;
-$figure-max-width:      290px !default;
-$figure-width:          33.3% !default;
+$figure-min-width:      280px !default;
+$figure-max-width:      280px !default;
+$figure-width:          31.5% !default;
 $figure-height:         220px !default;
 $figure-margin:         0 7px 30px 7px!default;
 
@@ -131,7 +131,7 @@ figure {
             @include prefix(transform, translateY(-($figure-height - 85px)));
         }
         span {
-            @include prefix(transform, translateY(70px));
+            @include prefix(transform, translateY(80px));
         }
         figcaption {
             background: rgba(#053A04,.9);

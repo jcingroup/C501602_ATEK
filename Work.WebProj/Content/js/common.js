@@ -1,10 +1,17 @@
-// 沒有卷軸時不出現 goTop 按鈕
 $(window).scroll(function(){
+    // 沒有卷軸時不出現 goTop 按鈕
     if ($(this).scrollTop() > 100) {
         $('.goTop').fadeIn();
     } else {
         $('.goTop').fadeOut(500);
     }
+
+    // 左選單在卷動時固定位置
+    var sticky = $('#sidebar'),
+        scroll = $(window).scrollTop();
+
+    if (scroll >= 200) sticky.addClass('fixed');
+    else sticky.removeClass('fixed');
 });
 
 // 點選後跳到 href 指向的位置

@@ -10,7 +10,7 @@ $btn-bg-hover:       darken($brand-primary,6%) !default;
 $btn-shadow:         1px 1px 2px hsla(0,0,0,0.2);
 
 $btn-width:          100px !default;
-$btn-padding:        23px 55px !default;
+$btn-padding:        10px 30px !default;
 $btn-border:         1px solid $link-color;
 $btn-border-radius:  3px !default;
 
@@ -73,9 +73,6 @@ $btn-line-height:    1.01 !default;
 
 .btn-download {
     background: $btn-bg-color url(#{$img-path}/icon-download.png) right center no-repeat;
+    padding: 23px 55px;
     padding-right: 65px;
-}
-
-.btn-small {
-    padding: 10px 40px;
 }

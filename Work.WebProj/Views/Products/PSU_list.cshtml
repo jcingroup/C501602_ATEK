@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Products::FEATURE OF PRODUCT::AC-DC";
     ViewBag.BodyClass = "Products";
-    ViewBag.Target = "AC-DC";
+    ViewBag.Target = "Constant Voltage";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
@@ -12,161 +12,133 @@
 
 @section Scripts {
     <script src="~/Content/js/scrollspy.js"></script>
-    <script src="~/Content/js/classie.js"></script>
-    <script>
-        function init() {
-            window.addEventListener('scroll', function(e){
-                var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-                    shrinkOn = 185,
-                    header = document.querySelector("aside");
-                if (distanceY > shrinkOn) {
-                    classie.add(header,"smaller");
-                } else {
-                    if (classie.has(header,"smaller")) {
-                        classie.remove(header,"smaller");
-                    }
-                }
-            });
-        }
-        window.onload = init();
-    </script>
 }
 
 @Html.Partial("~/Views/Products/PSU_Sidebar.cshtml")
 
-<header class="intro">
-    <h2 class="font-sp">FEATURE OF PRODUCT</h2>
-    <img class="float-r" src="~/Content/images/Products/intro.jpg" alt="Feature of product">
-    <ul class="text-list">
-        <li>High efficiency up to 93%</li>
-        <li>Depending on the load, either constant current or constant voltage mode is applicable.</li>
-        <li>Saving Power < 0.5W</li>
-        <li>Over Voltage, Short circuit and Overload protection.</li>
-        <li>Built-in 3 in 1 dimming function, DALI, Zigbee as options.</li>
-        <li>Surge protection 4KV / 5KV.</li>
-    </ul>
-</header><!-- info //-->
+<div id="content">
 
-<section id="p1" class="kind">
-    <h3 class="font-sp">Constant Voltage</h3>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>300W</h4>
-            <span>LUX2-300-24</span>
-            <span>LUX2-300-36</span>
-            <span>LUX2-300-48</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>200W</h4>
-            <span>LUX2-200-24</span>
-            <span>LUX2-200-36</span>
-            <span>LUX2-200-48</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>150W</h4>
-            <span>LUX2-150-24</span>
-            <span>LUX2-150-36</span>
-            <span>LUX2-150-48</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>120W</h4>
-            <span>LUX2-120-24</span>
-            <span>LUX2-120-36</span>
-            <span>LUX2-120-48</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>120W</h4>
-            <span>LUX2-120-55</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>100W</h4>
-            <span>LUX2-100-24</span>
-            <span>LUX2-100-36</span>
-            <span>LUX2-100-48</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>60W</h4>
-            <span>PRE-060-24</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>40W</h4>
-            <span>PRE-040-55</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>30W</h4>
-            <span>PRE-030-24</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>20W</h4>
-            <span>PRE-020-24</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>20W</h4>
-            <span>PRE-020-55</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>10W</h4>
-            <span>PRE-020-24</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-</section>
+    <header class="intro">
+        <h3 class="font-sp">Constant Voltage</h3>
+        <h2 class="font-sp">FEATURE</h2>
+        <img class="float-r" src="~/Content/images/Products/intro.jpg" alt="Feature of product">
+        <ul class="text-list">
+            <li>High efficiency up to 93%</li>
+            <li>Depending on the load, either constant current or constant voltage mode is applicable.</li>
+            <li>Saving Power < 0.5W</li>
+            <li>Over Voltage, Short circuit and Overload protection.</li>
+            <li>Built-in 3 in 1 dimming function, DALI, Zigbee as options.</li>
+            <li>Surge protection 4KV / 5KV.</li>
+        </ul>
+    </header><!-- info //-->
 
-<section id="p2" class="kind">
-    <h3 class="font-sp">DALI</h3>
-    <figure>
-        <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-        <figcaption>
-            <h4>300W</h4>
-            <span>LUX2-300-24</span>
-            <span>LUX2-300-36</span>
-            <span>LUX2-300-48</span>
-            <a href="~/Products/PSU_content">READ MORE</a>
-        </figcaption>
-    </figure>
-</section>
+    <section id="p1" class="kind">
+        <h3 class="font-sp">Kind</h3>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>300W</h4>
+                <span>LUX2-300-24</span>
+                <span>LUX2-300-36</span>
+                <span>LUX2-300-48</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>200W</h4>
+                <span>LUX2-200-24</span>
+                <span>LUX2-200-36</span>
+                <span>LUX2-200-48</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>150W</h4>
+                <span>LUX2-150-24</span>
+                <span>LUX2-150-36</span>
+                <span>LUX2-150-48</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>120W</h4>
+                <span>LUX2-120-24</span>
+                <span>LUX2-120-36</span>
+                <span>LUX2-120-48</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>120W</h4>
+                <span>LUX2-120-55</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>100W</h4>
+                <span>LUX2-100-24</span>
+                <span>LUX2-100-36</span>
+                <span>LUX2-100-48</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>60W</h4>
+                <span>PRE-060-24</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>40W</h4>
+                <span>PRE-040-55</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>30W</h4>
+                <span>PRE-030-24</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>20W</h4>
+                <span>PRE-020-24</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>20W</h4>
+                <span>PRE-020-55</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <figcaption>
+                <h4>10W</h4>
+                <span>PRE-020-24</span>
+                <a href="~/Products/PSU_content">READ MORE</a>
+            </figcaption>
+        </figure>
+    </section>
+</div><!-- content //-->

@@ -10,23 +10,25 @@
     <li><a href="~/Products">PRODUCTS</a></li>
 }
 
-@section Scripts {
-    <script src="~/Content/js/classie.js"></script>
-    <script>
-        function init() {
-            window.addEventListener('scroll', function(e){
-                var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-                    shrinkOn = 185,
-                    header = document.querySelector("aside");
-                if (distanceY > shrinkOn) {
-                    classie.add(header,"smaller");
-                } else {
-                    if (classie.has(header,"smaller")) {
-                        classie.remove(header,"smaller");
-                    }
-                }
-            });
-        }
-        window.onload = init();
-    </script>
-}
+<section class="catalog">
+    <h3 class="font-sp">AC-DC</h3>
+    <dl>
+        <dt>Contant Voltage</dt>
+        <dd>
+            <a href="~/Products/PSU_list" class="btn">kind</a>
+        </dd>
+    </dl>
+    <dl>
+        <dt>DALI</dt>
+        <dd>
+            <a href="~/Products/PSU_list" class="btn">kind</a>
+        </dd>
+    </dl>
+    <dl>
+        <dt>Wireless</dt>
+        <dd>
+            <a href="~/Products/PSU_list" class="btn">Zigbee</a>
+            <a href="~/Products/PSU_list" class="btn">Sub-GHZ</a>
+        </dd>
+    </dl>
+</section>

@@ -1,22 +1,29 @@
-﻿<aside id="sub-nav">
+﻿<aside id="sidebar" class="sub-nav">
     <nav>
-        @* 分類名稱 *@
+        @* 第1層 *@
         <header class="font-sp">AC-DC</header>
 
-        @* 當前頁選單 + class="active"
-        <a href="#p1" class="active">Constant Voltage</a>
-        <em>Wireless</em> tag標籤 後台可新增修改或不使用*@
-
-        <a href="#p1">Constant Voltage</a>
-        <a href="#p2">DALI</a>
-        <a href="#p3"><em>Wireless</em>Zigbee</a>
-        <a href="#p4"><em>Wireless</em>Sub-GHZ</a>
+        <dl class="current">
+            @* 第2層 *@
+            <dt>Constant Voltage</dt>
+            <dd>
+                @* 第3層 list後加 #p1*@
+                <a class="btn" href="PSU_list#p1">Kind</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>DALI</dt>
+            <dd>
+                <a class="btn" href="PSU_list#p1">Kind</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>Wireless</dt>
+            <dd>
+                <a class="btn" href="PSU_list#p1">Zigbee</a>
+                <a class="btn" href="PSU_list#p2">Sub-GHZ</a>
+            </dd>
+        </dl>
     </nav>
 
-    @* 有其他分類時如下
-    <nav>
-        <header class="font-sp">DC-DC</header>
-        <a href="~/Products/PSU_list.cshtml#p1">test</a>
-        <a href="~/Products/PSU_list.cshtml#p1">test2</a>
-    </nav> *@
 </aside>

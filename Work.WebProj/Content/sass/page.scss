@@ -2,7 +2,7 @@
 
 $font-size-h2: 62px;
 $font-size-h3: 35px;
-$line:           1px solid #EAEFDE;
+$line:         1px solid #EAEFDE;
 
 @import "helper/function";
 @import "helper/var";
@@ -95,17 +95,17 @@ main {
 
 #sidebar {
     float: right;
-    width: cp(350px);
+    width: cp(300px);
 }
 #content {
     float: left;
-    width: cp(1020px);
+    width: cp(1060px);
 }
 
 // == Products
 
 // 產品子分類
-#sub-nav {
+.sub-nav {
     nav {
         @extend %clearfix;
         margin-bottom: 25px;
@@ -115,63 +115,45 @@ main {
         font-size: em(35px);
         margin-bottom: 5px;
     }
-    em {
-        @include absolute(right -2px top 7px);
-        display: block;
-        background: $brand-primary;
-        color: #fff;
-        font-size: em(13px,22px);
-        font-style: normal;
-        line-height: 1;
-        padding: 3px 4px;
-    }
-    a {
-        position: relative;
-        display: inline-block;
-        background: #ECECEC;
-        box-shadow: 1px 1px 0 #CBCBCB;
-        color: #4C6F17;
-        font-size: em(22px);
-        text-align: center;
-
-        width: 250px;
-        margin-right: 7px;
-        margin-bottom: 7px;
-
-        @include text-middle(80px);
-
-        &:hover, &:active, &.active {
+    dl {
+        background: #efefef;
+        padding: 20px;
+        margin: 8px 0;
+        &.current {
             background: $brand-primary;
-            box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
-            color: #fff;
-
-            em {
-                background: #fff;
-                color: $brand-primary;
+            // box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
+            dt { color: #fff; }
+            a {
+                background: #F1F1F1;
+                color: #4C4C4C;
             }
         }
     }
-    &.smaller {
-        @include fixed(top 0 left 0 right 0);
-        background: rgba(#fff, .95);
-        border-bottom: $line;
-        padding: 15px 20px; padding-bottom: 0;
+    dt {
+        color: darken($brand-primary,20%);
+        font-size: em(22px);
+        margin-bottom: 15px;
+    }
+    a {
+        min-width: auto;
+        padding: 8px 12px;
+        font-size: em(15px);
+    }
+    &.fixed {
+        @include fixed(top 20px left 50%);
+        margin-left: 340px;
+        // background: #fff;
         z-index: z(tooltip);
-
-        nav { margin-bottom: 15px; }
-        header, a { float: left; }
-        header { margin-right: 15px; }
-        em { font-size: em(11px,16px); }
-        a {
-            font-size: em(16px);
-            width: 185px;
-            @include text-middle(50px);
+        @include mq(wider) {
+            max-width: 308px;
+            margin-left: 393px;
         }
     }
 }
 
 .Products #main {
     header h2 {
+        color: $brand-secondary;
         letter-spacing: 3px;
         margin-top: 0;
         margin-bottom: 20px;
@@ -180,14 +162,33 @@ main {
         border-top: $line;
         margin-top: 35px;
     }
+    .catalog, .series { border: none; }
 }
 
+// 產品分類
+.catalog {
+    text-align: center;
+    h3 { margin-top: 0; }
+    dl {
+        display: inline-block;
+        background: #efefef;
+        width: 32%;
+        margin: 10px 2px;
+        padding: 25px 7px;
+    }
+    dt {
+        font-size: em(22px);
+        color: #528446;
+        margin-bottom: 30px;
+    }
+}
 // 產品列表頁
 .intro {
     @extend %clearfix;
     padding-top: 10px;
 
     img { margin-top: -35px; }
+    h3 { margin-top: 0; }
 }
 .kind { @extend %clearfix; }
 
@@ -226,7 +227,6 @@ main {
 }
 
 // 系列產品(滑動特效)
-.Products #main .series { border: none; }
 
 #slide, .swiper-slide {
     height: 260px;
