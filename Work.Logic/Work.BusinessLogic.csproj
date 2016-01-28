@@ -74,164 +74,92 @@
   <ItemGroup>
     <Compile Include="Base.cs" />
     <Compile Include="DB0\AspNetRoles.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\AspNetUsers.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\Banner.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB0\C13B0_1Komo.Context.cs">
+    <Compile Include="DB0\C50A0_ATEK.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>C13B0_1Komo.Context.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB0\C13B0_1Komo.cs">
+    <Compile Include="DB0\C50A0_ATEK.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB0\C13B0_1Komo.Designer.cs">
+    <Compile Include="DB0\C50A0_ATEK.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>C13B0_1Komo.edmx</DependentUpon>
+      <DependentUpon>C50A0_ATEK.edmx</DependentUpon>
     </Compile>
     <Compile Include="DB0\DBPart.cs" />
     <Compile Include="DB0\Department.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\Issue.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\i_Currency.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\i_IDX.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\i_Lang.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\i_Parm.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\i_SN.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\i_UserLoginLog.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\Menu.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_AspNetRoles.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_AspNetUsers.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_Banner.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_Department.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_Issue.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_i_Currency.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_i_IDX.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_i_Lang.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_i_Parm.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_i_SN.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_i_UserLoginLog.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_Menu.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_News.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_PaymentReply.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_Product.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_ProductCategory_l1.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_ProductCategory_l2.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_ProductSelect.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_Purchase.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_PurchaseDetail.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_Sales.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_Settle.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_SettleCal.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\m_SettleDetail.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\News.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\PaymentReply.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\Product.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\ProductCategory_l1.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\ProductCategory_l2.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\ProductSelect.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\Purchase.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\PurchaseDetail.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\Sales.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\Settle.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\SettleCal.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB0\SettleDetail.cs">
-      <DependentUpon>C13B0_1Komo.tt</DependentUpon>
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="LogicCenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -240,12 +168,12 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="DB0\C13B0_1Komo.edmx">
+    <EntityDeploy Include="DB0\C50A0_ATEK.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>C13B0_1Komo.Designer.cs</LastGenOutput>
+      <LastGenOutput>C50A0_ATEK.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DB0\C13B0_1Komo.edmx.diagram">
-      <DependentUpon>C13B0_1Komo.edmx</DependentUpon>
+    <None Include="DB0\C50A0_ATEK.edmx.diagram">
+      <DependentUpon>C50A0_ATEK.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -253,15 +181,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB0\C13B0_1Komo.Context.tt">
+    <Content Include="DB0\C50A0_ATEK.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>C13B0_1Komo.edmx</DependentUpon>
-      <LastGenOutput>C13B0_1Komo.Context.cs</LastGenOutput>
+      <DependentUpon>C50A0_ATEK.edmx</DependentUpon>
+      <LastGenOutput>C50A0_ATEK.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DB0\C13B0_1Komo.tt">
+    <Content Include="DB0\C50A0_ATEK.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>C13B0_1Komo.edmx</DependentUpon>
-      <LastGenOutput>C13B0_1Komo.cs</LastGenOutput>
+      <DependentUpon>C50A0_ATEK.edmx</DependentUpon>
+      <LastGenOutput>C50A0_ATEK.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

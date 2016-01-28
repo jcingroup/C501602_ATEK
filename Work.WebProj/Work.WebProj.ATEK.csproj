@@ -198,7 +198,6 @@
     <Compile Include="Areas\Active\Controllers\BannerDataController.cs" />
     <Compile Include="Areas\Active\Controllers\ParmDataController.cs" />
     <Compile Include="Areas\Active\Controllers\NewsDataController.cs" />
-    <Compile Include="Areas\Base\Controllers\ExcelReportController.cs" />
     <Compile Include="Areas\Base\Controllers\LoginController.cs" />
     <Content Include="app_modules\comm-cmpt\package.js" />
     <Content Include="app_modules\comm-func\package.js" />
@@ -314,6 +313,15 @@
     <Compile Include="_Code\Ashx\ValidateCode.ashx.cs">
       <DependentUpon>ValidateCode.ashx</DependentUpon>
     </Compile>
+    <Content Include="Content\backstage\component\fontAwesome\font-awesome.css" />
+    <Content Include="Content\backstage\vendor\font-awesome.css" />
+    <Content Include="Content\backstage\_admin\bs\bootstrap.css" />
+    <Content Include="Content\backstage\_admin\fa\font-awesome.css" />
+    <Content Include="Content\backstage\_admin\page.css" />
+    <Content Include="Content\backstage\_admin\vendors\bootstrap-datetimepicker-build.css" />
+    <Content Include="Content\backstage\_admin\vendors\jquery.loadmask.css" />
+    <Content Include="Content\backstage\_admin\vendors\mask-load.css" />
+    <Content Include="Content\backstage\_admin\vendors\toastr.css" />
     <Content Include="Content\css\bootstrap-datetimepicker-build.css" />
     <Content Include="Content\css\editor.css" />
     <Content Include="Content\css\grid.css" />

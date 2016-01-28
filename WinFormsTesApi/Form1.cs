@@ -27,15 +27,15 @@ namespace WinFormsTesApi
         {
             LogicCenter lg = new LogicCenter("SR-NetWeb,sa,jcin@4257386~");
 
-            lg.SettleCal(2015, 10);
+           // lg.SettleCal(2015, 10);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             LogicCenter lg = new LogicCenter("SR-NetWeb,sa,jcin@4257386~");
 
-            var t = lg.GetShareBySales("M002", null);
-            var s = JsonConvert.SerializeObject(t);
+            //var t = lg.GetShareBySales("M002", null);
+            //var s = JsonConvert.SerializeObject(t);
         }
     }
 }
