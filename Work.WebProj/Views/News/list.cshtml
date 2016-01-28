@@ -1,7 +1,36 @@
 ﻿
 @{
-    ViewBag.Title = "list";
+    ViewBag.Title = "NEWS";
+    ViewBag.BodyClass = "News";
+    ViewBag.Target = "EXHIBITION"; @* 當前 *@
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>list</h2>
+@section breadCrumb {
+    <li><a href="~/News">NEWS</a></li>
+}
 
+<nav id="sidebar" class="tag">
+    @* 後台可自定 *@
+    <a href="~/News">ALL</a>
+    <a href="~/News" class="current">EXHIBITION</a> @* 當前+classs="current" *@
+    <a href="~/News">BUSINESSES</a>
+</nav>
+
+<div id="content">
+
+    <article class="panel hover-shadow">
+        <header>Annual General Meeting of Shareholders 2011</header>
+        <p>A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below@* 左為news內容，右邊...more統一加入*@...more</p>
+        <a href="~/News/Content"></a>
+        <footer>2016.1.28</footer>
+    </article>
+
+    <article class="panel hover-shadow">
+        <header>Annual General Meeting of Shareholders 2011</header>
+        <p>A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below...more</p>
+        <a href="~/News/Content"></a>
+        <footer>2016.1.28</footer>
+    </article>
+
+</div><!-- content //-->

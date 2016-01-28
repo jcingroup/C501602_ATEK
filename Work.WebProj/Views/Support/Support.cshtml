@@ -1,7 +1,17 @@
 ﻿
 @{
     ViewBag.Title = "Support";
+    ViewBag.BodyClass = "Support";
+    ViewBag.Target = "Support";
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>Support</h2>
+@section Scripts {
+    <script src="~/Content/js/collapse.js"></script>
+}
 
+<article class="collapse">
+    <header><em>EXHIBITION</em>Annual General Meeting of Shareholders 2011</header>
+    <div>A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below.</div>
+    <footer>2016.1.28</footer>
+</article>

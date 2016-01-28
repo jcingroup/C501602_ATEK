@@ -14,5 +14,9 @@ namespace DotWeb.WebApp.Controllers
         {
             return View("list");
         }
+        public ActionResult content()
+        {
+            return View();
+        }
     }
 }

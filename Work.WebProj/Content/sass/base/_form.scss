@@ -182,3 +182,37 @@ input:not([type]), #{text-inputs(all)} {
 
 // 禁用元素的滑鼠樣式(含label)
 *[disabled], .disabled { cursor: $cursor-disabled; }
+
+// == checkbox
+// #{text-inputs(checkbox)} {
+//     position: absolute;
+//     margin-left: -9999px;
+//     visibility: hidden;
+// }
+// #{text-inputs(checkbox)} + label {
+//     // 共用設定
+//     display: block;
+//     position: relative;
+//     cursor: pointer; cursor:hand;
+//     outline: none;
+//     user-select: none;
+
+//     // 各別設定(換圖及調大小)
+//     background-attachment: fixed;
+//     background: #e5e5e5 url(#{$img-path}/Products/check.png) center 50px no-repeat;
+//     border: 1px solid #fff;
+//     padding: 5px 10px;
+//     width: 34px; height: 34px;
+//     border-radius: 5px;
+//     margin: auto;
+// }
+// #{text-inputs(checkbox)}:hover + label {
+//     background-position: center 7px;
+// }
+// #{text-inputs(checkbox)}:checked + label {
+//     background-position: center -48px;
+// }
+// #{text-inputs(number)} {
+//     width: 80px;
+//     margin: auto;
+// }

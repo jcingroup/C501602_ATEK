@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+// == input群組
+.input-group {
+    position: relative;
+    padding: 0;
+
+    float: right;
+    margin-top: 20px;
+    font-size: em(13px);
+
+    .input-group-btn {
+        @include absolute(right 3px top 0);
+        height: $input-height - 6;
+        border-radius: $input-radius;
+        margin: 3px;
+    }
+}

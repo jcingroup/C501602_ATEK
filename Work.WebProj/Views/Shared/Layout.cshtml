@@ -14,7 +14,8 @@
         var gb_approot = '@Url.Content("~")';
     </script>
     <!--[if lt IE 9]><script src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><![endif]-->
-    <link rel="stylesheet" href="~/Content/css/grid.css">
+    <link href="~/Content/css/grid.css" rel="stylesheet">
+    <link href="~/Content/css/swiper.min.css" rel="stylesheet">
     @if (ViewBag.IsFirstPage)
     {
         <link href="~/Content/css/index.css" rel="stylesheet">
@@ -56,7 +57,7 @@
         else
         {
             <main id="main">
-                <form action="" class="col-3 col-sm-12 input-group search">
+                <form action="" class="col-2 col-sm-12 input-group search">
                     <input type="Search" placeholder="SEARCH...">
                     <button class="input-group-btn">Search</button>
                 </form>
@@ -99,6 +100,7 @@
     </footer><!-- footer -->
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/Content/js/swiper/swiper.min.js"></script>
     <script src="~/Content/js/common.js"></script>
     @RenderSection("Scripts", required: false)
     <script src="~/Scripts/GoogleAnalytics.js"></script>

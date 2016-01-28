@@ -5,17 +5,13 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-@section css {
-    <link href="~/Content/css/swiper.min.css" rel="stylesheet">
-}
-
 @section Scripts {
-    <script src="~/Content/js/swiper/swiper.min.js"></script>
     <script>
         var mySwiper = new Swiper('#banner', {
             autoplay: 4000,
             speed: 1000,
             effect: 'fade',
+            autoplayDisableOnInteraction: false
         })
     </script>
 }

@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.hover-underline {
+	color: #808080;
+    position: relative;
+
+    &::before {
+        display: block;
+        content: '';
+        height: 1px; width: 100%;
+        background: #808080;
+        @include absolute(bottom 0 right 0);
+        @include prefix(transform, scaleX(0));
+        @include prefix(transform-origin, 50%);
+        @include prefix(transition, transform .35s ease-out, webkit);
+    }
+
+    &:hover, &:active {
+        &::before {
+            @include prefix(transform, scaleX(1));
+        }
+    }
+}
+
+.hover-shadow {
+    @extend %effect-all;
+
+    header { @extend %effect-all; }
+
+    &:hover, &:active {
+        box-shadow: 3px 8px 12px rgba(0,0,0,0.2);
+
+        header { color: $brand-primary; }
+    }
+}

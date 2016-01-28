@@ -53,18 +53,15 @@ figcaption {
         z-index: z(tooltip) - 1;
         white-space: nowrap;
         opacity: 0;
-    }
-}
 
-// theme
-figcaption {
-    @extend %effect-all;
-
-    > a {
         line-height: $figure-height;
         height: $figure-height;
     }
+
+    @extend %effect-all;
 }
+
+// theme
 figure {
     @extend %effect-all;
 
@@ -106,11 +103,10 @@ figure {
             @include prefix(transform, scale3d(1.2,1.2,1));
         }
         h4 {
-            @include prefix(transform, translateY(-($figure-height - 85px)));
-            font-size: em(34px);
+            color: #333;
         }
         span {
-            @include prefix(transform, translateY(85px));
+            @include prefix(transform, translateY(20px));
             opacity: 1;
         }
         figcaption {
@@ -122,13 +118,23 @@ figure {
 .kind figure {
     border: 1px solid $figure-border-color;
 
-    span { color: #D8DF2B;}
+    span {
+        color: #D8DF2B;
+    }
 
     &:hover, &:active {
         border: 4px solid #D7DD19;
 
-        h4 { color: #fff;}
-        span { @include prefix(transform, translateY(70px)); }
-        figcaption { background: rgba(#053A04,.9); }
+        h4 {
+            color: #fff;
+            font-size: em(34px);
+            @include prefix(transform, translateY(-($figure-height - 85px)));
+        }
+        span {
+            @include prefix(transform, translateY(70px));
+        }
+        figcaption {
+            background: rgba(#053A04,.9);
+        }
     }
 }

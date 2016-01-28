@@ -318,6 +318,10 @@ address {
   background-color: transparent;
   border: 0; }
 
+.hover-shadow, .hover-shadow header {
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s; }
+
 .float-l {
   float: left; }
 
@@ -555,6 +559,11 @@ body {
   .hover-underline:hover::before, .hover-underline:active::before {
     -webkit-transform: scaleX(1);
     transform: scaleX(1); }
+
+.hover-shadow:hover, .hover-shadow:active {
+  box-shadow: 3px 8px 12px rgba(0, 0, 0, 0.2); }
+  .hover-shadow:hover header, .hover-shadow:active header {
+    color: #79B229; }
 
 .dropbtn {
   cursor: pointer;

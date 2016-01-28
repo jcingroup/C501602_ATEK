@@ -333,6 +333,8 @@ tr:nth-of-type(odd) {
   overflow-x: auto;
   min-height: 0.01%;
   max-width: 1400px; }
+  .table-rwd table {
+    width: 100%; }
   @media (max-width: 48em) {
     .table-rwd {
       width: 100%;
