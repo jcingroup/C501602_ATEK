@@ -352,6 +352,7 @@
     <Content Include="Content\images\Products\intro.jpg" />
     <Content Include="Content\images\Products\pic.jpg" />
     <Content Include="Content\js\classie.js" />
+    <Content Include="Content\js\map.js" />
     <Content Include="Content\js\scrollspy.js" />
     <Content Include="Content\sass\editor.scss" />
     <Content Include="Content\sass\grid.scss" />

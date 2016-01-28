@@ -6,5 +6,29 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>ContactUs</h2>
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="~/Content/js/map.js"></script>
+}
 
+<form action="" class="contacts">
+    <h3 class="font-sp">Welcome to Contact Us</h3>
+
+    <input type="text" placeholder="Title">
+
+    <input type="text" placeholder="Name">
+
+    <input type="text" placeholder="Company">
+
+    <input type="text" placeholder="Tel">
+
+    <input type="text" placeholder="Fax">
+
+    <input type="text" placeholder="E-mail">
+
+    <textarea rows="8" placeholder="Please fill in this"></textarea>
+
+    <button class="btn btn-small">SEND</button>
+</form>
+
+<div id="map-canvas"></div>

@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+$input-group-radius:       19px !default;
+$input-group-height:       38px !default;
+
 // == input群組
 .input-group {
     position: relative;
@@ -9,10 +12,16 @@
     margin-top: 20px;
     font-size: em(13px);
 
+    input {
+        border-color: #9CD217;
+        border-radius: $input-group-radius;
+        height: $input-group-height;
+    }
+
     .input-group-btn {
         @include absolute(right 3px top 0);
-        height: $input-height - 6;
-        border-radius: $input-radius;
+        height: $input-group-height - 6;
+        border-radius: $input-group-radius;
         margin: 3px;
     }
 }
