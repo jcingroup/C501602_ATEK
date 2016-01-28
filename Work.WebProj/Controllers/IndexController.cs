@@ -33,9 +33,9 @@ namespace DotWeb.Controllers
         {
             return Redirect("~/Base/Login");
         }
-        public class IndexInfo
-        {
-            public List<m_Banner> banners { get; set; }
-        }
+    }
+    public class IndexInfo
+    {
+        public List<m_Banner> banners { get; set; }
     }
 }
