@@ -496,6 +496,7 @@
     <Content Include="Views\ContactUs\ContactUs.cshtml" />
     <Content Include="Views\Products\PSU_sidebar.cshtml" />
     <Content Include="Views\News\content.cshtml" />
+    <Content Include="Views\Products\PSU_catalog.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

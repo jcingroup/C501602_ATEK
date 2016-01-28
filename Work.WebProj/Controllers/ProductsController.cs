@@ -12,13 +12,17 @@ namespace DotWeb.WebApp.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View("PSU_list");
+            return View("PSU_catalog");
         }
         public ActionResult PSU_content()
         {
             return View();
         }
         public ActionResult PSU_sidebar()
+        {
+            return View();
+        }
+        public ActionResult PSU_list()
         {
             return View();
         }
