@@ -43,11 +43,6 @@ $btn-padding:       12px 20px;
         margin: 30px auto;
     }
 }
-#banner, .swiper-slide {
-    height: 500px;
-
-    @include mq(phone,tablet) {  }
-}
 .swiper-wrapper {
     @extend %list-unstyled;
     margin-bottom: 0;
@@ -56,11 +51,6 @@ $btn-padding:       12px 20px;
     text-align: center;
 
     @include mq-max(tablet) {}
-}
-@for $i from 1 through 2 {
-    .i#{$i} {
-        background-image: url(#{$img-banner}#{$i}.jpg);
-    }
 }
 
 // == main

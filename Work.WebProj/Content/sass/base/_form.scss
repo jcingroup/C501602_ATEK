@@ -15,14 +15,14 @@ $form-color:(
     input-bg:               #fff,
     input-bg-disabled:      $gray-lighter,
     input-color:            $gray,
-    input-border:           #9CD217,
-    input-border-focus:     #D8DF2B,
+    input-border:           #ccc,
+    input-border-focus:     lighten($brand-primary,30%),
     input-placeholder:      #C7CBBD,
     input-addon-bg:         $gray-lighter,
     input-addon-border:     #ccc
 );
 
-$input-radius:              19px !default;
+$input-radius:              5px !default;
 $input-height:              38px !default;
 
 // 合併配色
