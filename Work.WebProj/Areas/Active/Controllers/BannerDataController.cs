@@ -45,10 +45,6 @@ namespace DotWeb.Areas.Active.Controllers
                 if (filekind == "Banner")
                     handleImageSave(fileName, id, ImageFileUpParm.BannerRotator, filekind, "Active", "BannerData");
 
-                //廠商
-                if (filekind == "Firm")
-                    handleImageSave(fileName, id, ImageFileUpParm.FirmRotator, filekind, "Active", "BannerData");
-
 
                 r.result = true;
                 r.file_name = fileName;

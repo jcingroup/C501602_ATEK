@@ -32,13 +32,11 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 var items = db0.Banner             
-                    .OrderBy(x=>x.type)
-                    .ThenByDescending(x => x.sort)
+                    .OrderByDescending(x=>x.sort)
                     .Select(x => new m_Banner()
                     {
                         banner_id = x.banner_id,
                         banner_name = x.banner_name,
-                        type = x.type,
                         sort = x.sort,
                         i_Hide = x.i_Hide
                     });
@@ -72,11 +70,8 @@ namespace DotWeb.Api
                 item = await db0.Banner.FindAsync(md.banner_id);
 
                 item.banner_name = md.banner_name;
-                item.type = md.type;
                 item.sort = md.sort;
                 item.i_Hide = md.i_Hide;
-                item.show_name = md.show_name;
-                item.style_string = md.style_string;
 
                 await db0.SaveChangesAsync();
                 rAjaxResult.result = true;

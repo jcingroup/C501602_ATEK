@@ -45,11 +45,8 @@
             <PropertyRef Name="banner_id" />
           </Key>
           <Property Name="banner_id" Type="int" Nullable="false" />
-          <Property Name="banner_name" Type="nvarchar" MaxLength="64" />
-          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="banner_name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="sort" Type="int" Nullable="false" />
-          <Property Name="show_name" Type="bit" Nullable="false" />
-          <Property Name="style_string" Type="varchar" MaxLength="256" />
           <Property Name="i_Hide" Type="bit" Nullable="false" />
           <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
           <Property Name="i_InsertDeptID" Type="int" />
@@ -407,28 +404,9 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="Menu" EntitySet="Menu" />
           </AssociationSet>
-          <EntitySet Name="Banner" EntityType="C50A0_ATEKModel.Banner" />
           <EntitySet Name="News" EntityType="C50A0_ATEKModel.News" />
+          <EntitySet Name="Banner" EntityType="C50A0_ATEKModel.Banner" />
         </EntityContainer>
-        <EntityType Name="Banner">
-          <Key>
-            <PropertyRef Name="banner_id" />
-          </Key>
-          <Property Name="banner_id" Type="Int32" Nullable="false" />
-          <Property Name="banner_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="type" Type="Int32" Nullable="false" />
-          <Property Name="sort" Type="Int32" Nullable="false" />
-          <Property Name="show_name" Type="Boolean" Nullable="false" />
-          <Property Name="style_string" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
-          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="i_InsertDeptID" Type="Int32" />
-          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
-          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="i_UpdateDeptID" Type="Int32" />
-          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
-          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-        </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="news_id" />
@@ -438,6 +416,22 @@
           <Property Name="news_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="news_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sort" Type="Int32" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="banner_id" />
+          </Key>
+          <Property Name="banner_id" Type="Int32" Nullable="false" />
+          <Property Name="banner_name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
           <Property Name="i_Hide" Type="Boolean" Nullable="false" />
           <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="i_InsertDeptID" Type="Int32" />
@@ -594,26 +588,6 @@
               <ScalarProperty Name="menu_id" ColumnName="menu_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Banner">
-            <EntityTypeMapping TypeName="C50A0_ATEKModel.Banner">
-              <MappingFragment StoreEntitySet="Banner">
-                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
-                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
-                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
-                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
-                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
-                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
-                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
-                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
-                <ScalarProperty Name="style_string" ColumnName="style_string" />
-                <ScalarProperty Name="show_name" ColumnName="show_name" />
-                <ScalarProperty Name="sort" ColumnName="sort" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="banner_name" ColumnName="banner_name" />
-                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="C50A0_ATEKModel.News">
               <MappingFragment StoreEntitySet="News">
@@ -630,6 +604,23 @@
                 <ScalarProperty Name="news_date" ColumnName="news_date" />
                 <ScalarProperty Name="news_title" ColumnName="news_title" />
                 <ScalarProperty Name="news_id" ColumnName="news_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banner">
+            <EntityTypeMapping TypeName="C50A0_ATEKModel.Banner">
+              <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="banner_name" ColumnName="banner_name" />
+                <ScalarProperty Name="banner_id" ColumnName="banner_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
