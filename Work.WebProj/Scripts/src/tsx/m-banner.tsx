@@ -251,10 +251,6 @@ namespace Banner {
                 outHtml =
                     (
                         <div>
-
-                    <ul className="breadcrumb">
-                        <li><i className="fa-list-alt"></i> {this.props.menuName}</li>
-                        </ul>
                     <h3 className="title">
                         {this.props.caption}
                         </h3>
@@ -325,11 +321,6 @@ namespace Banner {
 
                 outHtml = (
                     <div>
-    <ul className="breadcrumb">
-        <li><i className="fa-list-alt"></i>
-            {this.props.menuName}
-            </li>
-        </ul>
     <h4 className="title"> {this.props.caption} 基本資料維護</h4>
     <form className="form-horizontal" onSubmit={this.handleSubmit}>
         <div className="col-xs-10">

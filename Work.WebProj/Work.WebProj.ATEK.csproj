@@ -588,6 +588,7 @@
     <TypeScriptCompile Include="Scripts\ts-def\widegt\gridInfo.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.v3.datetimepicker\bootstrap.v3.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\ckeditor\ckeditor.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery-sortable\jquery-sortable.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.cookie\jquery.cookie.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\moment\moment-node.d.ts" />
