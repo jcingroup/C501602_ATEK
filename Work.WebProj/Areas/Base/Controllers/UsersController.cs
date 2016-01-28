@@ -38,50 +38,17 @@ namespace DotWeb.Areas.Base.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (this.LoginUserFlag == "Y")
-                    {
-                        if (md.ConfirmPassword != md.NewPassword)
-                        {
-                            rAjaxResult.message = Resources.Res.Log_Err_NewPasswordNotSure;
-                            rAjaxResult.result = false;
-                            return defJSON(rAjaxResult);
-                        }
-                        if (md.OldPassword == md.NewPassword)
-                        {
-                            rAjaxResult.message = Resources.Res.Log_Err_NewPasswordSame;
-                            rAjaxResult.result = false;
-                            return defJSON(rAjaxResult);
-                        }
-                        using (var db0 = getDB0())
-                        {
-                            var getUser = db0.Sales.Find(this.UserId);
-                            if (md.OldPassword != EncryptString.desDecryptBase64(HttpUtility.UrlDecode(getUser.password)))
-                            {
-                                rAjaxResult.message = Resources.Res.Log_Err_Password;
-                                rAjaxResult.result = false;
-                                return defJSON(rAjaxResult);
-                            }
-                            else {
-                                getUser.password= HttpUtility.UrlEncode(EncryptString.desEncryptBase64(md.NewPassword));
-                                db0.SaveChanges();
-                            }
-                        }
-                    }
-                    else if (this.LoginUserFlag == "N")
-                    {
-                        IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), md.OldPassword, md.NewPassword);
+                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), md.OldPassword, md.NewPassword);
 
-                        if (result.Succeeded)
-                        {
-                            rAjaxResult.result = true;
-                        }
-                        else
-                        {
-                            rAjaxResult.message = String.Join(":", result.Errors);
-                            rAjaxResult.result = false;
-                        }
+                    if (result.Succeeded)
+                    {
+                        rAjaxResult.result = true;
                     }
-
+                    else
+                    {
+                        rAjaxResult.message = String.Join(":", result.Errors);
+                        rAjaxResult.result = false;
+                    }
                 }
                 else
                 {

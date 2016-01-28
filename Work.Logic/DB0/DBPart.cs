@@ -122,9 +122,9 @@ namespace ProcCore.Business.DB0
     }
     #endregion
 
-    public partial class C13B0_1KomoEntities : DbContext
+    public partial class C50A0_ATEKEntities : DbContext
     {
-        public C13B0_1KomoEntities(string connectionstring)
+        public C50A0_ATEKEntities(string connectionstring)
             : base(connectionstring)
         {
         }

@@ -13,10 +13,10 @@ namespace ProcCore.Business.DB0
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class C13B0_1KomoEntities : DbContext
+    public partial class C50A0_ATEKEntities : DbContext
     {
-        public C13B0_1KomoEntities()
-            : base("name=C13B0_1KomoEntities")
+        public C50A0_ATEKEntities()
+            : base("name=C50A0_ATEKEntities")
         {
         }
     
@@ -31,23 +31,11 @@ namespace ProcCore.Business.DB0
         public virtual DbSet<i_Currency> i_Currency { get; set; }
         public virtual DbSet<i_IDX> i_IDX { get; set; }
         public virtual DbSet<i_Lang> i_Lang { get; set; }
+        public virtual DbSet<i_Parm> i_Parm { get; set; }
         public virtual DbSet<i_SN> i_SN { get; set; }
         public virtual DbSet<i_UserLoginLog> i_UserLoginLog { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbSet<Purchase> Purchase { get; set; }
-        public virtual DbSet<Sales> Sales { get; set; }
-        public virtual DbSet<Settle> Settle { get; set; }
-        public virtual DbSet<PurchaseDetail> PurchaseDetail { get; set; }
-        public virtual DbSet<SettleCal> SettleCal { get; set; }
-        public virtual DbSet<ProductSelect> ProductSelect { get; set; }
-        public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<Issue> Issue { get; set; }
-        public virtual DbSet<ProductCategory_l1> ProductCategory_l1 { get; set; }
-        public virtual DbSet<ProductCategory_l2> ProductCategory_l2 { get; set; }
-        public virtual DbSet<i_Parm> i_Parm { get; set; }
-        public virtual DbSet<PaymentReply> PaymentReply { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
-        public virtual DbSet<SettleDetail> SettleDetail { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<News> News { get; set; }
     }
 }
