@@ -73,6 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="DB0\AboutUs.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\AboutUsDetail.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB0\AspNetRoles.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
@@ -120,6 +126,12 @@
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\Menu.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\m_AboutUs.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\m_AboutUsDetail.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_AspNetRoles.cs">

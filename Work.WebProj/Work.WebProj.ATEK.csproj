@@ -272,6 +272,8 @@
     <Content Include="ckfinder\core\connector\aspx\lang\zh-cn.xml" />
     <Content Include="ckfinder\core\connector\aspx\lang\zh-tw.xml" />
     <Compile Include="Controllers\AboutUsController.cs" />
+    <Compile Include="Controllers\Api\AboutUsDetailController.cs" />
+    <Compile Include="Controllers\Api\AboutUsController.cs" />
     <Compile Include="Controllers\Api\GetActionController.cs" />
     <Compile Include="Controllers\Api\BannerController.cs" />
     <Compile Include="Controllers\Api\NewsController.cs" />
