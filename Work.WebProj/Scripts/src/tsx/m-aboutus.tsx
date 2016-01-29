@@ -15,7 +15,7 @@ namespace AboutUs {
     export class GridForm extends React.Component<any, FormState>{
 
         constructor() {
-
+            
             super();
             this.handleSubmit = this.handleSubmit.bind(this);
             this.componentDidMount = this.componentDidMount.bind(this);
@@ -84,8 +84,14 @@ namespace AboutUs {
                             }
                             </select>
                             </div>
-                        </h3>
-
+                    </h3>
+                    <div className="alert alert-warning">
+                        <button type="button" className="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        <ol>
+                            <li>點選 <strong className="fa-bars"></strong> 並<strong>拖曳</strong>，可修改排列順序。</li>
+                            <li>點選 <strong className="fa-chevron-up"></strong> 可收合/展開，點選 <strong className="fa-times"></strong> 可刪除。</li>
+                        </ol>
+                    </div>
                     <GridDetailForm
                         MainId={fieldData.aboutus_id}
                         handleSubmit={this.handleSubmit}
@@ -223,18 +229,11 @@ namespace AboutUs {
 
             outHtml = (
                 <div>
-                    <div className="col-xs-12">
-                        <button className="btn-lg thumbnail" type="button" onClick={this.creatNewData.bind(this) }>
-                            <span className="caption"><i className="fa-plus-circle"></i>新增</span>
-                            </button>
-                        </div>
-                    <div className="alert alert-warning col-xs-12">
-                    <button type="button" className="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
-                    <ol>
-                        <li>點選 <strong className="fa-bars"></strong> 並<strong>拖曳</strong>，可修改排列順序。</li>
-                        <li>點選 <strong className="fa-chevron-up"></strong> 或 <strong className="fa-chevron-down"></strong> 可收合/展開，點選 <strong className="fa-times"></strong> 可刪除。</li>
-                        </ol>
-                        </div>
+                    <p>
+                        <button className="btn-success" type="button" onClick={this.creatNewData.bind(this) }>
+                            <i className="fa-plus-circle"></i> 新增
+                        </button>
+                    </p>
                     <form className="form-horizontal" onSubmit={this.handleSubmit}>
                         <div className="panel-group" ref="SortForm">
                     {
@@ -244,11 +243,11 @@ namespace AboutUs {
                             DeleteItem={this.deleteItem} />
                     )
                     }
-                            </div>
+                        </div>
                         <div className="form-action text-center">
                             <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
-                            </div>
-                        </form>
+                        </div>
+                    </form>
                     </div>
             );
 
@@ -330,22 +329,18 @@ namespace AboutUs {
 
             outHtml = (
                 <div className="panel">
-            <div className="panel-heading">
-                <h4 className="panel-title draggable clearfix">
-                    <div className="form-horizontal">
-                        <div className="col-xs-10">
-                            <i className="fa-bars"></i>
-                            <div className="input-group">
-                                <span className="input-group-addon">#{this.props.iKey}</span>
-                                </div>
-                            </div>
-                        </div>
-                    <ul className="widget">
-                        <li><button onClick={() => this.setState({ open: !this.state.open }) } type="button" title="收合/展開" className="btn-link text-default"><i className="fa-chevron-down"></i></button></li>
-                        <li><button className="btn-link text-danger" type="button" title="刪除" onClick={this.deleteItem.bind(this, this.props.iKey) }><i className="fa-times"></i></button></li>
-                        </ul>
-                    </h4>
-                </div>
+                    <div className="panel-heading">
+                        <h4 className="panel-title">
+                            <a className="draggable" href="#">
+                                <i className="fa-bars"></i>
+                                #{this.props.iKey}
+                                <ul className="widget">
+                                    <li><button onClick={() => this.setState({ open: !this.state.open }) } type="button" title="收合/展開" className="btn-link text-default"><i className="fa-chevron-down"></i></button></li>
+                                    <li><button className="btn-link text-danger" type="button" title="刪除" onClick={this.deleteItem.bind(this, this.props.iKey) }><i className="fa-times"></i></button></li>
+                                </ul>
+                            </a>
+                        </h4>
+                    </div>
                     <Collapse in={this.state.open}>
                         <div className="panel-body">
                             <div className="editor">
@@ -353,12 +348,12 @@ namespace AboutUs {
                                     name={'content-' + this.props.iKey}
                                     value={fieldData.detail_content}
                                     onChange={this.changeFDValue.bind(this, 'detail_content') } />
-                                </div>
                             </div>
-                        </Collapse>
+                        </div>
+                    </Collapse>
 
 
-                    </div>
+                </div>
             );
 
             return outHtml;
