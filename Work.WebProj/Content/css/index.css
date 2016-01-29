@@ -218,12 +218,6 @@ a {
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px; }
 
-hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 0;
-  border-top: 1px solid #eeeeee; }
-
 img {
   vertical-align: middle; }
 
@@ -305,18 +299,18 @@ address {
 .half {
   width: 49.6%; }
 
-.list-inline, .list-unstyled, .text-list, .swiper-wrapper {
-  list-style: none; }
-
-.list-inline > li {
-  display: inline-block; }
-
 #header h1, #footer .contact em, .club a, .goTop {
   font: 0/0 a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
   border: 0; }
+
+.list-inline, .list-unstyled, .text-list, .swiper-wrapper {
+  list-style: none; }
+
+.list-inline > li {
+  display: inline-block; }
 
 .hover-shadow, .hover-shadow header {
   -webkit-transition: all 0.35s;

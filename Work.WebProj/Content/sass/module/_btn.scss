@@ -9,6 +9,7 @@ $btn-bg-color:       $brand-primary !default;
 $btn-bg-hover:       darken($brand-primary,6%) !default;
 $btn-shadow:         1px 1px 2px hsla(0,0,0,0.2);
 
+$btn-display:        inline-block !default;
 $btn-width:          100px !default;
 $btn-padding:        10px 30px !default;
 $btn-border:         1px solid $link-color;
@@ -23,9 +24,9 @@ $btn-line-height:    1.01 !default;
 // ----------------------------------------------
 
 .btn {
-    display: inline-block;
+    display: $btn-display;
     padding: $btn-padding;
-    min-width: $btn-width;
+    // min-width: $btn-width;
 
     background: $btn-bg-color;
     border-radius: $btn-border-radius;

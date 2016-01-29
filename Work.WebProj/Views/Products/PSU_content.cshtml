@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-
 @section breadCrumb {
     <li><a href="~/Products">PRODUCTS</a></li>
     @* 子分類 需套程式變數的地方 *@
@@ -14,7 +13,12 @@
     <li><a href="~/Products/PSU_list#p1">kind</a></li>
 }
 
+@section css {
+    <link rel="stylesheet" href="~/Content/css/pop.css">
+}
+
 @section Scripts {
+    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
     <script>
         // searies 滑動特效
         var mySwiper = new Swiper('#slide', {
@@ -29,6 +33,10 @@
             prevButton:'.btn-prev',
             nextButton:'.btn-next',
         })
+        // 燈箱
+        $(document).ready(function() {
+            $('.image-popup').magnificPopup({type:'image'});
+        });
     </script>
 }
 
@@ -55,6 +63,10 @@
 
     <section class="spec">
         <h3 class="font-sp">TECHNICAL SPECIFICATION</h3>
+        <p class="text-right">
+            <strong>Certificate:</strong>
+            <a href="~/Content/images/Products/intro.jpg" class="btn image-popup">CE</a>
+        </p>
         <div class="rwd">
             @* 下為編輯器 *@
             <table class="full">
@@ -116,17 +128,13 @@
                 </tr>
 
                 <tr>
-                    <td rowspan="3" class="item">Other</td>
+                    <td rowspan="2" class="item">Other</td>
                     <td>IP</td>
                     <td colspan="3">65</td>
                 </tr>
                 <tr>
                     <td>Dimming</td>
                     <td colspan="3">1 ~ 10V&PWM</td>
-                </tr>
-                <tr>
-                    <td>Certificate</td>
-                    <td colspan="3"><a href="" class="btn">CE</a></td>
                 </tr>
             </table>
         </div>
