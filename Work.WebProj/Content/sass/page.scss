@@ -117,7 +117,7 @@ main {
     }
     dl {
         background: #efefef;
-        padding: 20px;
+        padding: 20px 15px;
         margin: 8px 0;
         &.current {
             background: $brand-primary;
@@ -218,13 +218,15 @@ main {
         margin-left: 10px;
         vertical-align: middle;
     }
-    .btn { margin-top: 30px; }
+    .btn-download { margin-top: 30px; }
 
     @include mq-max(tablet) {
         padding-left: 0;
         h3 { margin-bottom: 20px; }
     }
 }
+// 証書
+.text-right strong { margin-right: 14px; }
 
 // 系列產品(滑動特效)
 

@@ -218,12 +218,6 @@ a {
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px; }
 
-hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 0;
-  border-top: 1px solid #eeeeee; }
-
 img {
   vertical-align: middle; }
 
@@ -305,6 +299,13 @@ address {
 .half {
   width: 49.6%; }
 
+#header h1, #footer .contact em, .club a, .goTop, .search button {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0; }
+
 .list-inline, .breadcrumb, .list-unstyled, .text-list {
   list-style: none; }
 
@@ -316,13 +317,6 @@ figure::before, .pro-pic::before {
   display: inline-block;
   vertical-align: middle;
   height: 100%; }
-
-#header h1, #footer .contact em, .club a, .goTop, .search button {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0; }
 
 .hover-shadow, .hover-shadow header, .btn, figcaption, figure, figure h4, figure span, .search button {
   -webkit-transition: all 0.35s;
@@ -720,7 +714,6 @@ body {
 .btn {
   display: inline-block;
   padding: 10px 30px;
-  min-width: 100px;
   background: #79B229;
   border-radius: 3px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
@@ -976,7 +969,7 @@ main {
   margin-bottom: 5px; }
 .sub-nav dl {
   background: #efefef;
-  padding: 20px;
+  padding: 20px 15px;
   margin: 8px 0; }
   .sub-nav dl.current {
     background: #79B229; }
@@ -1060,13 +1053,16 @@ main {
     color: #CFCFCF;
     margin-left: 10px;
     vertical-align: middle; }
-  .pro-info .btn {
+  .pro-info .btn-download {
     margin-top: 30px; }
   @media (max-width: 48em) {
     .pro-info {
       padding-left: 0; }
       .pro-info h3 {
         margin-bottom: 20px; } }
+
+.text-right strong {
+  margin-right: 14px; }
 
 #slide, .swiper-slide {
   height: 260px; }
