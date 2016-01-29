@@ -195,6 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Active\ActiveAreaRegistration.cs" />
+    <Compile Include="Areas\Active\Controllers\SupportDataController.cs" />
     <Compile Include="Areas\Active\Controllers\AboutUsDataController.cs" />
     <Compile Include="Areas\Active\Controllers\BannerDataController.cs" />
     <Compile Include="Areas\Active\Controllers\ParmDataController.cs" />
@@ -222,6 +223,7 @@
     <Content Include="Areas\Active\Views\ParmData\Parm.cshtml" />
     <Content Include="Areas\Active\Views\BannerData\Main.cshtml" />
     <Content Include="Areas\Active\Views\AboutUsData\Main.cshtml" />
+    <Content Include="Areas\Active\Views\SupportData\Main.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\UsersController.cs" />
@@ -655,6 +657,7 @@
     <Content Include="Areas\Active\Views\ParmData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\BannerData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\AboutUsData\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Active\Views\SupportData\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
