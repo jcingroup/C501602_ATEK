@@ -184,6 +184,14 @@ namespace ProcCore.Business.DB0
     {
         public string imgsrc { get; set; }
     }
+    public partial class m_AboutUsDetail
+    {
+        public EditState edit_state { get; set; }
+    }
+    public partial class AboutUsDetail
+    {
+        public EditState edit_state { get; set; }
+    }
     public class L1
     {
         public int l1_id { get; set; }

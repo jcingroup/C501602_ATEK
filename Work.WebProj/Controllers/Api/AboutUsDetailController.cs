@@ -32,29 +32,20 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 var items = db0.AboutUsDetail
-                    .Where(x => x.aboutus_id == q.main_id)
+                    .Where(x => x.aboutus_id == q.main_id & x.i_Lang == q.i_Lang)
                     .OrderBy(x => x.sort)
                     .Select(x => new m_AboutUsDetail()
                     {
                         aboutus_id = x.aboutus_id,
                         aboutus_detail_id = x.aboutus_detail_id,
+                        detail_content = x.detail_content,
                         sort = x.sort,
-                        i_Hide = x.i_Hide
+                        i_Hide = x.i_Hide,
+                        i_Lang = x.i_Lang,
+                        edit_state = EditState.Update
                     });
 
-                int page = (q.page == null ? 1 : (int)q.page);
-                int startRecord = PageCount.PageInfo(page, this.defPageSize, items.Count());
-                var resultItems = await items.Skip(startRecord).Take(this.defPageSize).ToListAsync();
-
-                return Ok(new GridInfo<m_AboutUsDetail>()
-                {
-                    rows = resultItems,
-                    total = PageCount.TotalPage,
-                    page = PageCount.Page,
-                    records = PageCount.RecordCount,
-                    startcount = PageCount.StartCount,
-                    endcount = PageCount.EndCount
-                });
+                return Ok(items.ToList());
             }
             #endregion
         }
@@ -176,5 +167,6 @@ namespace DotWeb.Api
     {
         public string keyword { get; set; }
         public int main_id { get; set; }
+        public string i_Lang { get; set; }
     }
 }

@@ -226,6 +226,7 @@
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\UsersController.cs" />
     <Compile Include="Areas\Base\BaseAreaRegistration.cs" />
+    <Content Include="ckeditor\inlineConfig.js" />
     <Content Include="ckfinder\ckfinder.js" />
     <Content Include="ckfinder\ckfinder_v1.js" />
     <Content Include="ckfinder\config.ascx" />
@@ -578,8 +579,8 @@
     <TypeScriptCompile Include="Scripts\ts-def\commwww.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\ConsoleIe8.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\d.ts\Jquery.Ext.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts-def\def\defEnum.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\def\defGlobal.ts" />
-    <TypeScriptCompile Include="Scripts\ts-def\def\Payby.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\def\Toaster.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\d.ts\IAjaxResult.d.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\d.ts\IEditType.d.ts" />

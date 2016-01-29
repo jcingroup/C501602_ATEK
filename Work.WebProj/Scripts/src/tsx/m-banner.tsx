@@ -51,7 +51,7 @@ namespace Banner {
                        <td>{this.props.itemData.banner_name}</td>
                        <td>{this.props.itemData.sort }</td>
                        <td>{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
-                       <td><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangType} /></td>
+                       <td><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangData} /></td>
                 </tr>;
 
         }
@@ -274,7 +274,7 @@ namespace Banner {
                                                 value={searchData.i_Lang} >
                                                 <option value="">全部</option>
                                                 {
-                                                DT.LangType.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
+                                                DT.LangData.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
                                                 }
                                                 </select> { }
                                             <button className="btn-primary" type="submit"><i className="fa-search"></i> 搜尋</button>
@@ -359,7 +359,7 @@ namespace Banner {
                         onChange={this.changeFDValue.bind(this, 'i_Lang') }
                         value={fieldData.i_Lang} >
                         {
-                        DT.LangType.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
+                        DT.LangData.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
                         }
                         </select>
                     </div>

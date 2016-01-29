@@ -2,5 +2,5 @@
     var twDistrict: any;
     var dateFT: any;
     var PurchaseStateType: Array<server.StateTemplate>;
-    var LangType: Array<server.StateTemplate>;
+    var LangData: Array<server.StateTemplate>;
 }

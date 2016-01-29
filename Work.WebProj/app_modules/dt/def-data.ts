@@ -478,7 +478,7 @@ export var twDistrict =
         },
     ]
 export var dateFT: string = 'YYYY-MM-DD';
-export var LangType: Array<server.StateTemplate> = [
+export var LangData: Array<server.StateTemplate> = [
     { id: 'en-US', label: '英語(美國)', classNameforG: 'label label-primary' },
     { id: 'ja-JP', label: '日本語(日本)', classNameforG: 'label label-info' }
 ];

@@ -32,7 +32,7 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 var items = db0.AboutUs
-                    .OrderBy(x=>x.sort)
+                    .OrderBy(x => x.sort)
                     .Select(x => new m_AboutUs()
                     {
                         aboutus_id = x.aboutus_id,
@@ -64,8 +64,31 @@ namespace DotWeb.Api
                 db0 = getDB0();
 
                 item = await db0.AboutUs.FindAsync(md.aboutus_id);
-                item.sort = md.sort;
-                item.i_Hide = md.i_Hide;
+                //string lang = string.Empty;
+                //if (md.AboutUsDetail.Count() > 0)
+                //    lang = md.AboutUsDetail.FirstOrDefault().i_Lang;
+
+                var details = item.AboutUsDetail;
+
+                foreach (var detail in details)
+                {
+                    var md_detail = md.AboutUsDetail.First(x => x.aboutus_detail_id == detail.aboutus_detail_id);
+                    detail.sort = md_detail.sort;
+                    detail.detail_content = md_detail.detail_content;
+                    detail.i_Hide = md_detail.i_Hide;
+                }
+
+                var add_detail = md.AboutUsDetail.Where(x => x.edit_state == EditState.Insert);
+                foreach (var detail in add_detail)
+                {
+                    detail.aboutus_detail_id = GetNewId(CodeTable.AboutUsDetail);
+                    detail.i_InsertUserID = this.UserId;
+                    detail.i_InsertDateTime = DateTime.Now;
+                    detail.i_InsertDeptID = this.departmentId;
+                    //detail.i_Lang = System.Globalization.CultureInfo.CurrentCulture.Name;
+                    //detail.i_Lang = "zh-TW";
+                    details.Add(detail);
+                }
 
                 await db0.SaveChangesAsync();
                 rAjaxResult.result = true;
