@@ -84,6 +84,47 @@
         banner_name?: string;
         sort?: number;
         i_Hide?: boolean;
+        i_Lang?: string;
+    }
+    interface AboutUs extends BaseEntityTable {
+        aboutus_id: number;
+        sort: number;
+        i_Hide: boolean;
+        i_InsertUserID: string;
+        i_InsertDeptID: number;
+        i_InsertDateTime: Date;
+        i_UpdateUserID: string;
+        i_UpdateDeptID: number;
+        i_UpdateDateTime: Date;
+        i_Lang: string;
+        aboutUsDetail: server.AboutUsDetail[];
+    }
+    interface AboutUsDetail extends BaseEntityTable {
+        aboutus_detail_id: number;
+        aboutus_id: number;
+        detail_content: string;
+        sort: number;
+        i_Hide: boolean;
+        i_InsertUserID: string;
+        i_InsertDeptID: number;
+        i_InsertDateTime: Date;
+        i_UpdateUserID: string;
+        i_UpdateDeptID: number;
+        i_UpdateDateTime: Date;
+        i_Lang: string;
+        aboutUs: {
+            aboutus_id: number;
+            sort: number;
+            i_Hide: boolean;
+            i_InsertUserID: string;
+            i_InsertDeptID: number;
+            i_InsertDateTime: Date;
+            i_UpdateUserID: string;
+            i_UpdateDeptID: number;
+            i_UpdateDateTime: Date;
+            i_Lang: string;
+            aboutUsDetail: server.AboutUsDetail[];
+        };
     }
     interface L1 extends BaseEntityTable {
         l1_id?: number;

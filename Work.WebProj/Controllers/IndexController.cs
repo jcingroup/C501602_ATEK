@@ -14,7 +14,7 @@ namespace DotWeb.Controllers
             using (var db0 = getDB0())
             {
                 #region banner
-                info.banners = db0.Banner.Where(x => !x.i_Hide).OrderByDescending(x => x.sort)
+                info.banners = db0.Banner.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.sort)
                                          .Select(x => new m_Banner()
                                          {
                                              banner_id = x.banner_id,

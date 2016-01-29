@@ -14,10 +14,12 @@ namespace Banner {
         banner_name?: string;
         sort?: number;
         i_Hide?: boolean;
+        i_Lang: string;
     }
     interface FormState<G, F> extends BaseDefine.GirdFormStateBase<G, F> {
         searchData?: {
             keyword: string
+            i_Lang: string
         }
     }
     interface FormResult extends IResultBase {
@@ -49,6 +51,7 @@ namespace Banner {
                        <td>{this.props.itemData.banner_name}</td>
                        <td>{this.props.itemData.sort }</td>
                        <td>{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
+                       <td><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangType} /></td>
                 </tr>;
 
         }
@@ -78,7 +81,7 @@ namespace Banner {
                 fieldData: {},
                 gridData: { rows: [], page: 1 },
                 edit_type: 0,
-                searchData: { keyword: null }
+                searchData: { keyword: null, i_Lang: null }
             }
         }
         static defaultProps: BaseDefine.GridFormPropsBase = {
@@ -199,7 +202,7 @@ namespace Banner {
             this.setState(newState);
         }
         insertType() {
-            this.setState({ edit_type: 1, fieldData: { i_Hide: false, sort: 0 } });
+            this.setState({ edit_type: 1, fieldData: { i_Hide: false, sort: 0, i_Lang: 'en-US' } });
         }
         updateType(id: number | string) {
 
@@ -265,6 +268,15 @@ namespace Banner {
                                                 onChange={this.changeGDValue.bind(this, 'keyword') }
                                                 value={searchData.keyword}
                                                 placeholder="請輸入關鍵字..." /> { }
+                                            <label>語系</label> { }
+                                            <select className="form-control"
+                                                onChange={this.changeGDValue.bind(this, 'i_Lang') }
+                                                value={searchData.i_Lang} >
+                                                <option value="">全部</option>
+                                                {
+                                                DT.LangType.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
+                                                }
+                                                </select> { }
                                             <button className="btn-primary" type="submit"><i className="fa-search"></i> 搜尋</button>
                                             </div>
                                         </div>
@@ -283,6 +295,7 @@ namespace Banner {
                                         <th className="col-xs-4">名稱</th>
                                         <th className="col-xs-2">排序</th>
                                         <th className="col-xs-2">狀態</th>
+                                        <th className="col-xs-2">語系</th>
                                         </tr>
                                     </thead>
                                 <tbody>
@@ -335,9 +348,21 @@ namespace Banner {
             <div className="form-group">
                 <label className="col-xs-2 control-label">名稱</label>
                 <div className="col-xs-8">
-                    <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'banner_name') } value={fieldData.banner_name} maxLength={64} />
+                    <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'banner_name') } value={fieldData.banner_name} maxLength={64} required />
                     </div>
                 <small className="col-xs-2 help-inline">最多64字</small>
+                </div>
+            <div className="form-group">
+                <label className="col-xs-2 control-label">選擇語系</label>
+                <div className="col-xs-8">
+                    <select className="form-control"
+                        onChange={this.changeFDValue.bind(this, 'i_Lang') }
+                        value={fieldData.i_Lang} >
+                        {
+                        DT.LangType.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
+                        }
+                        </select>
+                    </div>
                 </div>
             <div className="form-group">
                 <label className="col-xs-2 control-label">排序</label>

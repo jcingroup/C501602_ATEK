@@ -121,7 +121,7 @@
 
     //stateforgrid
     interface StateForGirdProps extends React.Props<StateForGirdClass> {
-        stateData: Array<server.StateTemplate>, id: number, ver?: number 
+        stateData: Array<server.StateTemplate>, id: number | string, ver?: number 
     }
     interface StateForGird extends React.ReactElement<StateForGirdProps> { }
     interface StateForGirdClass extends React.ComponentClass<StateForGirdProps> {

@@ -31,19 +31,25 @@ namespace DotWeb.Api
 
             using (db0 = getDB0())
             {
-                var items = db0.Banner             
-                    .OrderByDescending(x=>x.sort)
+                var items = db0.Banner
+                    .OrderByDescending(x => x.sort)
                     .Select(x => new m_Banner()
                     {
                         banner_id = x.banner_id,
                         banner_name = x.banner_name,
                         sort = x.sort,
-                        i_Hide = x.i_Hide
+                        i_Hide = x.i_Hide,
+                        i_Lang = x.i_Lang
                     });
                 if (q.keyword != null)
                 {
                     items = items.Where(x => x.banner_name.Contains(q.keyword));
                 }
+                if (q.i_Lang != null)
+                {
+                    items = items.Where(x => x.i_Lang == q.i_Lang);
+                }
+
                 int page = (q.page == null ? 1 : (int)q.page);
                 int startRecord = PageCount.PageInfo(page, this.defPageSize, items.Count());
                 var resultItems = await items.Skip(startRecord).Take(this.defPageSize).ToListAsync();
@@ -72,6 +78,7 @@ namespace DotWeb.Api
                 item.banner_name = md.banner_name;
                 item.sort = md.sort;
                 item.i_Hide = md.i_Hide;
+                item.i_Lang = md.i_Lang;
 
                 await db0.SaveChangesAsync();
                 rAjaxResult.result = true;
@@ -94,7 +101,7 @@ namespace DotWeb.Api
             md.i_InsertDateTime = DateTime.Now;
             md.i_InsertDeptID = this.departmentId;
             md.i_InsertUserID = this.UserId;
-            md.i_Lang = "zh-TW";
+            //md.i_Lang = "zh-TW";
             r = new ResultInfo<Banner>();
             if (!ModelState.IsValid)
             {
@@ -179,5 +186,6 @@ namespace DotWeb.Api
     public class q_Banner : QueryBase
     {
         public string keyword { get; set; }
+        public string i_Lang { get; set; }
     }
 }

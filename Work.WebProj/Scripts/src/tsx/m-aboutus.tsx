@@ -7,7 +7,11 @@ import CommCmpt = require('comm-cmpt');
 import CommFunc = require('comm-func');
 
 namespace AboutUs {
-    export class GridForm extends React.Component<any, { aboutus_content?: string }>{
+    interface FormState {
+        gridData?: server.AboutUsDetail[],
+        main_id?: number
+    }
+    export class GridForm extends React.Component<any, FormState>{
 
         constructor() {
 
@@ -20,7 +24,8 @@ namespace AboutUs {
 
 
             this.state = {
-                aboutus_content: null
+                gridData: [],
+                main_id: 1
             }
         }
         static defaultProps = {
@@ -28,12 +33,12 @@ namespace AboutUs {
             apiPath: gb_approot + 'api/GetAction/PostAboutUs'
         }
         componentDidMount() {
-            this.queryInitData();
+            //this.queryInitData();
         }
         queryInitData() {
             CommFunc.jqGet(this.props.apiInitPath, {})
                 .done((data, textStatus, jqXHRdata) => {
-                    this.setState({ aboutus_content: data });
+                    this.setState({ gridData: data });
                     CKEDITOR.replace('aboutus_content');
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
@@ -43,8 +48,8 @@ namespace AboutUs {
         handleSubmit(e: React.FormEvent) {
 
             e.preventDefault();
-            this.state.aboutus_content = CKEDITOR.instances['aboutus_content'].getData();
-            CommFunc.jqPost(this.props.apiPath, { aboutus: this.state.aboutus_content })
+            this.state.gridData = CKEDITOR.instances['aboutus_content'].getData();
+            CommFunc.jqPost(this.props.apiPath, { aboutus: this.state.gridData })
                 .done((data, textStatus, jqXHRdata) => {
                     if (data.result) {
                         CommFunc.tosMessage(null, '修改完成', 1);
@@ -62,42 +67,39 @@ namespace AboutUs {
         }
         setInputValue(e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
-            let obj = this.state.aboutus_content;
-            obj = input.value;
-            this.setState({ aboutus_content: obj });
+            //let obj = this.state.aboutus_content;
+            //obj = input.value;
+            //this.setState({ aboutus_content: obj });
         }
         render() {
 
             var outHtml: JSX.Element = null;
 
-            let aboutus_content = this.state.aboutus_content;
             let InputDate = CommCmpt.InputDate;
 
             outHtml = (
                 <div>
-    <ul className="breadcrumb">
-        <li><i className="fa-list-alt"></i>
-            {this.props.menuName}
-            </li>
-        </ul>
-    <h4 className="title"> {this.props.caption} 基本資料維護</h4>
-    <form className="form-horizontal" onSubmit={this.handleSubmit}>
-        <div className="col-xs-12">
+                    <h3 className="title clearfix">
+                    <span className="pull-left">{this.props.caption}</span>
+                        </h3>
 
-            <div className="form-group">
-                <div className="col-xs-10">
-                    <textarea type="date" rows={20} className="form-control" id="aboutus_content" name="aboutus_content" value={aboutus_content} onChange={this.setInputValue.bind(this) } />
-                    </div>
-                </div>
+                    <div className="alert alert-warning">
+                    <button type="button" className="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                    <ol>
+                        <li>點選 <strong className="fa-bars"></strong> 並<strong>拖曳</strong>，可修改排列順序。</li>
+                        <li>點選 <strong className="fa-chevron-up"></strong> 或 <strong className="fa-chevron-down"></strong> 可收合/展開，點選 <strong className="fa-times"></strong> 可刪除。</li>
+                        </ol>
+                        </div>
+                    <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                        <div className="panel-group" ref="SortForm">
+
+                            </div>
+                        <div className="form-action text-center">
+                            <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
+                            </div>
+                        </form>
 
 
-            <div className="form-action">
-                <div className="col-xs-4 col-xs-offset-2">
-                    <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
-                    </div>
-                </div>
-            </div>
-        </form>
                     </div>
             );
 

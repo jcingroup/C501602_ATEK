@@ -735,7 +735,7 @@ export class TwAddress extends React.Component<TwAddressProps, { country_list: A
     }
 }
 
-export class StateForGird extends React.Component<{ stateData: Array<server.StateTemplate>, id: number, ver?: number }, { setClass: string, label: string }>{
+export class StateForGird extends React.Component<{ stateData: Array<server.StateTemplate>, id: number | string, ver?: number }, { setClass: string, label: string }>{
     constructor() {
 
         super();

@@ -478,9 +478,9 @@ export var twDistrict =
         },
     ]
 export var dateFT: string = 'YYYY-MM-DD';
-export var sourceType: Array<server.StateTemplate> = [
-    { id: 1, label: '現場訂購', classNameforG: 'label label-primary' },
-    { id: 2, label: '網路訂購', classNameforG: 'label label-info' }
+export var LangType: Array<server.StateTemplate> = [
+    { id: 'en-US', label: '英語(美國)', classNameforG: 'label label-primary' },
+    { id: 'ja-JP', label: '日本語(日本)', classNameforG: 'label label-info' }
 ];
 export var PurchaseStateType: Array<server.StateTemplate> = [
     { id: 0, label: '現場付款', classNameforG: 'label label-primary' },
@@ -489,77 +489,3 @@ export var PurchaseStateType: Array<server.StateTemplate> = [
     { id: 3, label: '匯款完畢待出貨通知', className: 'text-warning', classNameforG: 'label label-info' },
     { id: 4, label: '訂單完成', className: 'text-success', classNameforG: 'label label-success' }
 ];
-export var PaymentReplyType: Array<server.StateTemplate> = [
-    { id: 0, label: '尚未核對', classNameforG: 'label label-default' },
-    { id: 1, label: '核對正確', classNameforG: 'label label-success' },
-    { id: -1, label: '核對錯誤', classNameforG: 'label label-danger' }
-];
-//一般(共享)會員
-export var PaymentViewTypeByMember: Array<server.StateTemplate> = [
-    { id: 1, label: '個人消費紀錄', classNameforG: 'label label-default' },
-    { id: 2, label: '共享圈消費紀錄', classNameforG: 'label label-success' }
-];
-//經理人
-export var PaymentViewTypeByManager: Array<server.StateTemplate> = [
-    { id: 1, label: '個人消費紀錄', classNameforG: 'label label-default' },
-    { id: 2, label: '共享圈消費紀錄', classNameforG: 'label label-success' },
-    { id: 3, label: '直推會員消費紀錄', classNameforG: 'label label-danger' },
-    { id: 4, label: '直推經理人消費紀錄', classNameforG: 'label label-danger' }
-];
-//營運中心
-export var PaymentViewTypeByCenter: Array<server.StateTemplate> = [
-    { id: 1, label: '個人消費紀錄', classNameforG: 'label label-default' },
-    { id: 2, label: '共享圈消費紀錄', classNameforG: 'label label-success' },
-    { id: 3, label: '直推會員消費紀錄', classNameforG: 'label label-danger' },
-    { id: 4, label: '直推經理人消費紀錄', classNameforG: 'label label-danger' },
-    { id: 5, label: '間接推薦會員(經理人)消費紀錄', classNameforG: 'label label-danger' },
-];
-export var SalesRankType: Array<server.StateTemplate> = [
-    { id: 1, label: '共享會員', classNameforG: 'label label-default' },
-    { id: 2, label: '經理人', classNameforG: 'label label-warning' },
-    { id: 3, label: '營運中心', classNameforG: 'label label-info' },
-    { id: 4, label: '管理處', classNameforG: 'label label-danger' }
-];
-//rank可升級分類
-export var SalesRiseRankType: Array<server.StateTemplate> = [
-    { id: 1, label: '合格經理人(推薦達3人)', classNameforG: 'label label-warning' },
-    { id: 2, label: '營運中心', classNameforG: 'label label-info' },
-    { id: 3, label: '管理處', classNameforG: 'label label-danger' }
-];
-
-//取貨方式
-export var PurchasePickupState: Array<server.StateTemplate> = [
-    { id: 0, label: '現場取貨', classNameforG: 'label label-primary' },
-    { id: 1, label: '宅配', classNameforG: 'label label-success' },
-    { id: 2, label: '自取', classNameforG: 'label label-info' }
-];
-export var BannerType: Array<server.StateTemplate> = [
-    { id: 1, label: 'Banner圖', classNameforG: 'label label-success' },
-    { id: 2, label: '廠商圖', classNameforG: 'label label-info' }
-];
-export var remitTimeData: Array<server.SelectFormat> = [
-    { id: '01:00:00', label: '上午 1:00' },
-    { id: '02:00:00', label: '上午 2:00' },
-    { id: '03:00:00', label: '上午 3:00' },
-    { id: '04:00:00', label: '上午 4:00' },
-    { id: '05:00:00', label: '上午 5:00' },
-    { id: '06:00:00', label: '上午 6:00' },
-    { id: '07:00:00', label: '上午 7:00' },
-    { id: '08:00:00', label: '上午 8:00' },
-    { id: '09:00:00', label: '上午 9:00' },
-    { id: '10:00:00', label: '上午 10:00' },
-    { id: '11:00:00', label: '上午 11:00' },
-    { id: '12:00:00', label: '中午 12:00' },
-    { id: '13:00:00', label: '下午 1:00(13:00)' },
-    { id: '14:00:00', label: '下午 2:00(14:00)' },
-    { id: '15:00:00', label: '下午 3:00(15:00)' },
-    { id: '16:00:00', label: '下午 4:00(16:00)' },
-    { id: '17:00:00', label: '下午 5:00(17:00)' },
-    { id: '18:00:00', label: '下午 6:00(18:00)' },
-    { id: '19:00:00', label: '下午 7:00(19:00)' },
-    { id: '20:00:00', label: '下午 8:00(20:00)' },
-    { id: '21:00:00', label: '下午 9:00(21:00)' },
-    { id: '22:00:00', label: '下午 10:00(22:00)' },
-    { id: '23:00:00', label: '下午 11:00(23:00)' },
-    { id: '00:00:00', label: '半夜 12:00(00:00)' }
-]
