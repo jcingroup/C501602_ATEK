@@ -331,10 +331,14 @@
     <Content Include="Content\css\editor.css" />
     <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\index.css" />
+    <Content Include="Content\css\lightbox.css" />
     <Content Include="Content\css\page.css" />
-    <Content Include="Content\css\pop.css" />
     <Content Include="Content\css\swiper.min.css" />
     <Content Include="Content\font\fontAwesome\fontawesome-webfont.svg" />
+    <Content Include="Content\images\AboutUs\pic.gif" />
+    <Content Include="Content\images\AboutUs\pic2.gif" />
+    <Content Include="Content\images\AboutUs\pic3.gif" />
+    <Content Include="Content\images\AboutUs\pic4.gif" />
     <Content Include="Content\images\goTop.png" />
     <Content Include="Content\images\icon-club.gif" />
     <Content Include="Content\images\icon-contact.gif" />
@@ -354,8 +358,11 @@
     <Content Include="Content\images\menuBg.gif" />
     <Content Include="Content\images\no-pic.gif" />
     <Content Include="Content\images\Products\cert.jpg" />
+    <Content Include="Content\images\Products\icon-arrow.png" />
+    <Content Include="Content\images\Products\icon-look.png" />
     <Content Include="Content\images\Products\intro.jpg" />
     <Content Include="Content\images\Products\pic.jpg" />
+    <Content Include="Content\js\lightbox.min.js" />
     <Content Include="Content\js\map.js" />
     <Content Include="Content\js\scrollspy.js" />
     <Content Include="Content\sass\editor.scss" />

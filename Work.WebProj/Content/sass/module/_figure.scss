@@ -59,6 +59,7 @@ figcaption {
     }
 
     @extend %effect-all;
+    background-position: center 150px;
 }
 
 // theme
@@ -83,7 +84,7 @@ figure {
     }
     span {
         @extend %effect-all;
-        @include prefix(transform, translateY(45px));
+        @include prefix(transform, translateY(70px));
         opacity: 0;
         display: inline-block;
 
@@ -106,7 +107,7 @@ figure {
             color: #333;
         }
         span {
-            @include prefix(transform, translateY(20px));
+            @include prefix(transform, translateY(80px));
             opacity: 1;
         }
         figcaption {
@@ -115,6 +116,7 @@ figure {
     }
 }
 
+// 列表
 .kind figure {
     border: 1px solid $figure-border-color;
 
@@ -134,7 +136,7 @@ figure {
             @include prefix(transform, translateY(80px));
         }
         figcaption {
-            background: rgba(#053A04,.9);
+            background: rgba(#053A04,.9) url(#{$img-path}/Products/icon-look.png) center 150px no-repeat;
         }
     }
 }

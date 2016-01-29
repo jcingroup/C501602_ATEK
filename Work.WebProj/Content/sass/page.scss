@@ -229,24 +229,26 @@ main {
 .text-right strong { margin-right: 14px; }
 
 // 系列產品(滑動特效)
-
 #slide, .swiper-slide {
     height: 260px;
-}
-.swiper-wrapper {
 }
 #slide {
     position: relative;
     .btn-prev, .btn-next {
-        @include absolute(top 0);
-        width: 30px; height: 100%;
-        background: #E5F4D8;
         z-index: 999;
+        background-attachment: fixed;
+        background: #eee url(#{$img-path}/Products/icon-arrow.png) 6px center no-repeat;
+        cursor: pointer; cursor: hand;
+        width: 30px; height: 100%;
+        @include absolute(top 0);
+
+        &:hover, &:active {
+            background-color: #E5F4D8;
+        }
     }
     .btn-prev { left: 0; }
-    .btn-next { right: 0; }
+    .btn-next { right: 0; background-position: -55px center; }
 }
-
 
 // == News & Support
 .tag {
@@ -329,5 +331,35 @@ main {
         // top: $gutter; left: 0;
         // height: auto;
         // width: 100%;
+    }
+}
+
+// == about us
+.AboutUs article {
+    h2 { margin-top: 0; margin-bottom: 20px; }
+    h3 { margin-top: 20px; }
+    p { color: #333; line-height: 1.9; }
+
+    &:nth-of-type(1) {
+        img { margin-right: 40px; }
+    }
+    &:nth-of-type(2) {
+        img { margin-top: -65px; margin-right: 30px; }
+    }
+    &:nth-of-type(3) {
+        background: #D7ECC5;
+        padding: 35px 20px;
+        img { margin-left: 25px; margin-right: 40px;}
+    }
+    &:nth-of-type(4) {
+        background: url(#{$img-path}/AboutUs/pic4.gif) center no-repeat;
+        padding: 170px 0;
+        text-align: center;
+        p {
+            color: #656565;
+            width: cp(750px);
+            max-width: 670px;
+            margin: auto;
+        }
     }
 }

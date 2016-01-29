@@ -769,7 +769,8 @@ figure {
 figcaption {
   text-transform: uppercase;
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden; }
+  backface-visibility: hidden;
+  background-position: center 150px; }
   figcaption::before, figcaption::after {
     pointer-events: none; }
   figcaption, figcaption > a {
@@ -803,8 +804,8 @@ figure h4 {
   font-size: 1.375em;
   margin: 0; }
 figure span {
-  -webkit-transform: translateY(45px);
-  transform: translateY(45px);
+  -webkit-transform: translateY(70px);
+  transform: translateY(70px);
   opacity: 0;
   display: inline-block;
   font-size: 0.9375em;
@@ -823,8 +824,8 @@ figure:hover, figure:active {
   figure:hover h4, figure:active h4 {
     color: #333; }
   figure:hover span, figure:active span {
-    -webkit-transform: translateY(20px);
-    transform: translateY(20px);
+    -webkit-transform: translateY(80px);
+    transform: translateY(80px);
     opacity: 1; }
   figure:hover figcaption, figure:active figcaption {
     background: rgba(255, 255, 255, 0.8); }
@@ -844,7 +845,7 @@ figure:hover, figure:active {
       -webkit-transform: translateY(80px);
       transform: translateY(80px); }
     .kind figure:hover figcaption, .kind figure:active figcaption {
-      background: rgba(5, 58, 4, 0.9); }
+      background: rgba(5, 58, 4, 0.9) url(../images/Products/icon-look.png) center 150px no-repeat; }
 
 .dropbtn {
   cursor: pointer;
@@ -1070,16 +1071,22 @@ main {
 #slide {
   position: relative; }
   #slide .btn-prev, #slide .btn-next {
-    position: absolute;
-    top: 0;
+    z-index: 999;
+    background-attachment: fixed;
+    background: #eee url(../images/Products/icon-arrow.png) 6px center no-repeat;
+    cursor: pointer;
+    cursor: hand;
     width: 30px;
     height: 100%;
-    background: #E5F4D8;
-    z-index: 999; }
+    position: absolute;
+    top: 0; }
+    #slide .btn-prev:hover, #slide .btn-prev:active, #slide .btn-next:hover, #slide .btn-next:active {
+      background-color: #E5F4D8; }
   #slide .btn-prev {
     left: 0; }
   #slide .btn-next {
-    right: 0; }
+    right: 0;
+    background-position: -55px center; }
 
 .tag a {
   display: inline-block;
@@ -1142,3 +1149,32 @@ main {
     margin-top: 0; }
   .contacts input, .contacts textarea, .contacts button {
     margin: 15px 0; }
+
+.AboutUs article h2 {
+  margin-top: 0;
+  margin-bottom: 20px; }
+.AboutUs article h3 {
+  margin-top: 20px; }
+.AboutUs article p {
+  color: #333;
+  line-height: 1.9; }
+.AboutUs article:nth-of-type(1) img {
+  margin-right: 40px; }
+.AboutUs article:nth-of-type(2) img {
+  margin-top: -65px;
+  margin-right: 30px; }
+.AboutUs article:nth-of-type(3) {
+  background: #D7ECC5;
+  padding: 35px 20px; }
+  .AboutUs article:nth-of-type(3) img {
+    margin-left: 25px;
+    margin-right: 40px; }
+.AboutUs article:nth-of-type(4) {
+  background: url(../images/AboutUs/pic4.gif) center no-repeat;
+  padding: 170px 0;
+  text-align: center; }
+  .AboutUs article:nth-of-type(4) p {
+    color: #656565;
+    width: 54%;
+    max-width: 670px;
+    margin: auto; }

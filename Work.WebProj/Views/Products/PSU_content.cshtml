@@ -14,11 +14,11 @@
 }
 
 @section css {
-    <link rel="stylesheet" href="~/Content/css/pop.css">
+    <link rel="stylesheet" href="~/Content/css/lightbox.css">
 }
 
 @section Scripts {
-    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/lightbox.min.js"></script>
     <script>
         // searies 滑動特效
         var mySwiper = new Swiper('#slide', {
@@ -33,10 +33,11 @@
             prevButton:'.btn-prev',
             nextButton:'.btn-next',
         })
-        // 燈箱
-        $(document).ready(function() {
-            $('.image-popup').magnificPopup({type:'image'});
-        });
+        lightbox.option({
+          disableScrolling: true,
+          fadeDuration: 200,
+          resizeDuration: 200
+        })
     </script>
 }
 
@@ -65,7 +66,7 @@
         <h3 class="font-sp">TECHNICAL SPECIFICATION</h3>
         <p class="text-right">
             <strong>Certificate:</strong>
-            <a href="~/Content/images/Products/intro.jpg" class="btn image-popup">CE</a>
+            <a href="~/Content/images/Products/cert.jpg" class="btn" data-lightbox="img-set" data-title="通過CE認證">CE</a>
         </p>
         <div class="rwd">
             @* 下為編輯器 *@
