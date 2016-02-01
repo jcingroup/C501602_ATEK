@@ -41,16 +41,12 @@ namespace DotWeb.Api
                         memo = x.memo,
                         sort = x.sort,
                         i_Hide = x.i_Hide,
-                        i_Lang = x.i_Lang
+                        i_Lang = x.i_Lang,
+                        check_sub = true
                     });
                 if (q.main_id != null)
                 {
                     items = items.Where(x => x.all_category_l1_id == q.main_id);
-                }
-
-                if (q.i_Lang != null)
-                {
-                    items = items.Where(x => x.i_Lang == q.i_Lang);
                 }
 
                 int page = (q.page == null ? 1 : (int)q.page);

@@ -8,174 +8,141 @@ import CommFunc = require('comm-func');
 import DT = require('dt');
 
 namespace AllCategory {
-    interface FormState {
-        fieldData?: server.AboutUs
+    interface Rows {
+        all_category_l1_id?: number;
+        check_del?: boolean,
+        l1_name?: string;
+        memo?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_Lang: string;
+        check_sub?: boolean;
     }
-
-    export class GridForm extends React.Component<any, FormState>{
-
+    interface L1RowsProps<R> {
+        key?: number,
+        ikey: number,
+        itemData: R,
+        chd?: boolean,
+        subCheck(p1: number, p2: boolean): void,
+        primKey: number | string,
+        i_Lang: string
+    }
+    interface FormState<G, F> extends BaseDefine.GirdFormStateBase<G, F> {
+        searchData?: {
+            main_id: number,
+            i_Lang: string
+        }
+    }
+    interface FormResult extends IResultBase {
+        id: string
+    }
+    //(展開/合起)子分類項目 按鈕
+    class GridSubButton extends React.Component<{ iKey: number, chd: boolean, subCheck(ikey: number, chd: boolean): void }, { subHtml: string }> {
         constructor() {
-
             super();
-            this.handleSubmit = this.handleSubmit.bind(this);
-            this.componentDidMount = this.componentDidMount.bind(this);
-            this.setLangValue = this.setLangValue.bind(this);
-            this.render = this.render.bind(this);
-
-
+            this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+            this.onClick = this.onClick.bind(this);
             this.state = {
-                fieldData: { aboutus_id: 1, i_Lang: 'en-US' }
+                subHtml: 'fa-minus'//預設為展開
             }
         }
-        static defaultProps = {
-            apiPath: gb_approot + 'api/AboutUs'
-        }
-        componentDidMount() {
-        }
-        handleSubmit(detailData: server.AboutUsDetail[], e: React.FormEvent) {
-
-            e.preventDefault();
-            this.state.fieldData.AboutUsDetail = detailData;
-            CommFunc.jqPut(this.props.apiPath, this.state.fieldData)
-                .done((data, textStatus, jqXHRdata) => {
-                    if (data.result) {
-                        (this.refs["GridDetailForm"]).queryGridData();
-                        CommFunc.tosMessage(null, '修改完成', 1);
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    CommFunc.showAjaxError(errorThrown);
-                });
-            return;
-        }
-        setLangValue(e: React.SyntheticEvent) {
-            let input: HTMLInputElement = e.target as HTMLInputElement;
-            let obj = this.state.fieldData;
-            obj.i_Lang = input.value;
-            if (obj.i_Lang == 'en-US') {
-                obj.aboutus_id = 1;
-            } else if (obj.i_Lang == 'ja-JP') {
-                obj.aboutus_id = 2;
+        componentWillReceiveProps(nextProps) {
+            //當元件收到新的 props 時被執行，這個方法在初始化時並不會被執行。使用的時機是在我們使用 setState() 並且呼叫 render() 之前您可以比對 props，舊的值在 this.props，而新值就從 nextProps 來。
+            if (nextProps.chd) {
+                this.setState({ subHtml: 'fa-minus' });//展開
+            } else {
+                this.setState({ subHtml: 'fa-plus' });//合起
             }
-            this.setState({ fieldData: obj });
-            //(this.refs["GridDetailForm"]).queryGridData();
+        }
+        onClick() {
+            this.props.subCheck(this.props.iKey, this.props.chd);
+            this.props.chd = !this.props.chd;
+            if (this.props.chd) {
+                this.setState({ subHtml: 'fa-minus' });//展開
+            } else {
+                this.setState({ subHtml: 'fa-plus' });//合起
+            }
         }
         render() {
-
-            var outHtml: JSX.Element = null;
-            let fieldData = this.state.fieldData;
-
-            outHtml = (
-                <div>
-                    <h3 className="title clearfix">
-                    <span className="pull-left">{this.props.caption}</span>
-                        <div className="form-inline pull-left col-xs-offset-1">
-                        <label><small>選擇語系：</small></label>
-                        <select className="form-control"
-                            value={fieldData.i_Lang}
-                            onChange={this.setLangValue.bind(this) }
-                            >
-                            {
-                            DT.LangData.map(function (itemData, i) {
-                                return <option key={itemData.id} value={itemData.id}>{itemData.label}</option>;
-                            })
-                            }
-                            </select>
-                            </div>
-                        </h3>
-                    <div className="alert alert-warning">
-                        <button type="button" className="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
-                        <p>點選 <i className="fa-bars"></i> 並拖曳，可修改排列順序。</p>
-                        </div>
-                    <GridDetailForm
-                        MainId={fieldData.aboutus_id}
-                        handleSubmit={this.handleSubmit}
-                        Lang={fieldData.i_Lang}
-                        ref="GridDetailForm" />
-
-                    </div>
-            );
-
-            return outHtml;
+            return <button type="button" className="btn-link btn-lg" onClick={this.onClick}><i className={this.state.subHtml}></i></button>;
         }
     }
+    //L1 主表單list
+    class GridRow extends React.Component<L1RowsProps<Rows>, BaseDefine.GridRowStateBase> {
+        constructor() {
+            super();
+            this.subCheck = this.subCheck.bind(this);
+        }
+        static defaultProps = {
+            fdName: 'fieldData',
+            gdName: 'searchData',
+            apiPathName: gb_approot + 'api/AllCategoryL1'
+        }
+        subCheck(i, chd) {
+            this.props.subCheck(i, chd);
+        }
+        render() {
+            let subHtml: JSX.Element = null;
+            if (this.props.itemData.check_sub) {
+                subHtml = <GridSubForm ref="GridSubForm" MainId={this.props.primKey} i_Lang={this.props.i_Lang}/>;
+            }
+            return <tbody>
+                        <tr>
+                        <td className="text-center"><GridSubButton iKey={this.props.ikey} chd={this.props.itemData.check_sub} subCheck={this.subCheck.bind(this) } /></td>
+                        <td>{this.props.itemData.l1_name}</td>
+                        <td>{this.props.itemData.memo }</td>
+                            </tr>
+                       {subHtml}{/*裡面放 子表單(GridSubForm)點展開才顯示--(底層)-->子表單內容(GridSubRow)*/}
+                </tbody>;
+        }
+    }
+    //L1主表單
+    export class GridForm extends React.Component<BaseDefine.GridFormPropsBase, FormState<Rows, server.All_Category_L1>>{
 
-    interface DetailFormState {
-        gridData?: server.AboutUsDetail[];
-        placeholder?: any;
-        dragged?: any;
-        over?: any;
-        over_id?: number;
-        nodePlacement?: string;
-    }
-    interface DetailFormProps {
-        MainId: number,
-        handleSubmit(detailData: server.AboutUsDetail[], e: React.FormEvent): void,
-        Lang: string,
-        ref: string,
-        apiDetailPath?: string
-    }
-    //明細列表
-    export class GridDetailForm extends React.Component<DetailFormProps, DetailFormState>{
         constructor() {
 
             super();
-            this.handleSubmit = this.handleSubmit.bind(this);
-            this.componentDidMount = this.componentDidMount.bind(this);
-            this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
-            this.gridData = this.gridData.bind(this);
             this.queryGridData = this.queryGridData.bind(this);
-            this.setSubInputValue = this.setSubInputValue.bind(this);
-            this.creatNewData = this.creatNewData.bind(this);
-            this.deleteItem = this.deleteItem.bind(this);
-
-            this.dragStart = this.dragStart.bind(this);
-            this.dragEnd = this.dragEnd.bind(this);
-            this.dragOver = this.dragOver.bind(this);
-
+            this.deleteSubmit = this.deleteSubmit.bind(this);
+            this.subCheck = this.subCheck.bind(this);
+            this.componentDidMount = this.componentDidMount.bind(this);
+            this.insertType = this.insertType.bind(this);
+            this.handleSearch = this.handleSearch.bind(this);
             this.render = this.render.bind(this);
+
+
             this.state = {
-                gridData: []
+                fieldData: {},
+                gridData: { rows: [], page: 1 },
+                edit_type: 0,
+                searchData: { main_id: gb_MainId, i_Lang: 'en-US' }
             }
         }
-        static defaultProps = {
-            apiDetailPath: gb_approot + 'api/AboutUsDetail'
+        static defaultProps: BaseDefine.GridFormPropsBase = {
+            fdName: 'fieldData',
+            gdName: 'searchData',
+            apiPath: gb_approot + 'api/AllCategoryL1'
         }
         componentDidMount() {
-            this.queryGridData();
-            let placeholder = this.state.placeholder;
-            placeholder = document.createElement("div");
-            placeholder.className = "placeholder panel";
-            this.setState({ placeholder: placeholder });
+            this.queryGridData(1);
         }
-        componentWillReceiveProps(nextProps: DetailFormProps) {
-            this.queryGridData(nextProps.MainId, nextProps.Lang);//語系有改變就重新讀取gridData
-        }
-        handleSubmit(e: React.FormEvent) {
+        gridData(page: number) {
 
-            e.preventDefault();
-            this.props.handleSubmit(this.state.gridData, e);
-            return;
-        }
-        gridData(main_id?: number, Lang?: string) {
-            if (main_id != undefined && Lang != undefined) {
-                var parms = {
-                    main_id: main_id,
-                    i_Lang: Lang
-                };
+            var parms = {
+                page: 0
+            };
+
+            if (page == 0) {
+                parms.page = this.state.gridData.page;
             } else {
-                var parms = {
-                    main_id: this.props.MainId,
-                    i_Lang: this.props.Lang
-                };
+                parms.page = page;
             }
-            //console.log(main_id, Lang);
-            return CommFunc.jqGet(this.props.apiDetailPath, parms);
+
+            $.extend(parms, this.state.searchData);
+            return CommFunc.jqGet(this.props.apiPath, parms);
         }
-        queryGridData(main_id?: number, Lang?: string) {
-            this.gridData(main_id, Lang)
+        queryGridData(page: number) {
+            this.gridData(page)
                 .done((data, textStatus, jqXHRdata) => {
                     this.setState({ gridData: data });
                 })
@@ -183,10 +150,368 @@ namespace AllCategory {
                     CommFunc.showAjaxError(errorThrown);
                 });
         }
-        setSubInputValue(i: number, name: string, e: React.SyntheticEvent) {
+        handleOnBlur(date) {
+
+        }
+        deleteSubmit() {
+
+            if (!confirm('確定是否刪除?')) {
+                return;
+            }
+
+            var ids = [];
+            for (var i in this.state.gridData.rows) {
+                if (this.state.gridData.rows[i].check_del) {
+                    ids.push('ids=' + this.state.gridData.rows[i].all_category_l1_id);
+                }
+            }
+
+            if (ids.length == 0) {
+                CommFunc.tosMessage(null, '未選擇刪除項', 2);
+                return;
+            }
+
+            CommFunc.jqDelete(this.props.apiPath + '?' + ids.join('&'), {})
+                .done(function (data, textStatus, jqXHRdata) {
+                    if (data.result) {
+                        CommFunc.tosMessage(null, '刪除完成', 1);
+                        this.queryGridData(0);
+                    } else {
+                        alert(data.message);
+                    }
+                }.bind(this))
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        handleSearch(e: React.FormEvent) {
+            e.preventDefault();
+            this.queryGridData(0);
+            return;
+        }
+        subCheck(i: number, chd: boolean) {
+            let newState = this.state;
+            this.state.gridData.rows[i].check_sub = !chd;
+            this.setState(newState);
+        }
+        insertType() {
+            this.setState({ edit_type: 1, fieldData: { i_Hide: false, sort: 0, i_Lang: 'en-US' } });
+        }
+        changeLangVal(e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
+            let obj = this.state.searchData;
             let gridData = this.state.gridData;
-            let obj = gridData[i];
+            obj.i_Lang = input.value;
+
+            //gridData.rows.forEach((itemData, i) => itemData.check_sub = true);
+
+            this.setState({ searchData: obj, gridData: gridData });
+        }
+        render() {
+
+            var outHtml: JSX.Element = null;
+
+            let searchData = this.state.searchData;
+            let GridNavPage = CommCmpt.GridNavPage;
+
+            outHtml =
+                (
+                    <div>
+                    <h3 className="title clearfix">
+                        <span className="pull-left">{this.props.caption}</span>
+                        <div className="form-inline pull-left col-xs-offset-1">
+                            <label><small>選擇語系：</small></label>
+                            <select className="form-control"
+                                value={searchData.i_Lang}
+                                onChange={this.changeLangVal.bind(this) }
+                                >
+                                {
+                                DT.LangData.map(function (itemData, i) {
+                                    return <option key={itemData.id} value={itemData.id}>{itemData.label}</option>;
+                                })
+                                }
+                                </select>
+                            </div>
+                        </h3>
+                    <div className="alert alert-warning clear" role="alert">
+                        <p>點選 <i className="fa-bars"></i> 並拖曳，可修改排列順序。</p>
+                        </div>
+                    <form onSubmit={this.handleSearch}>
+                        <div className="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th className="col-xs-1 text-center">展開/收合</th>
+                                        <th className="col-xs-5">項目</th>
+                                        <th className="col-xs-6">說明</th>
+                                        </tr>
+                                    </thead>
+                                    {
+                                    this.state.gridData.rows.map(
+                                        (itemData, i) =>
+                                            <GridRow key={i}
+                                                ikey={i}
+                                                primKey={itemData.all_category_l1_id}
+                                                i_Lang={searchData.i_Lang}
+                                                itemData={itemData}
+                                                subCheck={this.subCheck}/>
+                                    )
+                                    }
+                                </table>
+                            </div>
+                    <GridNavPage
+                        startCount={this.state.gridData.startcount}
+                        endCount={this.state.gridData.endcount}
+                        recordCount={this.state.gridData.records}
+                        totalPage={this.state.gridData.total}
+                        nowPage={this.state.gridData.page}
+                        onQueryGridData={this.queryGridData}
+                        InsertType={this.insertType}
+                        deleteSubmit={this.deleteSubmit}
+                        showAdd={false}
+                        showDelete={false}
+                        />
+                        </form>
+                        </div>
+                );
+
+            return outHtml;
+        }
+    }
+
+
+    interface SubRows {
+        all_category_l2_id: number;
+        all_category_l1_id?: number;
+        check_del?: boolean,
+        l2_name?: string;
+        memo?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_Lang: string;
+    }
+    interface SubFormState<G, F> extends BaseDefine.GirdFormStateBase<G, F> {
+        isShowSubEdit?: boolean
+    }
+    interface GridSubFormProps {
+        ref: any;
+        MainId: number | string;
+        i_Lang: string;
+        apiSubPathName?: string;
+        apiUpdateSortPath?: string;
+        fdName?: string;
+        gdName?: string;
+    }
+    // L2子表單List
+    class GridSubRow extends React.Component<BaseDefine.GridRowPropsBase<SubRows>, BaseDefine.GridRowStateBase> {
+        constructor() {
+            super();
+            this.delCheck = this.delCheck.bind(this);
+            this.modify = this.modify.bind(this);
+        }
+        delCheck(i, chd) {
+            this.props.delCheck(i, chd);
+        }
+        modify() {
+            this.props.updateType(this.props.primKey)
+        }
+        render() {
+            let StateForGird = CommCmpt.StateForGird;
+            return <tr>
+                       <td className="text-center"><i className="fa-bars text-muted draggable"></i></td>
+                       <td className="text-center"><CommCmpt.GridCheckDel iKey={this.props.ikey} chd={this.props.itemData.check_del} delCheck={this.delCheck} /></td>
+                       <td className="text-center"><CommCmpt.GridButtonModify modify={this.modify} /></td>
+                       <td>{this.props.itemData.l2_name}</td>
+                       <td>{this.props.itemData.sort }</td>
+                       <td>{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
+                       <td><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangData} /></td>
+                </tr>;
+
+        }
+    }
+    //L2子表單
+    export class GridSubForm extends React.Component<GridSubFormProps, SubFormState<SubRows, server.All_Category_L2>>{
+
+        constructor() {
+
+            super();
+            this.updateType = this.updateType.bind(this);
+            this.queryGridData = this.queryGridData.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+            this.deleteSubmit = this.deleteSubmit.bind(this);
+            this.delCheck = this.delCheck.bind(this);
+            this.checkAll = this.checkAll.bind(this);
+            this.componentDidMount = this.componentDidMount.bind(this);
+            this.insertType = this.insertType.bind(this);
+            this.changeFDValue = this.changeFDValue.bind(this);
+            this.setInputValue = this.setInputValue.bind(this);
+            this.handleSearch = this.handleSearch.bind(this);
+            this.closeSubEdit = this.closeSubEdit.bind(this);
+
+            this.render = this.render.bind(this);
+
+
+            this.state = {
+                fieldData: {},
+                gridData: { rows: [], page: 1 },
+                edit_type: 0,
+                isShowSubEdit: false
+            }
+        }
+        static defaultProps = {
+            fdName: 'fieldData',
+            gdName: 'searchData',
+            apiSubPathName: gb_approot + 'api/AllCategoryL2',
+            apiUpdateSortPath: gb_approot + 'Active/Category/UpdateSort'
+        }
+        componentDidMount() {
+            this.queryGridData(1);
+        }
+        componentWillReceiveProps(nextProps: GridSubFormProps) {
+            this.queryGridData(0, nextProps.MainId, nextProps.i_Lang);//語系有改變就重新讀取gridData
+        }
+        gridData(page: number, main_id?: number | string, Lang?: string) {
+            if (main_id != undefined && Lang != undefined) {
+                var parms = {
+                    page: 0,
+                    main_id: main_id,
+                    i_Lang: Lang
+                };
+            } else {
+                var parms = {
+                    page: 0,
+                    main_id: this.props.MainId,
+                    i_Lang: this.props.i_Lang
+                };
+            }
+
+            if (page == 0) {
+                parms.page = this.state.gridData.page;
+            } else {
+                parms.page = page;
+            }
+            return CommFunc.jqGet(this.props.apiSubPathName, parms);
+        }
+        queryGridData(page: number, main_id?: number | string, Lang?: string) {
+            this.gridData(page, main_id, Lang)
+                .done((data, textStatus, jqXHRdata) => {
+                    this.setState({ gridData: data });
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        handleSubmit(e: React.FormEvent) {
+
+            e.preventDefault();
+            if (this.state.edit_type == 1) {
+                CommFunc.jqPost(this.props.apiSubPathName, this.state.fieldData)
+                    .done((data: FormResult, textStatus, jqXHRdata) => {
+                        if (data.result) {
+                            CommFunc.tosMessage(null, '新增完成', 1);
+                            //this.updateType(data.id);
+                            this.queryGridData(0);
+                            this.setState({ isShowSubEdit: false });
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .fail((jqXHR, textStatus, errorThrown) => {
+                        CommFunc.showAjaxError(errorThrown);
+                    });
+            }
+            else if (this.state.edit_type == 2) {
+                CommFunc.jqPut(this.props.apiSubPathName, this.state.fieldData)
+                    .done((data, textStatus, jqXHRdata) => {
+                        if (data.result) {
+                            CommFunc.tosMessage(null, '修改完成', 1);
+                            this.queryGridData(0);
+                            this.setState({ isShowSubEdit: false });
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .fail((jqXHR, textStatus, errorThrown) => {
+                        CommFunc.showAjaxError(errorThrown);
+                    });
+            };
+            return;
+        }
+        deleteSubmit() {
+
+            if (!confirm('確定是否刪除?')) {
+                return;
+            }
+
+            var ids = [];
+            for (var i in this.state.gridData.rows) {
+                if (this.state.gridData.rows[i].check_del) {
+                    ids.push('ids=' + this.state.gridData.rows[i].all_category_l2_id);
+                }
+            }
+
+            if (ids.length == 0) {
+                CommFunc.tosMessage(null, '未選擇刪除項', 2);
+                return;
+            }
+
+            CommFunc.jqDelete(this.props.apiSubPathName + '?' + ids.join('&'), {})
+                .done(function (data, textStatus, jqXHRdata) {
+                    if (data.result) {
+                        CommFunc.tosMessage(null, '刪除完成', 1);
+                        this.queryGridData(0);
+                    } else {
+                        alert(data.message);
+                    }
+                }.bind(this))
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        handleSearch(e: React.FormEvent) {
+            e.preventDefault();
+            this.queryGridData(0);
+            return;
+        }
+        delCheck(i: number, chd: boolean) {
+            let newState = this.state;
+            this.state.gridData.rows[i].check_del = !chd;
+            this.setState(newState);
+        }
+        checkAll() {
+
+            let newState = this.state;
+            newState.checkAll = !newState.checkAll;
+            for (var prop in this.state.gridData.rows) {
+                this.state.gridData.rows[prop].check_del = newState.checkAll;
+            }
+            this.setState(newState);
+        }
+        insertType() {
+            this.setState({
+                edit_type: 1, fieldData: {
+                    i_Hide: false,
+                    sort: 0,
+                    i_Lang: this.props.i_Lang,
+                    all_category_l1_id: this.props.MainId
+                }, isShowSubEdit: true
+            });
+        }
+        updateType(id: number | string) {
+            CommFunc.jqGet(this.props.apiSubPathName, { id: id })
+                .done((data, textStatus, jqXHRdata) => {
+                    this.setState({ edit_type: 2, fieldData: data.data, isShowSubEdit: true });
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        changeFDValue(name: string, e: React.SyntheticEvent) {
+            this.setInputValue(this.props.fdName, name, e);
+        }
+        setInputValue(collentName: string, name: string, e: React.SyntheticEvent) {
+            let input: HTMLInputElement = e.target as HTMLInputElement;
+            let obj = this.state[collentName];
             if (input.value == 'true') {
                 obj[name] = true;
             } else if (input.value == 'false') {
@@ -194,238 +519,165 @@ namespace AllCategory {
             } else {
                 obj[name] = input.value;
             }
-            this.setState({ gridData: gridData });
+            this.setState({ fieldData: obj });
         }
-        creatNewData() {
-            let newState = this.state;
-            let newData: server.AboutUsDetail = {
-                aboutus_detail_id: 0,
-                aboutus_id: this.props.MainId,
-                detail_content: null,
-                i_Hide: false,
-                i_Lang: this.props.Lang,
-                edit_state: EditState.Insert
-            };
-            newState.gridData.push(newData);
-            this.setState(newState);
-        }
-        deleteItem(i: number) {
-            var newState = this.state;
-            var data = newState.gridData[i];
-
-            if (data.edit_state == EditState.Insert) {
-                newState.gridData.splice(i, 1);
-                this.setState(newState);
-            } else {
-                CommFunc.jqDelete(this.props.apiDetailPath + '?ids=' + data.aboutus_detail_id, {})
-                    .done(function (data, textStatus, jqXHRdata) {
-                        if (data.result) {
-                            newState.gridData.splice(i, 1);
-                            this.setState(newState);
-                        } else {
-                            tosMessage(null, data.message, 1);
-                        }
-                    }.bind(this))
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        showAjaxError(errorThrown);
-                    });
-            }
-        }
-        dragStart(e) {
-            this.state.dragged = e.currentTarget;
-            //this.state.placeholder = e.currentTarget;
-
-            e.dataTransfer.effectAllowed = 'move';
-            // Firefox requires calling dataTransfer.setData
-            // for the drag to properly work
-            e.dataTransfer.setData("text/html", e.currentTarget);
-        }
-        dragEnd(e) {
-
-            this.state.dragged.style.display = "block";
-            this.state.dragged.parentNode.removeChild(this.state.placeholder);
-
-            // Update state
-            var data = this.state.gridData;
-            var from = Number(this.state.dragged.dataset.id);
-            var to = this.state.over_id;
-            if (from < to) to--;
-            if (this.state.nodePlacement == "after") to++;
-            data.splice(to, 0, data.splice(from, 1)[0]);
-            data.forEach((item, i) => item.sort = i);//變更排序內容
-            this.setState({ gridData: data });
-            
-        }
-        dragOver(e) {
-            e.preventDefault();
-            let newState = this.state;
-            this.state.dragged.style.display = "none";
-            if (e.target.className == "placeholder") return;
-            newState.over = e.target;
-
-            if (e.target.dataset.id != undefined) {//只能插入有data-id屬性的div間格中
-                var relY = e.clientY - this.state.over.offsetTop;
-                var height = this.state.over.offsetHeight / 2;
-                var parent = e.target.parentNode;
-                newState.over_id = Number(e.target.dataset.id);
-                this.setState(newState);
-                if (relY > height) {
-                    this.state.nodePlacement = "after";
-                    parent.insertBefore(this.state.placeholder, e.target.nextElementSibling);
-                }
-                else if (relY < height) {
-                    this.state.nodePlacement = "before"
-                    parent.insertBefore(this.state.placeholder, e.target);
-                }
-            }
+        closeSubEdit() {
+            this.setState({ isShowSubEdit: false });
         }
         render() {
 
             var outHtml: JSX.Element = null;
-            outHtml = (
-                <div>
-                    <p>
-                        <button className="btn-success" type="button" onClick={this.creatNewData.bind(this) }>
-                            <i className="fa-plus-circle"></i> 新增
-                            </button>
-                        </p>
-                    <form className="form-horizontal" onSubmit={this.handleSubmit}>
-                        <div className="panel-group" ref="SortForm" id="SortForm" onDragOver={this.dragOver.bind(this) }>
-                    {
-                    this.state.gridData.map((itemData, i) =>
-                        <GridDetailField key={i + '-' + itemData.aboutus_detail_id} iKey={i} fieldData={itemData}
-                            DragEnd={this.dragEnd }
-                            DragStart={this.dragStart }
-                            setSubInputValue={this.setSubInputValue}
-                            DeleteItem={this.deleteItem} />
-                    )
-                    }
-                            </div>
-                        <div className="form-action text-center">
-                            <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
-                            </div>
-                        </form>
-                    </div>
-            );
-
-            return outHtml;
-        }
-    }
-
-    interface DetailFieldState {
-        fieldData?: server.AboutUsDetail,
-        editorObj?: any,
-        open?: boolean
-    }
-    interface DetailFieldProps {
-        fieldData: server.AboutUsDetail,
-        iKey: number,
-        key: string,
-        setSubInputValue(i: number, name: string, e: React.SyntheticEvent): void,
-        DeleteItem(i: number): void,
-        DragEnd(e: any): void,
-        DragStart(e: any): void
-    }
-    //明細表單
-    export class GridDetailField extends React.Component<DetailFieldProps, DetailFieldState>{
-
-        constructor() {
-
-            super();
-            this.componentDidMount = this.componentDidMount.bind(this);
-            this.changeFDValue = this.changeFDValue.bind(this);
-            this.deleteItem = this.deleteItem.bind(this);
-            this.setEditor = this.setEditor.bind(this);
-            this.render = this.render.bind(this);
-            this.state = {
-                fieldData: {},
-                editorObj: null,
-                open: true
-            }
-        }
-        static defaultProps = {
-            apiDetailPath: gb_approot + 'api/AboutUsDetail'
-        }
-        componentDidMount() {
-            let fieldData = this.props.fieldData;
-            if (fieldData.edit_state == 0) {
-                fieldData.sort = this.props.iKey;//排序預設跟資料順序一樣
-            }
-            this.setState({ fieldData: fieldData });
-
-            this.setEditor('content-' + this.props.iKey, fieldData.detail_content);
-        }
-        changeFDValue(name: string, e: React.SyntheticEvent) {
-            this.props.setSubInputValue(this.props.iKey, name, e);
-        }
-        deleteItem(i: number) {
-            if (this.props.fieldData.edit_state == 1) {
-                if (confirm('此筆資料已存在，確認是否刪除?')) {
-                    this.props.DeleteItem(i);
-                }
-            } else {
-                this.props.DeleteItem(i);
-            }
-        }
-        setEditor(editorName: string, content: string) {
-            let editorObj = this.state.editorObj;
-
-            CKEDITOR.disableAutoInline = true;
-            var cfg2 = { customConfig: '../ckeditor/inlineConfig.js' }
-            editorObj = CKEDITOR.inline(editorName, cfg2);
-            editorObj.setData(content);//一開始載入會沒資料
-
-            editorObj.on('change', function (evt) {
-                this.state.fieldData.detail_content = editorObj.getData();
-            }.bind(this));
-        }
-        render() {
-
-            var outHtml: JSX.Element = null;
-
+            let GridNavPage = CommCmpt.GridNavPage;
+            let ModalSubEdit = ReactBootstrap.Modal;
             let fieldData = this.state.fieldData;
-            let Collapse = ReactBootstrap.Collapse;
 
-            outHtml = (
-                <div className="panel" data-id={this.props.iKey}
-                    onDragEnd={this.props.DragEnd.bind(this) }
-                    onDragStart={this.props.DragStart.bind(this) }>
-                    <div className="panel-heading">
-                        <h4 className="panel-title">
-                            <a className="draggable" href="#">
-                                <i className="fa-bars"></i>
-                                #{this.props.iKey}
-                                <ul className="widget">
-                                    <li><button onClick={() => this.setState({ open: !this.state.open }) } type="button" title="收合/展開" className="btn-link text-default"><i className="fa-chevron-down"></i></button></li>
-                                    <li><button className="btn-link text-danger" type="button" title="刪除" onClick={this.deleteItem.bind(this, this.props.iKey) }><i className="fa-times"></i></button></li>
-                                    </ul>
-                                </a>
-                            </h4>
-                        </div>
-                    <Collapse in={this.state.open}>
-                        <div className="panel-body">
-                            <div className="editor">
-                                <textarea className="form-control" rows={4} id={'content-' + this.props.iKey}
-                                    name={'content-' + this.props.iKey}
-                                    value={fieldData.detail_content}
-                                    onChange={this.changeFDValue.bind(this, 'detail_content') } />
+            outHtml =
+                (
+                    <tr className="sub-grid">
+                    <td className="fold">
+                        <div className="row">
+                            <div className="col-xs-6 col-xs-offset-6 text-center">
+                                <i className="fa-chevron-right"></i>
                                 </div>
                             </div>
-                        </Collapse>
+                        </td>
+                    <td colSpan={3}>
+                        <div className="row">
+                            <div className="col-xs-10">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className="col-xs-1"></th>
+                                            <th className="col-xs-1 text-center">
+                                                <label className="cbox">
+                                                    <input type="checkbox" checked={this.state.checkAll} onChange={this.checkAll} />
+                                                    <i className="fa-check"></i>
+                                                    </label>
+                                                </th>
+                                            <th className="col-xs-1 text-center">修改</th>
+                                            <th className="col-xs-3">項目</th>
+                                            <th className="col-xs-2">排序</th>
+                                            <th className="col-xs-2">狀態</th>
+                                            <th className="col-xs-2">語系</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody ref="SortTbody">
+                                         {
+                                         this.state.gridData.rows.map(
+                                             (itemData, i) =>
+                                                 <GridSubRow key={i}
+                                                     ikey={i}
+                                                     primKey={itemData.all_category_l2_id}
+                                                     itemData={itemData}
+                                                     delCheck={this.delCheck}
+                                                     updateType={this.updateType} />
+                                         )
+                                         }
+                                        </tbody>
+                                    </table>
+                                 <GridNavPage
+                                     startCount={this.state.gridData.startcount}
+                                     endCount={this.state.gridData.endcount}
+                                     recordCount={this.state.gridData.records}
+                                     totalPage={this.state.gridData.total}
+                                     nowPage={this.state.gridData.page}
+                                     onQueryGridData={this.queryGridData}
+                                     InsertType={this.insertType}
+                                     deleteSubmit={this.deleteSubmit}
+                                     />
+                                {/*---子分類編輯視窗start---*/}
+                                 <ModalSubEdit show={this.state.isShowSubEdit} onHide={this.closeSubEdit}>
+                                    <div className="modal-header light">
+                                    <div className="pull-right">
+                                        <button onClick={this.closeSubEdit} type="button"><i className="fa-times"></i></button>
+                                        </div>
+                                    <h4 className="modal-title">分類項目 { } 編輯</h4>
+                                        </div>
+                                    <form className="form-horizontal"  onSubmit={this.handleSubmit} id="form2">
+                                        <div className="modal-body">
+
+                                            <div className="alert alert-warning"><p>以下皆為 <strong className="text-danger">必填項目</strong> 。</p></div>
+                                            <div className="form-group">
+                                            <label className="col-xs-2 control-label">分類名稱</label>
+                                            <div className="col-xs-6">
+                                                <input type="text"
+                                                    className="form-control"
+                                                    value={fieldData.l2_name}
+                                                    onChange={this.changeFDValue.bind(this, 'l2_name') }
+                                                    maxLength={64}
+                                                    required />
+                                                </div>
+                                            <small className="col-xs-4 help-inline">最多64字</small>
+                                                </div>
+                                            {/*<div className="form-group">
+                                                <label className="col-xs-2 control-label">選擇語系</label>
+                                                <div className="col-xs-8">
+                                                    <select className="form-control"
+                                                        onChange={this.changeFDValue.bind(this, 'i_Lang') }
+                                                        value={fieldData.i_Lang} >
+                                                        {
+                                                        DT.LangData.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
+                                                        }
+                                                        </select>
+                                                    </div>
+                                                </div>*/}
+                                            <div className="form-group">
+                                            <label className="col-xs-2 control-label">排序</label>
+                                            <div className="col-xs-6">
+                                                <input type="number"
+                                                    className="form-control"
+                                                    value={fieldData.sort}
+                                                    onChange={this.changeFDValue.bind(this, 'sort') }
+                                                    maxLength={64}
+                                                    required />
+                                                </div>
+                                            <small className="col-xs-4 help-inline">數字越大越前面</small>
+                                                </div>
+                                            <div className="form-group">
+                                                <label className="col-xs-2 control-label">狀態</label>
+                                                <div className="col-xs-3">
+                                                    <div className="radio-inline">
+                                                        <label>
+                                                            <input 	type="radio"
+                                                                name="i_Hide"
+                                                                value={true}
+                                                                checked={fieldData.i_Hide === true}
+                                                                onChange={this.changeFDValue.bind(this, 'i_Hide') } />
+                                                            <span>隱藏</span>
+                                                            </label>
+                                                        </div>
+                                                    <div className="radio-inline">
+                                                        <label>
+                                                            <input type="radio"
+                                                                name="i_Hide"
+                                                                value={false}
+                                                                checked={fieldData.i_Hide === false}
+                                                                onChange={this.changeFDValue.bind(this, 'i_Hide') }/>
+                                                            <span>顯示</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
 
-                    </div>
-            );
+                                            </div>
+                                        <div className="modal-footer">
+                                            <button  type="submit" form="form2" className="btn-primary"><i className="fa-check"></i> 儲存</button>
+                                                    <button className="col-xs-offset-1" type="button" onClick={this.closeSubEdit}><i className="fa-times"></i>關閉</button>
+                                            </div>
+                                        </form>
+                                     </ModalSubEdit>
+                                {/*---子分類編輯視窗end---*/}
+                                </div >
+                            </div >
+                        </td >
+                        </tr >
+                );
 
             return outHtml;
         }
     }
 }
-
-
-
-
-
 
 var dom = document.getElementById('page_content');
 ReactDOM.render(<AllCategory.GridForm caption={gb_caption} menuName={gb_menuname} iconClass="fa-list-alt" />, dom);

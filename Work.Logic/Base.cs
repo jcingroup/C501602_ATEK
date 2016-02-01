@@ -24,5 +24,6 @@ namespace ProcCore.Business
     {
         public Int16 edit_type { get; set; }
         public bool check_del { get; set; }
+        public bool check_sub { get; set; }
     }
 }

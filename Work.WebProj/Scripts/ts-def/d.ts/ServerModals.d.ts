@@ -115,6 +115,27 @@
             AboutUsDetail: server.AboutUsDetail[];
         };
     }
+
+    interface All_Category_L1 extends BaseEntityTable {
+        all_category_l1_id?: number;
+        l1_name?: string;
+        sort?: number;
+        memo?: string;
+        i_Hide?: boolean;
+        i_Lang?: string;
+        All_Category_L2?: server.All_Category_L2[];
+    }
+    interface All_Category_L2 extends BaseEntityTable {
+        all_category_l2_id?: number;
+        all_category_l1_id?: number | string;
+        l2_name?: string;
+        category?: number;
+        sort?: number;
+        memo?: string;
+        i_Hide?: boolean;
+        i_Lang?: string;
+        All_Category_L1?: server.All_Category_L1;
+    }
     interface L1 extends BaseEntityTable {
         l1_id?: number;
         l1_name?: string;

@@ -32,8 +32,8 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 var items = db0.All_Category_L2
-                    .OrderBy(x => x.sort)
-                    .Where(x => x.all_category_l1_id == q.main_id && x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name)
+                    .OrderByDescending(x => x.sort)
+                    .Where(x => x.all_category_l1_id == q.main_id && x.i_Lang == q.i_Lang)
                     .Select(x => new m_All_Category_L2()
                     {
                         all_category_l1_id = x.all_category_l1_id,
