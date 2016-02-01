@@ -257,7 +257,7 @@ namespace AboutUs {
             data.splice(to, 0, data.splice(from, 1)[0]);
             data.forEach((item, i) => item.sort = i);//變更排序內容
             this.setState({ gridData: data });
-            
+
         }
         dragOver(e) {
             e.preventDefault();
@@ -373,9 +373,10 @@ namespace AboutUs {
         setEditor(editorName: string, content: string) {
             let editorObj = this.state.editorObj;
 
-            CKEDITOR.disableAutoInline = true;
-            var cfg2 = { customConfig: '../ckeditor/inlineConfig.js' }
-            editorObj = CKEDITOR.inline(editorName, cfg2);
+            //CKEDITOR.disableAutoInline = true;
+            var cfg2 = {customConfig: '../ckeditor/inlineConfig.js' }
+            //editorObj = CKEDITOR.inline(editorName, cfg2);
+            editorObj = CKEDITOR.replace(editorName, cfg2);
             editorObj.setData(content);//一開始載入會沒資料
 
             editorObj.on('change', function (evt) {
