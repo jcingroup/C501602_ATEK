@@ -366,6 +366,7 @@ namespace AllCategory {
         }
         componentDidMount() {
             this.queryGridData(1);
+
         }
         componentWillReceiveProps(nextProps: GridSubFormProps) {
             this.queryGridData(0, nextProps.MainId, nextProps.i_Lang);//語系有改變就重新讀取gridData

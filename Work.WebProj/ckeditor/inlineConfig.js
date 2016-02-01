@@ -9,8 +9,9 @@ CKEDITOR.editorConfig = function (config) {
     // config.uiColor = '#AADC6E';
 
     config.contentsCss = ['../../Content/css/editor.css'];
+    config.extraPlugins = 'sourcedialog';
     config.toolbar = [
-        { name: "document", items: ["Source", "-"] },
+        { name: "document", items: ["Sourcedialog", "-"] },
         { name: "tools", items: ["Maximize", "-"] },
         {
             name: "basicstyles",
