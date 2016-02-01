@@ -22,6 +22,9 @@
         <EntityTypeShape EntityType="C50A0_ATEKModel.AboutUs" Width="1.5" PointX="5.375" PointY="11.25" />
         <EntityTypeShape EntityType="C50A0_ATEKModel.AboutUsDetail" Width="1.5" PointX="7.625" PointY="11" />
         <AssociationConnector Association="C50A0_ATEKModel.FK_AboutUsDetail_AboutUs" />
+        <EntityTypeShape EntityType="C50A0_ATEKModel.All_Category_L1" Width="1.5" PointX="10.375" PointY="8.25" />
+        <EntityTypeShape EntityType="C50A0_ATEKModel.All_Category_L2" Width="1.5" PointX="12.625" PointY="8" />
+        <AssociationConnector Association="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

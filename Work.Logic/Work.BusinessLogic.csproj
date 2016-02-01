@@ -79,6 +79,12 @@
     <Compile Include="DB0\AboutUsDetail.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\All_Category_L1.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\All_Category_L2.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB0\AspNetRoles.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
@@ -132,6 +138,12 @@
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_AboutUsDetail.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\m_All_Category_L1.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\m_All_Category_L2.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\m_AspNetRoles.cs">

@@ -37,6 +37,42 @@
           <Property Name="i_UpdateDateTime" Type="datetime" />
           <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
         </EntityType>
+        <EntityType Name="All_Category_L1">
+          <Key>
+            <PropertyRef Name="all_category_l1_id" />
+          </Key>
+          <Property Name="all_category_l1_id" Type="int" Nullable="false" />
+          <Property Name="l1_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="sort" Type="real" />
+          <Property Name="memo" Type="nvarchar" MaxLength="255" />
+          <Property Name="i_Hide" Type="bit" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="All_Category_L2">
+          <Key>
+            <PropertyRef Name="all_category_l2_id" />
+          </Key>
+          <Property Name="all_category_l2_id" Type="int" Nullable="false" />
+          <Property Name="all_category_l1_id" Type="int" Nullable="false" />
+          <Property Name="l2_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="category" Type="int" />
+          <Property Name="sort" Type="real" />
+          <Property Name="memo" Type="nvarchar" MaxLength="255" />
+          <Property Name="i_Hide" Type="bit" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -214,6 +250,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_All_Category_L2_All_Category_L1">
+          <End Role="All_Category_L1" Type="Self.All_Category_L1" Multiplicity="1" />
+          <End Role="All_Category_L2" Type="Self.All_Category_L2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Category_L1">
+              <PropertyRef Name="all_category_l1_id" />
+            </Principal>
+            <Dependent Role="All_Category_L2">
+              <PropertyRef Name="all_category_l1_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -269,6 +317,8 @@
         <EntityContainer Name="C50A0_ATEKModelStoreContainer">
           <EntitySet Name="AboutUs" EntityType="Self.AboutUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AboutUsDetail" EntityType="Self.AboutUsDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="All_Category_L1" EntityType="Self.All_Category_L1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="All_Category_L2" EntityType="Self.All_Category_L2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
@@ -286,6 +336,10 @@
           <AssociationSet Name="FK_AboutUsDetail_AboutUs" Association="Self.FK_AboutUsDetail_AboutUs">
             <End Role="AboutUs" EntitySet="AboutUs" />
             <End Role="AboutUsDetail" EntitySet="AboutUsDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_All_Category_L2_All_Category_L1" Association="Self.FK_All_Category_L2_All_Category_L1">
+            <End Role="All_Category_L1" EntitySet="All_Category_L1" />
+            <End Role="All_Category_L2" EntitySet="All_Category_L2" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -462,6 +516,12 @@
             <End Role="AboutUs" EntitySet="AboutUs" />
             <End Role="AboutUsDetail" EntitySet="AboutUsDetail" />
           </AssociationSet>
+          <EntitySet Name="All_Category_L1" EntityType="C50A0_ATEKModel.All_Category_L1" />
+          <EntitySet Name="All_Category_L2" EntityType="C50A0_ATEKModel.All_Category_L2" />
+          <AssociationSet Name="FK_All_Category_L2_All_Category_L1" Association="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1">
+            <End Role="All_Category_L1" EntitySet="All_Category_L1" />
+            <End Role="All_Category_L2" EntitySet="All_Category_L2" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="News">
           <Key>
@@ -540,6 +600,56 @@
             </Principal>
             <Dependent Role="AboutUsDetail">
               <PropertyRef Name="aboutus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="All_Category_L1">
+          <Key>
+            <PropertyRef Name="all_category_l1_id" />
+          </Key>
+          <Property Name="all_category_l1_id" Type="Int32" Nullable="false" />
+          <Property Name="l1_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Single" />
+          <Property Name="memo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="All_Category_L2" Relationship="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1" FromRole="All_Category_L1" ToRole="All_Category_L2" />
+        </EntityType>
+        <EntityType Name="All_Category_L2">
+          <Key>
+            <PropertyRef Name="all_category_l2_id" />
+          </Key>
+          <Property Name="all_category_l2_id" Type="Int32" Nullable="false" />
+          <Property Name="all_category_l1_id" Type="Int32" Nullable="false" />
+          <Property Name="l2_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="Int32" />
+          <Property Name="sort" Type="Single" />
+          <Property Name="memo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="All_Category_L1" Relationship="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1" FromRole="All_Category_L2" ToRole="All_Category_L1" />
+        </EntityType>
+        <Association Name="FK_All_Category_L2_All_Category_L1">
+          <End Type="C50A0_ATEKModel.All_Category_L1" Role="All_Category_L1" Multiplicity="1" />
+          <End Type="C50A0_ATEKModel.All_Category_L2" Role="All_Category_L2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Category_L1">
+              <PropertyRef Name="all_category_l1_id" />
+            </Principal>
+            <Dependent Role="All_Category_L2">
+              <PropertyRef Name="all_category_l1_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -757,6 +867,44 @@
                 <ScalarProperty Name="detail_content" ColumnName="detail_content" />
                 <ScalarProperty Name="aboutus_id" ColumnName="aboutus_id" />
                 <ScalarProperty Name="aboutus_detail_id" ColumnName="aboutus_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="All_Category_L1">
+            <EntityTypeMapping TypeName="C50A0_ATEKModel.All_Category_L1">
+              <MappingFragment StoreEntitySet="All_Category_L1">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="l1_name" ColumnName="l1_name" />
+                <ScalarProperty Name="all_category_l1_id" ColumnName="all_category_l1_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="All_Category_L2">
+            <EntityTypeMapping TypeName="C50A0_ATEKModel.All_Category_L2">
+              <MappingFragment StoreEntitySet="All_Category_L2">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="l2_name" ColumnName="l2_name" />
+                <ScalarProperty Name="all_category_l1_id" ColumnName="all_category_l1_id" />
+                <ScalarProperty Name="all_category_l2_id" ColumnName="all_category_l2_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
