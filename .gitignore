@@ -221,3 +221,13 @@ Work.WebProj/app_modules/comm-typeahead/main.js
 Work.WebProj/app_modules/dt/def-data.js
 Work.WebProj/app_modules/Pikaday/pikadaydef.js
 Work.WebProj/app_modules/simple-ajax-uploader/SimpleAjaxUploader.def.js
+Work.WebProj/ckfinder/_samples/*
+Work.WebProj/ckfinder/_source/*
+Work.WebProj/ckfinder/help/*
+Work.WebProj/ckfinder/plugins/*
+Work.WebProj/ckfinder/lang/*
+Work.WebProj/ckfinder/skins/*
+Work.WebProj/_Code/SysUpFiles/Active/*
+Work.WebProj/ckfinder/userfiles/*
+Work.WebProj/ckfinder/*.txt
+Work.WebProj/ckfinder/ckfinder.html

@@ -19,7 +19,7 @@
     "react-dom": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "toastr": "^2.1.2",
-    "jquery-sortable": "^0.9.13"
+    "sortablejs": "^1.4.2"
   },
   "devDependencies": {
     "babel-loader": "^6.2.0",

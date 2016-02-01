@@ -15,7 +15,7 @@ namespace AboutUs {
     export class GridForm extends React.Component<any, FormState>{
 
         constructor() {
-            
+
             super();
             this.handleSubmit = this.handleSubmit.bind(this);
             this.componentDidMount = this.componentDidMount.bind(this);
@@ -84,14 +84,14 @@ namespace AboutUs {
                             }
                             </select>
                             </div>
-                    </h3>
+                        </h3>
                     <div className="alert alert-warning">
                         <button type="button" className="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
                         <ol>
                             <li>點選 <strong className="fa-bars"></strong> 並<strong>拖曳</strong>，可修改排列順序。</li>
                             <li>點選 <strong className="fa-chevron-up"></strong> 可收合/展開，點選 <strong className="fa-times"></strong> 可刪除。</li>
-                        </ol>
-                    </div>
+                            </ol>
+                        </div>
                     <GridDetailForm
                         MainId={fieldData.aboutus_id}
                         handleSubmit={this.handleSubmit}
@@ -106,7 +106,12 @@ namespace AboutUs {
     }
 
     interface DetailFormState {
-        gridData?: server.AboutUsDetail[]
+        gridData?: server.AboutUsDetail[];
+        placeholder?: any;
+        dragged?: any;
+        over?: any;
+        over_id?: number;
+        nodePlacement?: string;
     }
     interface DetailFormProps {
         MainId: number,
@@ -117,7 +122,6 @@ namespace AboutUs {
     }
     //明細列表
     export class GridDetailForm extends React.Component<DetailFormProps, DetailFormState>{
-
         constructor() {
 
             super();
@@ -129,6 +133,11 @@ namespace AboutUs {
             this.setSubInputValue = this.setSubInputValue.bind(this);
             this.creatNewData = this.creatNewData.bind(this);
             this.deleteItem = this.deleteItem.bind(this);
+
+            this.dragStart = this.dragStart.bind(this);
+            this.dragEnd = this.dragEnd.bind(this);
+            this.dragOver = this.dragOver.bind(this);
+
             this.render = this.render.bind(this);
             this.state = {
                 gridData: []
@@ -139,6 +148,10 @@ namespace AboutUs {
         }
         componentDidMount() {
             this.queryGridData();
+            let placeholder = this.state.placeholder;
+            placeholder = document.createElement("div");
+            placeholder.className = "placeholder panel";
+            this.setState({ placeholder: placeholder });
         }
         componentWillReceiveProps(nextProps: DetailFormProps) {
             this.queryGridData(nextProps.MainId, nextProps.Lang);//語系有改變就重新讀取gridData
@@ -221,33 +234,80 @@ namespace AboutUs {
                     });
             }
         }
+        dragStart(e) {
+            this.state.dragged = e.currentTarget;
+            //this.state.placeholder = e.currentTarget;
+
+            e.dataTransfer.effectAllowed = 'move';
+            // Firefox requires calling dataTransfer.setData
+            // for the drag to properly work
+            e.dataTransfer.setData("text/html", e.currentTarget);
+        }
+        dragEnd(e) {
+
+            this.state.dragged.style.display = "block";
+            this.state.dragged.parentNode.removeChild(this.state.placeholder);
+
+            // Update state
+            var data = this.state.gridData;
+            var from = Number(this.state.dragged.dataset.id);
+            var to = this.state.over_id;
+            if (from < to) to--;
+            if (this.state.nodePlacement == "after") to++;
+            data.splice(to, 0, data.splice(from, 1)[0]);
+            data.forEach((item, i) => item.sort = i);//變更排序內容
+            this.setState({ gridData: data });
+            
+        }
+        dragOver(e) {
+            e.preventDefault();
+            let newState = this.state;
+            this.state.dragged.style.display = "none";
+            if (e.target.className == "placeholder") return;
+            newState.over = e.target;
+
+            if (e.target.dataset.id != undefined) {//只能插入有data-id屬性的div間格中
+                var relY = e.clientY - this.state.over.offsetTop;
+                var height = this.state.over.offsetHeight / 2;
+                var parent = e.target.parentNode;
+                newState.over_id = Number(e.target.dataset.id);
+                this.setState(newState);
+                if (relY > height) {
+                    this.state.nodePlacement = "after";
+                    parent.insertBefore(this.state.placeholder, e.target.nextElementSibling);
+                }
+                else if (relY < height) {
+                    this.state.nodePlacement = "before"
+                    parent.insertBefore(this.state.placeholder, e.target);
+                }
+            }
+        }
         render() {
 
             var outHtml: JSX.Element = null;
-
-            let InputDate = CommCmpt.InputDate;
-
             outHtml = (
                 <div>
                     <p>
                         <button className="btn-success" type="button" onClick={this.creatNewData.bind(this) }>
                             <i className="fa-plus-circle"></i> 新增
-                        </button>
-                    </p>
+                            </button>
+                        </p>
                     <form className="form-horizontal" onSubmit={this.handleSubmit}>
-                        <div className="panel-group" ref="SortForm">
+                        <div className="panel-group" ref="SortForm" id="SortForm" onDragOver={this.dragOver.bind(this) }>
                     {
                     this.state.gridData.map((itemData, i) =>
                         <GridDetailField key={i + '-' + itemData.aboutus_detail_id} iKey={i} fieldData={itemData}
+                            DragEnd={this.dragEnd }
+                            DragStart={this.dragStart }
                             setSubInputValue={this.setSubInputValue}
                             DeleteItem={this.deleteItem} />
                     )
                     }
-                        </div>
+                            </div>
                         <div className="form-action text-center">
                             <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
-                        </div>
-                    </form>
+                            </div>
+                        </form>
                     </div>
             );
 
@@ -266,6 +326,8 @@ namespace AboutUs {
         key: string,
         setSubInputValue(i: number, name: string, e: React.SyntheticEvent): void,
         DeleteItem(i: number): void,
+        DragEnd(e: any): void,
+        DragStart(e: any): void
     }
     //明細表單
     export class GridDetailField extends React.Component<DetailFieldProps, DetailFieldState>{
@@ -328,7 +390,9 @@ namespace AboutUs {
             let Collapse = ReactBootstrap.Collapse;
 
             outHtml = (
-                <div className="panel">
+                <div className="panel" data-id={this.props.iKey}
+                    onDragEnd={this.props.DragEnd.bind(this) }
+                    onDragStart={this.props.DragStart.bind(this) }>
                     <div className="panel-heading">
                         <h4 className="panel-title">
                             <a className="draggable" href="#">
@@ -337,10 +401,10 @@ namespace AboutUs {
                                 <ul className="widget">
                                     <li><button onClick={() => this.setState({ open: !this.state.open }) } type="button" title="收合/展開" className="btn-link text-default"><i className="fa-chevron-down"></i></button></li>
                                     <li><button className="btn-link text-danger" type="button" title="刪除" onClick={this.deleteItem.bind(this, this.props.iKey) }><i className="fa-times"></i></button></li>
-                                </ul>
-                            </a>
-                        </h4>
-                    </div>
+                                    </ul>
+                                </a>
+                            </h4>
+                        </div>
                     <Collapse in={this.state.open}>
                         <div className="panel-body">
                             <div className="editor">
@@ -348,12 +412,12 @@ namespace AboutUs {
                                     name={'content-' + this.props.iKey}
                                     value={fieldData.detail_content}
                                     onChange={this.changeFDValue.bind(this, 'detail_content') } />
+                                </div>
                             </div>
-                        </div>
-                    </Collapse>
+                        </Collapse>
 
 
-                </div>
+                    </div>
             );
 
             return outHtml;

@@ -192,6 +192,8 @@ namespace DotWeb.Areas.Base.Controllers
                     .Single();
 
                 ViewData["lang"] = item_lang.area;
+                //Response.Cookies.Add(new HttpCookie(CommWebSetup.WebCookiesId + ".IsAuthorized", "OK"));//CKFinder
+                Session["IsAuthorized"] = true;//ckfinder用
                 db.Dispose();
             }
             catch (Exception ex)
