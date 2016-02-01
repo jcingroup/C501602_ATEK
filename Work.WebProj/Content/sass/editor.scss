@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-$body-bg: #f5f5f5;
+$font-size-h2: 62px;
+$font-size-h3: 35px;
 
 // import
 // ------------------------------------------------------------
@@ -9,12 +10,11 @@ $body-bg: #f5f5f5;
 @import "helper/mixins";
 
 @import "base/basic";
+@import "base/extend";
+@import "base/classes";
 @import "base/table";
 
-p, ul, ol, li { text-align: left; }
-
-p { line-height: 2; }
-
-tbody { border: none; }
-
-li { margin-left: 20px; }
+article {
+    h2 { margin-top: 0; margin-bottom: 20px; }
+    p { color: #333; line-height: 1.9; }
+}

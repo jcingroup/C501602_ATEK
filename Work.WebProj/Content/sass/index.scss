@@ -40,7 +40,12 @@ $btn-padding:       12px 20px;
 
     @include mq(wider) {
         max-width: $max-width;
-        margin: 30px auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @include mq-max(tablet) {
+        margin-left: $gutter;
+        margin-right: $gutter;
     }
 }
 .swiper-wrapper {
@@ -49,8 +54,7 @@ $btn-padding:       12px 20px;
 }
 .swiper-slide {
     text-align: center;
-
-    @include mq-max(tablet) {}
+    img { min-width: 100%; }
 }
 
 // == main

@@ -8,24 +8,25 @@ CKEDITOR.editorConfig = function (config) {
     config.language = 'zh';
     // config.uiColor = '#AADC6E';
 
-    //config.contentsCss = ['../Content/css/editor.css'];
+    config.contentsCss = ['../../Content/css/editor.css'];
     config.toolbar = [
         { name: "document", items: ["Source", "-"] },
         { name: "tools", items: ["Maximize", "-"] },
         {
-            name: "clipboard",
-            items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "Undo", "Redo"]
-        },
-        { name: "links", items: ["Link", "Unlink", "Anchor"] },
-        {
             name: "basicstyles",
             items: ["FontSize", "Bold", "Underline", "Strike", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "-", "RemoveFormat"]
         },
-        '/',
+        { name: "styles", items: ["Format"] },
         { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent"] },
+        '/',
+        // { name: "styles", items: ["Styles", "Format"] },
         { name: "colors", items: ["TextColor", "BGColor"] },
-        { name: "styles", items: ["Styles", "Format"] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
+        { name: "links", items: ["Link", "Unlink", "Anchor"] },
+        { name: 'insert', items: ['Image', 'Table', 'Smiley', 'Iframe'] },
+        {
+            name: "clipboard",
+            items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "Undo", "Redo"]
+        },
         { name: "editing" }
     ];
     config.filebrowserBrowseUrl = "../../ckfinder/ckfinder.html";

@@ -991,7 +991,7 @@ main {
   position: fixed;
   top: 20px;
   left: 50%;
-  margin-left: 340px;
+  margin-left: 338px;
   z-index: 90; }
   @media (min-width: 87.5em) {
     .sub-nav.fixed {
@@ -1011,13 +1011,15 @@ main {
 
 .catalog {
   text-align: center; }
+  .catalog h3, .catalog header {
+    text-align: left; }
   .catalog h3 {
     margin-top: 0; }
   .catalog dl {
     display: inline-block;
     background: #efefef;
-    width: 32%;
-    margin: 10px 2px;
+    width: 31.3%;
+    margin: 20px 11px;
     padding: 25px 7px; }
   .catalog dt {
     font-size: 1.375em;
@@ -1094,12 +1096,10 @@ main {
   background: #79B229;
   border-radius: 3px;
   color: #fff;
-  font-size: 0.9375em;
-  font-family: "trebuc";
   font-style: normal;
   font-weight: normal;
   letter-spacing: 1px;
-  padding: 3px 15px;
+  padding: 6px 18px;
   margin: 7px 2px; }
   .tag a:hover, .tag a:active, .tag a.current {
     background: #559543; }

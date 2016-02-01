@@ -621,13 +621,20 @@ body {
   @media (min-width: 87.5em) {
     #banner {
       max-width: 1400px;
-      margin: 30px auto; } }
+      margin-left: auto;
+      margin-right: auto; } }
+  @media (max-width: 48em) {
+    #banner {
+      margin-left: 15px;
+      margin-right: 15px; } }
 
 .swiper-wrapper {
   margin-bottom: 0; }
 
 .swiper-slide {
   text-align: center; }
+  .swiper-slide img {
+    min-width: 100%; }
 
 .new-product {
   float: left;
