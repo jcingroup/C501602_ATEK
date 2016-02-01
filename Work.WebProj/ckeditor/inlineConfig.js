@@ -33,6 +33,7 @@ CKEDITOR.editorConfig = function (config) {
     config.filebrowserImageBrowseUrl = "../../ckfinder/ckfinder.html?type=Images";
     config.filebrowserImageUploadUrl = "../../ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images";
     config.autoUpdateElement = true;
+    config.allowedContent=true;
 };
 
 CKEDITOR.stylesSet.add('default', [

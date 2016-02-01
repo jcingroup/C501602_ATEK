@@ -225,9 +225,10 @@ img {
   font-family: 'trebuc';
   src: local("Trebuchet MS"), url(../font/trebucit.ttf) format("truetype"); }
 .font-sp {
-  font-family: "trebuc"; }
+  font-family: "trebuc", sans-serif; }
 
 h2, h3, h4, h5, h6 {
+  font-family: trebuc, sans-serifMicrosoft Jhenghei, \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: #79B229; }
@@ -399,9 +400,10 @@ tr:nth-of-type(odd) {
         .table-rwd table th, .table-rwd table td {
           white-space: nowrap; } }
 
-article h2 {
+h2 {
   margin-top: 0;
   margin-bottom: 20px; }
-article p {
+
+p {
   color: #333;
   line-height: 1.9; }

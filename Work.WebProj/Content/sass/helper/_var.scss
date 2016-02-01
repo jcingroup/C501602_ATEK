@@ -48,7 +48,7 @@ $gutter:                15px !default;
 // ----------------------------------------------------------------------
 // 微軟正黑體
 $font-family-base:      'Microsoft Jhenghei', \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif !default;
-$font-sp:               'trebuc';
+$font-sp:               'trebuc', sans-serif;
 
 $font-size-base:        16px !default;
 $font-size-lg:          $font-size-base * 1.25 !default;     // 20px
@@ -66,7 +66,7 @@ $font-size-h4:          $font-size-base * 1.125 !default;
 $font-size-h5:          $font-size-base !default;
 $font-size-h6:          $font-size-base * 0.875 !default;
 
-$heading-font-family:   inherit !default;
+$heading-font-family:   $font-sp + $font-family-base !default;
 $heading-font-weight:   500 !default;
 $heading-line-height:   1.1 !default;
 
