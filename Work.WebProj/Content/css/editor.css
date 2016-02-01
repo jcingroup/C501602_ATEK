@@ -400,6 +400,10 @@ tr:nth-of-type(odd) {
         .table-rwd table th, .table-rwd table td {
           white-space: nowrap; } }
 
+h1, h2, h3, h4, h5, h6, p, blockquote,
+ul, ol, li, dl, dt, dd {
+  text-align: left; }
+
 h2 {
   margin-top: 0;
   margin-bottom: 20px; }

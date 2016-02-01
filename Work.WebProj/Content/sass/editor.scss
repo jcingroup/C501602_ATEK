@@ -14,5 +14,7 @@ $font-size-h3: 35px;
 @import "base/classes";
 @import "base/table";
 
+h1,h2,h3,h4,h5,h6,p,blockquote,
+ul,ol,li,dl,dt,dd { text-align: left; }
 h2 { margin-top: 0; margin-bottom: 20px; }
 p { color: #333; line-height: 1.9; }

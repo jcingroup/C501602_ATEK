@@ -408,12 +408,12 @@ namespace AboutUs {
                         </div>
                     <Collapse in={this.state.open}>
                         <div className="panel-body">
-                            <div className="editor">
+                            {/*<div className="editor">*/}
                                 <textarea className="form-control" rows={4} id={'content-' + this.props.iKey}
                                     name={'content-' + this.props.iKey}
                                     value={fieldData.detail_content}
                                     onChange={this.changeFDValue.bind(this, 'detail_content') } />
-                                </div>
+                                {/*</div>*/}
                             </div>
                         </Collapse>
 
