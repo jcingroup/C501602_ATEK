@@ -3,7 +3,8 @@ CKEDITOR.editorConfig = function (config) {
     config.language = 'zh';
     // config.uiColor = '#AADC6E';
 
-    config.contentsCss = ['../../Content/css/editor.css'];
+    //config.contentsCss = ['../../Content/css/editor.css'];
+    config.extraPlugins = 'youtube';
     config.toolbar = [
         { name: "document", items: ["Source", "-"] },
         { name: "tools", items: ["Maximize", "-"] },
@@ -25,7 +26,7 @@ CKEDITOR.editorConfig = function (config) {
         },
         {
             name: 'insert',
-            items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'Iframe']
+            items: ['Image', 'Youtube', 'Table', 'HorizontalRule', 'Smiley', 'Iframe']
         },
         {
             name: "clipboard",

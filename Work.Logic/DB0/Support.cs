@@ -13,19 +13,14 @@ namespace ProcCore.Business.DB0
     using System.Collections.Generic;
     
     using Newtonsoft.Json;
-    public partial class All_Category_L2 : BaseEntityTable
+    public partial class Support : BaseEntityTable
     {
-        public All_Category_L2()
-        {
-            this.Support = new HashSet<Support>();
-        }
-    
-        public int all_category_l2_id { get; set; }
-        public int all_category_l1_id { get; set; }
-        public string l2_name { get; set; }
-        public Nullable<int> category { get; set; }
-        public Nullable<float> sort { get; set; }
-        public string memo { get; set; }
+        public int support_id { get; set; }
+        public string support_title { get; set; }
+        public int support_category { get; set; }
+        public System.DateTime day { get; set; }
+        public string support_content { get; set; }
+        public int sort { get; set; }
         public bool i_Hide { get; set; }
         public string i_InsertUserID { get; set; }
         public Nullable<int> i_InsertDeptID { get; set; }
@@ -36,8 +31,7 @@ namespace ProcCore.Business.DB0
         public string i_Lang { get; set; }
     
     	[JsonIgnore]
-        public virtual All_Category_L1 All_Category_L1 { get; set; }
-    	[JsonIgnore]
-        public virtual ICollection<Support> Support { get; set; }
+        public virtual All_Category_L2 All_Category_L2 { get; set; }
     }
 }
+

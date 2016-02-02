@@ -238,6 +238,25 @@
           <Property Name="i_UpdateDateTime" Type="datetime" />
           <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
         </EntityType>
+        <EntityType Name="Support">
+          <Key>
+            <PropertyRef Name="support_id" />
+          </Key>
+          <Property Name="support_id" Type="int" Nullable="false" />
+          <Property Name="support_title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="support_category" Type="int" Nullable="false" />
+          <Property Name="day" Type="datetime" Nullable="false" />
+          <Property Name="support_content" Type="ntext" />
+          <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="i_Hide" Type="bit" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_InsertDeptID" Type="int" />
+          <Property Name="i_InsertDateTime" Type="datetime" />
+          <Property Name="i_UpdateUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="i_UpdateDeptID" Type="int" />
+          <Property Name="i_UpdateDateTime" Type="datetime" />
+          <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
         <Association Name="FK_AboutUsDetail_AboutUs">
           <End Role="AboutUs" Type="Self.AboutUs" Multiplicity="1" />
           <End Role="AboutUsDetail" Type="Self.AboutUsDetail" Multiplicity="*" />
@@ -314,6 +333,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Support_All_Category_L2">
+          <End Role="All_Category_L2" Type="Self.All_Category_L2" Multiplicity="1" />
+          <End Role="Support" Type="Self.Support" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Category_L2">
+              <PropertyRef Name="all_category_l2_id" />
+            </Principal>
+            <Dependent Role="Support">
+              <PropertyRef Name="support_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="C50A0_ATEKModelStoreContainer">
           <EntitySet Name="AboutUs" EntityType="Self.AboutUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AboutUsDetail" EntityType="Self.AboutUsDetail" Schema="dbo" store:Type="Tables" />
@@ -333,6 +364,7 @@
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuRole" EntityType="Self.MenuRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Support" EntityType="Self.Support" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AboutUsDetail_AboutUs" Association="Self.FK_AboutUsDetail_AboutUs">
             <End Role="AboutUs" EntitySet="AboutUs" />
             <End Role="AboutUsDetail" EntitySet="AboutUsDetail" />
@@ -356,6 +388,10 @@
           <AssociationSet Name="FK_MenuRole_Menu" Association="Self.FK_MenuRole_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="MenuRole" EntitySet="MenuRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Support_All_Category_L2" Association="Self.FK_Support_All_Category_L2">
+            <End Role="All_Category_L2" EntitySet="All_Category_L2" />
+            <End Role="Support" EntitySet="Support" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -522,6 +558,11 @@
             <End Role="All_Category_L1" EntitySet="All_Category_L1" />
             <End Role="All_Category_L2" EntitySet="All_Category_L2" />
           </AssociationSet>
+          <EntitySet Name="Support" EntityType="C50A0_ATEKModel.Support" />
+          <AssociationSet Name="FK_Support_All_Category_L2" Association="C50A0_ATEKModel.FK_Support_All_Category_L2">
+            <End Role="All_Category_L2" EntitySet="All_Category_L2" />
+            <End Role="Support" EntitySet="Support" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="News">
           <Key>
@@ -640,6 +681,7 @@
           <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
           <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="All_Category_L1" Relationship="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1" FromRole="All_Category_L2" ToRole="All_Category_L1" />
+          <NavigationProperty Name="Support" Relationship="C50A0_ATEKModel.FK_Support_All_Category_L2" FromRole="All_Category_L2" ToRole="Support" />
         </EntityType>
         <Association Name="FK_All_Category_L2_All_Category_L1">
           <End Type="C50A0_ATEKModel.All_Category_L1" Role="All_Category_L1" Multiplicity="1" />
@@ -650,6 +692,38 @@
             </Principal>
             <Dependent Role="All_Category_L2">
               <PropertyRef Name="all_category_l1_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Support">
+          <Key>
+            <PropertyRef Name="support_id" />
+          </Key>
+          <Property Name="support_id" Type="Int32" Nullable="false" />
+          <Property Name="support_title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="support_category" Type="Int32" Nullable="false" />
+          <Property Name="day" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="support_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="All_Category_L2" Relationship="C50A0_ATEKModel.FK_Support_All_Category_L2" FromRole="Support" ToRole="All_Category_L2" />
+        </EntityType>
+        <Association Name="FK_Support_All_Category_L2">
+          <End Type="C50A0_ATEKModel.All_Category_L2" Role="All_Category_L2" Multiplicity="1" />
+          <End Type="C50A0_ATEKModel.Support" Role="Support" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Category_L2">
+              <PropertyRef Name="all_category_l2_id" />
+            </Principal>
+            <Dependent Role="Support">
+              <PropertyRef Name="support_category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -905,6 +979,26 @@
                 <ScalarProperty Name="l2_name" ColumnName="l2_name" />
                 <ScalarProperty Name="all_category_l1_id" ColumnName="all_category_l1_id" />
                 <ScalarProperty Name="all_category_l2_id" ColumnName="all_category_l2_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Support">
+            <EntityTypeMapping TypeName="C50A0_ATEKModel.Support">
+              <MappingFragment StoreEntitySet="Support">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="support_content" ColumnName="support_content" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="support_category" ColumnName="support_category" />
+                <ScalarProperty Name="support_title" ColumnName="support_title" />
+                <ScalarProperty Name="support_id" ColumnName="support_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

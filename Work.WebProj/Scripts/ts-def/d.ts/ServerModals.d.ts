@@ -115,7 +115,16 @@
             AboutUsDetail: server.AboutUsDetail[];
         };
     }
-
+    interface Support extends BaseEntityTable {
+        support_id?: number;
+        support_title?: string;
+        support_category?: number;
+        day?: Date;
+        support_content?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_Lang?: string;
+    }
     interface All_Category_L1 extends BaseEntityTable {
         all_category_l1_id?: number;
         l1_name?: string;
@@ -136,12 +145,10 @@
         i_Lang?: string;
         All_Category_L1?: server.All_Category_L1;
     }
-
     interface CategroySort {//分類管理排序用
         id: number;
         sort: number;
     }
-
     interface L1 extends BaseEntityTable {
         l1_id?: number;
         l1_name?: string;

@@ -11,12 +11,13 @@ namespace ProcCore.Business.DB0
 {
     using System;
     using System.Collections.Generic;
-    public partial class m_News :BaseEntityTable {
-    public int news_id { get; set; }
-    public string news_title { get; set; }
-    public System.DateTime news_date { get; set; }
-    public string news_content { get; set; }
-    public Nullable<int> sort { get; set; }
+    public partial class m_Support :BaseEntityTable {
+    public int support_id { get; set; }
+    public string support_title { get; set; }
+    public int support_category { get; set; }
+    public System.DateTime day { get; set; }
+    public string support_content { get; set; }
+    public int sort { get; set; }
     public bool i_Hide { get; set; }
     public string i_InsertUserID { get; set; }
     public Nullable<int> i_InsertDeptID { get; set; }
@@ -27,3 +28,4 @@ namespace ProcCore.Business.DB0
     public string i_Lang { get; set; }
     }
 }
+

@@ -280,6 +280,7 @@
     <Compile Include="Controllers\Api\AboutUsController.cs" />
     <Compile Include="Controllers\Api\AllCategoryL2Controller.cs" />
     <Compile Include="Controllers\Api\AllCategoryL1Controller.cs" />
+    <Compile Include="Controllers\Api\SupportController.cs" />
     <Compile Include="Controllers\Api\GetActionController.cs" />
     <Compile Include="Controllers\Api\BannerController.cs" />
     <Compile Include="Controllers\Api\NewsController.cs" />
@@ -441,6 +442,7 @@
     <Content Include="Scripts\build\app\m_news.js" />
     <Content Include="Scripts\build\app\m_parm.js" />
     <Content Include="Scripts\build\app\m_roles.js" />
+    <Content Include="Scripts\build\app\m_support.js" />
     <Content Include="Scripts\cdn\BootSideMenu.js" />
     <Content Include="Scripts\cdn\bootstrap.min.js" />
     <Content Include="Scripts\cdn\codrops\classie.js" />
@@ -582,6 +584,7 @@
     <TypeScriptCompile Include="app_modules\react-datepicker.d\react-datepicker.d.ts" />
     <TypeScriptCompile Include="app_modules\simple-ajax-uploader\SimpleAjaxUploader.def.ts" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-all_category.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-support.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-sortable.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-change_password.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-banner.tsx" />

@@ -561,7 +561,7 @@ namespace AllCategory {
             e.dataTransfer.setData("text/html", e.currentTarget);
         }
         dragEnd(e) {
-            $("#Sort-" + Number(this.state.dragged.dataset.id)).show();
+            $("#Sort-" + this.props.MainId + "-" + Number(this.state.dragged.dataset.id)).show();
             this.state.dragged.parentNode.removeChild(this.state.placeholder);
 
             // Update state
@@ -584,7 +584,7 @@ namespace AllCategory {
         dragOver(e) {
             e.preventDefault();
             let newState = this.state;
-            $("#Sort-" + Number(this.state.dragged.dataset.id)).hide();
+            $("#Sort-" + this.props.MainId + "-" + Number(this.state.dragged.dataset.id)).hide();
             if (e.target.className == "placeholder") return;
 
             if (e.target.dataset.id != undefined) {//只能插入有data-id屬性的tr間格中

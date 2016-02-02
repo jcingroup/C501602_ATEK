@@ -182,7 +182,13 @@
     <Compile Include="DB0\m_News.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\m_Support.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB0\News.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\Support.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="LogicCenter.cs" />

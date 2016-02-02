@@ -15,7 +15,7 @@ namespace ProcCore.Business
     public enum CodeTable
     {
         Base,
-        Banner, AboutUsDetail, News,
+        Banner, AboutUsDetail, News, Support,
         All_Category_L1, All_Category_L2
     }
     public enum SNType

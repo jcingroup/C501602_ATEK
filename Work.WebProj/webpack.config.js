@@ -15,8 +15,9 @@ module.exports = {
         m_aboutus: path.resolve(__dirname, 'Scripts/src/tsx/m-aboutus.js'),
         m_parm: path.resolve(__dirname, 'Scripts/src/tsx/m-parm.js'),
         m_banner: path.resolve(__dirname, 'Scripts/src/tsx/m-banner.js'),
+        m_support: path.resolve(__dirname, 'Scripts/src/tsx/m-support.js'),
         m_all_category: path.resolve(__dirname, 'Scripts/src/tsx/m-all_category.js'),
-        m_sortable: path.resolve(__dirname, 'Scripts/src/tsx/m-sortable.js'),
+        m_sortable: path.resolve(__dirname, 'Scripts/src/tsx/m-sortable.js'),//測試sortable
         vendors: ['jquery', 'react', 'react-bootstrap', 'moment']
     },
     output: {

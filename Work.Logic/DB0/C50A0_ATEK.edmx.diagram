@@ -25,6 +25,8 @@
         <EntityTypeShape EntityType="C50A0_ATEKModel.All_Category_L1" Width="1.5" PointX="10.375" PointY="8.25" />
         <EntityTypeShape EntityType="C50A0_ATEKModel.All_Category_L2" Width="1.5" PointX="12.625" PointY="8" />
         <AssociationConnector Association="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1" />
+        <EntityTypeShape EntityType="C50A0_ATEKModel.Support" Width="1.5" PointX="14.875" PointY="8.125" />
+        <AssociationConnector Association="C50A0_ATEKModel.FK_Support_All_Category_L2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
