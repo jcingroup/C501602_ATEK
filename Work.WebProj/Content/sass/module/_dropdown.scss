@@ -34,9 +34,6 @@ $dropdown-color:            #C2E57E !default;
 
 // 下拉最外層容器
 .dropdown {
-    // position: relative;
-    // display: inline-block;
-
     z-index: z(logo)-1;
     @include absolute(right 0 top 13px);
 }

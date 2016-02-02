@@ -23,7 +23,7 @@
             #{$prefix}transition:
                 opacity 0.2s ease-in-out,
                 visibility 0.2s ease-in-out,
-                #{$prefix}transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);;
+                #{$prefix}transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
         }
 
         @include prefix(transform, translate3d(0, 0, 0), webkit moz);

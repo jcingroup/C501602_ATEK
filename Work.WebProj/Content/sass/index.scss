@@ -54,44 +54,72 @@ $btn-padding:       12px 20px;
 }
 .swiper-slide {
     text-align: center;
-    img { min-width: 100%; }
+    img { width: 100%; }
 }
 
 // == main
 .new-product {
     float: left;
     display: block;
+    position: relative;
+    &::before, &::after {
+        @extend %effect-all;
+        content: '';
+        display: block;
+        position: absolute;
+    }
+    &::before {
+        @include size(100%);
+        left: 0; top: 0;
+    }
+    &::after {
+        $size: 60px;
+        @include circle($size);
+        left: 50%; top: 50%;
+        margin: (-$size/2) 0 0 (-$size/2);
+        background-position: center;
+    }
+    &:hover, &:active {
+        &::before {
+            background: rgba(0,0,0,.5);
+        }
+        &::after {
+            background: rgba(255,255,255,.5) url(#{$img-path}/Products/icon-look.png) center no-repeat;
+            transform: scale(1.2);
+        }
+    }
 }
 
-#main {
-    ul {
-        float: right;
-        width: cp(769px);
+.list-inline {
+    float: right;
+    width: cp(769px);
 
-        @include mq(wider) { width: cp(845px); }
+    @include mq(wider) { width: cp(845px); }
+    @include mq(break(tablet, +1), wide) { max-width: 420px; }
 
-        a {
-            background-attachment: fixed;
-            background: url(#{$img-path2}/infoPic.png) right 30px no-repeat;
+    a {
+        @extend %text-hide;
+        // background-attachment: fixed;
+        // background: url(#{$img-path2}/infoPic.png) right 30px no-repeat;
 
-            color: #00987A;
-            font-family: $font-sp;
-            font-size: em(31px);
-            letter-spacing: 2px;
-            text-align: left;
+        // color: #00987A;
+        // font-family: $font-sp;
+        // font-size: em(31px);
+        // letter-spacing: 2px;
+        // text-align: left;
 
-            display: block;
-            height: 156px;
-            padding-top: 32px;
-            padding-left: 20px;
+        display: block;
+        height: 156px;
+        // padding-top: 32px;
+        // padding-left: 20px;
 
-            &:hover, &:active {
-                color: $brand-primary;
-                box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
-            }
+        &:hover, &:active {
+            // color: $brand-primary;
+            box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
         }
     }
     li {
+        float: left;
         background: url(#{$img-path2}/infoBg.gif) center no-repeat;
         box-shadow: 1px 1px 0 #CBCBCB;
         width: 48.6%;
