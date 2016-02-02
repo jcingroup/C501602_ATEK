@@ -295,7 +295,6 @@ namespace AllCategory {
         isShowSubEdit?: boolean,
         placeholder?: any;
         dragged?: any;
-        over?: any;
         over_id?: number;
         nodePlacement?: string;
         draggedClientY?: number;//一開始元件拖動起始位置
@@ -328,7 +327,7 @@ namespace AllCategory {
         }
         render() {
             let StateForGird = CommCmpt.StateForGird;
-            return <tr data-id={this.props.ikey} id={"Sort-" + this.props.ikey}
+            return <tr data-id={this.props.ikey} id={"Sort-" + this.props.itemData.all_category_l1_id + "-" + this.props.ikey}
                 onDragEnd={this.props.DragEnd.bind(this) }
                 onDragStart={this.props.DragStart.bind(this) }>
                        <td className="text-center col-xs-1"
@@ -366,6 +365,7 @@ namespace AllCategory {
             this.dragStart = this.dragStart.bind(this);
             this.dragEnd = this.dragEnd.bind(this);
             this.dragOver = this.dragOver.bind(this);
+            this.updateSort = this.updateSort.bind(this);
 
             this.render = this.render.bind(this);
 
@@ -381,7 +381,7 @@ namespace AllCategory {
             fdName: 'fieldData',
             gdName: 'searchData',
             apiSubPathName: gb_approot + 'api/AllCategoryL2',
-            apiUpdateSortPath: gb_approot + 'Active/Category/UpdateSort'
+            apiUpdateSortPath: gb_approot + 'api/GetAction/updateCategorySort'
         }
         componentDidMount() {
             this.queryGridData(1);
@@ -390,7 +390,6 @@ namespace AllCategory {
             placeholder.className = "placeholder";
             let td = document.createElement("td");
             td.setAttribute("colSpan", "7");
-            placeholder.setAttribute("id", "Move-tr");
             placeholder.appendChild(td);
 
             this.setState({ placeholder: placeholder });
@@ -554,6 +553,7 @@ namespace AllCategory {
         }
         dragStart(e) {
             this.state.dragged = e.currentTarget;
+            //先抓一開始拖動物件的絕對位置,後面再依拖動的滑鼠做座標比較要插入在before還是after
             this.state.draggedClientY = e.clientY;
             e.dataTransfer.effectAllowed = 'move';
             // Firefox requires calling dataTransfer.setData
@@ -571,32 +571,50 @@ namespace AllCategory {
             if (from < to) to--;
             if (this.state.nodePlacement == "after") to++;
             data.rows.splice(to, 0, data.rows.splice(from, 1)[0]);
-            data.rows.forEach((item, i) => item.sort = data.rows.length - i);//變更排序內容
-            this.setState({ gridData: data });
 
+            let updateSort: server.CategroySort[] = [];
+            data.rows.forEach((item, i) => {
+                item.sort = data.rows.length - i;
+                let obj: server.CategroySort = { id: item.all_category_l2_id, sort: item.sort };
+                updateSort.push(obj);
+            });//變更排序內容
+            this.setState({ gridData: data });
+            this.updateSort(updateSort);
         }
         dragOver(e) {
             e.preventDefault();
             let newState = this.state;
             $("#Sort-" + Number(this.state.dragged.dataset.id)).hide();
             if (e.target.className == "placeholder") return;
-            newState.over = e.target;
 
             if (e.target.dataset.id != undefined) {//只能插入有data-id屬性的tr間格中
                 var relY = e.clientY - this.state.draggedClientY;
-                var height = this.state.over.offsetHeight / 2;
+                var height = e.target.offsetHeight / 2;
                 newState.over_id = Number(e.target.dataset.id);
                 this.setState(newState);
-                //因為<tr>點不到,所以只好用<td>放data-id值
+                //因為<tr>點不到,所以只好用<td>放data-id值,所以插入的元素要直接抓id
                 if (relY > height) {
                     this.state.nodePlacement = "after";
-                    $(this.state.placeholder).insertAfter("#Sort-" + newState.over_id);
+                    $(this.state.placeholder).insertAfter("#Sort-" + this.props.MainId + "-" + newState.over_id);
                 }
                 else if (relY < height) {
                     this.state.nodePlacement = "before"
-                    $(this.state.placeholder).insertBefore("#Sort-" + newState.over_id);
+                    $(this.state.placeholder).insertBefore("#Sort-" + this.props.MainId + "-" + newState.over_id);
                 }
             }
+        }
+        updateSort(SortData: server.CategroySort[]) {
+            CommFunc.jqPost(this.props.apiUpdateSortPath, { SortData: SortData })
+                .done((data, textStatus, jqXHRdata) => {
+                    if (data.result) {
+                        CommFunc.tosMessage(null, '修改完成', 1);
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
         }
         render() {
 
@@ -635,7 +653,7 @@ namespace AllCategory {
                                             <th className="col-xs-2">語系</th>
                                             </tr>
                                         </thead>
-                                    <tbody ref="SortTbody" id="SortTbody" onDragOver={this.dragOver.bind(this) }>
+                                    <tbody ref="SortTbody" onDragOver={this.dragOver.bind(this) }>
                                             {
                                             this.state.gridData.rows.map(
                                                 (itemData, i) =>

@@ -129,13 +129,36 @@ namespace DotWeb.Api
             return t3.ToList();
         }
 
+        /// <summary>
+        /// 後台分類管理-更新排序
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ResultInfo updateCategorySort([FromBody]CategroySortParm parm)
+        {
+            ResultInfo rAjaxResult = new ResultInfo();
+            try
+            {
+                using (var db0 = getDB0())
+                {
+                    foreach (var q in parm.SortData)
+                    {
+                        var item = db0.All_Category_L2.Find(q.id);
+                        item.sort = q.sort;
+                    }
+                    db0.SaveChanges();
+                }
 
-
-
-
-
-
-
+                rAjaxResult.result = true;
+            }
+            catch (Exception ex)
+            {
+                rAjaxResult.result = false;
+                rAjaxResult.message = ex.Message;
+            }
+            return rAjaxResult;
+        }
         #region 後台-參數設定
         [HttpPost]
         public ResultInfo PostAboutUs([FromBody]AboutUsParm md)
@@ -193,6 +216,15 @@ namespace DotWeb.Api
     public class AboutUsParm
     {
         public string aboutus { get; set; }
+    }
+    public class CategroySort
+    {
+        public int id { get; set; }
+        public int sort { get; set; }
+    }
+    public class CategroySortParm
+    {
+        public IList<CategroySort> SortData { get; set; }
     }
     #endregion
 }

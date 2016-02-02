@@ -136,6 +136,12 @@
         i_Lang?: string;
         All_Category_L1?: server.All_Category_L1;
     }
+
+    interface CategroySort {//分類管理排序用
+        id: number;
+        sort: number;
+    }
+
     interface L1 extends BaseEntityTable {
         l1_id?: number;
         l1_name?: string;
