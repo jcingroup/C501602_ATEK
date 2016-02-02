@@ -249,7 +249,8 @@ namespace AllCategory {
                                     {
                                     this.state.gridData.rows.map(
                                         (itemData, i) =>
-                                            <GridRow key={i}
+                                            <GridRow
+                                                key={i}
                                                 ikey={i}
                                                 primKey={itemData.all_category_l1_id}
                                                 i_Lang={searchData.i_Lang}
@@ -291,7 +292,13 @@ namespace AllCategory {
         i_Lang: string;
     }
     interface SubFormState<G, F> extends BaseDefine.GirdFormStateBase<G, F> {
-        isShowSubEdit?: boolean
+        isShowSubEdit?: boolean,
+        placeholder?: any;
+        dragged?: any;
+        over?: any;
+        over_id?: number;
+        nodePlacement?: string;
+        draggedClientY?: number;//一開始元件拖動起始位置
     }
     interface GridSubFormProps {
         ref: any;
@@ -302,8 +309,12 @@ namespace AllCategory {
         fdName?: string;
         gdName?: string;
     }
+    interface GridSubRowProps<R> extends BaseDefine.GridRowPropsBase<R> {
+        DragEnd(e: any): void,
+        DragStart(e: any): void
+    }
     // L2子表單List
-    class GridSubRow extends React.Component<BaseDefine.GridRowPropsBase<SubRows>, BaseDefine.GridRowStateBase> {
+    class GridSubRow extends React.Component<GridSubRowProps<SubRows>, BaseDefine.GridRowStateBase> {
         constructor() {
             super();
             this.delCheck = this.delCheck.bind(this);
@@ -317,14 +328,18 @@ namespace AllCategory {
         }
         render() {
             let StateForGird = CommCmpt.StateForGird;
-            return <tr>
-                       <td className="text-center"><i className="fa-bars text-muted draggable"></i></td>
-                       <td className="text-center"><CommCmpt.GridCheckDel iKey={this.props.ikey} chd={this.props.itemData.check_del} delCheck={this.delCheck} /></td>
-                       <td className="text-center"><CommCmpt.GridButtonModify modify={this.modify} /></td>
-                       <td>{this.props.itemData.l2_name}</td>
-                       <td>{this.props.itemData.sort }</td>
-                       <td>{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
-                       <td><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangData} /></td>
+            return <tr data-id={this.props.ikey} id={"Sort-" + this.props.ikey}
+                onDragEnd={this.props.DragEnd.bind(this) }
+                onDragStart={this.props.DragStart.bind(this) }>
+                       <td className="text-center col-xs-1"
+                           data-id={this.props.ikey}
+                           ><i className="fa-bars text-muted draggable" data-id={this.props.ikey}></i></td>
+                       <td className="text-center col-xs-1"><CommCmpt.GridCheckDel iKey={this.props.ikey} chd={this.props.itemData.check_del} delCheck={this.delCheck} /></td>
+                       <td className="text-center col-xs-1"><CommCmpt.GridButtonModify modify={this.modify} /></td>
+                       <td className="col-xs-3">{this.props.itemData.l2_name}</td>
+                       <td className="col-xs-2">{this.props.itemData.sort }</td>
+                       <td className="col-xs-2">{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
+                       <td className="col-xs-2"><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangData} /></td>
                 </tr>;
 
         }
@@ -348,6 +363,10 @@ namespace AllCategory {
             this.handleSearch = this.handleSearch.bind(this);
             this.closeSubEdit = this.closeSubEdit.bind(this);
 
+            this.dragStart = this.dragStart.bind(this);
+            this.dragEnd = this.dragEnd.bind(this);
+            this.dragOver = this.dragOver.bind(this);
+
             this.render = this.render.bind(this);
 
 
@@ -366,7 +385,15 @@ namespace AllCategory {
         }
         componentDidMount() {
             this.queryGridData(1);
+            let placeholder = this.state.placeholder;
+            placeholder = document.createElement("tr");
+            placeholder.className = "placeholder";
+            let td = document.createElement("td");
+            td.setAttribute("colSpan", "7");
+            placeholder.setAttribute("id", "Move-tr");
+            placeholder.appendChild(td);
 
+            this.setState({ placeholder: placeholder });
         }
         componentWillReceiveProps(nextProps: GridSubFormProps) {
             this.queryGridData(0, nextProps.MainId, nextProps.i_Lang);//語系有改變就重新讀取gridData
@@ -525,6 +552,52 @@ namespace AllCategory {
         closeSubEdit() {
             this.setState({ isShowSubEdit: false });
         }
+        dragStart(e) {
+            this.state.dragged = e.currentTarget;
+            this.state.draggedClientY = e.clientY;
+            e.dataTransfer.effectAllowed = 'move';
+            // Firefox requires calling dataTransfer.setData
+            // for the drag to properly work
+            e.dataTransfer.setData("text/html", e.currentTarget);
+        }
+        dragEnd(e) {
+            $("#Sort-" + Number(this.state.dragged.dataset.id)).show();
+            this.state.dragged.parentNode.removeChild(this.state.placeholder);
+
+            // Update state
+            var data = this.state.gridData;
+            var from = Number(this.state.dragged.dataset.id);
+            var to = this.state.over_id;
+            if (from < to) to--;
+            if (this.state.nodePlacement == "after") to++;
+            data.rows.splice(to, 0, data.rows.splice(from, 1)[0]);
+            data.rows.forEach((item, i) => item.sort = data.rows.length - i);//變更排序內容
+            this.setState({ gridData: data });
+
+        }
+        dragOver(e) {
+            e.preventDefault();
+            let newState = this.state;
+            $("#Sort-" + Number(this.state.dragged.dataset.id)).hide();
+            if (e.target.className == "placeholder") return;
+            newState.over = e.target;
+
+            if (e.target.dataset.id != undefined) {//只能插入有data-id屬性的tr間格中
+                var relY = e.clientY - this.state.draggedClientY;
+                var height = this.state.over.offsetHeight / 2;
+                newState.over_id = Number(e.target.dataset.id);
+                this.setState(newState);
+                //因為<tr>點不到,所以只好用<td>放data-id值
+                if (relY > height) {
+                    this.state.nodePlacement = "after";
+                    $(this.state.placeholder).insertAfter("#Sort-" + newState.over_id);
+                }
+                else if (relY < height) {
+                    this.state.nodePlacement = "before"
+                    $(this.state.placeholder).insertBefore("#Sort-" + newState.over_id);
+                }
+            }
+        }
         render() {
 
             var outHtml: JSX.Element = null;
@@ -562,18 +635,20 @@ namespace AllCategory {
                                             <th className="col-xs-2">語系</th>
                                             </tr>
                                         </thead>
-                                    <tbody ref="SortTbody">
-                                         {
-                                         this.state.gridData.rows.map(
-                                             (itemData, i) =>
-                                                 <GridSubRow key={i}
-                                                     ikey={i}
-                                                     primKey={itemData.all_category_l2_id}
-                                                     itemData={itemData}
-                                                     delCheck={this.delCheck}
-                                                     updateType={this.updateType} />
-                                         )
-                                         }
+                                    <tbody ref="SortTbody" id="SortTbody" onDragOver={this.dragOver.bind(this) }>
+                                            {
+                                            this.state.gridData.rows.map(
+                                                (itemData, i) =>
+                                                    <GridSubRow key={i}
+                                                        ikey={i}
+                                                        primKey={itemData.all_category_l2_id}
+                                                        itemData={itemData}
+                                                        delCheck={this.delCheck}
+                                                        updateType={this.updateType}
+                                                        DragEnd={this.dragEnd }
+                                                        DragStart={this.dragStart }/>
+                                            )
+                                            }
                                         </tbody>
                                     </table>
                                  <GridNavPage

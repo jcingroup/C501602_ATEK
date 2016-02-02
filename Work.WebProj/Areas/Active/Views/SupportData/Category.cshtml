@@ -6,7 +6,21 @@
     <li>@ViewBag.Caption</li>
 }
 @section IncludeCSS{
+    <style>
+        tr.placeholder {
+            border: 3px #ccc dashed;
+            height: 35px;
+            opacity: 0.6;
+            text-align: center;
+            font-size: large;
+        }
 
+            tr.placeholder > td:before {
+                line-height: 25px;
+                content: "移到這裡";
+                color: rgb(128, 128, 128);
+            }
+    </style>
 }
 @section IncludeScript{
     @Html.Partial("Manage/JSGlobalVar")
