@@ -7,7 +7,7 @@
 }
 
 // 做圓形
-@mixin circle($size, $align:center, $display:inline-block) {
+@mixin circle($size, $align:false, $display:inline-block) {
     display: $display;
 
     @extend %circle;

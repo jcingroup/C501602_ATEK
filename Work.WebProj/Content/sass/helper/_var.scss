@@ -105,9 +105,9 @@ $color: $state-type;
 // == z-index
 // ----------------------------------------------------------------------
 $z-index: (
-    header:     1,
-    main:       3,
-    footer:     2,
+    header:     2,
+    main:       1,
+    footer:     3,
     banner:     4,
     logo:       50,
     menu:       60,

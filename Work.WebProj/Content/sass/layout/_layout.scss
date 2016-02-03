@@ -35,7 +35,7 @@ $goTop-position:        bottom 30px right 10px !default;
     margin: 0 ($gutter + 5);
 
     @include mq(wider) { margin: 0 auto; }
-    @include mq-max(tablet) { margin: 0 auto; }
+    @include mq-max(tablet) { margin: 0 $gutter; }
 }
 
 // 容器-header、wrap、main、footer等
@@ -98,8 +98,8 @@ $goTop-position:        bottom 30px right 10px !default;
         @include absolute($logo-position);
 
         @include mq-max(tablet) {
-            // background-image: url(#{$img-path}/logo2.gif);
-            // background-size: contain;
+            left: 50%;
+            margin-left: -(nth($logo-size,1) / 2);
         }
         @include mq-max(phone) {
             // left: 0; right: 0;
@@ -115,22 +115,74 @@ body, #menu {
     transition: all 0.3s ease;
 }
 .menu-trigger {
+    @extend %text-hide;
     display: none;
-
-    background-attachment: fixed;
-    background: url(#{$img-path}/icon.png) no-repeat 0 -59px;
-    color: $brand-secondary;
-    font-size: em(19px);
-    font-weight: bold;
-    padding-left: 25px;
-    margin-left: -7px;
+    cursor: pointer;
     z-index: z(overlay) + 1;
 
-    @include absolute(left 0 top 5px);
+    $button-width: 67px;
+    $button-height: 60px;
+    $bar-thickness: 6px;
+    $button-pd: 10px;
+    $bar-color: #C2E57E;
 
-    &:hover { color: $brand-primary; }
+    position: relative;
+    left: 0; top: 20px;
+    overflow: hidden;
+    width: $button-width;
+    height: $button-height;
+    transition: background 0.3s;
 
+    @include prefix(apperance, none, webkit moz);
     @include mq-max(959px) { display: block; }
+
+    &:active, &.active {
+        background-color: darken($brand-primary, 10%);
+        span {
+            background: none;
+            &::before {
+                top: 0;
+                transform: rotate(45deg);
+            }
+            &::after {
+                bottom: 0;
+                transform: rotate(-45deg);
+            }
+            &::before, &::after {
+                transition-delay: 0s, 0.3s;
+            }
+        }
+    }
+
+    span {
+        @include absolute(left $button-pd right $button-pd top (($button-height / 2) - ($bar-thickness / 2)));
+        display: block;
+
+        background: $bar-color;
+        height: $bar-thickness;
+        margin: auto;
+        transition: background 0s 0.3s;
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: $bar-thickness;
+            background-color: $bar-color;
+            transition-duration: 0.3s, 0.3s;
+            transition-delay: 0.3s, 0s;
+            @include absolute(left 0);
+        }
+        &::before {
+            top: -(($button-height / 2) - ($bar-thickness / 2) - $button-pd);
+            transition-property: top, transform;
+        }
+        &::after {
+            bottom: -(($button-height / 2) - ($bar-thickness / 2) - $button-pd);
+            transition-property: bottom, transform;
+        }
+    }
 }
 body {
     position: relative;
@@ -158,7 +210,6 @@ body {
         $selector: append($selector, unquote(".#{$item} &:nth-of-type(#{$i})"), comma);
     }
     a {
-        position: relative;
         display: inline-block;
 
         border-left: 3px solid #D8DF2B;
@@ -168,61 +219,57 @@ body {
         letter-spacing: 2px;
         line-height: 19px;
 
-        padding: 0 70px 0 17px;
-        margin-left: 1px;
+        padding: 0 40px 0 17px;
 
         &:hover, &:active,
         #{$selector} {
             background: url(#{$img-path}/menuBg.gif) right 0 no-repeat;
             padding-bottom: 31px;
         }
-        @include mq(wide) { }
+        @include mq(wide) { padding-right: 70px; }
         @include mq-max(desktop) { }
     }
 
-    @include mq-max(959px) {
-        // background: $brand-primary;
-        // width: $menu-trigger-width;
-        // height: 100%;
-        // overflow-y: auto;
-        // z-index: z(overlay) + 1;
+    @include mq-max(tablet) {
+        background: #333;
+        width: $menu-trigger-width;
+        height: 100%;
+        overflow-y: auto;
+        z-index: z(overlay) + 1;
 
-        // @include fixed(top 0);
-        // left: -$menu-trigger-width;
+        @include fixed(top 0);
+        left: -$menu-trigger-width;
 
-        // .toggle {
-        //     display: block;
-        //     cursor: pointer; cursor: hand;
-        //     background: $brand-primary url(#{$img-path}/icon.png) no-repeat right 6px;
+        .toggle {
+            display: block;
+            cursor: pointer; cursor: hand;
+            background: $brand-primary url(#{$img-path}/icon.png) no-repeat right 6px;
 
-        //     color: #fff;
-        //     font-size: em(20px);
-        //     letter-spacing: 0.1em;
+            color: #fff;
+            font-size: em(20px);
+            letter-spacing: 0.1em;
 
-        //     padding: 20px 0;
-        // }
-        // .push & { left: 0; }
+            padding: 20px 0;
+        }
+        .push & { left: 0; }
 
-        // a {
-        //     border-bottom: 1px solid $brand-secondary;
-        //     color: #fff;
+        a {
+            border-bottom: 1px solid #454545;
+            color: #fff;
 
-        //     font-size: em(18px);
-        //     font-weight: normal;
-        //     letter-spacing: 0.03em;
-        //     text-align: left;
+            font-size: em(18px);
+            font-weight: normal;
+            text-align: left;
 
-        //     width: 100%;
-        //     padding: $gutter;
+            width: 100%;
+            padding: $gutter;
 
-        //     &:hover, &:active,
-        //     #{$selector} {
-        //         background: darken($brand-secondary,2%);
-        //         border-radius: 0;
-
-        //         &::after { display: none; }
-        //     }
-        // }
+            &:hover, &:active,
+            #{$selector} {
+                background: $brand-primary;
+                padding: ($gutter + 10) $gutter;
+            }
+        }
     }
 }
 
