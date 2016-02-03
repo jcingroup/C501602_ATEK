@@ -126,6 +126,11 @@ namespace ProcCore.Business.DB0
         public string fileSrc { get; set; }
         //public string[] fileSrcs { get; set; }
     }
+    public partial class m_News
+    {
+        public string l2_name { get; set; }
+
+    }
     public class L1
     {
         public int l1_id { get; set; }

@@ -18,6 +18,7 @@ namespace ProcCore.Business.DB0
         public All_Category_L2()
         {
             this.Support = new HashSet<Support>();
+            this.News = new HashSet<News>();
         }
     
         public int all_category_l2_id { get; set; }
@@ -39,5 +40,7 @@ namespace ProcCore.Business.DB0
         public virtual All_Category_L1 All_Category_L1 { get; set; }
     	[JsonIgnore]
         public virtual ICollection<Support> Support { get; set; }
+    	[JsonIgnore]
+        public virtual ICollection<News> News { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace DotWeb.WebApp.Controllers
             using (var db0 = getDB0())
             {
                 #region get content
-                info.items = db0.Support.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.sort)
+                info.items = db0.Support.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => new { x.sort, x.day })
                                          .Select(x => new m_Support()
                                          {
                                              support_id = x.support_id,

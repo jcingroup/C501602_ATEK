@@ -35,12 +35,12 @@ namespace ProcCore.Business.DB0
         public virtual DbSet<i_SN> i_SN { get; set; }
         public virtual DbSet<i_UserLoginLog> i_UserLoginLog { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<AboutUs> AboutUs { get; set; }
         public virtual DbSet<AboutUsDetail> AboutUsDetail { get; set; }
         public virtual DbSet<All_Category_L1> All_Category_L1 { get; set; }
         public virtual DbSet<All_Category_L2> All_Category_L2 { get; set; }
         public virtual DbSet<Support> Support { get; set; }
+        public virtual DbSet<News> News { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace DotWeb.Api
             using (db0 = getDB0())
             {
                 var items = db0.Support
-                    .OrderByDescending(x => x.sort)
+                    .OrderByDescending(x => new { x.sort, x.day })
                     .Select(x => new m_Support()
                     {
                         support_id = x.support_id,
@@ -85,6 +85,7 @@ namespace DotWeb.Api
                 item.support_title = md.support_title;
                 item.day = md.day;
                 item.support_content = md.support_content;
+                item.support_category = md.support_category;
                 item.sort = md.sort;
                 item.i_Hide = md.i_Hide;
                 item.i_Lang = md.i_Lang;

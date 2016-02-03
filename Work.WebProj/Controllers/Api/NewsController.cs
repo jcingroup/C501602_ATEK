@@ -36,14 +36,25 @@ namespace DotWeb.Api
                     .Select(x => new m_News()
                     {
                         news_id = x.news_id,
-                        news_date = x.news_date,
+                        day = x.day,
                         news_title = x.news_title,
-                        sort=x.sort,
-                        i_Hide=x.i_Hide
+                        news_category = x.news_category,
+                        l2_name = x.All_Category_L2.l2_name,
+                        sort = x.sort,
+                        i_Hide = x.i_Hide,
+                        i_Lang = x.i_Lang
                     });
                 if (q.keyword != null)
                 {
                     items = items.Where(x => x.news_title.Contains(q.keyword));
+                }
+                if (q.i_Lang != null)
+                {
+                    items = items.Where(x => x.i_Lang == q.i_Lang);
+                }
+                if (q.category != null)
+                {
+                    items = items.Where(x => x.news_category == q.category);
                 }
                 int page = (q.page == null ? 1 : (int)q.page);
                 int startRecord = PageCount.PageInfo(page, this.defPageSize, items.Count());
@@ -71,11 +82,13 @@ namespace DotWeb.Api
                 item = await db0.News.FindAsync(md.news_id);
 
                 item.news_title = md.news_title;
-                item.news_date = md.news_date;
+                item.day = md.day;
                 item.news_content = md.news_content;
+                item.news_info = md.news_info;
+                item.news_category = md.news_category;
                 item.sort = md.sort;
                 item.i_Hide = md.i_Hide;
-                //item.sort = md.sort;
+                item.i_Lang = md.i_Lang;
 
                 await db0.SaveChangesAsync();
                 rAjaxResult.result = true;
@@ -98,7 +111,7 @@ namespace DotWeb.Api
             md.i_InsertDateTime = DateTime.Now;
             md.i_InsertDeptID = this.departmentId;
             md.i_InsertUserID = this.UserId;
-            md.i_Lang = "zh-TW";
+            //md.i_Lang = "zh-TW";
             r = new ResultInfo<News>();
             if (!ModelState.IsValid)
             {
@@ -183,5 +196,7 @@ namespace DotWeb.Api
     public class q_News : QueryBase
     {
         public string keyword { get; set; }
+        public string i_Lang { get; set; }
+        public int? category { get; set; }
     }
 }

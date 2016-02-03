@@ -109,8 +109,7 @@ namespace Support {
             this.queryInitData();
         }
         componentDidUpdate(prevProps, prevState) {
-            if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2)) ||
-                (prevState.edit_type == 1 && this.state.edit_type == 2)) {
+            if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
                 console.log('CKEDITOR');
                 CKEDITOR.replace('support_content');
             }
@@ -304,6 +303,7 @@ namespace Support {
             let obj = this.state[collentName];
             obj[name] = input.value;
 
+            NewState.options_category = [];
             NewState.all_category.forEach((item, i) => {
                 if (item.lang == input.value) {
                     NewState.options_category = item.items;
@@ -312,12 +312,11 @@ namespace Support {
             if (collentName == this.props.gdName) {
                 obj['category'] = null;//語系切換,分類搜尋條件清空
                 $("#search-category option:first").attr("selected", "true");
-                if (obj[name] == "") {
-                    NewState.options_category = [];
-                }
             } else if (collentName == this.props.fdName) {
-                $("#field-category option:first").attr("selected", "true");
-                obj['support_category'] = NewState.options_category[0].val;
+                if (NewState.options_category.length > 0) {
+                    $("#field-category option:first").attr("selected", "true");
+                    obj['support_category'] = NewState.options_category[0].val;
+                }
             }
             this.setState(NewState);
         }
@@ -512,7 +511,7 @@ namespace Support {
                 <div className="col-xs-8">
                 <MasterFileUpload FileKind="File1" MainId={fieldData.support_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/SupportData/aj_FUpload'}
                     url_list={gb_approot + 'Active/SupportData/aj_FList'} url_delete={gb_approot + 'Active/SupportData/aj_FDelete'} url_download={gb_approot + 'Active/SupportData/aj_FDown'} />
-                <small className="help-block">最多1個檔案, 每個檔案最大不可超過4MB</small>
+                <small className="help-block">最多1個檔案, 每個檔案最大不可超過4MB; 接受檔案類型為pdf、doc、docx、xls、xlsx、txt、png、jpg、jpeg的檔案</small>
                     </div>
                </div>
             <div className="form-group">

@@ -64,21 +64,7 @@
         aspNetRoles?: server.AspNetRoles[];
         role_array?: Array<UserRoleInfo>;
     }
-    interface News extends BaseEntityTable {
-        news_id?: number;
-        news_title?: string;
-        news_date?: any;
-        news_content?: string;
-        sort?: number;
-        i_Hide?: boolean;
-    }
-    interface Issue extends BaseEntityTable {
-        issue_id?: number;
-        issue_title?: string;
-        issue_content?: string;
-        sort?: number;
-        i_Hide?: boolean;
-    }
+
     interface Banner extends BaseEntityTable {
         banner_id?: number;
         banner_name?: string;
@@ -121,6 +107,17 @@
         support_category?: number;
         day?: Date | string;
         support_content?: string;
+        sort?: number;
+        i_Hide?: boolean;
+        i_Lang?: string;
+    }
+    interface News extends BaseEntityTable {
+        news_id?: number;
+        news_title?: string;
+        news_category?: number;
+        day?: Date | string;
+        news_info?: string;
+        news_content?: string;
         sort?: number;
         i_Hide?: boolean;
         i_Lang?: string;

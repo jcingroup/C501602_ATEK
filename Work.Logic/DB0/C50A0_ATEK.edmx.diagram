@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="C50A0_ATEKModel.Menu" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
         <AssociationConnector Association="C50A0_ATEKModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="C50A0_ATEKModel.MenuRole" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="C50A0_ATEKModel.News" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="C50A0_ATEKModel.Banner" Width="1.5" PointX="10.375" PointY="3.75" />
         <EntityTypeShape EntityType="C50A0_ATEKModel.AboutUs" Width="1.5" PointX="5.375" PointY="11.25" />
         <EntityTypeShape EntityType="C50A0_ATEKModel.AboutUsDetail" Width="1.5" PointX="7.625" PointY="11" />
@@ -27,6 +26,8 @@
         <AssociationConnector Association="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1" />
         <EntityTypeShape EntityType="C50A0_ATEKModel.Support" Width="1.5" PointX="14.875" PointY="8.125" />
         <AssociationConnector Association="C50A0_ATEKModel.FK_Support_All_Category_L2" />
+        <EntityTypeShape EntityType="C50A0_ATEKModel.News" Width="1.5" PointX="14.875" PointY="13.125" />
+        <AssociationConnector Association="C50A0_ATEKModel.FK_News_All_Category_L2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

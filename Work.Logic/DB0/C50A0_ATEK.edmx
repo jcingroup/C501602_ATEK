@@ -226,9 +226,11 @@
           </Key>
           <Property Name="news_id" Type="int" Nullable="false" />
           <Property Name="news_title" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="news_date" Type="datetime" Nullable="false" />
+          <Property Name="news_category" Type="int" Nullable="false" />
+          <Property Name="day" Type="datetime" Nullable="false" />
+          <Property Name="news_info" Type="nvarchar" MaxLength="512" />
           <Property Name="news_content" Type="ntext" />
-          <Property Name="sort" Type="int" />
+          <Property Name="sort" Type="int" Nullable="false" />
           <Property Name="i_Hide" Type="bit" Nullable="false" />
           <Property Name="i_InsertUserID" Type="nvarchar" MaxLength="128" />
           <Property Name="i_InsertDeptID" Type="int" />
@@ -333,6 +335,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_News_All_Category_L2">
+          <End Role="All_Category_L2" Type="Self.All_Category_L2" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Category_L2">
+              <PropertyRef Name="all_category_l2_id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="news_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Support_All_Category_L2">
           <End Role="All_Category_L2" Type="Self.All_Category_L2" Multiplicity="1" />
           <End Role="Support" Type="Self.Support" Multiplicity="*" />
@@ -388,6 +402,10 @@
           <AssociationSet Name="FK_MenuRole_Menu" Association="Self.FK_MenuRole_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="MenuRole" EntitySet="MenuRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_All_Category_L2" Association="Self.FK_News_All_Category_L2">
+            <End Role="All_Category_L2" EntitySet="All_Category_L2" />
+            <End Role="News" EntitySet="News" />
           </AssociationSet>
           <AssociationSet Name="FK_Support_All_Category_L2" Association="Self.FK_Support_All_Category_L2">
             <End Role="All_Category_L2" EntitySet="All_Category_L2" />
@@ -544,7 +562,6 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="Menu" EntitySet="Menu" />
           </AssociationSet>
-          <EntitySet Name="News" EntityType="C50A0_ATEKModel.News" />
           <EntitySet Name="Banner" EntityType="C50A0_ATEKModel.Banner" />
           <EntitySet Name="AboutUs" EntityType="C50A0_ATEKModel.AboutUs" />
           <EntitySet Name="AboutUsDetail" EntityType="C50A0_ATEKModel.AboutUsDetail" />
@@ -563,25 +580,12 @@
             <End Role="All_Category_L2" EntitySet="All_Category_L2" />
             <End Role="Support" EntitySet="Support" />
           </AssociationSet>
+          <EntitySet Name="News" EntityType="C50A0_ATEKModel.News" />
+          <AssociationSet Name="FK_News_All_Category_L2" Association="C50A0_ATEKModel.FK_News_All_Category_L2">
+            <End Role="All_Category_L2" EntitySet="All_Category_L2" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="News">
-          <Key>
-            <PropertyRef Name="news_id" />
-          </Key>
-          <Property Name="news_id" Type="Int32" Nullable="false" />
-          <Property Name="news_title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="news_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="news_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="sort" Type="Int32" />
-          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
-          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="i_InsertDeptID" Type="Int32" />
-          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
-          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="i_UpdateDeptID" Type="Int32" />
-          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
-          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-        </EntityType>
         <EntityType Name="Banner">
           <Key>
             <PropertyRef Name="banner_id" />
@@ -682,6 +686,7 @@
           <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="All_Category_L1" Relationship="C50A0_ATEKModel.FK_All_Category_L2_All_Category_L1" FromRole="All_Category_L2" ToRole="All_Category_L1" />
           <NavigationProperty Name="Support" Relationship="C50A0_ATEKModel.FK_Support_All_Category_L2" FromRole="All_Category_L2" ToRole="Support" />
+          <NavigationProperty Name="News" Relationship="C50A0_ATEKModel.FK_News_All_Category_L2" FromRole="All_Category_L2" ToRole="News" />
         </EntityType>
         <Association Name="FK_All_Category_L2_All_Category_L1">
           <End Type="C50A0_ATEKModel.All_Category_L1" Role="All_Category_L1" Multiplicity="1" />
@@ -724,6 +729,39 @@
             </Principal>
             <Dependent Role="Support">
               <PropertyRef Name="support_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="news_id" />
+          </Key>
+          <Property Name="news_id" Type="Int32" Nullable="false" />
+          <Property Name="news_title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="news_category" Type="Int32" Nullable="false" />
+          <Property Name="day" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="news_info" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="news_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="i_Hide" Type="Boolean" Nullable="false" />
+          <Property Name="i_InsertUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_InsertDeptID" Type="Int32" />
+          <Property Name="i_InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_UpdateUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="i_UpdateDeptID" Type="Int32" />
+          <Property Name="i_UpdateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="i_Lang" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="All_Category_L2" Relationship="C50A0_ATEKModel.FK_News_All_Category_L2" FromRole="News" ToRole="All_Category_L2" />
+        </EntityType>
+        <Association Name="FK_News_All_Category_L2">
+          <End Type="C50A0_ATEKModel.All_Category_L2" Role="All_Category_L2" Multiplicity="1" />
+          <End Type="C50A0_ATEKModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_Category_L2">
+              <PropertyRef Name="all_category_l2_id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="news_category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -874,25 +912,6 @@
               <ScalarProperty Name="menu_id" ColumnName="menu_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="C50A0_ATEKModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
-                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
-                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
-                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
-                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
-                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
-                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
-                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
-                <ScalarProperty Name="sort" ColumnName="sort" />
-                <ScalarProperty Name="news_content" ColumnName="news_content" />
-                <ScalarProperty Name="news_date" ColumnName="news_date" />
-                <ScalarProperty Name="news_title" ColumnName="news_title" />
-                <ScalarProperty Name="news_id" ColumnName="news_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Banner">
             <EntityTypeMapping TypeName="C50A0_ATEKModel.Banner">
               <MappingFragment StoreEntitySet="Banner">
@@ -999,6 +1018,27 @@
                 <ScalarProperty Name="support_category" ColumnName="support_category" />
                 <ScalarProperty Name="support_title" ColumnName="support_title" />
                 <ScalarProperty Name="support_id" ColumnName="support_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="C50A0_ATEKModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="i_Lang" ColumnName="i_Lang" />
+                <ScalarProperty Name="i_UpdateDateTime" ColumnName="i_UpdateDateTime" />
+                <ScalarProperty Name="i_UpdateDeptID" ColumnName="i_UpdateDeptID" />
+                <ScalarProperty Name="i_UpdateUserID" ColumnName="i_UpdateUserID" />
+                <ScalarProperty Name="i_InsertDateTime" ColumnName="i_InsertDateTime" />
+                <ScalarProperty Name="i_InsertDeptID" ColumnName="i_InsertDeptID" />
+                <ScalarProperty Name="i_InsertUserID" ColumnName="i_InsertUserID" />
+                <ScalarProperty Name="i_Hide" ColumnName="i_Hide" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="news_content" ColumnName="news_content" />
+                <ScalarProperty Name="news_info" ColumnName="news_info" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="news_category" ColumnName="news_category" />
+                <ScalarProperty Name="news_title" ColumnName="news_title" />
+                <ScalarProperty Name="news_id" ColumnName="news_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

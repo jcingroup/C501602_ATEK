@@ -13,13 +13,20 @@ namespace News {
         news_id?: string;
         check_del?: boolean,
         news_title?: string;
-        news_date?: any;
+        l2_name?: string;
+        day?: any;
+        sort?: number;
         i_Hide?: boolean;
+        i_Lang: string;
     }
     interface FormState<G, F> extends BaseDefine.GirdFormStateBase<G, F> {
         searchData?: {
             keyword: string
-        }
+            i_Lang: string
+            category: number
+        },
+        all_category?: Array<server.LangOption>,
+        options_category?: Array<server.Option>
     }
     interface FormResult extends IResultBase {
         id: string
@@ -34,7 +41,7 @@ namespace News {
         static defaultProps = {
             fdName: 'fieldData',
             gdName: 'searchData',
-            apiPathName: gb_approot + 'api/News'
+            apiPathName: gb_approot + 'api/Support'
         }
         delCheck(i, chd) {
             this.props.delCheck(i, chd);
@@ -43,13 +50,16 @@ namespace News {
             this.props.updateType(this.props.primKey)
         }
         render() {
-
+            let StateForGird = CommCmpt.StateForGird;
             return <tr>
                        <td className="text-center"><CommCmpt.GridCheckDel iKey={this.props.ikey} chd={this.props.itemData.check_del} delCheck={this.delCheck} /></td>
                        <td className="text-center"><CommCmpt.GridButtonModify modify={this.modify} /></td>
                        <td>{this.props.itemData.news_title}</td>
-                       <td>{Moment(this.props.itemData.news_date).format(DT.dateFT) }</td>
+                       <td>{this.props.itemData.l2_name}</td>
+                       <td>{Moment(this.props.itemData.day).format(DT.dateFT) }</td>
+                       <td>{this.props.itemData.sort }</td>
                        <td>{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
+                       <td><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangData} /></td>
                 </tr>;
 
         }
@@ -71,9 +81,11 @@ namespace News {
             this.changeGDValue = this.changeGDValue.bind(this);
             this.changeFDValue = this.changeFDValue.bind(this);
             this.setInputValue = this.setInputValue.bind(this);
-            this.changeDatePicker = this.changeDatePicker.bind(this);
-            this.componentDidUpdate = this.componentDidUpdate.bind(this);
             this.handleSearch = this.handleSearch.bind(this);
+            this.componentDidUpdate = this.componentDidUpdate.bind(this);
+            this.queryInitData = this.queryInitData.bind(this);
+            this.setLangVal = this.setLangVal.bind(this);
+            this.changeDatePicker = this.changeDatePicker.bind(this);
             this.render = this.render.bind(this);
 
 
@@ -81,23 +93,37 @@ namespace News {
                 fieldData: {},
                 gridData: { rows: [], page: 1 },
                 edit_type: 0,
-                searchData: { keyword: null }
+                searchData: { keyword: null, i_Lang: null, category: null },
+                all_category: [],
+                options_category: []
             }
         }
         static defaultProps: BaseDefine.GridFormPropsBase = {
             fdName: 'fieldData',
             gdName: 'searchData',
-            apiPath: gb_approot + 'api/News'
+            apiPath: gb_approot + 'api/News',
+            apiInitPath: gb_approot + 'api/GetAction/GetCategoryData'
         }
         componentDidMount() {
             this.queryGridData(1);
+            this.queryInitData();
         }
         componentDidUpdate(prevProps, prevState) {
-            if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2)) ||
-                (prevState.edit_type == 1 && this.state.edit_type == 2)) {
+            if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
                 console.log('CKEDITOR');
                 CKEDITOR.replace('news_content');
             }
+        }
+        queryInitData() {
+            CommFunc.jqGet(this.props.apiInitPath, { l1_id: AllCategoryL1.news })
+                .done((data, textStatus, jqXHRdata) => {
+                    if (data.result) {
+                        this.setState({ all_category: data.data });
+                    }
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
         }
         gridData(page: number) {
 
@@ -210,13 +236,26 @@ namespace News {
             this.setState(newState);
         }
         insertType() {
-            this.setState({ edit_type: 1, fieldData: { i_Hide: false, news_date: Moment().format(DT.dateFT) } });
+            let options = this.state.all_category[0].items;
+            this.setState({
+                edit_type: 1, fieldData: {
+                    i_Hide: false,
+                    sort: 0, i_Lang: 'en-US', news_category: options[0].val,
+                    day: Moment().toJSON()
+                }, options_category: options
+            });
         }
         updateType(id: number | string) {
 
             CommFunc.jqGet(this.props.apiPath, { id: id })
                 .done((data, textStatus, jqXHRdata) => {
-                    this.setState({ edit_type: 2, fieldData: data.data });
+                    let options = [];
+                    this.state.all_category.forEach((item, i) => {
+                        if (data.data.i_Lang == item.lang) {
+                            options = item.items;
+                        }
+                    });
+                    this.setState({ edit_type: 2, fieldData: data.data, options_category: options });
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
                     CommFunc.showAjaxError(errorThrown);
@@ -250,7 +289,6 @@ namespace News {
             }
             this.setState({ fieldData: obj });
         }
-
         changeDatePicker(name: string, v: Date) {
             let obj = this.state.fieldData
             obj[name] = Moment(v).toJSON();
@@ -258,21 +296,41 @@ namespace News {
                 fieldData: obj
             });
         }
+        setLangVal(collentName: string, name: string, e: React.SyntheticEvent) {
+            let input: HTMLInputElement = e.target as HTMLInputElement;
+            let NewState = this.state;
+
+            let obj = this.state[collentName];
+            obj[name] = input.value;
+            NewState.options_category = [];
+            NewState.all_category.forEach((item, i) => {
+                if (item.lang == input.value) {
+                    NewState.options_category = item.items;
+                }
+            });
+            if (collentName == this.props.gdName) {
+                obj['category'] = null;//語系切換,分類搜尋條件清空
+                $("#search-category option:first").attr("selected", "true");
+            } else if (collentName == this.props.fdName) {
+                if (NewState.options_category.length > 0) {
+                    $("#field-category option:first").attr("selected", "true");
+                    obj['news_category'] = NewState.options_category[0].val;
+                }
+            }
+            this.setState(NewState);
+        }
         render() {
 
             var outHtml: JSX.Element = null;
+            let option = this.state.options_category;
 
             if (this.state.edit_type == 0) {
                 let searchData = this.state.searchData;
                 let GridNavPage = CommCmpt.GridNavPage;
 
                 outHtml =
-                (
-                    <div>
-
-                    <ul className="breadcrumb">
-                        <li><i className="fa-list-alt"></i> {this.props.menuName}</li>
-                        </ul>
+                    (
+                        <div>
                     <h3 className="title">
                         {this.props.caption}
                         </h3>
@@ -287,6 +345,25 @@ namespace News {
                                                 onChange={this.changeGDValue.bind(this, 'keyword') }
                                                 value={searchData.keyword}
                                                 placeholder="請輸入關鍵字..." /> { }
+                                            <label>語系</label> { }
+                                            <select className="form-control"
+                                                onChange={this.setLangVal.bind(this, this.props.gdName, 'i_Lang') }
+                                                value={searchData.i_Lang} >
+                                                <option value="">全部</option>
+                                                {
+                                                DT.LangData.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
+                                                }
+                                                </select> { }
+                                            <label>分類</label> { }
+                                            <select className="form-control"
+                                                id="search-category"
+                                                onChange={this.changeGDValue.bind(this, 'category') }
+                                                value={searchData.category} >
+                                                <option value="">全部</option>
+                                                {
+                                                option.map((itemData, i) => <option key={i} value={itemData.val}>{itemData.Lname}</option>)
+                                                }
+                                                </select> { }
                                             <button className="btn-primary" type="submit"><i className="fa-search"></i> 搜尋</button>
                                             </div>
                                         </div>
@@ -302,9 +379,12 @@ namespace News {
                                                 </label>
                                             </th>
                                         <th className="col-xs-1 text-center">修改</th>
-                                        <th className="col-xs-4">標題</th>
-                                        <th className="col-xs-3">日期</th>
-                                        <th className="col-xs-3">狀態</th>
+                                        <th className="col-xs-3">標題</th>
+                                        <th className="col-xs-1">分類</th>
+                                        <th className="col-xs-1">發布日期</th>
+                                        <th className="col-xs-1">排序</th>
+                                        <th className="col-xs-1">狀態</th>
+                                        <th className="col-xs-1">語系</th>
                                         </tr>
                                     </thead>
                                 <tbody>
@@ -333,60 +413,71 @@ namespace News {
                         deleteSubmit={this.deleteSubmit}
                         />
                         </form>
-                        </div>
-                );
+                            </div>
+                    );
             }
             else if (this.state.edit_type == 1 || this.state.edit_type == 2) {
                 let fieldData = this.state.fieldData;
                 let InputDate = CommCmpt.InputDate;
+                let MasterFileUpload = CommCmpt.MasterFileUpload;
+
 
                 outHtml = (
                     <div>
-    <ul className="breadcrumb">
-        <li><i className="fa-list-alt"></i>
-            {this.props.menuName}
-            </li>
-        </ul>
     <h4 className="title"> {this.props.caption} 基本資料維護</h4>
     <form className="form-horizontal" onSubmit={this.handleSubmit}>
         <div className="col-xs-10">
             <div className="form-group">
-                <label className="col-xs-2 control-label">首頁列表圖</label>
-                <div className="col-xs-8">
-                    <CommCmpt.MasterImageUpload FileKind="List" MainId={fieldData.news_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/NewsData/aj_FUpload'} url_list={gb_approot + 'Active/NewsData/aj_FList'}
-                        url_delete={gb_approot + 'Active/NewsData/aj_FDelete'} />
-                    <small className="help-block">最多1張圖，建議尺寸 180*180 px</small>
-                    </div>
-                </div>
-
-            <div className="form-group">
                 <label className="col-xs-2 control-label">標題</label>
                 <div className="col-xs-8">
-                    <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'news_title') } value={fieldData.news_title} maxLength={64}
-                        required />
+                    <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'news_title') } value={fieldData.news_title} maxLength={64} required />
                     </div>
-                <small className="col-xs-2 text-danger">(必填) </small>
+                <small className="col-xs-2 help-inline"><span className="text-danger">(必填) </span>, 最多64字</small>
                 </div>
-
             <div className="form-group">
-                <label className="col-xs-2 control-label">日期</label>
+                <label className="col-xs-2 control-label">語系</label>
                 <div className="col-xs-8">
-                    <InputDate id="news_date"
-                        onChange={this.changeDatePicker}
-                        field_name="news_date"
-                        value={fieldData.news_date}
+                    <select className="form-control"
+                        onChange={this.setLangVal.bind(this, this.props.fdName, 'i_Lang') }
+                        value={fieldData.i_Lang} >
+                        {
+                        DT.LangData.map((itemData, i) => <option key={i} value={itemData.id}>{itemData.label}</option>)
+                        }
+                        </select>
+                    </div>
+                <small className="help-inline col-xs-2 text-danger">(必填) </small>
+                </div>
+            <div className="form-group">
+                <label className="col-xs-2 control-label">分類</label>
+                <div className="col-xs-8">
+                    <select className="form-control" id="field-category" required
+                        onChange={this.changeFDValue.bind(this, 'news_category') }
+                        value={fieldData.news_category} >
+                        {
+                        option.map((itemData, i) => <option key={i} value={itemData.val}>{itemData.Lname}</option>)
+                        }
+                        </select>
+                    </div>
+                <small className="help-inline col-xs-2 text-danger">(必填) </small>
+                </div>
+            <div className="form-group">
+                <label className="col-xs-2 control-label">發布日期</label>
+                <div className="col-xs-8">
+                    <CommCmpt.InputDate id="day"
+                        onChange={this.changeDatePicker }
+                        field_name="day"
+                        value={fieldData.day}
                         disabled={false} required={true} ver={1} />
                     </div>
-                <small className="col-xs-2 text-danger">(必填) </small>
+                <small className="col-xs-2 help-inline"><span className="text-danger">(必填) </span></small>
                 </div>
-
             <div className="form-group">
                 <label className="col-xs-2 control-label">排序</label>
                 <div className="col-xs-8">
                     <input type="number" className="form-control" onChange={this.changeFDValue.bind(this, 'sort') } value={fieldData.sort}  />
                     </div>
+                <small className="col-xs-2 help-inline">數字越大越前面</small>
                 </div>
-
             <div className="form-group">
                 <label className="col-xs-2 control-label">狀態</label>
                 <div className="col-xs-4">
@@ -414,25 +505,30 @@ namespace News {
                        </div>
                     </div>
                 </div>
-
+            <div className="form-group">
+                <label className="col-xs-2 control-label">簡介</label>
+                <div className="col-xs-8">
+                    <textarea type="text" className="form-control" rows={3} value={fieldData.news_info} onChange={this.changeFDValue.bind(this, 'news_info') } />               
+                    </div>
+                <small className="col-xs-2 help-inline">最多512字</small>
+                </div>
             <div className="form-group">
                 <label className="col-xs-2 control-label">內容</label>
                 <div className="col-xs-10">
-                    <textarea type="date" className="form-control" id="news_content" name="news_content" value={fieldData.news_content} onChange={this.changeFDValue.bind(this, 'news_content') } />
+                    <textarea type="date" className="form-control" id="news_content" name="news_content"
+                        value={fieldData.news_content} onChange={this.changeFDValue.bind(this, 'news_content') }
+                        maxLength={512}/>
                     </div>
                 </div>
-
-
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-2">
-                    <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
-                    {}
+                    <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button> { }
                     <button type="button" onClick={this.noneType}><i className="fa-times"></i> 回前頁</button>
                     </div>
                 </div>
             </div>
         </form>
-                        </div>
+                        </div >
                 );
             }
 

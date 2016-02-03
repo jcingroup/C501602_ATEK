@@ -225,6 +225,7 @@
     <Content Include="Areas\Active\Views\AboutUsData\Main.cshtml" />
     <Content Include="Areas\Active\Views\SupportData\Main.cshtml" />
     <Content Include="Areas\Active\Views\SupportData\Category.cshtml" />
+    <Content Include="Areas\Active\Views\NewsData\Category.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\UsersController.cs" />
@@ -438,7 +439,6 @@
     <Content Include="Scripts\build\app\m_all_category.js" />
     <Content Include="Scripts\build\app\m_banner.js" />
     <Content Include="Scripts\build\app\m_change_password.js" />
-    <Content Include="Scripts\build\app\m_issue.js" />
     <Content Include="Scripts\build\app\m_news.js" />
     <Content Include="Scripts\build\app\m_parm.js" />
     <Content Include="Scripts\build\app\m_roles.js" />
@@ -593,7 +593,6 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-aboutus.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-menu.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-login.tsx" />
-    <TypeScriptCompile Include="Scripts\src\tsx\m-issue.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-news.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\w-member_login.ts" />

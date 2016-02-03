@@ -11,7 +11,6 @@ module.exports = {
         m_users: path.resolve(__dirname, 'Scripts/src/tsx/m-users.js'),
         //後台 管理者
         m_news: path.resolve(__dirname, 'Scripts/src/tsx/m-news.js'),
-        m_issue: path.resolve(__dirname, 'Scripts/src/tsx/m-issue.js'),
         m_aboutus: path.resolve(__dirname, 'Scripts/src/tsx/m-aboutus.js'),
         m_parm: path.resolve(__dirname, 'Scripts/src/tsx/m-parm.js'),
         m_banner: path.resolve(__dirname, 'Scripts/src/tsx/m-banner.js'),
