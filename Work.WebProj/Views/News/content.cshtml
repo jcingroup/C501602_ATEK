@@ -1,8 +1,8 @@
-﻿
+﻿@model DotWeb.WebApp.Controllers.NewsContent
 @{
-    ViewBag.Title = "NEWS::Annual General Meeting of Shareholders 2011";
+    ViewBag.Title = "NEWS::" + Model.item.news_title;
     ViewBag.BodyClass = "News";
-    ViewBag.Target = "Annual General Meeting of Shareholders 2011";
+    ViewBag.Target = Model.item.news_title;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
@@ -12,19 +12,26 @@
 
 <nav id="sidebar" class="tag">
     <a href="~/News">ALL</a>
-    <a href="~/News">EXHIBITION</a>
-    <a href="~/News" class="current">BUSINESSES</a>
+    @foreach (var i in Model.category)
+    {
+        if (i.l2_id == ViewBag.category)
+        {
+            <a href="~/News?category=@i.l2_id" class="current">@i.l2_name</a>
+        }
+        else {
+            <a href="~/News?category=@i.l2_id">@i.l2_name</a>
+        }
+    }
 </nav>
 
 <div id="content">
 
     <article class="panel">
-        <header>Annual General Meeting of Shareholders 2011</header>
+        <header>@Model.item.news_title</header>
         <div>
-            @* 此為編輯器 *@
-            A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below
+            @Html.Raw(Model.item.news_content)
         </div>
-        <footer>2016.1.28</footer>
+        <footer>@Model.item.day.ToString("yyyy.MM.dd")</footer>
     </article>
 
     <div class="text-center">

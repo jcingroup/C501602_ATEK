@@ -45,6 +45,11 @@ namespace DotWeb.WebApp.Controllers
                                                      l2_name = x.l2_name
                                                  }).ToList();
                 #endregion
+                bool exist = info.category.Any(x => x.l2_id == category);
+                if (!exist & category != null)
+                {
+                    return Redirect("~/Support");
+                }
             }
             ViewBag.category = category;
             return View("Support", info);
