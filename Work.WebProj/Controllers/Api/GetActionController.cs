@@ -159,6 +159,32 @@ namespace DotWeb.Api
             }
             return rAjaxResult;
         }
+        /// <summary>
+        /// 後台分類管理-取得分類資料
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
+        public IHttpActionResult GetCategoryData([FromUri]GetCategoryDataParm q)
+        {
+            try
+            {
+                using (var db0 = getDB0())
+                {
+                    var options_category = db0.All_Category_L2.Where(x => x.all_category_l1_id == q.l1_id & !x.i_Hide)
+                                                                       .OrderByDescending(x => x.sort)
+                                                                       .GroupBy(x => x.i_Lang)
+                                                                       .Select(x => new { lang = x.Key, items = x.Select(y => new option() { val = y.all_category_l2_id, Lname = y.l2_name }) }).ToList();
+
+                    return Ok(new { result = true, data = options_category });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { result = true, message = ex.ToString() });
+            }
+        }
+
+
         #region 後台-參數設定
         [HttpPost]
         public ResultInfo PostAboutUs([FromBody]AboutUsParm md)
@@ -222,9 +248,18 @@ namespace DotWeb.Api
         public int id { get; set; }
         public int sort { get; set; }
     }
+    public class GetCategoryDataParm
+    {
+        public int l1_id { get; set; }
+    }
     public class CategroySortParm
     {
         public IList<CategroySort> SortData { get; set; }
     }
     #endregion
+    public class option
+    {
+        public int val { get; set; }
+        public string Lname { get; set; }
+    }
 }

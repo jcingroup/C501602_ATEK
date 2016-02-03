@@ -294,6 +294,7 @@ interface FileUpProps {
     MainId: number | string,
     ParentEditType?: number
 }
+//圖片上傳
 export class MasterImageUpload extends React.Component<FileUpProps, any>{
 
     constructor() {
@@ -480,7 +481,206 @@ export class MasterImageUpload extends React.Component<FileUpProps, any>{
         return outHtml;
     }
 }
+//檔案上傳
+export class MasterFileUpload extends React.Component<FileUpProps, any>{
 
+    constructor() {
+        super();
+        this.createFileUpLoadObject = this.createFileUpLoadObject.bind(this);
+        this.deleteFile = this.deleteFile.bind(this);
+        this.getFileList = this.getFileList.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
+        this.render = this.render.bind(this);
+        this.state = {
+            filelist: [],
+            download_src: ''
+        }
+    }
+    static defaultProps: FileUpProps = {
+        MainId: 0,
+        FileKind: 'F'
+    }
+
+    componentDidMount() {
+        if (typeof this.props.MainId === 'string') {
+            if (this.props.MainId != null) {
+                this.createFileUpLoadObject();
+                this.getFileList();
+            }
+        } else if (typeof this.props.MainId === 'number') {
+            if (this.props.MainId > 0) {
+                this.createFileUpLoadObject();
+                this.getFileList();
+            }
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (typeof this.props.MainId === 'string') {
+            if (this.props.MainId != null && prevProps.MainId == null) {
+                this.createFileUpLoadObject();
+                this.getFileList();
+            }
+        } else if (typeof this.props.MainId === 'number') {
+            if (this.props.MainId > 0 && prevProps.MainId == 0) {
+                this.createFileUpLoadObject();
+                this.getFileList();
+            }
+        }
+    }
+    deleteFile(filename) {
+        CommFunc.jqPost(this.props.url_delete, {
+            id: this.props.MainId,
+            fileKind: this.props.FileKind,
+            filename: filename
+        })
+            .done(function (data, textStatus, jqXHRdata) {
+                if (data.result) {
+                    this.getFileList();
+                } else {
+                    alert(data.message);
+                }
+            }.bind(this))
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                CommFunc.showAjaxError(errorThrown);
+            });
+    }
+    downloadFile(id, filekind, filename) {
+        var parms = [];
+        parms.push('id=' + id);
+        parms.push('filekind=' + filekind);
+        parms.push('filename=' + filename);
+        parms.push('tid=' + CommFunc.uniqid());
+        var src = this.props.url_download + '?' + parms.join('&');
+        this.setState({ download_src: src });
+    }
+    createFileUpLoadObject() {
+
+        if (this.props.ParentEditType == 1)
+            return;
+
+        let btn = document.getElementById('upload-btn-' + this.props.MainId + '-' + this.props.FileKind);
+        let _this = this;
+
+        var uploader = new upload.SimpleUpload({
+            button: btn,
+            url: this.props.url_upload,
+            data: {
+                id: this.props.MainId,
+                fileKind: this.props.FileKind
+            },
+            name: 'fileName',
+            multiple: true,
+            maxSize: 5000,
+            allowedExtensions: ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'txt', 'png', 'jpg', 'jpeg'],
+            accept: 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/plain,image/*',
+            responseType: 'json',
+            encodeCustomHeaders: true,
+            onSubmit: function (filename, ext) {
+                if (_this.props.MainId == 0) {
+                    alert('此筆資料未完成新增，無法上傳檔案!')
+                    return false;
+                }
+
+                var progress = document.createElement('div'), // container for progress bar
+                    bar = document.createElement('div'), // actual progress bar
+                    fileSize = document.createElement('div'), // container for upload file size
+                    wrapper = document.createElement('div'), // container for this progress bar
+                    progressBox = document.getElementById('progressBox-' + _this.props.MainId); // on page container for progress bars
+
+                // Assign each element its corresponding class
+                progress.className = 'progress';
+                bar.className = 'progress-bar progress-bar-success progress-bar-striped active';
+                fileSize.className = 'size';
+                wrapper.className = 'wrapper';
+
+                // Assemble the progress bar and add it to the page
+                progress.appendChild(bar);
+                wrapper.innerHTML = '<div class="name">' + filename + '</div>'; // filename is passed to onSubmit()
+                wrapper.appendChild(fileSize);
+                wrapper.appendChild(progress);
+                progressBox.appendChild(wrapper); // just an element on the page to hold the progress bars    
+
+                // Assign roles to the elements of the progress bar
+                this.setProgressBar(bar); // will serve as the actual progress bar
+                this.setFileSizeBox(fileSize); // display file size beside progress bar
+                this.setProgressContainer(wrapper); // designate the containing div to be removed after upload	
+            },
+            onSizeError: function () {
+                //errBox.innerHTML = 'Files may not exceed 500K.';
+            },
+            onExtError: function () {
+                //errBox.innerHTML = 'Invalid file type. Please select a PNG, JPG, GIF ,DOC ,DOCX , image.';
+            },
+            onComplete: function (file, response) {
+                if (response.result) {
+                    _this.getFileList();
+                } else {
+                    alert(response.message);
+                }
+            }
+        });
+    }
+    getFileList() {
+        CommFunc.jqPost(this.props.url_list, {
+            id: this.props.MainId,
+            fileKind: this.props.FileKind
+        })
+            .done(function (data, textStatus, jqXHRdata) {
+                if (data.result) {
+                    this.setState({ filelist: data.files })
+                } else {
+                    alert(data.message);
+                }
+            }.bind(this))
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                CommFunc.showAjaxError(errorThrown);
+            });
+    }
+    render() {
+
+        var outHtml = null;
+        var fileButtonHtml = null;
+        if (this.props.ParentEditType == 1) {
+            fileButtonHtml = (
+                <div className="form-control">
+                <small className="col-xs-6 help-inline">請先按儲存後方可上傳檔案</small>
+                    </div>
+            );
+        } else if (this.props.ParentEditType == 2) {
+            fileButtonHtml = (
+                <div className="form-control">
+                <input type="file" id={'upload-btn-' + this.props.MainId + '-' + this.props.FileKind} />
+                    </div>
+            );
+        };
+        outHtml = (
+            <div>
+            {fileButtonHtml}
+            <p className="help-block" ref="SortImage">
+            {
+            this.state.filelist.map(function (itemData, i) {
+                var subOutHtml =
+                    <span className="doc-upload" key={i}>
+                        <i className="fa-file-text-o"></i>
+                        <button type="button"
+                            className="close"
+                            onClick={this.deleteFile.bind(this, itemData.fileName) }
+                            title="刪除檔案"> &times; </button>
+                        <button type="button" className="btn-link" onClick={this.downloadFile.bind(this, this.props.MainId, this.props.FileKind, itemData.fileName) } >
+                            {itemData.fileName}</button>
+                        </span>;
+                return subOutHtml;
+            }, this)
+            }
+                </p>
+                <div id={'progressBox-' + this.props.MainId} className="progress-wrap"></div>
+                <iframe src={this.state.download_src} style={ { visibility: 'hidden', display: 'none' } } />
+                </div>
+        );
+        return outHtml;
+    }
+}
 
 interface TwAddressProps {
     onChange(fieldName: string, e: React.SyntheticEvent): void,

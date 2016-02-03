@@ -98,6 +98,22 @@
     }
     var MasterImageUpload: MasterImageUploadClass;
 
+    //MasterFileUpload
+    interface MasterFileUploadProps extends React.Props<MasterFileUploadClass> {
+        url_upload?: string,
+        url_list?: string,
+        url_delete?: string,
+        url_download?: string,
+        url_sort?: string,
+        FileKind?: string,
+        MainId: number | string,
+        ParentEditType?: number
+    }
+    interface MasterFileUpload extends React.ReactElement<MasterFileUploadProps> { }
+    interface MasterFileUploadClass extends React.ComponentClass<MasterFileUploadProps> {
+    }
+    var MasterFileUpload: MasterFileUploadClass;
+
     //twaddress
     interface TwAddressProps extends React.Props<TwAddressClass> {
         onChange(fieldName: string, e: React.SyntheticEvent): void,

@@ -14,6 +14,7 @@
     export interface GridFormPropsBase {
         apiPath?: string,
         apiPathDetail?: string,
+        apiInitPath?: string,
         gdName?: string,
         fdName?: string,
         menuName?: string,

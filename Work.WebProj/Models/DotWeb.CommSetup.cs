@@ -266,7 +266,7 @@ namespace DotWeb.CommSetup
         {
             get
             {
-                FilesUpScope FiUp = new FilesUpScope() { limitCount = 5, limitSize = 1024 * 1024 * 256 };
+                FilesUpScope FiUp = new FilesUpScope() { limitCount = 1, limitSize = 1024 * 1024 * 256 };
                 return FiUp;
             }
         }

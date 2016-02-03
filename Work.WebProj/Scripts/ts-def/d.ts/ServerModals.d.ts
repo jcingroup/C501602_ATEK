@@ -119,7 +119,7 @@
         support_id?: number;
         support_title?: string;
         support_category?: number;
-        day?: Date;
+        day?: Date | string;
         support_content?: string;
         sort?: number;
         i_Hide?: boolean;
@@ -149,13 +149,12 @@
         id: number;
         sort: number;
     }
-    interface L1 extends BaseEntityTable {
-        l1_id?: number;
-        l1_name?: string;
-        l2_list?: Array<server.L2>
+    interface LangOption {
+        lang?: string;
+        items?: Array<server.Option>;
     }
-    interface L2 extends BaseEntityTable {
-        l2_id?: number;
-        l2_name?: string;
+    interface Option {//分類管理選單用
+        val?: number;
+        Lname?: string;
     }
 } 
