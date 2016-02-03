@@ -123,6 +123,8 @@ namespace ProcCore.Business.DB0
     public partial class m_Support
     {
         public string l2_name { get; set; }
+        public string fileSrc { get; set; }
+        //public string[] fileSrcs { get; set; }
     }
     public class L1
     {

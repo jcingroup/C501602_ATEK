@@ -1222,6 +1222,63 @@ namespace DotWeb.Controller
             }
         }
         #endregion
+        #region 前台抓取檔案
+        public string[] GetFiles(string id, string file_kind, string category1, string category2)
+        {
+            string tpl_path = string.Format(getImg_path_tpl, category1, category2, id, file_kind);
+            string web_folder = Url.Content(tpl_path);
+            string server_folder = Server.MapPath(tpl_path);
+  
+            string[] files = { };
+            if (Directory.Exists(server_folder))
+            {
+                var get_files = Directory.EnumerateFiles(server_folder)
+                    .Where(x => x.EndsWith("jpg") || x.EndsWith("jpeg") || x.EndsWith("png") || x.EndsWith("gif") || x.EndsWith("JPG") || x.EndsWith("JPEG") || x.EndsWith("PNG") || x.EndsWith("GIF") ||
+                     x.EndsWith("pdf") || x.EndsWith("PDF") || x.EndsWith("doc") || x.EndsWith("DOC") || x.EndsWith("docx") || x.EndsWith("DOCX") ||
+                     x.EndsWith("xls") || x.EndsWith("XLS") || x.EndsWith("xlsx") || x.EndsWith("XLSX") || x.EndsWith("TXT") || x.EndsWith("txt")) 
+                    .ToList();
+                IList<string> files_path = new List<string>();
+                foreach (var fobj in get_files)
+                {
+                    FileInfo file_info = new FileInfo(fobj.ToString());
+                    files_path.Add(web_folder + "//" + file_info.Name);
+                }
+                return files_path.ToArray();
+            }
+            else
+            {
+                return files;
+            }
+        }
+        public string GetFile(string id, string file_kind, string category1, string category2)
+        {
+            string tpl_path = string.Format(getImg_path_tpl, category1, category2, id, file_kind);
+            string server_folder = Server.MapPath(tpl_path);
+
+            if (Directory.Exists(server_folder))
+            {
+                var get_files = Directory.EnumerateFiles(server_folder)
+                    .Where(x => x.EndsWith("jpg") || x.EndsWith("jpeg") || x.EndsWith("png") || x.EndsWith("gif") || x.EndsWith("JPG") || x.EndsWith("JPEG") || x.EndsWith("PNG") || x.EndsWith("GIF") ||
+                     x.EndsWith("pdf") || x.EndsWith("PDF") || x.EndsWith("doc") || x.EndsWith("DOC") || x.EndsWith("docx") || x.EndsWith("DOCX") ||
+                     x.EndsWith("xls") || x.EndsWith("XLS") || x.EndsWith("xlsx") || x.EndsWith("XLSX") || x.EndsWith("TXT") || x.EndsWith("txt"))
+                    .FirstOrDefault();
+
+                if (get_files != null)
+                {
+                    FileInfo file_info = new FileInfo(get_files);
+                    return Url.Content(tpl_path + "\\" + file_info.Name);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
         #region 移除html或script標籤
         /// <summary>
         /// 移除html tag
