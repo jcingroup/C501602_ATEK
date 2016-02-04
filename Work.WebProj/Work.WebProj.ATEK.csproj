@@ -219,7 +219,7 @@
     <Content Include="app_modules\dt\package.json" />
     <Content Include="Areas\Active\Views\NewsData\Main.cshtml" />
     <Content Include="app_modules\comm-typeahead\package.json" />
-    <Content Include="Areas\Active\Views\ParmData\AboutUS.cshtml" />
+    <Content Include="Areas\Active\Views\ParmData\IndexImg.cshtml" />
     <Content Include="Areas\Active\Views\ParmData\Parm.cshtml" />
     <Content Include="Areas\Active\Views\BannerData\Main.cshtml" />
     <Content Include="Areas\Active\Views\AboutUsData\Main.cshtml" />
@@ -585,6 +585,7 @@
     <TypeScriptCompile Include="app_modules\react-datepicker.d\react-datepicker.d.ts" />
     <TypeScriptCompile Include="app_modules\simple-ajax-uploader\SimpleAjaxUploader.def.ts" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-all_category.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-index_img.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-support.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-sortable.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-change_password.tsx" />
