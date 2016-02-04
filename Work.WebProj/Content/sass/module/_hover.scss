@@ -4,9 +4,7 @@
 	color: #808080;
     position: relative;
 
-    &::before {
-        display: block;
-        content: '';
+    @include el(before) {
         height: 1px; width: 100%;
         background: #808080;
         @include absolute(bottom 0 right 0);

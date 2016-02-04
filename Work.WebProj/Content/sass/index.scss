@@ -63,10 +63,8 @@ $btn-padding:       12px 20px;
     display: block;
     position: relative;
 
-    &::before, &::after {
+    @include el(all) {
         @extend %effect-all;
-        content: '';
-        display: block;
         position: absolute;
     }
     &::before {
