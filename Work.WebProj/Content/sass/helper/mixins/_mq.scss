@@ -2,7 +2,7 @@
 
 // mixin來源: https://github.com/sass-mq/sass-mq
 //
-// == var
+// == var (breaklist in var.scss)
 // ----------------------------------------------------------------------
 $mq-base-font-size:    $font-size-base !default;
 
@@ -10,20 +10,7 @@ $mq-base-font-size:    $font-size-base !default;
 // (IE <= 8, Firefox <= 3, Opera <= 9)
 $mq-responsive:        true !default;
 
-// Breakpoint list
-$mq-breakpoints: (
-    mobile:            320px,
-    phone:             480px,
-    phone-plus:        640px,
-    tablet:            768px,
-    desktop:           980px,
-    wide:              1200px,
-    wider:             1400px
-) !default;
-
 $mq-static-breakpoint: desktop !default;
-
-// $mq-show-breakpoints:  () !default;
 
 // Customize the media type (e.g. `@media screen` or `@media print`)
 $mq-media-type:        all !default;

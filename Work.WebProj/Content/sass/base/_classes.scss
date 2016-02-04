@@ -41,8 +41,7 @@
 			content: '';
 			background: #D8DF2B;
 			@include size(6px);
-			@include absolute(top 50% left 0);
-			margin-top: -3px;
+			@include absolute(top 8px left 0);
 		}
 	}
 }

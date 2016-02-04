@@ -39,6 +39,7 @@ main {
     margin-top: 20px;
     margin-bottom: 35px;
 
+
     a {
         color: #B2B2B2;
         font-size: em(14px,20px);
@@ -52,19 +53,11 @@ main {
         color: $success;
         font-size: em(20px);
     }
-    // @include mq(break(tablet,+1),wide) {
-    //     float: left;
-    //     width: auto;
-    //     margin-left: 95px;
-    // }
-    // @include mq-max(tablet) {
-    //     text-align: right;
-    //     width: auto;
-    //     @include absolute(right 10px top 120px);
-    //     li { display: inline-block; float: none; }
-    // }
 }
+
 .search {
+    min-width: 130px;
+    @include mq-max(phone-plus) { margin-bottom: 20px; }
     button {
         @extend %text-hide;
         @extend %effect-all;
@@ -78,75 +71,150 @@ main {
     }
 }
 
-/* .pro-menu {
-    display: none;
-
-    background: #E5E5E5 url(#{$img-path}/icon_select.gif) right center no-repeat;
-    border: 1px solid #fff;
-    color: $gray-darker;
-    font-size: em(19px);
-    font-weight: bold;
-    width: 100%; height: 40px;
-    padding: 5px 10px;
-    border-radius: 5px;
-
-    &:hover, &:active { background-color: darken(#e5e5e5,5%); }
-} */
-
 #sidebar {
     float: right;
     width: cp(300px);
+
+    @include mq-max(break(desktop, -1)) {
+        margin-bottom: 2%;
+    }
 }
 #content {
     float: left;
     width: cp(1060px);
 }
+#sidebar, #content {
+    @include mq-max(break(desktop, -1)) {
+        float: none;
+        width: 100%;
+    }
+}
 
 // == Products
 
 // 產品子分類
+.pro-menu {
+    display: none;
+
+    font-size: em(22px);
+    width: 100%;
+    padding: 12px 0;
+
+    @include mq-max(break(phone-plus, -1)) {
+        display: block;
+    }
+}
 .sub-nav {
+
     nav {
         @extend %clearfix;
+        @extend %effect-all;
         margin-bottom: 25px;
+
+        @include mq-max(break(phone-plus, -1)) {
+            @include absolute(left $gutter right $gutter);
+            background: $brand-primary;
+            padding: 2% 1%;
+
+            opacity: 0;
+            visibility: hidden;
+            z-index: z(dropdown);
+
+            &.open { opacity: 1; visibility: visible; }
+            a {
+                &:hover, &:active, &.current {
+                    background: lighten($gray,63%);
+                }
+            }
+        }
     }
     header {
         color: $brand-primary;
         font-size: em(35px);
         margin-bottom: 5px;
+
+        @include mq-max(break(desktop, -1)) {
+            display: none;
+        }
     }
     dl {
         background: #efefef;
         padding: 20px 15px;
         margin: 8px 0;
+
         &.current {
             background: $brand-primary;
-            // box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
             dt { color: #fff; }
-            a {
-                background: #F1F1F1;
-                color: #4C4C4C;
-            }
+            a { background: #F1F1F1; color: #4C4C4C; }
+        }
+        @include mq-max(break(desktop, -1)) {
+            display: inline-block;
+            vertical-align: top;
+            width: 32.8%;
+            padding: 12px 15px;
+        }
+        @include mq-max(break(phone-plus, -1)) {
+            background: none;
+            padding: 0; margin: 0;
+            width: 32.5%;
+            text-align: center;
+        }
+        @include mq-max(break(phone, -1)) {
+            width: 100%;
+            margin: 5px 0;
         }
     }
     dt {
         color: darken($brand-primary,20%);
         font-size: em(22px);
         margin-bottom: 15px;
+
+        @include mq-max(break(desktop, -1)) {
+            font-size: em(20px);
+            margin-bottom: 8px;
+        }
+        @include mq-max(break(phone-plus, -1)) {
+            font-size: em(15px);
+            color: #fff;
+        }
     }
     a {
         min-width: auto;
         padding: 8px 12px;
         font-size: em(15px);
+        margin: 5px 0;
+
+        @include mq-max(break(phone-plus, -1)) {
+            background: #F1F1F1;
+            color: #4C4C4C;
+            &:hover, &:active {
+                color: $brand-secondary;
+                background: #fff;
+            }
+        }
     }
     &.fixed {
         @include fixed(top 20px left 50%);
-        margin-left: 338px;
-        // background: #fff;
+        margin-left: 268px;
         z-index: z(tooltip);
+
         @include mq(wider) {
             max-width: 308px;
             margin-left: 393px;
+        }
+        @include mq(wide) {
+            margin-left: 342px;
+        }
+        @include mq-max(break(desktop, -1)) {
+            background: #fff;
+            left: 0; top: 0;
+            margin-left: 0;
+            padding: 0 $gutter;
+
+            nav:last-child { margin-bottom: 0; }
+            // header { display: none; }
+            // dl { padding: 5px 8px; }
+            dt { margin-bottom: 2px; }
         }
     }
 }
@@ -169,29 +237,48 @@ main {
 .catalog {
     text-align: center;
     h3, header { text-align: left; }
-    h3 { margin-top: 0; }
+    // h3 { margin-top: 0; }
     dl {
         display: inline-block;
+        vertical-align: top;
         background: #efefef;
-        width: 31.3%;
-        margin: 20px 11px;
+        width: 31%;
+        margin: cp(20px) cp(11px);
         padding: 25px 7px;
+        @include mq(break(phone, +1),tablet) {
+            width: 47%;
+        }
+        @include mq-max(phone) {
+            width: 100%; margin: cp(20px) 0;
+        }
     }
     dt {
         font-size: em(22px);
         color: #528446;
         margin-bottom: 30px;
     }
+    .btn { margin: 5px 0;}
 }
-// 產品列表頁
+
+// 產品分類說明
 .intro {
     @extend %clearfix;
     padding-top: 10px;
 
-    img { margin-top: -35px; }
+    img {
+        margin-top: -35px;
+        @include mq-max(tablet) { margin-top: 0; }
+    }
     h3 { margin-top: 0; }
 }
-.kind { @extend %clearfix; }
+
+// 產品列表
+.kind {
+    @extend %clearfix;
+    @include mq-max(break(desktop, -1)) {
+        text-align: center;
+    }
+}
 
 // 產品內頁
 .pro-pic {
@@ -205,8 +292,15 @@ main {
         max-height: 350px;
     }
     @include mq-max(mobile) {
-        height: 180px;
-        img { max-height: 170px; }
+        // height: 180px;
+        // img { max-height: 170px; }
+    }
+    @include mq(desktop,wide) {
+        img { max-width: 290px; }
+    }
+    @include mq-max(tablet) {
+        height: auto;
+        padding: 3% 0;
     }
 }
 .pro-info {
@@ -218,6 +312,10 @@ main {
         color: #CFCFCF;
         margin-left: 10px;
         vertical-align: middle;
+
+        @include mq-max(break(tablet, -1)) {
+            display: block;
+        }
     }
     .btn-download { margin-top: 30px; }
 
@@ -226,12 +324,19 @@ main {
         h3 { margin-bottom: 20px; }
     }
 }
+.pro-pic, .pro-info {
+    @include mq-max(tablet) {
+        float: none;
+        width: 100%;
+    }
+}
 // 証書
 .text-right strong { margin-right: 14px; }
 
 // 系列產品(滑動特效)
 #slide, .swiper-slide {
     height: 260px;
+
 }
 #slide {
     position: relative;
@@ -249,6 +354,11 @@ main {
     }
     .btn-prev { left: 0; }
     .btn-next { right: 0; background-position: -55px center; }
+    img {
+        @include mq-max(phone) {
+            width: 80%;
+        }
+    }
 }
 
 // == News & Support
@@ -313,9 +423,8 @@ main {
     margin-top: 55px;
 
     @include mq-max(tablet) {
-        float: none;
-        width: 100%;
         height: 300px;
+        margin-top: 3%;
     }
 }
 .contacts {
@@ -326,10 +435,13 @@ main {
     input, textarea, button { margin: 15px 0; }
 
     @include mq-max(tablet) {
-        // position: relative;
-        // top: $gutter; left: 0;
-        // height: auto;
-        // width: 100%;
+
+    }
+}
+#map-canvas, .contacts {
+    @include mq-max(tablet) {
+        float: none;
+        width: 100%;
     }
 }
 

@@ -36,7 +36,7 @@ $btn-padding:       12px 20px;
 #banner {
     background: #F1F1F1;
     border: 1px solid #E5E5E5;
-    margin: 30px 20px;
+    margin: 3.5% 20px;
 
     @include mq(wider) {
         max-width: $max-width;
@@ -62,6 +62,7 @@ $btn-padding:       12px 20px;
     float: left;
     display: block;
     position: relative;
+
     &::before, &::after {
         @extend %effect-all;
         content: '';
@@ -84,18 +85,38 @@ $btn-padding:       12px 20px;
             background: rgba(0,0,0,.5);
         }
         &::after {
-            background: rgba(255,255,255,.5) url(#{$img-path}/Products/icon-look.png) center no-repeat;
-            transform: scale(1.2);
+            background: rgba(255,255,255,.5) url(#{$img-path}/icon-look.png) center no-repeat;
+            @include prefix(transform, scale(1.2))
+        }
+    }
+
+    img {
+        max-width: 540px;
+        max-height: 324px;
+    }
+
+    @include mq-max(break(desktop,-1)) {
+        float: none;
+        img {
+            width: 100%;
+            max-height: auto;
         }
     }
 }
 
 .list-inline {
     float: right;
-    width: cp(769px);
+    width: 55%;
 
-    @include mq(wider) { width: cp(845px); }
-    @include mq(break(tablet, +1), wide) { max-width: 420px; }
+    @include mq(wider) { width: 61%; }
+    @include mq(desktop, wide) { max-width: 420px; }
+    @include mq-max(break(desktop, -1)) {
+        float: none;
+        width: 100%;
+    }
+    @include mq(break(phone, +1), break(desktop, -1)) {
+        margin-top: 20px;
+    }
 
     a {
         @extend %text-hide;
@@ -113,19 +134,23 @@ $btn-padding:       12px 20px;
         // padding-top: 32px;
         // padding-left: 20px;
 
+        @include mq(break(phone, -1), break(desktop, -1)) {
+            height: 200px;
+        }
+
         &:hover, &:active {
             // color: $brand-primary;
             box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
         }
     }
     li {
+        @extend %effect-all;
+
         float: left;
         background: url(#{$img-path2}/infoBg.gif) center no-repeat;
         box-shadow: 1px 1px 0 #CBCBCB;
         width: 48.6%;
         margin-bottom: 10px;
-
-        @include prefix(transition, all .35s ease, webkit);
 
         &:nth-child(even) { margin-left: 8px; }
 
@@ -133,8 +158,15 @@ $btn-padding:       12px 20px;
             @include prefix(transform, translate(1px,2px))
         }
 
-        &:nth-of-type(2) a { background-position: right -210px; }
-        &:nth-of-type(3) a { background-position: right -418px; }
-        &:nth-of-type(4) a { background-position: right -650px; }
+        @include mq-max(break(desktop,-1)) { float: none; }
+        @include mq-max(break(phone-plus,-1)) {
+            margin: 0;
+            width: 100%;
+            &:nth-child(even) { margin-left: 0; }
+        }
+
+        // &:nth-of-type(2) a { background-position: right -210px; }
+        // &:nth-of-type(3) a { background-position: right -418px; }
+        // &:nth-of-type(4) a { background-position: right -650px; }
     }
 }

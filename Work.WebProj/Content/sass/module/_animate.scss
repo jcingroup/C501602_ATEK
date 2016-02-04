@@ -1,5 +1,8 @@
 @charset "UTF-8";
-// effect
+
+
+
+// animate
 // ------------------------------------------------------------
 
 @include keyframes(slide-up) {
@@ -44,7 +47,6 @@
         opacity: 0;
         @include prefix(transform, scale(.5) translateY(200px));
     }
-
     100% {
         opacity: 1;
         @include prefix(transform, scale(1) translateY(0));
@@ -52,34 +54,26 @@
 }
 
 @include keyframes(fadeIn) {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 
 @include keyframes(fadeOut) {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 
 @include keyframes(fadeInUp) {
-  0% {
-    opacity: 0;
-    @include prefix(transform, translateY(20px));
-  }
-  100% {
-    opacity: 1;
-    @include prefix(transform, translateY(0));
-  }
+    0% {
+        opacity: 0;
+        @include prefix(transform, translateY(20px));
+    }
+    100% {
+        opacity: 1;
+        @include prefix(transform, translateY(0));
+    }
 }
 
 
@@ -432,83 +426,45 @@
 
 
 @include keyframes(flash) {
-  0% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+    75% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 
 @include keyframes(bounce) {
-  0% {
-    @include prefix(transform, translateY(0));
-  }
-  20% {
-    @include prefix(transform, translateY(0));
-  }
-  40% {
-    @include prefix(transform, translateY(-30px));
-  }
-  60% {
-    @include prefix(transform, translateY(-15px));
-  }
-  50% {
-    @include prefix(transform, translateY(0));
-  }
-  80% {
-    @include prefix(transform, translateY(0));
-  }
-  100% {
-    @include prefix(transform, translateY(0));
-  }
+    0%, 20%, 50%, 80%, 100% {
+        @include prefix(transform, translateY(0));
+    }
+    // 20% { @include prefix(transform, translateY(0)); }
+    40% { @include prefix(transform, translateY(-30px)); }
+    60% { @include prefix(transform, translateY(-15px)); }
+    // 50% { @include prefix(transform, translateY(0)); }
+    // 80% { @include prefix(transform, translateY(0)); }
+    // 100% { @include prefix(transform, translateY(0)); }
 }
 
 
 @include keyframes(shake) {
-  0% {
-    @include prefix(transform, translateX(0));
-  }
-  10% {
-    @include prefix(transform, translateX(-10px));
-  }
-  20% {
-    @include prefix(transform, translateX(10px));
-  }
-  30% {
-    @include prefix(transform, translateX(-10px));
-  }
-  40% {
-    @include prefix(transform, translateX(10px));
-  }
-  50% {
-    @include prefix(transform, translateX(-10px));
-  }
-  60% {
-    @include prefix(transform, translateX(10px));
-  }
-  70% {
-    @include prefix(transform, translateX(-10px));
-  }
-  80% {
-    @include prefix(transform, translateX(10px));
-  }
-  90% {
-    @include prefix(transform, translateX(-10px));
-  }
-  100% {
-    @include prefix(transform, translateX(0));
-  }
+    0%, 100% {
+        @include prefix(transform, translateX(0));
+    }
+    10%, 30%, 50%, 70%, 90% {
+        @include prefix(transform, translateX(-10px));
+    }
+    20%, 40%, 60%, 80% {
+        @include prefix(transform, translateX(10px));
+    }
+    // 30% { @include prefix(transform, translateX(-10px)); }
+    // 40% { @include prefix(transform, translateX(10px)); }
+    // 50% { @include prefix(transform, translateX(-10px)); }
+    // 60% { @include prefix(transform, translateX(10px)); }
+    // 70% { @include prefix(transform, translateX(-10px)); }
+    // 80% { @include prefix(transform, translateX(10px)); }
+    // 90% { @include prefix(transform, translateX(-10px)); }
+    // 100% { @include prefix(transform, translateX(0)); }
 }
 
 
@@ -653,37 +609,21 @@
 
 
 @include keyframes(tada) {
-  0% {
-    @include prefix(transform, scale(1));
-  }
-  10% {
+  0% { @include prefix(transform, scale(1)); }
+  10%, 20% {
     @include prefix(transform, scale(0.9) rotate(-3deg));
   }
-  20% {
-    @include prefix(transform, scale(0.9) rotate(-3deg));
-  }
-  30% {
+  // 20% { @include prefix(transform, scale(0.9) rotate(-3deg)); }
+  30%, 50%, 70%, 90% {
     @include prefix(transform, scale(1.1) rotate(3deg));
   }
-  40% {
+  40%, 60%, 80% {
     @include prefix(transform, scale(1.1) rotate(-3deg));
   }
-  50% {
-    @include prefix(transform, scale(1.1) rotate(3deg));
-  }
-  60% {
-    @include prefix(transform, scale(1.1) rotate(-3deg));
-  }
-  70% {
-    @include prefix(transform, scale(1.1) rotate(3deg));
-  }
-  80% {
-    @include prefix(transform, scale(1.1) rotate(-3deg));
-  }
-  90% {
-    @include prefix(transform, scale(1.1) rotate(3deg));
-  }
-  100% {
-    @include prefix(transform, scale(1) rotate(0));
-  }
+  // 50% { @include prefix(transform, scale(1.1) rotate(3deg)); }
+  // 60% { @include prefix(transform, scale(1.1) rotate(-3deg)); }
+  // 70% { @include prefix(transform, scale(1.1) rotate(3deg)); }
+  // 80% { @include prefix(transform, scale(1.1) rotate(-3deg)); }
+  // 90% { @include prefix(transform, scale(1.1) rotate(3deg)); }
+  // 100% { @include prefix(transform, scale(1) rotate(0)); }
 }
