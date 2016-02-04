@@ -809,6 +809,8 @@ body {
     .list-inline {
       margin-top: 20px; } }
   .list-inline a {
+    background-position: center;
+    background-repeat: no-repeat;
     display: block;
     height: 156px; }
     @media (min-width: 29.9375em) and (max-width: 61.1875em) {
