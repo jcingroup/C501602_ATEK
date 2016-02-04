@@ -351,6 +351,7 @@
     <Content Include="Content\images\icon-club.gif" />
     <Content Include="Content\images\icon-contact.gif" />
     <Content Include="Content\images\icon-download.png" />
+    <Content Include="Content\images\icon-look.png" />
     <Content Include="Content\images\icon-search.gif" />
     <Content Include="Content\images\Index\banner1.jpg" />
     <Content Include="Content\images\Index\banner2.jpg" />
