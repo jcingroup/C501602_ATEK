@@ -319,6 +319,10 @@ a, body, #menu, .hover-shadow, .hover-shadow header, .btn, figcaption, figure, f
   -webkit-transition: all 0.35s;
   transition: all 0.35s; }
 
+#wrapper::before, .menu-trigger span::before, .menu-trigger span::after, .hover-underline::before, .dropbtn::after {
+  content: '';
+  display: block; }
+
 .float-l {
   float: left; }
 
@@ -515,8 +519,6 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   min-height: 100%;
   padding-bottom: 298px; }
   #wrapper::before {
-    content: '';
-    display: block;
     position: absolute;
     width: 100%;
     height: 110px;
@@ -599,8 +601,6 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     -webkit-transition: background 0s 0.3s;
     transition: background 0s 0.3s; }
     .menu-trigger span::before, .menu-trigger span::after {
-      content: '';
-      display: block;
       width: 100%;
       height: 6px;
       background-color: #C2E57E;
@@ -778,8 +778,6 @@ body {
   color: #808080;
   position: relative; }
   .hover-underline::before {
-    display: block;
-    content: '';
     height: 1px;
     width: 100%;
     background: #808080;
@@ -965,7 +963,6 @@ figure:hover, figure:active {
   .dropbtn::after {
     width: 0;
     height: 0;
-    content: '';
     display: inline-block;
     border: 5px solid transparent;
     border-top: 7px solid #93C336;
@@ -1054,7 +1051,7 @@ main {
     font-size: 0.7em;
     margin-right: 8px; }
     .breadcrumb a::after {
-      content: '/';
+      content: "/";
       margin-left: 3px; }
     .breadcrumb a:hover, .breadcrumb a:active {
       color: #79B229; }

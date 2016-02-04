@@ -396,7 +396,6 @@
     <Content Include="Content\sass\base\_table.scss" />
     <Content Include="Content\sass\helper\mixins\_align.scss" />
     <Content Include="Content\sass\helper\mixins\_animation.scss" />
-    <Content Include="Content\sass\helper\mixins\_form.scss" />
     <Content Include="Content\sass\helper\mixins\_gradient.scss" />
     <Content Include="Content\sass\helper\mixins\_media.scss" />
     <Content Include="Content\sass\helper\mixins\_mq.scss" />
@@ -405,7 +404,6 @@
     <Content Include="Content\sass\helper\mixins\_shape.scss" />
     <Content Include="Content\sass\helper\mixins\_state.scss" />
     <Content Include="Content\sass\helper\mixins\_tab-focus.scss" />
-    <Content Include="Content\sass\helper\mixins\_table.scss" />
     <Content Include="Content\sass\helper\mixins\_text.scss" />
     <Content Include="Content\sass\helper\_function.scss" />
     <Content Include="Content\sass\helper\_mixins.scss" />

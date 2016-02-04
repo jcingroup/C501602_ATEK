@@ -50,9 +50,11 @@
 
 // 用偽類做三角形
 @mixin arrow($dir:right, $width:5px, $height: $width/2, $color: inherit, $display: inline-block) {
+    @extend %pseudos;
     @include size(0);
-    content: '';
-    display: $display;
+    @if $display != block {
+        display: $display;
+    }
     border: $width solid transparent;
 
     @if ($dir == "top" or $dir =="up") {

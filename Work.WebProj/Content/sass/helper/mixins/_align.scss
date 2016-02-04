@@ -1,21 +1,15 @@
 @charset "UTF-8";
 
-// 讓某元素垂直置中
+// 讓目標元素垂直置中
 @mixin middle($target) {
     @extend %middle;
 
-    @if $target == img {
-        #{$target} {
-            display: inline-block;
-            @content;
-        }
-    }
-    @else {
-        #{$target} {
-            display: inline-block;
+    #{$target} {
+        @if $target != img {
             vertical-align: middle;
-            @content;
         }
+        display: inline-block;
+        @content;
     }
 }
 

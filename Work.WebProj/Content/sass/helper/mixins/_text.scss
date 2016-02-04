@@ -32,3 +32,26 @@
 @mixin stroke($stroke, $color) {
     text-shadow: stroke($stroke, $color);
 }
+
+// 插入偽類
+@mixin el($el, $content: '') {
+    @if $el == "before" or $el == "after" {
+        &::#{$el} {
+            @if $content == '' {
+                @extend %pseudos;
+            } @else {
+                content: $content;
+            }
+            @content;
+        }
+    } @else {
+        &::before, &::after {
+            @if $content == '' {
+                @extend %pseudos;
+            } @else {
+                content: $content;
+            }
+            @content;
+        }
+    }
+}

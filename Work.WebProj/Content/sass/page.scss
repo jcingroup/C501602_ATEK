@@ -45,7 +45,7 @@ main {
         font-size: em(14px,20px);
         margin-right: 8px;
 
-        &::after { content: '/'; margin-left: 3px; }
+        @include el(after, '/') { margin-left: 3px; }
         &:hover, &:active { color: $brand-primary; }
     }
     li {

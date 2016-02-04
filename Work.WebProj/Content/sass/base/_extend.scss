@@ -46,3 +46,9 @@
 %effect-all {
     @include prefix(transition, all .35s);
 }
+
+// 偽類
+%pseudos {
+    content: '';
+    display: block;
+}
