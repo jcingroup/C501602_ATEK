@@ -16,33 +16,51 @@ $dropdown-color:            #C2E57E !default;
     text-align: left;
 
     padding: 5px 10px;
-    width: $dropdown-width;
+    width: 100%;
 
     &::after {
         @include arrow(down,5px,7px,#93C336);
         @include absolute(right 8px top 10px);
     }
 
-    &:hover, &:focus {
+    &:hover, &:active {
         border-color: lighten(#93c336,5%);
         color: lighten($dropdown-color,15%);
 
-        &::after { border-top-color: lighten(#93c336,15%); }
+        &::after {
+            border-top-color: lighten(#93c336,15%);
+            @include animation(jump .6s infinite .6s);
+        }
     }
+}
+
+@include keyframes(jump) {
+    20% { @include prefix(transform, translateY(-2px)); }
+    80% { @include prefix(transform, translateY(2px)); }
 }
 
 
 // 下拉最外層容器
 .dropdown {
     z-index: z(logo)-1;
+    width: $dropdown-width;
+
     @include absolute(right 0 top 13px);
+    @include mq-max(break(phone-plus, -1)) {
+        width: 28%;
+    }
+    @include mq-max(break(phone, -1)) {
+        left: 0;
+        top: 5px;
+        width: 35%;
+    }
 }
 
 // 隱藏內容
 .dropdown-content {
     display: none;
     position: absolute;
-    min-width: $dropdown-width;
+    min-width: 100%;
 
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

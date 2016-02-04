@@ -105,16 +105,29 @@ $color: $state-type;
 // == z-index
 // ----------------------------------------------------------------------
 $z-index: (
-    header:     2,
-    main:       1,
-    footer:     3,
-    banner:     4,
-    logo:       50,
-    menu:       60,
-    goTop:      1001,
-    dropdown:   80,
-    tooltip:    90,
-    modal:      998,
-    overlay:    999,
-    toggle:     99,
+    header:           3,
+    main:             2,
+    footer:           1,
+    banner:           4,
+    logo:             50,
+    menu:             60,
+    goTop:            1001,
+    dropdown:         80,
+    tooltip:          90,
+    modal:            998,
+    overlay:          999,
+    toggle:           99,
 );
+
+
+// == RWD-break
+// ----------------------------------------------------------------------
+$mq-breakpoints: (
+    mobile:           320px,
+    phone:            480px,
+    phone-plus:       640px,
+    tablet:           768px,
+    desktop:          980px,
+    wide:             1200px,
+    wider:            1400px
+) !default;

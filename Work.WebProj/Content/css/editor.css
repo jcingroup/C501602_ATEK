@@ -208,18 +208,19 @@ body {
 
 a {
   color: #656565;
-  text-decoration: none;
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease; }
+  text-decoration: none; }
   a:hover, a:active, a.active {
     color: #79B229; }
   a:focus {
     outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
+    outline: 1px auto #79B229;
     outline-offset: -2px; }
 
 img {
   vertical-align: middle; }
+  @media (max-width: 47.9375em) {
+    img {
+      width: 100%; } }
 
 @font-face {
   font-family: 'trebuc';
@@ -280,11 +281,6 @@ hr {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #f9f9f9; }
 
-address {
-  margin-bottom: 20px;
-  font-style: normal;
-  line-height: 1.25; }
-
 .clearfix::after {
   content: '';
   display: table;
@@ -305,6 +301,10 @@ address {
 
 .list-inline > li {
   display: inline-block; }
+
+a {
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s; }
 
 .float-l {
   float: left; }
@@ -340,9 +340,8 @@ address {
       width: 6px;
       height: 6px;
       position: absolute;
-      top: 50%;
-      left: 0;
-      margin-top: -3px; }
+      top: 8px;
+      left: 0; }
 
 /*      table
 -----------------------------------------------------------------------*/

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-// prefixes
+// animation
 // -----------------------------------------------------------------
 // 使用方法:
 // @include keyframes(move-the-object) {
@@ -24,39 +24,28 @@
             $animations: #{$animations + ", "};
         }
     }
-
     @include prefix(animation, $animations);
 }
 
-
-@mixin keyframes($animationName) {
-    @-webkit-keyframes #{$animationName} {
-        @content;
+@mixin keyframes($animationName){
+    @each $pfx in $prefixes {
+        @if $pfx == "webkit" {
+            @-webkit-keyframes #{$animationName} { @content; }
+        }
+        @else if $pfx == "moz" {
+            @-moz-keyframes #{$animationName} { @content; }
+        }
+        @else if $pfx == "ms" {
+            @-ms-keyframes #{$animationName} { @content; }
+        }
+        @else if $pfx == "o" {
+            @-o-keyframes #{$animationName} { @content; }
+        }
     }
-    // @-moz-keyframes #{$animationName} {
-    //     @content;
-    // }
-    // @-o-keyframes #{$animationName} {
-    //     @content;
-    // }
-    @keyframes #{$animationName} {
-        @content;
-    }
+    @keyframes #{$animationName} { @content; }
 }
 
 @mixin diy-animation($animationName,$animations) {
-    @-webkit-keyframes #{$animationName} {
-        @content;
-    }
-    // @-moz-keyframes #{$animationName} {
-    //     @content;
-    // }
-    // @-o-keyframes #{$animationName} {
-    //     @content;
-    // }
-    @keyframes #{$animationName} {
-        @content;
-    }
-
-    @include prefix(animation, $animationName $animations, webkit)
+    @include keyframes($animationName);
+    @include prefix(animation, $animationName $animations, webkit);
 }

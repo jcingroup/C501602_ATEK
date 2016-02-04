@@ -4,9 +4,9 @@ $figure-bg:             #fff !default;
 $figure-border-color:   #9CD217 !default;
 $figure-text-align:     center !default;
 
-$figure-min-width:      280px !default;
-$figure-max-width:      280px !default;
-$figure-width:          31.5% !default;
+$figure-min-width:      270px !default;
+$figure-max-width:      295px !default;
+$figure-width:          33% !default;
 $figure-height:         220px !default;
 $figure-margin:         0 7px 30px 7px!default;
 
@@ -17,24 +17,31 @@ figure {
     cursor: pointer;
     float: left;
 
-    width: $figure-width;
+    width: 31.5%;
     height: $figure-height;
     max-width: $figure-max-width;
     margin: $figure-margin;
 
     text-align: $figure-text-align;
 
-    img { position: relative; }
-
+    @include mq(break(tablet, +1), break(wide, -1)) {
+        &:nth-of-type(3n) { margin-right: 0; }
+        &:nth-of-type(3n+1) { margin-left: 0; }
+    }
+    @include mq(wide) { width: $figure-width; }
     @include mq(wider) { max-width: 335px; }
-    @include mq-max(tablet) {
-        display: inline-block;
+    @include mq-max(break(desktop, -1)) {
         float: none;
-        margin-left: 0;
-        width: 49.6%;
-        min-width: auto;
+        display: inline-block;
+    }
+    @include mq-max(tablet) {
+        width: 48%;
+        max-width: none;
+        margin: 3px; margin-bottom: 15px;
     }
     @include mq-max(phone) { width: 100%; }
+
+    img { position: relative; }
 }
 
 figcaption {
@@ -90,11 +97,15 @@ figure {
 
         font-size: em(15px);
         line-height: 1;
-        padding: 0 7px;
-        margin: 7px 0;
+        margin: 7px;
 
-        &:nth-of-type(odd) { border-right: 1px solid #D8DF2B; }
-        &:last-of-type { border: none; }
+        // &:nth-of-type(odd) {
+        //     border-right: 1px solid #D8DF2B;
+        //     @include mq-max(break(desktop, -1)) {
+        //         border: none;
+        //     }
+        // }
+        // &:last-of-type { border: none; }
     }
 
     &:hover, &:active {

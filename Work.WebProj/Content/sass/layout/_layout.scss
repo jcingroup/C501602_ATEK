@@ -20,7 +20,7 @@ $menu-trigger-width:    250px !default;
 
 // footer
 $footer-height:         248px !default;
-$footer-height-sm:      100px;
+$footer-height-sm:      366px;
 $footer-transY:         $footer-height !default;
 $footer-bg:             #ECECEC;
 $footer-color:          #808080;
@@ -35,7 +35,6 @@ $goTop-position:        bottom 30px right 10px !default;
     margin: 0 ($gutter + 5);
 
     @include mq(wider) { margin: 0 auto; }
-    @include mq-max(tablet) { margin: 0 $gutter; }
 }
 
 // 容器-header、wrap、main、footer等
@@ -45,6 +44,7 @@ $goTop-position:        bottom 30px right 10px !default;
     @include mq-max(tablet) {
         padding-left: $gutter;
         padding-right: $gutter;
+        margin: 0;
     }
 }
 
@@ -56,7 +56,7 @@ $goTop-position:        bottom 30px right 10px !default;
 #wrapper, #header, #footer, #main, .wrap {
     position: relative;
 }
-#header, #footer {
+#footer {
     @extend %contain;
 }
 
@@ -90,6 +90,8 @@ $goTop-position:        bottom 30px right 10px !default;
     z-index: z(header);
     height: $header-height;
 
+    @include mq-max(tablet) { margin: 0 $gutter; }
+
     h1 {
         cursor: pointer; cursor: hand; // for ie
         z-index: z(logo);
@@ -97,28 +99,26 @@ $goTop-position:        bottom 30px right 10px !default;
         @include text-pic($logo-img, nth($logo-size,1), nth($logo-size,2));
         @include absolute($logo-position);
 
-        @include mq-max(tablet) {
+        @include mq-max(break(desktop, -1)) {
             left: 50%;
             margin-left: -(nth($logo-size,1) / 2);
         }
-        @include mq-max(phone) {
-            // left: 0; right: 0;
-            // width: 100%;
+        @include mq-max(break(phone, -1)) {
+            right: -10px; left: auto;
+            margin-left: 0;
         }
     }
 }
 
 // == 行動版主選單
 body, #menu {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    @extend %effect-all;
 }
 .menu-trigger {
     @extend %text-hide;
     display: none;
     cursor: pointer;
-    z-index: z(overlay) + 1;
+    // z-index: z(overlay) + 1;
 
     $button-width: 67px;
     $button-height: 60px;
@@ -131,10 +131,11 @@ body, #menu {
     overflow: hidden;
     width: $button-width;
     height: $button-height;
-    transition: background 0.3s;
 
+    @include prefix(transition, background 0.3s);
     @include prefix(apperance, none, webkit moz);
-    @include mq-max(959px) { display: block; }
+    @include mq-max(break(desktop,-1)) { display: block; }
+    @include mq-max(break(phone, -1)) { top: 40px; }
 
     &:active, &.active {
         background-color: darken($brand-primary, 10%);
@@ -142,14 +143,14 @@ body, #menu {
             background: none;
             &::before {
                 top: 0;
-                transform: rotate(45deg);
+                @include prefix(transform, rotate(45deg));
             }
             &::after {
                 bottom: 0;
-                transform: rotate(-45deg);
+                @include prefix(transform, rotate(-45deg));
             }
             &::before, &::after {
-                transition-delay: 0s, 0.3s;
+                @include prefix(transition-delay, '0, .3s');
             }
         }
     }
@@ -161,7 +162,7 @@ body, #menu {
         background: $bar-color;
         height: $bar-thickness;
         margin: auto;
-        transition: background 0s 0.3s;
+        @include prefix(transition, background 0s 0.3s);
 
         &::before,
         &::after {
@@ -170,17 +171,17 @@ body, #menu {
             width: 100%;
             height: $bar-thickness;
             background-color: $bar-color;
-            transition-duration: 0.3s, 0.3s;
-            transition-delay: 0.3s, 0s;
             @include absolute(left 0);
+            @include prefix(transition-duration, '.3s, .3s');
+            @include prefix(transition-delay, '.3s, 0');
         }
         &::before {
             top: -(($button-height / 2) - ($bar-thickness / 2) - $button-pd);
-            transition-property: top, transform;
+            @include prefix(transition-property, 'top, transform');
         }
         &::after {
             bottom: -(($button-height / 2) - ($bar-thickness / 2) - $button-pd);
-            transition-property: bottom, transform;
+            @include prefix(transition-property, 'bottom, transform');
         }
     }
 }
@@ -227,10 +228,9 @@ body {
             padding-bottom: 31px;
         }
         @include mq(wide) { padding-right: 70px; }
-        @include mq-max(desktop) { }
     }
 
-    @include mq-max(tablet) {
+    @include mq-max(break(desktop,-1)) {
         background: #333;
         width: $menu-trigger-width;
         height: 100%;
@@ -281,15 +281,22 @@ body {
     background: $footer-bg;
     color: $footer-color;
     min-height: $footer-height;
-    margin-top: -($footer-transY);
+    margin-top: -($footer-height);
 
     padding: 43px 0;
     text-align: left;
+
+    @include mq-max(phone) {
+        margin-top: -($footer-height-sm);
+    }
 
     .contact {
         border: 1px solid #fff;
         padding: 20px 30px;
         margin-right: 3%;
+
+        @include mq-max(tablet) { margin-right: 0; }
+        @include mq-max(break(phone, -1)) { padding: 12px; }
 
         em {
             @include text-pic('icon-contact.gif',24px,21px,fixed,0 0);
@@ -298,15 +305,16 @@ body {
             margin-right: 7px;
         }
         a { color: $footer-color; }
-
         .col-5 {
             color: #545454;
             font-size: em(30px);
             line-height: 1.85;
 
-            li {
-                &:nth-of-type(2) em { background-position: 0 -54px; }
+            @include mq-max(break(phone, -1)) {
+                font-size: em(23px);
             }
+
+            li:nth-of-type(2) em { background-position: 0 -54px; }
         }
         .col-7 {
             font-size: em(13px);
@@ -322,6 +330,10 @@ body {
     font-size: em(14px);
 
     @include absolute(right 15px bottom 20px);
+    @include mq-max(tablet) {
+        left: 15px; bottom: -30px;
+        text-align: center;
+    }
 }
 
 .club {

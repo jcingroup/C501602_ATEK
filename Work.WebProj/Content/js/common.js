@@ -36,11 +36,11 @@ $(document).ready(function() {
     });
 
     // 行動裝置的產品分類選單
-    // $(".pro-menu").click(function() {
-    //     $(this).toggleClass("active");
-    //     // $('aside nav').slideToggle(750);
-    //     $('aside nav').toggleClass('open');
-    // });
+    $(".pro-menu").click(function() {
+        $(this).toggleClass("active");
+        // $('aside nav').slideToggle(750);
+        $('#sidebar nav').toggleClass('open');
+    });
 
     // 下拉選單
     $(".dropbtn").click(function(){
