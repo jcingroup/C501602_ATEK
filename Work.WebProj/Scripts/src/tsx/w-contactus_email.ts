@@ -35,7 +35,7 @@
         }).done(function (result: LoginResult, textStatus, jqXHRdata) {
             if (result.result) {
                 $("#err").hide();
-                alert('Email已送出，我們會儘快與您聯絡!');
+                alert(result.message);
             }
             else {
                 $("#err").show();

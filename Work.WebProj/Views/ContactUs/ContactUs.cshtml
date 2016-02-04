@@ -7,37 +7,29 @@
 }
 
 @section Scripts {
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="~/Content/js/map.js"></script>
     <script src="~/Scripts/src/tsx/w-contactus_email.js?v=@CommWebSetup.CacheVer"></script>
-    <script>
-        var onloadCallback = function () {
-            widgetId = grecaptcha.render('widgetId', {
-                'sitekey': '6LfOXBcTAAAAAFNfTvo7HMmCLVvn3oz6flwzI445',
-                'theme': 'light'
-            });
-        };
-    </script>
 }
 
 <form action="" class="contacts" id="ContactUsInfo">
     <h3 class="font-sp">Welcome to Contact Us</h3>
 
-    <input type="text" id="m_title" placeholder="Title">
+    <input type="text" id="m_title" placeholder="Title" required>
 
-    <input type="text" id="m_name" placeholder="Name">
+    <input type="text" id="m_name" placeholder="Name" required>
 
     <input type="text" id="m_company" placeholder="Company">
 
-    <input type="tel" id="m_tel" placeholder="Tel">
+    <input type="tel" id="m_tel" placeholder="Tel" required>
 
     <input type="tel" id="m_fax" placeholder="Fax">
 
-    <input type="email" id="m_email" placeholder="E-mail">
+    <input type="email" id="m_email" placeholder="E-mail" required>
 
     <textarea rows="8" id="m_content" placeholder="Please fill in this"></textarea>
-    <div id="widgetId"></div>
+    <div class="g-recaptcha" data-sitekey="6LfOXBcTAAAAAFNfTvo7HMmCLVvn3oz6flwzI445"></div>
     <div id="err" style="color:red" hidden></div>
 
     <button class="btn btn-small">SEND</button>

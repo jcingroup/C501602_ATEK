@@ -15,14 +15,14 @@ namespace DotWeb.WebApp.Controllers
             return View("ContactUs");
         }
 
-  
         [HttpPost]
         public string sendMail(ContactUsMailContent md)
         {
             ResultInfo r = new ResultInfo();
             #region 驗證碼
             ValidateResponse Validate = ValidateCaptcha(md.response, "6LfOXBcTAAAAAOqEElEieoCCTQmHAmtRfnqSS141");
-            if (!Validate.Success) {
+            if (!Validate.Success)
+            {
                 r.result = false;
                 r.message = Resources.Res.Log_Err_googleValideNotEquel;
                 return defJSON(r);
@@ -35,7 +35,7 @@ namespace DotWeb.WebApp.Controllers
                     if (md.email == null)
                     {
                         r.result = false;
-                        r.message = "信箱號碼未填寫!";
+                        r.message = Resources.Res.Log_Err_MailAddressBlank;
                         return defJSON(r);
                     }
                     #region 信件發送
@@ -51,13 +51,13 @@ namespace DotWeb.WebApp.Controllers
                     if (mail == false)
                     {
                         r.result = false;
-                        r.message = "信箱號碼不正確或送信失敗!";
+                        r.message = Resources.Res.Log_Err_SendMailFail;
                         return defJSON(r);
                     }
                     #endregion
                 }
                 r.result = true;
-
+                r.message = Resources.Res.Log_Success_SendMail;
             }
             catch (Exception ex)
             {
