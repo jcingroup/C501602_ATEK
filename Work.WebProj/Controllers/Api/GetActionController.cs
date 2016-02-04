@@ -195,7 +195,7 @@ namespace DotWeb.Api
                 var open = openLogic();
                 md.aboutus = RemoveScriptTag(md.aboutus);//移除script標籤
 
-                open.setParmValue(ParmDefine.AboutUs, md.aboutus);
+                //open.setParmValue(ParmDefine.AboutUs, md.aboutus);
 
                 rAjaxResult.result = true;
             }
@@ -214,16 +214,6 @@ namespace DotWeb.Api
                 var open = openLogic();
 
                 open.setParmValue(ParmDefine.Email, md.Email);
-
-                open.setParmValue(ParmDefine.PurchaseTotal, md.PurchaseTotal);
-                open.setParmValue(ParmDefine.HomoiothermyFee, md.HomoiothermyFee);
-                open.setParmValue(ParmDefine.RefrigerFee, md.RefrigerFee);
-
-                open.setParmValue(ParmDefine.AccountName, md.AccountName);
-                open.setParmValue(ParmDefine.BankName, md.BankName);
-                open.setParmValue(ParmDefine.BankCode, md.BankCode);
-                open.setParmValue(ParmDefine.AccountNumber, md.AccountNumber);
-                open.setParmValue(ParmDefine.Fee, md.Fee);
 
                 rAjaxResult.result = true;
             }

@@ -145,14 +145,6 @@ namespace ProcCore.Business.DB0
     public class Param
     {
         public string Email { get; set; }
-        public decimal PurchaseTotal { get; set; }
-        public decimal HomoiothermyFee { get; set; }//常溫運費
-        public decimal RefrigerFee { get; set; }//冷凍(冷藏)運費
-        public string AccountName { get; set; }
-        public string BankName { get; set; }
-        public string BankCode { get; set; }
-        public string AccountNumber { get; set; }
-        public decimal Fee { get; set; }
     }
     #endregion
 

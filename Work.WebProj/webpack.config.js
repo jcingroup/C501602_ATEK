@@ -17,6 +17,8 @@ module.exports = {
         m_support: path.resolve(__dirname, 'Scripts/src/tsx/m-support.js'),
         m_all_category: path.resolve(__dirname, 'Scripts/src/tsx/m-all_category.js'),
         m_sortable: path.resolve(__dirname, 'Scripts/src/tsx/m-sortable.js'),//測試sortable
+        //前台
+        w_contactus_email: path.resolve(__dirname, 'Scripts/src/tsx/w-contactus_email.js'),
         vendors: ['jquery', 'react', 'react-bootstrap', 'moment']
     },
     output: {

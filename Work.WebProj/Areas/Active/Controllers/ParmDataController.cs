@@ -29,8 +29,8 @@ namespace DotWeb.Areas.Active.Controllers
             var open = openLogic();
             using (var db0 = getDB0())
             {
-                string AboutUs = (string)open.getParmValue(ParmDefine.AboutUs);
-                return defJSON(AboutUs);
+                //string AboutUs = (string)open.getParmValue(ParmDefine.AboutUs);
+                return defJSON(new { });
             }
         }
         public string aj_ParamInit()
@@ -41,15 +41,6 @@ namespace DotWeb.Areas.Active.Controllers
             {
                 item.Email = (string)open.getParmValue(ParmDefine.Email);
 
-                item.PurchaseTotal = (decimal)open.getParmValue(ParmDefine.PurchaseTotal);
-                item.HomoiothermyFee = (decimal)open.getParmValue(ParmDefine.HomoiothermyFee);
-                item.RefrigerFee = (decimal)open.getParmValue(ParmDefine.RefrigerFee);
-
-                item.AccountName = (string)open.getParmValue(ParmDefine.AccountName);
-                item.BankName = (string)open.getParmValue(ParmDefine.BankName);
-                item.BankCode = (string)open.getParmValue(ParmDefine.BankCode);
-                item.AccountNumber = (string)open.getParmValue(ParmDefine.AccountNumber);
-                item.Fee = (decimal)open.getParmValue(ParmDefine.Fee);
                 return defJSON(item);
             }
         }

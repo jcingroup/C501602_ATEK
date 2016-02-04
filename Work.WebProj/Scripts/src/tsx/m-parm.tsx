@@ -9,14 +9,6 @@ import CommFunc = require('comm-func');
 namespace Parm {
     interface ParamData {
         Email?: string;
-        PurchaseTotal?: number;
-        HomoiothermyFee?: number;
-        RefrigerFee?: number;
-        AccountName?: string;
-        BankName?: string;
-        BankCode?: string;
-        AccountNumber?: string;
-        Fee?: number;
     }
     export class GridForm extends React.Component<any, { param?: ParamData }>{
 
@@ -31,15 +23,7 @@ namespace Parm {
             this.render = this.render.bind(this);
             this.state = {
                 param: {
-                    Email: null,
-                    PurchaseTotal: 0,
-                    HomoiothermyFee: 0,
-                    RefrigerFee:0,
-                    AccountName: null,
-                    BankName: null,
-                    BankCode: null,
-                    AccountNumber: null,
-                    Fee: 0
+                    Email: null
                 }
             }
         }
@@ -123,101 +107,7 @@ namespace Parm {
                            </div>
                         </div>
                 {/*--email end--*/}
-                {/*--shoppingCost--*/}
-                <div className="item-title text-center">
-                <h5>訂單運費設定</h5>
-                    </div>
-                    <div className="form-group">
-                       <label className="col-xs-3 control-label">會員下訂單，當訂單金額少於NT$</label>
-                       <div className="col-xs-1">
-                                <input className="form-control" type="number"
-                                    value={param.PurchaseTotal}
-                                    onChange={this.setInputValue.bind(this, 'PurchaseTotal') }
-                                    min={0}
-                                    required/>
-                           </div>
-                        <label className="col-xs-2 control-label">元時須付常溫運費NT$</label>
-                       <div className="col-xs-1">
-                                <input className="form-control" type="number"
-                                    value={param.HomoiothermyFee}
-                                    onChange={this.setInputValue.bind(this, 'HomoiothermyFee') }
-                                    min={0}
-                                    required/>
-                           </div>
-                        <label className="col-xs-2 control-label">元或冷凍(冷藏)運費NT$</label>
-                       <div className="col-xs-1">
-                                <input className="form-control" type="number"
-                                    value={param.RefrigerFee}
-                                    onChange={this.setInputValue.bind(this, 'RefrigerFee') }
-                                    min={0}
-                                    required/>
-                           </div>
-                        <label className="col-xs-1 control-label">元</label>
-                        </div>
-
-                {/*--shoppingCost end--*/}
-                {/*--Payment--*/}
-                <div className="item-title text-center">
-                <h5>付款方式</h5>
-                    </div>
-                    <div className="form-group">
-                     <label className="col-xs-4 control-label">當付款方式選擇『ATM轉帳』時，銀行帳號資料為: </label>
-                        </div>
-                    <div className="form-group">
-                       <label className="col-xs-2 control-label">戶名: </label>
-                       <div className="col-xs-3">
-                                <input className="form-control" type="text"
-                                    value={param.AccountName}
-                                    onChange={this.setInputValue.bind(this, 'AccountName') }
-                                    maxLength={16}
-                                    required/>
-                           </div>
-                        </div>
-                    <div className="form-group">
-                       <label className="col-xs-2 control-label">銀行: </label>
-                       <div className="col-xs-3">
-                                <input className="form-control" type="text"
-                                    value={param.BankName}
-                                    onChange={this.setInputValue.bind(this, 'BankName') }
-                                    maxLength={16}
-                                    required/>
-                           </div>
-                        </div>
-                    <div className="form-group">
-                       <label className="col-xs-2 control-label">代碼: </label>
-                       <div className="col-xs-3">
-                                <input className="form-control" type="text"
-                                    value={param.BankCode}
-                                    onChange={this.setInputValue.bind(this, 'BankCode') }
-                                    maxLength={5}
-                                    required/>
-                           </div>
-                        </div>
-                    <div className="form-group">
-                       <label className="col-xs-2 control-label">帳號: </label>
-                       <div className="col-xs-3">
-                                <input className="form-control" type="text"
-                                    value={param.AccountNumber}
-                                    onChange={this.setInputValue.bind(this, 'AccountNumber') }
-                                    maxLength={16}
-                                    required/>
-                           </div>
-                        </div>
-                    {/*<div className="form-group">
-                     <label className="col-xs-4 control-label">當付款方式選擇『貨到付款』時，須加NT$ </label>
-                       <div className="col-xs-1">
-                                <input className="form-control" type="number"
-                                    value={param.Fee}
-                                    onChange={this.setInputValue.bind(this, 'Fee') }
-                                    min={0}
-                                    required/>
-                           </div>
-                     <label className="control-label">元手續費</label>
-                        </div>*/}
-                {/*--Payment end--*/}
                 </div>
-
-
 
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-5">

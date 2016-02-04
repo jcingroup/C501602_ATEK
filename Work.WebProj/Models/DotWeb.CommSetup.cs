@@ -111,46 +111,11 @@ namespace DotWeb.CommSetup
                 return GetKeyValue("MailServer");
             }
         }
-        public static string MailTitle_Order
+        public static string MailTitle
         {
             get
             {
-                return GetKeyValue("MailTitle_Order");
-            }
-        }
-        public static string MailTitle_PaymentReply
-        {
-            get
-            {
-                return GetKeyValue("MailTitle_PaymentReply");
-            }
-        }
-        public static string MailTitle_Ship
-        {
-            get
-            {
-                return GetKeyValue("MailTitle_Ship");
-            }
-        }
-        public static string MailTitle_Cancel
-        {
-            get
-            {
-                return GetKeyValue("MailTitle_Cancel");
-            }
-        }
-        public static string MailTitle_Forgot
-        {
-            get
-            {
-                return GetKeyValue("MailTitle_Forgot");
-            }
-        }
-        public static string MailTitle_Signup
-        {
-            get
-            {
-                return GetKeyValue("MailTitle_Signup");
+                return GetKeyValue("MailTitle");
             }
         }
         public static string[] MailToList

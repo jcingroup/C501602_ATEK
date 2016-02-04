@@ -601,6 +601,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查詢類似 請驗證您不是自動程式。 的當地語系化字串。
+        /// </summary>
+        internal static string Log_Err_googleValideNotEquel {
+            get {
+                return ResourceManager.GetString("Log_Err_googleValideNotEquel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 此節仍其下仍有資料，需先刪除其下節點才能刪除此節點。 的當地語系化字串。
         /// </summary>
         internal static string Log_Err_HasSubTreeData {

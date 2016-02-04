@@ -296,6 +296,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CaptchaResponse.cs" />
     <Compile Include="Models\DotWeb.Controller.cs" />
     <Compile Include="Models\DotWeb.Api.cs" />
     <Compile Include="Models\DotWeb.cs" />
@@ -595,7 +596,7 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-login.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-news.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
-    <TypeScriptCompile Include="Scripts\src\tsx\w-member_login.ts" />
+    <TypeScriptCompile Include="Scripts\src\tsx\w-contactus_email.ts" />
     <TypeScriptCompile Include="Scripts\src\tsx\w-shopping_cart.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\commfunc.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\commwww.ts" />

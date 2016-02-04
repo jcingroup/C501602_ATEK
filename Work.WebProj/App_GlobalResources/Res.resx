@@ -370,4 +370,7 @@
   <data name="Button_ReturnIndex" xml:space="preserve">
     <value>回首頁</value>
   </data>
+  <data name="Log_Err_googleValideNotEquel" xml:space="preserve">
+    <value>請驗證您不是自動程式。</value>
+  </data>
 </root>

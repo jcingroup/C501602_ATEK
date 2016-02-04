@@ -1,5 +1,6 @@
 ﻿using DotWeb.CommSetup;
 using DotWeb.Controllers;
+using GooglereCAPTCHa.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -18,6 +19,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -904,9 +906,9 @@ namespace DotWeb.Controller
             Log.SetupBasePath = System.Web.HttpContext.Current.Server.MapPath("~\\_Code\\Log\\");
             Log.Enabled = true;
 
-            var getMemberIdCookie = Request.Cookies[CommWebSetup.WebCookiesId + ".member_id"];
-            var getMemberName = Request.Cookies[CommWebSetup.WebCookiesId + ".member_name"];
-            MemberId = getMemberIdCookie == null ? null : EncryptString.desDecryptBase64(Server.UrlDecode(getMemberIdCookie.Value));
+            //var getMemberIdCookie = Request.Cookies[CommWebSetup.WebCookiesId + ".member_id"];
+            //var getMemberName = Request.Cookies[CommWebSetup.WebCookiesId + ".member_name"];
+            //MemberId = getMemberIdCookie == null ? null : EncryptString.desDecryptBase64(Server.UrlDecode(getMemberIdCookie.Value));
             try
             {
                 var db = getDB0();
@@ -916,8 +918,6 @@ namespace DotWeb.Controller
                 ViewBag.VisitCount = visitCount;
                 ViewBag.IsFirstPage = false; //是否為首頁，請在首頁的Action此值設為True
                 //ajax_GetSidebarData();//取得左選單內容
-                //ajax_GetAboutUsData();//layout下方aboutus
-
                 this.isTablet = (new WebInfo()).isTablet();
             }
             catch (Exception ex)
@@ -1156,19 +1156,6 @@ namespace DotWeb.Controller
             //}
             //ViewBag.Sidebar = l1;
         }
-        /// <summary>
-        /// 取得萬客摩關於我們資料
-        /// </summary>
-        public void ajax_GetAboutUsData()
-        {
-            string AboutUs = string.Empty;
-            using (var db = getDB0())
-            {
-                var open = openLogic();
-                AboutUs = RemoveHTMLTag((string)open.getParmValue(ParmDefine.AboutUs));
-            }
-            ViewBag.AboutUs = AboutUs;
-        }
         #region 前台抓取圖片
         public string[] GetImgs(string id, string file_kind, string category1, string category2, string size)
         {
@@ -1228,14 +1215,14 @@ namespace DotWeb.Controller
             string tpl_path = string.Format(getImg_path_tpl, category1, category2, id, file_kind);
             string web_folder = Url.Content(tpl_path);
             string server_folder = Server.MapPath(tpl_path);
-  
+
             string[] files = { };
             if (Directory.Exists(server_folder))
             {
                 var get_files = Directory.EnumerateFiles(server_folder)
                     .Where(x => x.EndsWith("jpg") || x.EndsWith("jpeg") || x.EndsWith("png") || x.EndsWith("gif") || x.EndsWith("JPG") || x.EndsWith("JPEG") || x.EndsWith("PNG") || x.EndsWith("GIF") ||
                      x.EndsWith("pdf") || x.EndsWith("PDF") || x.EndsWith("doc") || x.EndsWith("DOC") || x.EndsWith("docx") || x.EndsWith("DOCX") ||
-                     x.EndsWith("xls") || x.EndsWith("XLS") || x.EndsWith("xlsx") || x.EndsWith("XLSX") || x.EndsWith("TXT") || x.EndsWith("txt")) 
+                     x.EndsWith("xls") || x.EndsWith("XLS") || x.EndsWith("xlsx") || x.EndsWith("XLSX") || x.EndsWith("TXT") || x.EndsWith("txt"))
                     .ToList();
                 IList<string> files_path = new List<string>();
                 foreach (var fobj in get_files)
@@ -1404,6 +1391,53 @@ namespace DotWeb.Controller
             }
         }
 
+        #endregion
+        #region google驗證碼
+        public ValidateResponse ValidateCaptcha(string response, string secret)
+        {
+            ValidateResponse result = new ValidateResponse();
+            var client = new WebClient();
+            var reply =
+                client.DownloadString(
+                    string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
+
+            var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
+
+            //when response is false check for the error message
+            result.Success = captchaResponse.Success;
+            if (!captchaResponse.Success)
+            {
+                if (captchaResponse.ErrorCodes.Count <= 0) result.Message = null;
+
+                var error = captchaResponse.ErrorCodes[0].ToLower();
+                switch (error)
+                {
+                    case ("missing-input-secret"):
+                        result.Message = "The secret parameter is missing.";
+                        break;
+                    case ("invalid-input-secret"):
+                        result.Message = "The secret parameter is invalid or malformed.";
+                        break;
+
+                    case ("missing-input-response"):
+                        result.Message = "The response parameter is missing.";
+                        break;
+                    case ("invalid-input-response"):
+                        result.Message = "The response parameter is invalid or malformed.";
+                        break;
+
+                    default:
+                        result.Message = "Error occured. Please try again";
+                        break;
+                }
+            }
+            else
+            {
+                result.Message = "Valid";
+            }
+
+            return result;
+        }
         #endregion
     }
     #endregion
