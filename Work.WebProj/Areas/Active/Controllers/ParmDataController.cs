@@ -11,7 +11,7 @@ namespace DotWeb.Areas.Active.Controllers
     public class ParmDataController : AdminController
     {
         #region Action and function section
-        public ActionResult AboutUS()
+        public ActionResult IndexImg()
         {
             ActionRun();
             return View();

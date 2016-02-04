@@ -13,6 +13,7 @@ module.exports = {
         m_news: path.resolve(__dirname, 'Scripts/src/tsx/m-news.js'),
         m_aboutus: path.resolve(__dirname, 'Scripts/src/tsx/m-aboutus.js'),
         m_parm: path.resolve(__dirname, 'Scripts/src/tsx/m-parm.js'),
+        m_index_img: path.resolve(__dirname, 'Scripts/src/tsx/m-index_img.js'),
         m_banner: path.resolve(__dirname, 'Scripts/src/tsx/m-banner.js'),
         m_support: path.resolve(__dirname, 'Scripts/src/tsx/m-support.js'),
         m_all_category: path.resolve(__dirname, 'Scripts/src/tsx/m-all_category.js'),
