@@ -334,10 +334,7 @@ main {
 .text-right strong { margin-right: 14px; }
 
 // 系列產品(滑動特效)
-#slide, .swiper-slide {
-    height: 260px;
-
-}
+#slide, .swiper-slide { height: 260px; }
 #slide {
     position: relative;
     .btn-prev, .btn-next {
@@ -354,10 +351,9 @@ main {
     }
     .btn-prev { left: 0; }
     .btn-next { right: 0; background-position: -55px center; }
-    img {
-        @include mq-max(phone) {
-            width: 80%;
-        }
+    figure {
+        @include mq(desktop) { width: 30%; }
+        @include mq-max(phone) { width: 80%; }
     }
 }
 

@@ -112,9 +112,7 @@ $goTop-position:        bottom 30px right 10px !default;
 
 // == 行動版主選單
 body, #menu {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    @extend %effect-all;
 }
 .menu-trigger {
     @extend %text-hide;
@@ -133,8 +131,8 @@ body, #menu {
     overflow: hidden;
     width: $button-width;
     height: $button-height;
-    transition: background 0.3s;
 
+    @include prefix(transition, background 0.3s);
     @include prefix(apperance, none, webkit moz);
     @include mq-max(break(desktop,-1)) { display: block; }
     @include mq-max(break(phone, -1)) { top: 40px; }
@@ -145,14 +143,14 @@ body, #menu {
             background: none;
             &::before {
                 top: 0;
-                transform: rotate(45deg);
+                @include prefix(transform, rotate(45deg));
             }
             &::after {
                 bottom: 0;
-                transform: rotate(-45deg);
+                @include prefix(transform, rotate(-45deg));
             }
             &::before, &::after {
-                transition-delay: 0s, 0.3s;
+                @include prefix(transition-delay, '0, .3s');
             }
         }
     }
@@ -164,7 +162,7 @@ body, #menu {
         background: $bar-color;
         height: $bar-thickness;
         margin: auto;
-        transition: background 0s 0.3s;
+        @include prefix(transition, background 0s 0.3s);
 
         &::before,
         &::after {
@@ -173,17 +171,17 @@ body, #menu {
             width: 100%;
             height: $bar-thickness;
             background-color: $bar-color;
-            transition-duration: 0.3s, 0.3s;
-            transition-delay: 0.3s, 0s;
             @include absolute(left 0);
+            @include prefix(transition-duration, '.3s, .3s');
+            @include prefix(transition-delay, '.3s, 0');
         }
         &::before {
             top: -(($button-height / 2) - ($bar-thickness / 2) - $button-pd);
-            transition-property: top, transform;
+            @include prefix(transition-property, 'top, transform');
         }
         &::after {
             bottom: -(($button-height / 2) - ($bar-thickness / 2) - $button-pd);
-            transition-property: bottom, transform;
+            @include prefix(transition-property, 'bottom, transform');
         }
     }
 }
@@ -316,9 +314,7 @@ body {
                 font-size: em(23px);
             }
 
-            li {
-                &:nth-of-type(2) em { background-position: 0 -54px; }
-            }
+            li:nth-of-type(2) em { background-position: 0 -54px; }
         }
         .col-7 {
             font-size: em(13px);
