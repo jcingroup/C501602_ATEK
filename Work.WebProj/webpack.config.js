@@ -5,6 +5,7 @@ module.exports = {
     entry: {
         //基礎功能
         m_menu: path.resolve(__dirname, 'Scripts/src/tsx/m-menu.js'),
+        m_menu_set: path.resolve(__dirname, 'Scripts/src/tsx/m-menu_set.js'),
         m_login: path.resolve(__dirname, 'Scripts/src/tsx/m-login.js'),
         m_roles: path.resolve(__dirname, 'Scripts/src/tsx/m-roles.js'),
         m_change_password: path.resolve(__dirname, 'Scripts/src/tsx/m-change_password.js'),

@@ -131,6 +131,16 @@ namespace ProcCore.Business.DB0
         public string l2_name { get; set; }
 
     }
+    public partial class Menu
+    {
+        public IList<MenuRoleArray> role_array { get; set; }
+    }
+    public class MenuRoleArray
+    {
+        public string role_id { get; set; }
+        public bool role_use { get; set; }
+        public string role_name { get; set; }
+    }
     public class L1
     {
         public int l1_id { get; set; }
@@ -145,6 +155,11 @@ namespace ProcCore.Business.DB0
     public class Param
     {
         public string Email { get; set; }
+    }
+    public class option
+    {
+        public int val { get; set; }
+        public string Lname { get; set; }
     }
     #endregion
 

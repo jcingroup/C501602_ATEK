@@ -247,9 +247,4 @@ namespace DotWeb.Api
         public IList<CategroySort> SortData { get; set; }
     }
     #endregion
-    public class option
-    {
-        public int val { get; set; }
-        public string Lname { get; set; }
-    }
 }

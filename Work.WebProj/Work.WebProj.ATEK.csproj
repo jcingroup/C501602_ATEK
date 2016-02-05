@@ -227,6 +227,7 @@
     <Content Include="Areas\Active\Views\SupportData\Category.cshtml" />
     <Content Include="Areas\Active\Views\NewsData\Category.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
+    <Compile Include="Areas\Base\Controllers\MenuController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
     <Compile Include="Areas\Base\Controllers\UsersController.cs" />
     <Compile Include="Areas\Base\BaseAreaRegistration.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Controllers\Api\AboutUsController.cs" />
     <Compile Include="Controllers\Api\AllCategoryL2Controller.cs" />
     <Compile Include="Controllers\Api\AllCategoryL1Controller.cs" />
+    <Compile Include="Controllers\Api\MenuController.cs" />
     <Compile Include="Controllers\Api\SupportController.cs" />
     <Compile Include="Controllers\Api\GetActionController.cs" />
     <Compile Include="Controllers\Api\BannerController.cs" />
@@ -415,6 +417,7 @@
     <Content Include="Content\sass\pop.scss" />
     <Content Include="Content\sass\vendor\magnific-popup\_main.scss" />
     <Content Include="Content\sass\vendor\magnific-popup\_settings.scss" />
+    <Content Include="Areas\Base\Views\Menu\Main.cshtml" />
     <None Include="gulpfile.js" />
     <Content Include="Content\images\noIE\bg.gif" />
     <Content Include="Content\images\noIE\brow.gif" />
@@ -440,6 +443,7 @@
     <Content Include="Scripts\build\app\m_banner.js" />
     <Content Include="Scripts\build\app\m_change_password.js" />
     <Content Include="Scripts\build\app\m_index_img.js" />
+    <Content Include="Scripts\build\app\m_menu_set.js" />
     <Content Include="Scripts\build\app\m_news.js" />
     <Content Include="Scripts\build\app\m_parm.js" />
     <Content Include="Scripts\build\app\m_roles.js" />
@@ -586,6 +590,7 @@
     <TypeScriptCompile Include="app_modules\react-datepicker.d\react-datepicker.d.ts" />
     <TypeScriptCompile Include="app_modules\simple-ajax-uploader\SimpleAjaxUploader.def.ts" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-all_category.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-menu_set.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-index_img.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-support.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-sortable.tsx" />
@@ -677,6 +682,7 @@
     <Content Include="Areas\Active\Views\BannerData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\AboutUsData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\SupportData\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Base\Views\Menu\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
