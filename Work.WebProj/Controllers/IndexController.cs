@@ -25,6 +25,13 @@ namespace DotWeb.Controllers
                     i.imgsrc = GetImg(i.banner_id.ToString(), "Banner", "Active", "BannerData", null);
                 }
                 #endregion
+                #region get other img
+                info.NewProuctImgSrc = GetImg("IndexImg", "NewProduct", "Active", "ParmData", null);
+                info.About1ImgSrc = GetImg("IndexImg", "About1", "Active", "ParmData", null);
+                info.About2ImgSrc = GetImg("IndexImg", "About2", "Active", "ParmData", null);
+                info.NewsImgSrc = GetImg("IndexImg", "EXHIBITION", "Active", "ParmData", null);
+                info.SupportImgSrc = GetImg("IndexImg", "SUPPORT", "Active", "ParmData", null);
+                #endregion
             }
             return View("Index", info);
         }
@@ -37,5 +44,10 @@ namespace DotWeb.Controllers
     public class IndexInfo
     {
         public List<m_Banner> banners { get; set; }
+        public string NewProuctImgSrc { get; set; }
+        public string About1ImgSrc { get; set; }
+        public string About2ImgSrc { get; set; }
+        public string NewsImgSrc { get; set; }
+        public string SupportImgSrc { get; set; }
     }
 }

@@ -96,53 +96,53 @@ namespace IndexImg {
                             </ol>
                         </div>
                    <div className="form-group">
-                        <label className="col-xs-2 control-label">最新產品</label>
+                        <label className="col-xs-2 control-label">New Product</label>
                         <div className="col-xs-8">
-                        <CommCmpt.MasterImageUpload FileKind="Banner" MainId={1} ParentEditType={2} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
-                            url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
+                        <CommCmpt.MasterImageUpload FileKind="NewProduct" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
                         <small className="help-block">最多1張圖，建議尺寸 w960 x h580</small>
                             </div>
                        </div>
                    <div className="form-group">
-                        <label className="col-xs-2 control-label">最新產品</label>
+                        <label className="col-xs-2 control-label">ABOUT ATEK</label>
                         <div className="col-xs-8">
-                        <CommCmpt.MasterImageUpload FileKind="Banner" MainId={1} ParentEditType={2} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
-                            url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
+                        <CommCmpt.MasterImageUpload FileKind="About1" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
                         <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                    <div className="form-group">
-                        <label className="col-xs-2 control-label">最新產品</label>
+                        <label className="col-xs-2 control-label">OEM/ODM</label>
                         <div className="col-xs-8">
-                        <CommCmpt.MasterImageUpload FileKind="Banner" MainId={1} ParentEditType={2} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
-                            url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
+                        <CommCmpt.MasterImageUpload FileKind="About2" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
                         <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                    <div className="form-group">
-                        <label className="col-xs-2 control-label">最新產品</label>
+                        <label className="col-xs-2 control-label">EXHIBITION</label>
                         <div className="col-xs-8">
-                        <CommCmpt.MasterImageUpload FileKind="Banner" MainId={1} ParentEditType={2} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
-                            url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
+                        <CommCmpt.MasterImageUpload FileKind="EXHIBITION" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
                         <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                    <div className="form-group">
-                        <label className="col-xs-2 control-label">最新產品</label>
+                        <label className="col-xs-2 control-label">SUPPORT</label>
                         <div className="col-xs-8">
-                        <CommCmpt.MasterImageUpload FileKind="Banner" MainId={1} ParentEditType={2} url_upload={gb_approot + 'Active/BannerData/aj_FUpload'} url_list={gb_approot + 'Active/BannerData/aj_FList'}
-                            url_delete={gb_approot + 'Active/BannerData/aj_FDelete'} />
+                        <CommCmpt.MasterImageUpload FileKind="SUPPORT" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
                         <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                 {/*--email end--*/}
                 </div>
 
-            <div className="form-action">
+            {/*<div className="form-action">
                 <div className="col-xs-4 col-xs-offset-5">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
                     </div>
-                </div>
+                </div>*/}
             </div>
         </form>
                     </div>

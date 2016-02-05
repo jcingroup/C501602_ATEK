@@ -157,51 +157,6 @@ namespace DotWeb.CommSetup
                 return imUp;
             }
         }
-        public static ImageUpScope ProductList
-        {
-            get
-            {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
-                imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ folderName="606", width=606}
-                };
-                return imUp;
-            }
-        }
-        public static ImageUpScope ProductRoll
-        {
-            get
-            {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 10, limitSize = 1024 * 1024 * 2 };
-                imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ folderName="400", width=400}
-                };
-                return imUp;
-            }
-        }
-
-        public static ImageUpScope Member
-        {
-            get
-            {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
-                imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ folderName="162", width=162}
-                };
-                return imUp;
-            }
-        }
-        public static ImageUpScope Company
-        {
-            get
-            {
-                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
-                imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ folderName="162", width=162}
-                };
-                return imUp;
-            }
-        }
         public static ImageUpScope BannerRotator
         {
             get
@@ -213,13 +168,24 @@ namespace DotWeb.CommSetup
                 return imUp;
             }
         }
-        public static ImageUpScope FirmRotator
+        public static ImageUpScope IndexNewProduct
         {
             get
             {
                 ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
                 imUp.Parm = new ImageSizeParm[] {
-                    new ImageSizeParm(){ heigh=65}
+                    new ImageSizeParm(){width=960 }
+                };
+                return imUp;
+            }
+        }
+        public static ImageUpScope IndexInfo
+        {
+            get
+            {
+                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
+                imUp.Parm = new ImageSizeParm[] {
+                    new ImageSizeParm(){width=415 }
                 };
                 return imUp;
             }

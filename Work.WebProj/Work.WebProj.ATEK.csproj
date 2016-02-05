@@ -439,6 +439,7 @@
     <Content Include="Scripts\build\app\m_all_category.js" />
     <Content Include="Scripts\build\app\m_banner.js" />
     <Content Include="Scripts\build\app\m_change_password.js" />
+    <Content Include="Scripts\build\app\m_index_img.js" />
     <Content Include="Scripts\build\app\m_news.js" />
     <Content Include="Scripts\build\app\m_parm.js" />
     <Content Include="Scripts\build\app\m_roles.js" />

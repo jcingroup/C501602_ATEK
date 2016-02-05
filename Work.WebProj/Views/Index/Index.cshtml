@@ -31,14 +31,14 @@
 
     <a class="new-product" href="~/Products/PSU_list">
         @* 後台可換圖 w960 x h580 *@
-        <img src="~/Content/images/index/newProduct.jpg">
+        <img src="@Model.NewProuctImgSrc">
     </a>
     <ul class="list-inline">
         @* 後台可換圖 w420 x h200 *@
-        <li><a href="~/AboutUs" style="background-image: url(/Content/images/index/info1.jpg)">ABOUT ATEK</a></li>
-        <li><a href="~/AboutUs" style="background-image: url(/Content/images/index/info2.jpg)">OEM/ODM</a></li>
-        <li><a href="~/News/list" style="background-image: url(/Content/images/index/info3.jpg)">EXHIBITION</a></li>
-        <li><a href="~/Support" style="background-image: url(/Content/images/index/info4.jpg)">SUPPORT</a></li>
+        <li><a href="~/AboutUs" style="background-image: url(@Model.About1ImgSrc)">ABOUT ATEK</a></li>
+        <li><a href="~/AboutUs" style="background-image: url(@Model.About2ImgSrc)">OEM/ODM</a></li>
+        <li><a href="~/News?category=6" style="background-image: url(@Model.NewsImgSrc)">EXHIBITION</a></li>
+        <li><a href="~/Support" style="background-image: url(@Model.SupportImgSrc)">SUPPORT</a></li>
     </ul>
 
 </section><!-- main //-->

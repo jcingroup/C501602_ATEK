@@ -1,4 +1,5 @@
-﻿using DotWeb.Controller;
+﻿using DotWeb.CommSetup;
+using DotWeb.Controller;
 using ProcCore.Business.DB0;
 using ProcCore.Business.LogicConect;
 using ProcCore.HandleResult;
@@ -43,6 +44,64 @@ namespace DotWeb.Areas.Active.Controllers
 
                 return defJSON(item);
             }
+        }
+        #endregion
+        #region ajax file section
+        [HttpPost]
+        public string aj_FUpload(string id, string filekind, string fileName)
+        {
+            UpFileInfo r = new UpFileInfo();
+            #region
+            string tpl_File = string.Empty;
+            try
+            {
+                //banner
+                if (filekind == "NewProduct")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexNewProduct, filekind, "Active", "ParmData");
+                if (filekind == "About1")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+                if (filekind == "About2")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+                if (filekind == "EXHIBITION")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+                if (filekind == "SUPPORT")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+
+
+                r.result = true;
+                r.file_name = fileName;
+            }
+            catch (LogicError ex)
+            {
+                r.result = false;
+                r.message = getRecMessage(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                r.result = false;
+                r.message = ex.Message;
+            }
+            #endregion
+            return defJSON(r);
+        }
+
+        [HttpPost]
+        public string aj_FList(string id, string filekind)
+        {
+            SerializeFileList r = new SerializeFileList();
+
+            r.files = listImgFiles(id, filekind, "Active", "ParmData");
+            r.result = true;
+            return defJSON(r);
+        }
+
+        [HttpPost]
+        public string aj_FDelete(string id, string filekind, string filename)
+        {
+            ResultInfo r = new ResultInfo();
+            DeleteSysFile(id, filekind, filename, ImageFileUpParm.NewsBasicSingle, "Active", "ParmData");
+            r.result = true;
+            return defJSON(r);
         }
         #endregion
     }
