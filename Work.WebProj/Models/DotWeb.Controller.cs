@@ -1200,12 +1200,13 @@ namespace DotWeb.Controller
                 }
                 else
                 {
-                    return Url.Content("~/Content/images/no-pic.gif");
+                    //return Url.Content("~/Content/images/no-pic.gif");
+                    return null;
                 }
             }
             else
             {
-                return Url.Content("~/Content/images/no-pic.gif");
+                return null;
             }
         }
         #endregion
