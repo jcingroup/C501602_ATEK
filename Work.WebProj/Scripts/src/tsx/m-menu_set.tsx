@@ -105,10 +105,12 @@ namespace MenuSet {
         }
         componentDidMount() {
             this.queryGridData(1);
+            this.getAjaxInitData();
         }
         getAjaxInitData() {
             CommFunc.jqGet(this.props.apiInitPath, {})
                 .done(function (data, textStatus, jqXHRdata) {
+                    console.log(data);
                     this.setState({ folder: data.options_folder });
                     //載入下拉是選單內容
                 }.bind(this))
