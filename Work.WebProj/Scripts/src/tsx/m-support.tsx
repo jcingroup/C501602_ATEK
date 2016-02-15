@@ -262,9 +262,16 @@ namespace Support {
                 });
         }
         noneType() {
+            let searchData = this.state.searchData;
+            let options = [];
+            this.state.all_category.forEach((item, i) => {
+                if (searchData.i_Lang == item.lang) {
+                    options = item.items;
+                }
+            });
             this.gridData(0)
                 .done(function (data, textStatus, jqXHRdata) {
-                    this.setState({ edit_type: 0, gridData: data });
+                    this.setState({ edit_type: 0, gridData: data, options_category: options});
                 }.bind(this))
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     CommFunc.showAjaxError(errorThrown);

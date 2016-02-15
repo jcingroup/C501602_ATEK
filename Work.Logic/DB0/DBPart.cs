@@ -131,6 +131,15 @@ namespace ProcCore.Business.DB0
         public string l2_name { get; set; }
 
     }
+    public partial class m_Product_Category_L2
+    {
+        public string l1_name { get; set; }
+    }
+    public partial class m_Product_Category_L3
+    {
+        public string l1_name { get; set; }
+        public string l2_name { get; set; }
+    }
     public partial class Menu
     {
         public IList<MenuRoleArray> role_array { get; set; }

@@ -28,7 +28,13 @@
         <AssociationConnector Association="C50A0_ATEKModel.FK_Support_All_Category_L2" />
         <EntityTypeShape EntityType="C50A0_ATEKModel.News" Width="1.5" PointX="14.875" PointY="13.125" />
         <AssociationConnector Association="C50A0_ATEKModel.FK_News_All_Category_L2" />
-      </Diagram>
+        <EntityTypeShape EntityType="C50A0_ATEKModel.Product_Category_L1" Width="1.5" PointX="12.375" PointY="1.25" />
+        <EntityTypeShape EntityType="C50A0_ATEKModel.Product_Category_L2" Width="1.5" PointX="14.625" PointY="1.125" />
+        <EntityTypeShape EntityType="C50A0_ATEKModel.Product_Category_L3" Width="1.5" PointX="16.875" PointY="1" />
+        <AssociationConnector Association="C50A0_ATEKModel.FK_Product_Category_L2_Product_Category_L1" />
+        <AssociationConnector Association="C50A0_ATEKModel.FK_Product_Category_L3_Product_Category_L1" />
+        <AssociationConnector Association="C50A0_ATEKModel.FK_Product_Category_L3_Product_Category_L2" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

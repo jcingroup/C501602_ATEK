@@ -195,6 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Active\ActiveAreaRegistration.cs" />
+    <Compile Include="Areas\Active\Controllers\ProductDataController.cs" />
     <Compile Include="Areas\Active\Controllers\SupportDataController.cs" />
     <Compile Include="Areas\Active\Controllers\AboutUsDataController.cs" />
     <Compile Include="Areas\Active\Controllers\BannerDataController.cs" />
@@ -226,6 +227,10 @@
     <Content Include="Areas\Active\Views\SupportData\Main.cshtml" />
     <Content Include="Areas\Active\Views\SupportData\Category.cshtml" />
     <Content Include="Areas\Active\Views\NewsData\Category.cshtml" />
+    <Content Include="Areas\Active\Views\ProductData\Main.cshtml" />
+    <Content Include="Areas\Active\Views\ProductData\CategoryL1.cshtml" />
+    <Content Include="Areas\Active\Views\ProductData\CategoryL2.cshtml" />
+    <Content Include="Areas\Active\Views\ProductData\CategoryL3.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
@@ -283,6 +288,9 @@
     <Compile Include="Controllers\Api\AllCategoryL2Controller.cs" />
     <Compile Include="Controllers\Api\AllCategoryL1Controller.cs" />
     <Compile Include="Controllers\Api\MenuController.cs" />
+    <Compile Include="Controllers\Api\ProductCategoryL2Controller.cs" />
+    <Compile Include="Controllers\Api\ProductCategoryL3Controller.cs" />
+    <Compile Include="Controllers\Api\ProductCategoryL1Controller.cs" />
     <Compile Include="Controllers\Api\SupportController.cs" />
     <Compile Include="Controllers\Api\GetActionController.cs" />
     <Compile Include="Controllers\Api\BannerController.cs" />
@@ -446,6 +454,9 @@
     <Content Include="Scripts\build\app\m_menu_set.js" />
     <Content Include="Scripts\build\app\m_news.js" />
     <Content Include="Scripts\build\app\m_parm.js" />
+    <Content Include="Scripts\build\app\m_product_category_l1.js" />
+    <Content Include="Scripts\build\app\m_product_category_l2.js" />
+    <Content Include="Scripts\build\app\m_product_category_l3.js" />
     <Content Include="Scripts\build\app\m_roles.js" />
     <Content Include="Scripts\build\app\m_support.js" />
     <Content Include="Scripts\cdn\BootSideMenu.js" />
@@ -592,6 +603,9 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-all_category.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-menu_set.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-index_img.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-product_category_l1.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-product_category_l3.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-product_category_l2.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-support.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-sortable.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-change_password.tsx" />
@@ -683,6 +697,7 @@
     <Content Include="Areas\Active\Views\AboutUsData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\SupportData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Base\Views\Menu\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Active\Views\ProductData\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

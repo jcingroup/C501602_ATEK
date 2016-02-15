@@ -182,10 +182,28 @@
     <Compile Include="DB0\m_News.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\m_Product_Category_L1.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\m_Product_Category_L2.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\m_Product_Category_L3.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB0\m_Support.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\News.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\Product_Category_L1.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\Product_Category_L2.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\Product_Category_L3.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\Support.cs">

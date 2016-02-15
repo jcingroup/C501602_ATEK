@@ -138,6 +138,39 @@
         i_Hide?: boolean;
         i_Lang?: string;
     }
+    interface Product_Category_L1 extends BaseEntityTable {
+        product_category_l1_id?: number;
+        l1_name?: string;
+        l1_info?: string;
+        l1_sort?: number;
+        i_Hide?: boolean;
+        i_Lang?: string;
+        Product_Category_L2?: server.Product_Category_L2[];
+        Product_Category_L3?: server.Product_Category_L3[];
+    }
+    interface Product_Category_L2 extends BaseEntityTable {
+        product_category_l2_id?: number;
+        l1_id?: number;
+        l2_name?: string;
+        l2_info?: string;
+        l2_sort?: number;
+        i_Hide?: boolean;
+        i_Lang?: string;
+        Product_Category_L1?: server.Product_Category_L1;
+        Product_Category_L3?: server.Product_Category_L3[];
+    }
+    interface Product_Category_L3 extends BaseEntityTable {
+        product_category_l3_id?: number;
+        l1_id?: number;
+        l2_id?: number;
+        l3_name?: string;
+        l3_info?: string;
+        l3_sort?: number;
+        i_Hide?: boolean;
+        i_Lang?: string;
+        Product_Category_L1?: server.Product_Category_L1;
+        Product_Category_L2?: server.Product_Category_L2;
+    }
     interface All_Category_L1 extends BaseEntityTable {
         all_category_l1_id?: number;
         l1_name?: string;
@@ -169,5 +202,18 @@
     interface Option {//分類管理選單用
         val?: number;
         Lname?: string;
+    }
+    interface LangOptionByProduct {
+        lang?: string;
+        items?: Array<server.L1>;
+    }
+    interface L1 {//產品分類第一層
+        l1_id?: number;
+        l1_name?: string;
+        l2_list?: server.L2[];
+    }
+    interface L2 {//產品分類第二層
+        l2_id?: number;
+        l2_name?: string;
     }
 } 
