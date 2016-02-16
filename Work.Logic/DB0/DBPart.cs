@@ -131,20 +131,28 @@ namespace ProcCore.Business.DB0
         public string l2_name { get; set; }
 
     }
+    public partial class m_Product_Category_L1
+    {
+        public IList<m_Product_Category_L2> l2_list { get; set; }
+    }
     public partial class m_Product_Category_L2
     {
         public string l1_name { get; set; }
+        public IList<m_Product_Category_L3> l3_list { get; set; }
     }
     public partial class m_Product_Category_L3
     {
         public string l1_name { get; set; }
         public string l2_name { get; set; }
+        public IList<m_Product> product_list { get; set; }
     }
     public partial class m_Product
     {
         public string l1_name { get; set; }
         public string l2_name { get; set; }
         public string l3_name { get; set; }
+        public string imgsrc { get; set; }
+        public IList<ProductModel> models { get; set; }
     }
     public partial class Menu
     {

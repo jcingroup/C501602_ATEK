@@ -1,4 +1,4 @@
-﻿
+﻿@model List<ProcCore.Business.DB0.m_Product_Category_L1>
 @{
     ViewBag.Title = "Products::FEATURE OF PRODUCT::AC-DC";
     ViewBag.BodyClass = "Products";
@@ -10,39 +10,26 @@
     <li><a href="~/Products">PRODUCTS</a></li>
 }
 
-<section class="catalog">
-    <h3 class="font-sp">AC-DC</h3>
+@foreach (var item in Model)
+{
+    <section class="catalog">
+        <h3 class="font-sp">@item.l1_name</h3>
 
-    <header class="intro">
-        @* 此為編輯器，下列為範例 *@
-        <img class="float-r" src="~/Content/images/Products/intro.jpg" alt="Feature of product">
-        <ul class="text-list">
-            <li>High efficiency up to 93%</li>
-            <li>Depending on the load, either constant current or constant voltage mode is applicable.</li>
-            <li>Saving Power < 0.5W</li>
-            <li>Over Voltage, Short circuit and Overload protection.</li>
-            <li>Built-in 3 in 1 dimming function, DALI, Zigbee as options.</li>
-            <li>Surge protection 4KV / 5KV.</li>
-        </ul>
-    </header><!-- info //-->
-
-    <dl>
-        <dt>Contant Voltage</dt>
-        <dd>
-            <a href="~/Products/PSU_list" class="btn">LUX Series</a>
-        </dd>
-    </dl>
-    <dl>
-        <dt>DALI</dt>
-        <dd>
-            <a href="~/Products/PSU_list" class="btn">Lux Series</a>
-        </dd>
-    </dl>
-    <dl>
-        <dt>Wireless</dt>
-        <dd>
-            <a href="~/Products/PSU_list" class="btn">Zigbee</a>
-            <a href="~/Products/PSU_list" class="btn">Sub-GHZ</a>
-        </dd>
-    </dl>
-</section>
+        <header class="intro">
+            @* 此為編輯器，下列為範例 *@
+            @Html.Raw(item.l1_info)
+        </header><!-- info //-->
+        @foreach (var l2 in item.l2_list)
+        {
+            <dl>
+                <dt>@l2.l2_name</dt>
+                <dd>
+                    @foreach (var l3 in l2.l3_list)
+                    {
+                        <a href="~/Products/PSU_list?l2_id=@l2.product_category_l2_id" class="btn">@l3.l3_name</a>
+                    }
+                </dd>
+            </dl>
+        }
+    </section>
+}

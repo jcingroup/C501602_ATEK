@@ -1,8 +1,8 @@
-﻿
+﻿@model ProcCore.Business.DB0.m_Product_Category_L2
 @{
     ViewBag.Title = "Products::FEATURE OF PRODUCT::AC-DC";
     ViewBag.BodyClass = "Products";
-    ViewBag.Target = "Constant Voltage";
+    ViewBag.Target = Model.l2_name;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
@@ -19,126 +19,30 @@
 <div id="content">
 
     <header class="intro">
-        <h3 class="font-sp">Constant Voltage</h3>
+        <h3 class="font-sp">@Model.l2_name</h3>
         <h2 class="font-sp">FEATURE</h2>
-        <img class="float-r" src="~/Content/images/Products/intro.jpg" alt="Feature of product">
-        <ul class="text-list">
-            <li>High efficiency up to 93%</li>
-            <li>Depending on the load, either constant current or constant voltage mode is applicable.</li>
-            <li>Saving Power < 0.5W</li>
-            <li>Over Voltage, Short circuit and Overload protection.</li>
-            <li>Built-in 3 in 1 dimming function, DALI, Zigbee as options.</li>
-            <li>Surge protection 4KV / 5KV.</li>
+        @Html.Raw(Model.l2_info)
         </ul>
     </header><!-- info //-->
+    @foreach (var l3 in Model.l3_list)
+    {
+        <section id="@("l3-"+l3.product_category_l3_id)" class="kind">
+            <h3 class="font-sp">@l3.l3_name</h3>
+            @foreach (var prod in l3.product_list)
+            {
+                <figure>
+                    <img src="@prod.imgsrc" alt="產品圖">
+                    <figcaption>
+                        <h4>@prod.power</h4>
+                        @foreach (var md in prod.models)
+                        {
+                            <span>@md.model_name</span>
+                        }
+                        <a href="~/Products/PSU_content?id=@prod.product_id">READ MORE</a>
+                    </figcaption>
+                </figure>
+            }
+        </section>
+    }
 
-    <section id="p1" class="kind">
-        <h3 class="font-sp">LUX Series</h3>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>300W</h4>
-                <span>LUX2-300-24</span>
-                <span>LUX2-300-36</span>
-                <span>LUX2-300-48</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>200W</h4>
-                <span>LUX2-200-24</span>
-                <span>LUX2-200-36</span>
-                <span>LUX2-200-48</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>150W</h4>
-                <span>LUX2-150-24</span>
-                <span>LUX2-150-36</span>
-                <span>LUX2-150-48</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>120W</h4>
-                <span>LUX2-120-24</span>
-                <span>LUX2-120-36</span>
-                <span>LUX2-120-48</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>120W</h4>
-                <span>LUX2-120-55</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>100W</h4>
-                <span>LUX2-100-24</span>
-                <span>LUX2-100-36</span>
-                <span>LUX2-100-48</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>60W</h4>
-                <span>PRE-060-24</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>40W</h4>
-                <span>PRE-040-55</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>30W</h4>
-                <span>PRE-030-24</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>20W</h4>
-                <span>PRE-020-24</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>20W</h4>
-                <span>PRE-020-55</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-        <figure>
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-            <figcaption>
-                <h4>10W</h4>
-                <span>PRE-020-24</span>
-                <a href="~/Products/PSU_content">READ MORE</a>
-            </figcaption>
-        </figure>
-    </section>
 </div><!-- content //-->

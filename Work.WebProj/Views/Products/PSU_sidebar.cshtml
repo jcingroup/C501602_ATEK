@@ -1,30 +1,50 @@
-﻿<aside id="sidebar" class="sub-nav">
+﻿@{
+
+    var sidebar = (List<ProcCore.Business.DB0.L1>)ViewBag.Sidebar;
+}
+<aside id="sidebar" class="sub-nav">
     <button class="btn pro-menu">Catalog</button>
     <nav>
-        @* 第1層 *@
-        <header class="font-sp">AC-DC</header>
-
-        <dl class="current">
-            @* 第2層 *@
-            <dt>Constant Voltage</dt>
-            <dd>
-                @* 第3層 list後加 #p1*@
-                <a class="btn" href="PSU_list#p1">LUX Series</a>
-            </dd>
-        </dl>
-        <dl>
-            <dt>DALI</dt>
-            <dd>
-                <a class="btn" href="PSU_list#p1">LUX Series</a>
-            </dd>
-        </dl>
-        <dl>
-            <dt>Wireless</dt>
-            <dd>
-                <a class="btn" href="PSU_list#p1">Zigbee</a>
-                <a class="btn" href="PSU_list#p2">Sub-GHZ</a>
-            </dd>
-        </dl>
+        @foreach (var l1 in sidebar)
+        {
+            @* 第1層 *@
+            <header class="font-sp">@l1.l1_name</header>
+            foreach (var l2 in l1.l2_list)
+            {
+                if (l2.l2_id == ViewBag.l2_id)
+                {
+                    var index = 1;
+                    <dl class="current">
+                        @* 第2層 *@
+                        <dt>@l2.l2_name</dt>
+                        <dd>
+                            @* 第3層 list後加 #p1*@
+                            @foreach (var l3 in l2.l3_list)
+                            {
+                                @*<a class="btn" href=@("PSU_list?l2_id="+l2.l2_id+"#p"+l3.l3_id)>@l3.l3_name</a>*@
+                                <a class="btn" href=@("PSU_list?l2_id="+l2.l2_id)>@l3.l3_name</a>
+                                index++;
+                            }
+                        </dd>
+                    </dl>
+                }
+                else {
+                    var index = 1;
+                    <dl>
+                        @* 第2層 *@
+                        <dt>@l2.l2_name</dt>
+                        <dd>
+                            @* 第3層 list後加 #p1*@
+                            @foreach (var l3 in l2.l3_list)
+                            {
+                                <a class="btn" href=@("PSU_list?l2_id="+l2.l2_id)>@l3.l3_name</a>
+                                index++;
+                            }
+                        </dd>
+                    </dl>
+                }
+            }
+        }
     </nav>
 
 </aside>
