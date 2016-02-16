@@ -190,6 +190,28 @@ namespace DotWeb.CommSetup
                 return imUp;
             }
         }
+        public static ImageUpScope Product
+        {
+            get
+            {
+                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
+                imUp.Parm = new ImageSizeParm[] {
+                    new ImageSizeParm(){width=420 }
+                };
+                return imUp;
+            }
+        }
+        public static ImageUpScope Certificate
+        {
+            get
+            {
+                ImageUpScope imUp = new ImageUpScope() { keepOrigin = true, limitCount = 1, limitSize = 1024 * 1024 * 2 };
+                imUp.Parm = new ImageSizeParm[] {
+                    new ImageSizeParm(){width=400 }
+                };
+                return imUp;
+            }
+        }
     }
     public static class SysFileUpParm
     {
@@ -197,7 +219,7 @@ namespace DotWeb.CommSetup
         {
             get
             {
-                FilesUpScope FiUp = new FilesUpScope() { limitCount = 1, limitSize = 1024 * 1024 * 256 };
+                FilesUpScope FiUp = new FilesUpScope() { limitCount = 1, limitSize = 1024 * 1024 * 4 };
                 return FiUp;
             }
         }

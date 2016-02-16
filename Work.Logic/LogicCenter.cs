@@ -17,7 +17,8 @@ namespace ProcCore.Business
         Base, Menu,
         Banner, AboutUsDetail, News, Support,
         All_Category_L1, All_Category_L2,
-        Product_Category_L1, Product_Category_L2, Product_Category_L3
+        Product_Category_L1, Product_Category_L2, Product_Category_L3,
+        Product, ProductModel
     }
     public enum SNType
     {

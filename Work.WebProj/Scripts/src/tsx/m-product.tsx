@@ -7,16 +7,18 @@ import CommCmpt = require('comm-cmpt');
 import CommFunc = require('comm-func');
 import DT = require('dt');
 
-namespace ProductCategoryL3 {
+namespace Product {
     interface Rows {
-        product_category_l3_id?: string;
+        product_id?: string;
         check_del?: boolean,
         l1_id: number;
         l2_id: number;
+        l3_id: number;
         l1_name?: string;
         l2_name?: string;
         l3_name?: string;
-        l3_sort?: number;
+        power?: string;
+        sort?: number;
         i_Hide?: boolean;
         i_Lang: string;
     }
@@ -26,15 +28,145 @@ namespace ProductCategoryL3 {
             i_Lang: string
             category_l1: number
             category_l2: number
+            category_l3: number
         },
         all_category?: Array<server.LangOptionByProduct>,
         options_category_l1?: Array<server.L1>
         options_category_l2?: Array<server.L2>
+        options_category_l3?: Array<server.L3>
     }
     interface FormResult extends IResultBase {
         id: string
     }
+    class HandleProductModel extends React.Component<{ product_id: number },
+        { models?: Array<server.ProductModel>, model_value?: string }> {
+        constructor() {
+            super();
+            this.componentDidMount = this.componentDidMount.bind(this);
+            this.query = this.query.bind(this);
+            this.delItem = this.delItem.bind(this);
+            this.submit = this.submit.bind(this);
+            this.onChange = this.onChange.bind(this);
+            this.state = {
+                models: [], model_value: null
+            };
+        }
+        static defaultProps = {
+        }
 
+        private query() {
+            CommFunc.jqGet(gb_approot + 'api/ProductModel', { product_id: this.props.product_id })
+                .done((data: Array<server.ProductModel>, textStatus, jqXHRdata) => {
+                    this.setState({
+                        model_value: null,
+                        models: data
+                    });
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        componentDidMount() {
+            this.query();
+        }
+        addNew() {
+
+            let sort: number = 1;
+            let last_item: server.ProductModel;
+
+            if (this.state.models.length > 0) {
+                last_item = this.state.models[this.state.models.length - 1];
+
+                if (last_item.edit_type == 1) {
+                    alert('尚有資料編輯中，無法新增。');
+                    return;
+                }
+                sort = last_item.sort + 1;
+            }
+
+
+            let new_item: server.ProductModel = {
+                edit_type: 1,
+                product_model_id: 0,
+                product_id: this.props.product_id,
+                model_name: '',
+                sort: sort
+            };
+            let obj = this.state.models;
+            obj.push(new_item);
+            this.setState({ models: obj });
+        }
+        delItem(i: number, e: React.SyntheticEvent) {
+
+            let obj = this.state.models;
+            let item = obj[i];
+
+            CommFunc.jqDelete(gb_approot + 'api/ProductModel?id=' + item.product_model_id, {})
+                .done((data: Array<server.ProductModel>, textStatus, jqXHRdata) => {
+                    this.query();
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        submit() {
+            if (this.state.model_value.trim() == '') {
+                alert('型號名稱未填寫!');
+                return;
+            }
+
+            let sort: number = 1;
+            let last_item: server.ProductModel;
+
+            if (this.state.models.length > 0) {
+                last_item = this.state.models[this.state.models.length - 1];
+                sort = last_item.sort + 1;
+            }
+
+            var new_obj: server.ProductModel = {
+                product_id: this.props.product_id,
+                model_name: this.state.model_value.trim(),
+                sort: sort
+            };
+
+            CommFunc.jqPost(gb_approot + 'api/ProductModel', new_obj)
+                .done((data, textStatus, jqXHRdata) => {
+                    this.query();
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        cancel() {
+            let obj = this.state.models;
+            obj.splice(-1, 1);
+            this.setState({ models: obj });
+        }
+        onChange(e: React.SyntheticEvent) {
+            let input: HTMLInputElement = e.target as HTMLInputElement;
+            this.setState({ model_value: input.value });
+        }
+
+        render() {
+            return (
+                <div>
+    <div className="input-group">
+        <input type="text" className="form-control" value={this.state.model_value} onChange={this.onChange} />
+        <span className="input-group-btn">
+                                                <button type="button" className="btn-success" onClick={this.submit}><i className="fa-plus"></i> 新增</button>
+            </span>
+        </div>
+    <ul className="help-block list-inline">
+        {this.state.models.map((item, i) => {
+            return <li key={item.product_model_id}><span className="label label-info">{item.model_name} <button type="button" className="btn-link" onClick={this.delItem.bind(this, i) }> &times; </button></span></li>
+        }) }
+        </ul>
+    <small className="help-block">ex.LUX2-200-V024、LUX2-200-V036...</small>
+                    </div>
+
+            );
+        }
+    }
     class GridRow extends React.Component<BaseDefine.GridRowPropsBase<Rows>, BaseDefine.GridRowStateBase> {
         constructor() {
             super();
@@ -44,7 +176,7 @@ namespace ProductCategoryL3 {
         static defaultProps = {
             fdName: 'fieldData',
             gdName: 'searchData',
-            apiPathName: gb_approot + 'api/ProductCategoryL2'
+            apiPathName: gb_approot + 'api/Product'
         }
         delCheck(i, chd) {
             this.props.delCheck(i, chd);
@@ -60,14 +192,15 @@ namespace ProductCategoryL3 {
                        <td>{this.props.itemData.l1_name}</td>
                        <td>{this.props.itemData.l2_name}</td>
                        <td>{this.props.itemData.l3_name}</td>
-                       <td>{this.props.itemData.l3_sort }</td>
+                       <td>{this.props.itemData.power}</td>
+                       <td>{this.props.itemData.sort }</td>
                        <td>{this.props.itemData.i_Hide ? <span className="label label-default">隱藏</span> : <span className="label label-primary">顯示</span>}</td>
                        <td><StateForGird id={this.props.itemData.i_Lang} stateData={DT.LangData} /></td>
                 </tr>;
 
         }
     }
-    export class GridForm extends React.Component<BaseDefine.GridFormPropsBase, FormState<Rows, server.Product_Category_L3>>{
+    export class GridForm extends React.Component<BaseDefine.GridFormPropsBase, FormState<Rows, server.Product>>{
 
         constructor() {
 
@@ -89,7 +222,8 @@ namespace ProductCategoryL3 {
             this.queryInitData = this.queryInitData.bind(this);
             this.setLangVal = this.setLangVal.bind(this);
             this.changeSearchCategoryL1 = this.changeSearchCategoryL1.bind(this);
-            this.onFieldDataL2Change = this.onFieldDataL2Change.bind(this);
+            this.changeSearchCategoryL2 = this.changeSearchCategoryL2.bind(this);
+            this.onFieldDataL3Change = this.onFieldDataL3Change.bind(this);
             this.render = this.render.bind(this);
 
 
@@ -97,23 +231,29 @@ namespace ProductCategoryL3 {
                 fieldData: {},
                 gridData: { rows: [], page: 1 },
                 edit_type: 0,
-                searchData: { keyword: null, i_Lang: null, category_l1: null, category_l2: null },
+                searchData: { keyword: null, i_Lang: null, category_l1: null, category_l2: null, category_l3: null },
                 all_category: [],
                 options_category_l1: [],
-                options_category_l2: []
+                options_category_l2: [],
+                options_category_l3: []
             }
         }
         static defaultProps: BaseDefine.GridFormPropsBase = {
             fdName: 'fieldData',
             gdName: 'searchData',
-            apiPath: gb_approot + 'api/ProductCategoryL3',
-            apiInitPath: gb_approot + 'api/GetAction/GetPorductCategoryL2'
+            apiPath: gb_approot + 'api/Product',
+            apiInitPath: gb_approot + 'api/GetAction/GetPorductCategoryL3'
         }
         componentDidMount() {
             this.queryGridData(1);
             this.queryInitData();
         }
         componentDidUpdate(prevProps, prevState) {
+            if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
+                console.log('CKEDITOR');
+                CKEDITOR.replace('feature');
+                CKEDITOR.replace('technical_specification');
+            }
         }
         queryInitData() {
             CommFunc.jqGet(this.props.apiInitPath, {})
@@ -153,6 +293,8 @@ namespace ProductCategoryL3 {
         handleSubmit(e: React.FormEvent) {
 
             e.preventDefault();
+            this.state.fieldData.feature = CKEDITOR.instances['feature'].getData();
+            this.state.fieldData.technical_specification = CKEDITOR.instances['technical_specification'].getData();
             if (this.state.edit_type == 1) {
                 CommFunc.jqPost(this.props.apiPath, this.state.fieldData)
                     .done((data: FormResult, textStatus, jqXHRdata) => {
@@ -182,9 +324,6 @@ namespace ProductCategoryL3 {
             };
             return;
         }
-        handleOnBlur(date) {
-
-        }
         deleteSubmit() {
 
             if (!confirm('確定是否刪除?')) {
@@ -194,7 +333,7 @@ namespace ProductCategoryL3 {
             var ids = [];
             for (var i in this.state.gridData.rows) {
                 if (this.state.gridData.rows[i].check_del) {
-                    ids.push('ids=' + this.state.gridData.rows[i].product_category_l3_id);
+                    ids.push('ids=' + this.state.gridData.rows[i].product_id);
                 }
             }
 
@@ -240,10 +379,11 @@ namespace ProductCategoryL3 {
             this.setState({
                 edit_type: 1, fieldData: {
                     i_Hide: false,
-                    l3_sort: 0,
+                    sort: 0,
                     i_Lang: 'en-US',
                     l1_id: options[0].l1_id,
-                    l2_id: options[0].l2_list[0].l2_id
+                    l2_id: options[0].l2_list[0].l2_id,
+                    l3_id: options[0].l2_list[0].l3_list[0].l3_id
                 }, options_category_l1: options
             });
         }
@@ -267,6 +407,7 @@ namespace ProductCategoryL3 {
             let searchData = this.state.searchData;
             let options_1 = [];
             let options_2 = [];
+            let options_3 = [];
             this.state.all_category.forEach((item, i) => {
                 if (searchData.i_Lang == item.lang) {
                     options_1 = item.items;
@@ -277,9 +418,14 @@ namespace ProductCategoryL3 {
                     options_2 = item.l2_list;
                 }
             })
+            options_2.map((item: server.L2, i) => {
+                if (searchData.category_l2 == item.l2_id) {
+                    options_3 = item.l3_list;
+                }
+            })
             this.gridData(0)
                 .done(function (data, textStatus, jqXHRdata) {
-                    this.setState({ edit_type: 0, gridData: data, options_category_l1: options_1, options_category_l2: options_2 });
+                    this.setState({ edit_type: 0, gridData: data, options_category_l1: options_1, options_category_l2: options_2, options_category_l3: options_3 });
                 }.bind(this))
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     CommFunc.showAjaxError(errorThrown);
@@ -319,15 +465,25 @@ namespace ProductCategoryL3 {
             });
             if (collentName == this.props.gdName) {
                 NewState.options_category_l2 = [];
+                NewState.options_category_l3 = [];
                 obj['category_l1'] = null;//語系切換,分類搜尋條件清空
                 obj['category_l2'] = null;//語系切換,分類搜尋條件清空
+                obj['category_l3'] = null;//語系切換,分類搜尋條件清空
                 $("#search-category-l1 option:first").attr("selected", "true");
                 $("#search-category-l2 option:first").attr("selected", "true");
+                $("#search-category-l3 option:first").attr("selected", "true");
             } else if (collentName == this.props.fdName) {
-                if (NewState.options_category_l1.length > 0 && NewState.options_category_l1[0].l2_list.length > 0) {
+                if (NewState.options_category_l1.length > 0 &&
+                    NewState.options_category_l1[0].l2_list.length > 0 &&
+                    NewState.options_category_l1[0].l2_list[0].l3_list.length > 0) {
                     $("#field-category option:first").attr("selected", "true");
                     obj['l1_id'] = NewState.options_category_l1[0].l1_id;
                     obj['l2_id'] = NewState.options_category_l1[0].l2_list[0].l2_id;
+                    obj['l3_id'] = NewState.options_category_l1[0].l2_list[0].l3_list[0].l3_id;
+                } else {
+                    obj['l1_id'] = null;
+                    obj['l2_id'] = null;
+                    obj['l3_id'] = null;
                 }
             }
             this.setState(NewState);
@@ -340,6 +496,7 @@ namespace ProductCategoryL3 {
             obj[name] = input.value;
 
             NewState.options_category_l2 = [];
+            NewState.options_category_l3 = [];
             NewState.options_category_l1.forEach((item, i) => {
                 if (item.l1_id == parseInt(input.value)) {
                     NewState.options_category_l2 = item.l2_list;
@@ -347,15 +504,36 @@ namespace ProductCategoryL3 {
             });
 
             obj['category_l2'] = null;//階層切換,分類搜尋條件清空
+            obj['category_l3'] = null;//階層切換,分類搜尋條件清空
             $("#search-category-l2 option:first").attr("selected", "true");
+            $("#search-category-l3 option:first").attr("selected", "true");
             this.setState(NewState);
         }
-        onFieldDataL2Change(e: React.SyntheticEvent) {
+        changeSearchCategoryL2(name: string, e: React.SyntheticEvent) {
+            let input: HTMLInputElement = e.target as HTMLInputElement;
+            let NewState = this.state;
+
+            let obj = this.state.searchData;
+            obj[name] = input.value;
+
+            NewState.options_category_l3 = [];
+            NewState.options_category_l2.forEach((item, i) => {
+                if (item.l2_id == parseInt(input.value)) {
+                    NewState.options_category_l3 = item.l3_list;
+                }
+            });
+
+            obj['category_l3'] = null;//階層切換,分類搜尋條件清空
+            $("#search-category-l3 option:first").attr("selected", "true");
+            this.setState(NewState);
+        }
+        onFieldDataL3Change(e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
             let obj = this.state.fieldData;
             var select = $(':selected', e.target);//取得目前選取的option
             obj['l1_id'] = parseInt(select.attr('data-l1'));
-            obj['l2_id'] = parseInt(input.value);
+            obj['l2_id'] = parseInt(select.attr('data-l2'));
+            obj['l3_id'] = parseInt(input.value);
             this.setState({ fieldData: obj });
         }
         render() {
@@ -363,6 +541,7 @@ namespace ProductCategoryL3 {
             var outHtml: JSX.Element = null;
             let option_l1 = this.state.options_category_l1;
             let option_l2 = this.state.options_category_l2;
+            let option_l3 = this.state.options_category_l3;
 
             if (this.state.edit_type == 0) {
                 let searchData = this.state.searchData;
@@ -407,11 +586,21 @@ namespace ProductCategoryL3 {
                                             <label>第二層分類</label> { }
                                             <select className="form-control"
                                                 id="search-category-l2"
-                                                onChange={this.changeGDValue.bind(this, 'category_l2') }
+                                                onChange={this.changeSearchCategoryL2.bind(this, 'category_l2') }
                                                 value={searchData.category_l2} >
                                                 <option value="">全部</option>
                                                 {
                                                 option_l2.map((itemData, i) => <option key={i} value={itemData.l2_id}>{itemData.l2_name}</option>)
+                                                }
+                                                </select> { }
+                                            <label>第三層分類</label> { }
+                                            <select className="form-control"
+                                                id="search-category-l3"
+                                                onChange={this.changeGDValue.bind(this, 'category_l3') }
+                                                value={searchData.category_l3} >
+                                                <option value="">全部</option>
+                                                {
+                                                option_l3.map((itemData, i) => <option key={i} value={itemData.l3_id}>{itemData.l3_name}</option>)
                                                 }
                                                 </select> { }
                                             <button className="btn-primary" type="submit"><i className="fa-search"></i> 搜尋</button>
@@ -429,9 +618,10 @@ namespace ProductCategoryL3 {
                                                 </label>
                                             </th>
                                         <th className="col-xs-1 text-center">修改</th>
-                                        <th className="col-xs-2">第一層分類</th>
+                                        <th className="col-xs-1">第一層分類</th>
                                         <th className="col-xs-2">第二層分類</th>
-                                        <th className="col-xs-2">分類名稱</th>
+                                        <th className="col-xs-2">第三層分類</th>
+                                        <th className="col-xs-2">功率名稱</th>
                                         <th className="col-xs-1">排序</th>
                                         <th className="col-xs-1">狀態</th>
                                         <th className="col-xs-1">語系</th>
@@ -443,7 +633,7 @@ namespace ProductCategoryL3 {
                                         (itemData, i) =>
                                             <GridRow key={i}
                                                 ikey={i}
-                                                primKey={itemData.product_category_l3_id}
+                                                primKey={itemData.product_id}
                                                 itemData={itemData}
                                                 delCheck={this.delCheck}
                                                 updateType={this.updateType} />
@@ -468,23 +658,34 @@ namespace ProductCategoryL3 {
             }
             else if (this.state.edit_type == 1 || this.state.edit_type == 2) {
                 let fieldData = this.state.fieldData;
-
-
+                var Tabs = ReactBootstrap.Tabs;
+                var Tab = ReactBootstrap.Tab;
+                //分類-選單內容
+                let options = [];
+                option_l1.forEach((l1, i) => {
+                    let options_l1_html = <optgroup className="text-danger" key={'l1-' + i} label={l1.l1_name}></optgroup>;
+                    options.push(options_l1_html);
+                    let options_l2_html: JSX.Element = null;
+                    l1.l2_list.forEach((l2, j) => {
+                        let detail = [];
+                        l2.l3_list.forEach((l3, k) => {
+                            let options_l3_html = < option className="text-success" key= { 'l3-' + k } data-l1={l1.l1_id} data-l2={l2.l2_id} value= { l3.l3_id } > {l3.l3_name }</option>;
+                            detail.push(options_l3_html);
+                        });
+                        options_l2_html = <optgroup className="text-warning" key={'l2-' + j} label={l2.l2_name}>{detail}</optgroup>;
+                        options.push(options_l2_html);
+                    });
+                });
+                ////分類-選單內容
                 outHtml = (
                     <div>
     <h4 className="title"> {this.props.caption} 基本資料維護</h4>
     <form className="form-horizontal" onSubmit={this.handleSubmit}>
-        <div className="col-xs-10">
+        <div className="col-xs-6">
+
             <div className="form-group">
-                <label className="col-xs-2 control-label">分類名稱</label>
-                <div className="col-xs-8">
-                    <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'l3_name') } value={fieldData.l3_name} maxLength={64} required />
-                    </div>
-                <small className="col-xs-2 help-inline"><span className="text-danger">(必填) </span>, 最多64字</small>
-                </div>
-            <div className="form-group">
-                <label className="col-xs-2 control-label">語系</label>
-                <div className="col-xs-8">
+                <label className="col-xs-3 control-label">語系</label>
+                <div className="col-xs-6">
                     <select className="form-control"
                         onChange={this.setLangVal.bind(this, this.props.fdName, 'i_Lang') }
                         value={fieldData.i_Lang} >
@@ -493,38 +694,29 @@ namespace ProductCategoryL3 {
                         }
                         </select>
                     </div>
-                <small className="help-inline col-xs-2 text-danger">(必填) </small>
+                <small className="help-inline col-xs-3 text-danger">(必填) </small>
                 </div>
             <div className="form-group">
-                <label className="col-xs-2 control-label">分類</label>
-                <div className="col-xs-8">
+                <label className="col-xs-3 control-label">分類</label>
+                <div className="col-xs-6">
                     <select className="form-control" id="field-category"
-                        onChange={this.onFieldDataL2Change.bind(this) }
-                        value={fieldData.l2_id} >
-                        {
-                        option_l1.map((itemData, i) => {
-                            let options_html = <optgroup key={'l1-' + i} label={itemData.l1_name}>
-                                {
-                                itemData.l2_list.map((l2, j) => < option key= { 'l2-' + j } data-l1={itemData.l1_id} value= { l2.l2_id } > { l2.l2_name }</option>)
-                                }
-                                </optgroup>
-                            return options_html;
-                        })
-                        }
+                        onChange={this.onFieldDataL3Change.bind(this) }
+                        value={fieldData.l2_id} required>
+                        {options}
                         </select>
                     </div>
-                <small className="help-inline col-xs-2 text-danger">(必填) </small>
+                <small className="help-inline col-xs-3 text-danger">(必填) </small>
                 </div>
             <div className="form-group">
-                <label className="col-xs-2 control-label">排序</label>
-                <div className="col-xs-8">
-                    <input type="number" className="form-control" onChange={this.changeFDValue.bind(this, 'l3_sort') } value={fieldData.l3_sort}  />
+                <label className="col-xs-3 control-label">排序</label>
+                <div className="col-xs-6">
+                    <input type="number" className="form-control" onChange={this.changeFDValue.bind(this, 'sort') } value={fieldData.sort}  />
                     </div>
-                <small className="col-xs-2 help-inline">數字越大越前面</small>
+                <small className="col-xs-3 help-inline">數字越大越前面</small>
                 </div>
             <div className="form-group">
-                <label className="col-xs-2 control-label">狀態</label>
-                <div className="col-xs-4">
+                <label className="col-xs-3 control-label">狀態</label>
+                <div className="col-xs-6">
                    <div className="radio-inline">
                        <label>
                             <input type="radio"
@@ -549,6 +741,85 @@ namespace ProductCategoryL3 {
                        </div>
                     </div>
                 </div>
+            <div className="form-group">
+                <label className="col-xs-3 control-label">功率(Power) </label>
+                <div className="col-xs-6">
+                    <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'power') } value={fieldData.power} maxLength={64} required />
+                    </div>
+                <small className="col-xs-3 help-inline"><span className="text-danger">(必填) </span>, 最多64字</small>
+                </div>
+            <div className="form-group">
+                <label className="col-xs-3 control-label">型號(Model) </label>
+                <div className="col-xs-6">
+                    <HandleProductModel product_id={this.state.fieldData.product_id} />
+                    </div>
+                </div>
+
+            </div>
+        <div className="col-xs-6">
+           <div className="form-group">
+                <label className="col-xs-2 control-label">代表圖片</label>
+                <div className="col-xs-8">
+                <CommCmpt.MasterImageUpload FileKind="img1" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
+                    url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
+                <small className="help-block">最多1張圖，建議尺寸 420*350 px, 每張圖最大不可超過2MB</small>
+                    </div>
+               </div>
+           <div className="form-group">
+                <label className="col-xs-2 control-label">附件檔案</label>
+                <div className="col-xs-8">
+                <CommCmpt.MasterFileUpload FileKind="file1" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'}
+                    url_list={gb_approot + 'Active/ProductData/aj_FList'} url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} url_download={gb_approot + 'Active/ProductData/aj_FDown'} />
+                <small className="help-block">最多1個檔案, 每個檔案最大不可超過4MB; 接受檔案類型為pdf、doc、docx、xls、xlsx、txt、png、jpg、jpeg的檔案</small>
+                    </div>
+               </div>
+           <div className="bg-info">
+               <div className="form-group">
+                    <label className="col-xs-2 control-label">證書圖片</label>
+                    <div className="col-xs-8">
+                    <small className="help-block">下列每證書最多傳1張，建議尺寸 400*514 px, 每張最大不可超過2MB</small>
+                        </div>
+                   </div>
+               <div className="form-group">
+                    <label className="col-xs-2 control-label">CE</label>
+                    <div className="col-xs-8">
+                    <CommCmpt.MasterImageUpload FileKind="CE" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
+                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
+                        </div>
+                   </div>
+               <div className="form-group">
+                    <label className="col-xs-2 control-label">UL</label>
+                    <div className="col-xs-8">
+                    <CommCmpt.MasterImageUpload FileKind="UL" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
+                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
+                        </div>
+                   </div>
+               <div className="form-group">
+                    <label className="col-xs-2 control-label">PSE</label>
+                    <div className="col-xs-8">
+                    <CommCmpt.MasterImageUpload FileKind="PSE" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
+                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
+                        </div>
+                   </div>
+               <div className="form-group">
+                    <label className="col-xs-2 control-label">VDE</label>
+                    <div className="col-xs-8">
+                    <CommCmpt.MasterImageUpload FileKind="VDE" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
+                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
+                        </div>
+                   </div>
+               </div>
+
+            </div>
+        <div className="col-xs-12">
+            <Tabs defaultActiveKey={1} animation={false}>
+                <Tab eventKey={1} title="特色(Feature)">
+                    <textarea type="date" className="form-control" id="feature" name="feature" value={fieldData.feature} onChange={this.changeFDValue.bind(this, 'feature') } />
+                    </Tab>
+                <Tab eventKey={2} title="技術規格(Technical Specification)">
+                    <textarea type="date" className="form-control" id="technical_specification" name="technical_specification" value={fieldData.technical_specification} onChange={this.changeFDValue.bind(this, 'technical_specification') } />
+                    </Tab>
+                </Tabs>
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-2">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button> { }
@@ -567,4 +838,4 @@ namespace ProductCategoryL3 {
 }
 
 var dom = document.getElementById('page_content');
-ReactDOM.render(<ProductCategoryL3.GridForm caption={gb_caption} menuName={gb_menuname} iconClass="fa-list-alt" />, dom);
+ReactDOM.render(<Product.GridForm caption={gb_caption} menuName={gb_menuname} iconClass="fa-list-alt" />, dom);

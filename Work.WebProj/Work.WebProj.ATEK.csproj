@@ -291,6 +291,8 @@
     <Compile Include="Controllers\Api\ProductCategoryL2Controller.cs" />
     <Compile Include="Controllers\Api\ProductCategoryL3Controller.cs" />
     <Compile Include="Controllers\Api\ProductCategoryL1Controller.cs" />
+    <Compile Include="Controllers\Api\ProductModelController.cs" />
+    <Compile Include="Controllers\Api\ProductController.cs" />
     <Compile Include="Controllers\Api\SupportController.cs" />
     <Compile Include="Controllers\Api\GetActionController.cs" />
     <Compile Include="Controllers\Api\BannerController.cs" />
@@ -454,6 +456,7 @@
     <Content Include="Scripts\build\app\m_menu_set.js" />
     <Content Include="Scripts\build\app\m_news.js" />
     <Content Include="Scripts\build\app\m_parm.js" />
+    <Content Include="Scripts\build\app\m_product.js" />
     <Content Include="Scripts\build\app\m_product_category_l1.js" />
     <Content Include="Scripts\build\app\m_product_category_l2.js" />
     <Content Include="Scripts\build\app\m_product_category_l3.js" />
@@ -604,6 +607,7 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-menu_set.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-index_img.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-product_category_l1.tsx" />
+    <TypeScriptCompile Include="Scripts\src\tsx\m-product.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-product_category_l3.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-product_category_l2.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-support.tsx" />

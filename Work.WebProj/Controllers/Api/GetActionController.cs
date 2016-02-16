@@ -185,6 +185,10 @@ namespace DotWeb.Api
         }
 
         #region 後台-產品分類
+        /// <summary>
+        /// 取得一層分類
+        /// </summary>
+        /// <returns></returns>
         public IHttpActionResult GetPorductCategoryL1()
         {
             try
@@ -204,6 +208,10 @@ namespace DotWeb.Api
                 return Ok(new { result = true, message = ex.ToString() });
             }
         }
+        /// <summary>
+        /// 取得兩層分類
+        /// </summary>
+        /// <returns></returns>
         public IHttpActionResult GetPorductCategoryL2()
         {
             try
@@ -223,6 +231,47 @@ namespace DotWeb.Api
                                                                                l2_list = y.Product_Category_L2.OrderByDescending(z => z.l2_sort)
                                                                                         .Where(z => !z.i_Hide & z.i_Lang == x.Key)
                                                                                         .Select(z => new L2() { l2_id = z.product_category_l2_id, l2_name = z.l2_name }).ToList()
+                                                                           })
+                                                                       }).ToList();
+
+                    return Ok(new { result = true, data = options_category });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { result = true, message = ex.ToString() });
+            }
+        }
+        /// <summary>
+        /// 取得三層分類
+        /// </summary>
+        /// <returns></returns>
+        public IHttpActionResult GetPorductCategoryL3()
+        {
+            try
+            {
+                using (var db0 = getDB0())
+                {
+                    var options_category = db0.Product_Category_L1.Where(x => !x.i_Hide)
+                                                                       .OrderByDescending(x => x.l1_sort)
+                                                                       .GroupBy(x => x.i_Lang)
+                                                                       .Select(x => new
+                                                                       {
+                                                                           lang = x.Key,
+                                                                           items = x.Select(y => new L1()
+                                                                           {
+                                                                               l1_id = y.product_category_l1_id,
+                                                                               l1_name = y.l1_name,
+                                                                               l2_list = y.Product_Category_L2.OrderByDescending(z => z.l2_sort)
+                                                                                        .Where(z => !z.i_Hide & z.i_Lang == x.Key)
+                                                                                        .Select(z => new L2()
+                                                                                        {
+                                                                                            l2_id = z.product_category_l2_id,
+                                                                                            l2_name = z.l2_name,
+                                                                                            l3_list = z.Product_Category_L3.OrderByDescending(w => w.l3_sort)
+                                                                                            .Where(w => !w.i_Hide & w.i_Lang == x.Key)
+                                                                                            .Select(w => new L3() { l3_id = w.product_category_l3_id, l3_name = w.l3_name }).ToList()
+                                                                                        }).ToList()
                                                                            })
                                                                        }).ToList();
 

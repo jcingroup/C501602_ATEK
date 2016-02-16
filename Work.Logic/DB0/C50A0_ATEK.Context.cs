@@ -45,5 +45,7 @@ namespace ProcCore.Business.DB0
         public virtual DbSet<Product_Category_L1> Product_Category_L1 { get; set; }
         public virtual DbSet<Product_Category_L2> Product_Category_L2 { get; set; }
         public virtual DbSet<Product_Category_L3> Product_Category_L3 { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProductModel> ProductModel { get; set; }
     }
 }

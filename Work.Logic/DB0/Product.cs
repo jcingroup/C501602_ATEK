@@ -13,19 +13,21 @@ namespace ProcCore.Business.DB0
     using System.Collections.Generic;
     
     using Newtonsoft.Json;
-    public partial class Product_Category_L2 : BaseEntityTable
+    public partial class Product : BaseEntityTable
     {
-        public Product_Category_L2()
+        public Product()
         {
-            this.Product_Category_L3 = new HashSet<Product_Category_L3>();
-            this.Product = new HashSet<Product>();
+            this.ProductModel = new HashSet<ProductModel>();
         }
     
-        public int product_category_l2_id { get; set; }
+        public int product_id { get; set; }
+        public string power { get; set; }
+        public string feature { get; set; }
+        public string technical_specification { get; set; }
         public int l1_id { get; set; }
-        public string l2_name { get; set; }
-        public string l2_info { get; set; }
-        public int l2_sort { get; set; }
+        public int l2_id { get; set; }
+        public int l3_id { get; set; }
+        public int sort { get; set; }
         public bool i_Hide { get; set; }
         public string i_InsertUserID { get; set; }
         public Nullable<int> i_InsertDeptID { get; set; }
@@ -38,8 +40,10 @@ namespace ProcCore.Business.DB0
     	[JsonIgnore]
         public virtual Product_Category_L1 Product_Category_L1 { get; set; }
     	[JsonIgnore]
-        public virtual ICollection<Product_Category_L3> Product_Category_L3 { get; set; }
+        public virtual Product_Category_L2 Product_Category_L2 { get; set; }
     	[JsonIgnore]
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual Product_Category_L3 Product_Category_L3 { get; set; }
+    	[JsonIgnore]
+        public virtual ICollection<ProductModel> ProductModel { get; set; }
     }
 }

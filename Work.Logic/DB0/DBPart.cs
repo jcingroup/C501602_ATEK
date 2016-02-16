@@ -140,6 +140,12 @@ namespace ProcCore.Business.DB0
         public string l1_name { get; set; }
         public string l2_name { get; set; }
     }
+    public partial class m_Product
+    {
+        public string l1_name { get; set; }
+        public string l2_name { get; set; }
+        public string l3_name { get; set; }
+    }
     public partial class Menu
     {
         public IList<MenuRoleArray> role_array { get; set; }
@@ -160,6 +166,12 @@ namespace ProcCore.Business.DB0
     {
         public int l2_id { get; set; }
         public string l2_name { get; set; }
+        public List<L3> l3_list { get; set; }
+    }
+    public class L3
+    {
+        public int l3_id { get; set; }
+        public string l3_name { get; set; }
     }
     public class Param
     {

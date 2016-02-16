@@ -191,6 +191,29 @@
         i_Lang?: string;
         All_Category_L1?: server.All_Category_L1;
     }
+    interface Product extends BaseEntityTable {
+        product_id?: number;
+        power?: string;
+        feature?: string;
+        technical_specification?: string;
+        l1_id?: number;
+        l2_id?: number;
+        l3_id?: number;
+        sort?: number;
+        i_Hide?: boolean;
+        i_Lang?: string;
+        Product_Category_L1?: server.Product_Category_L1;
+        Product_Category_L2?: server.Product_Category_L2;
+        Product_Category_L3?: server.Product_Category_L3;
+        ProductModel?: server.ProductModel[];
+    }
+    interface ProductModel extends BaseEntityTable {
+        product_model_id?: number;
+        product_id?: number;
+        model_name?: string;
+        sort?: number;
+        Product?: server.Product;
+    }
     interface CategroySort {//分類管理排序用
         id: number;
         sort: number;
@@ -215,5 +238,10 @@
     interface L2 {//產品分類第二層
         l2_id?: number;
         l2_name?: string;
+        l3_list?: server.L3[];
+    }
+    interface L3 {//產品分類第三層
+        l3_id?: number;
+        l3_name?: string;
     }
 } 

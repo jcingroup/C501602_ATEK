@@ -56,10 +56,21 @@ namespace DotWeb.Areas.Active.Controllers
             string tpl_File = string.Empty;
             try
             {
-                //banner
-                if (filekind == "img")
-                    handleImageSave(fileName, id, ImageFileUpParm.BannerRotator, filekind, "Active", "ProductData");
-
+                //代表圖
+                if (filekind == "img1")
+                    handleImageSave(fileName, id, ImageFileUpParm.Product, filekind, "Active", "ProductData");
+                //證書
+                if (filekind == "CE")
+                    handleImageSave(fileName, id, ImageFileUpParm.Certificate, filekind, "Active", "ProductData");
+                if (filekind == "UL")
+                    handleImageSave(fileName, id, ImageFileUpParm.Certificate, filekind, "Active", "ProductData");
+                if (filekind == "PSE")
+                    handleImageSave(fileName, id, ImageFileUpParm.Certificate, filekind, "Active", "ProductData");
+                if (filekind == "VDE")
+                    handleImageSave(fileName, id, ImageFileUpParm.Certificate, filekind, "Active", "ProductData");
+                //附件
+                if (filekind == "file1")
+                    handleFileSave(fileName, id, SysFileUpParm.BaseLimit, filekind, "Active", "ProductData");
 
                 r.result = true;
                 r.file_name = fileName;
@@ -82,8 +93,13 @@ namespace DotWeb.Areas.Active.Controllers
         public string aj_FList(string id, string filekind)
         {
             SerializeFileList r = new SerializeFileList();
-
-            r.files = listImgFiles(id, filekind, "Active", "ProductData");
+            if (filekind == "file1")
+            {
+                r.files = listDocFiles(id, filekind, "Active", "ProductData");
+            }
+            else {
+                r.files = listImgFiles(id, filekind, "Active", "ProductData");
+            }
             r.result = true;
             return defJSON(r);
         }
@@ -95,6 +111,16 @@ namespace DotWeb.Areas.Active.Controllers
             DeleteSysFile(id, filekind, filename, ImageFileUpParm.NewsBasicSingle, "Active", "ProductData");
             r.result = true;
             return defJSON(r);
+        }
+        [HttpGet]
+        public FileResult aj_FDown(int id, string filekind, string filename)
+        {
+            string path_tpl = string.Format("~/_Code/SysUpFiles/{0}/{1}/{2}/{3}/{4}", "Active", "ProductData", id, filekind, filename);
+            string server_path = Server.MapPath(path_tpl);
+            FileInfo file_info = new FileInfo(server_path);
+            FileStream file_stream = new FileStream(server_path, FileMode.Open, FileAccess.Read);
+            string web_path = Url.Content(path_tpl);
+            return File(file_stream, "application/*", file_info.Name);
         }
         #endregion
     }

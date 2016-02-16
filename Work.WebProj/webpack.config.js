@@ -17,6 +17,7 @@ module.exports = {
         m_index_img: path.resolve(__dirname, 'Scripts/src/tsx/m-index_img.js'),
         m_banner: path.resolve(__dirname, 'Scripts/src/tsx/m-banner.js'),
         m_support: path.resolve(__dirname, 'Scripts/src/tsx/m-support.js'),
+        m_product: path.resolve(__dirname, 'Scripts/src/tsx/m-product.js'),
         m_product_category_l1: path.resolve(__dirname, 'Scripts/src/tsx/m-product_category_l1.js'),
         m_product_category_l2: path.resolve(__dirname, 'Scripts/src/tsx/m-product_category_l2.js'),
         m_product_category_l3: path.resolve(__dirname, 'Scripts/src/tsx/m-product_category_l3.js'),
