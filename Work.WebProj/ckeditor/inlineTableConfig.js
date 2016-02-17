@@ -7,7 +7,9 @@ CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
     config.language = 'zh';
     // config.uiColor = '#AADC6E';
-    config.extraPlugins = 'quicktable';
+    //config.extraPlugins = 'quicktable';
+    //config.extraAllowedContent = 'td(*);';
+    config.allowedContent = true;
     config.contentsCss = ['../../Content/css/editor.css'];
     config.toolbar = [
         {
@@ -23,6 +25,7 @@ CKEDITOR.editorConfig = function (config) {
             items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "Undo", "Redo"]
         },
         { name: 'insert', items: ['Table', 'HorizontalRule'] },
+               { name: "document", items: ["Source", "-"] },
         { name: "editing" }
     ];
     config.autoUpdateElement = true;

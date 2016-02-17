@@ -31,9 +31,10 @@ namespace Product {
             category_l3: number
         },
         all_category?: Array<server.LangOptionByProduct>,
-        options_category_l1?: Array<server.L1>
-        options_category_l2?: Array<server.L2>
-        options_category_l3?: Array<server.L3>
+        options_category_l1?: Array<server.L1>,
+        options_category_l2?: Array<server.L2>,
+        options_category_l3?: Array<server.L3>,
+        table_tmple?: string
     }
     interface FormResult extends IResultBase {
         id: string
@@ -269,7 +270,7 @@ namespace Product {
             CommFunc.jqGet(this.props.apiInitPath, {})
                 .done((data, textStatus, jqXHRdata) => {
                     if (data.result) {
-                        this.setState({ all_category: data.data });
+                        this.setState({ all_category: data.data, table_tmple: data.table });
                     }
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
@@ -386,6 +387,7 @@ namespace Product {
         }
         insertType() {
             let options = this.state.all_category[0].items;
+
             this.setState({
                 edit_type: 1, fieldData: {
                     i_Hide: false,
@@ -393,7 +395,8 @@ namespace Product {
                     i_Lang: 'en-US',
                     l1_id: options[0].l1_id,
                     l2_id: options[0].l2_list[0].l2_id,
-                    l3_id: options[0].l2_list[0].l3_list[0].l3_id
+                    l3_id: options[0].l2_list[0].l3_list[0].l3_id,
+                    technical_specification: this.state.table_tmple
                 }, options_category_l1: options
             });
         }

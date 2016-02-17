@@ -51,7 +51,7 @@ namespace ProcCore.Business.LogicConect
     #region Parm Section
     public enum ParmDefine
     {
-        Open, Email
+        Open, Email, Table
     }
     #endregion
 

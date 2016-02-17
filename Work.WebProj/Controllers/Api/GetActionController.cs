@@ -250,8 +250,10 @@ namespace DotWeb.Api
         {
             try
             {
+                var open = openLogic();
                 using (var db0 = getDB0())
                 {
+                    string table = (string)open.getParmValue(ParmDefine.Table); ;
                     var options_category = db0.Product_Category_L1.Where(x => !x.i_Hide)
                                                                        .OrderByDescending(x => x.l1_sort)
                                                                        .GroupBy(x => x.i_Lang)
@@ -275,7 +277,7 @@ namespace DotWeb.Api
                                                                            })
                                                                        }).ToList();
 
-                    return Ok(new { result = true, data = options_category });
+                    return Ok(new { result = true, data = options_category, table = table });
                 }
             }
             catch (Exception ex)
