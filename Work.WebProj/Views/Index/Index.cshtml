@@ -22,7 +22,10 @@
         @* 圖片尺寸:w1400 x h500 *@
         @foreach (var banner in Model.banners)
         {
-            <li class="swiper-slide"><img src="@banner.imgsrc" alt="@banner.banner_name"></li>
+            if (banner.imgsrc != null)
+            {
+                <li class="swiper-slide"><img src="@banner.imgsrc" alt="@banner.banner_name"></li>
+            }
         }
     </ul>
 </div><!-- banner //-->

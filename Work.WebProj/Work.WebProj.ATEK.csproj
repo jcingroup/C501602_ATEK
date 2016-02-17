@@ -539,6 +539,7 @@
     <Content Include="Views\News\content.cshtml" />
     <Content Include="Views\Products\PSU_catalog.cshtml" />
     <Content Include="Views\ContactUs\ContactUsEmail.cshtml" />
+    <Content Include="Views\Shared\Layout.ja-JP.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,6 +4,8 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.WebPages;
+
 namespace DotWeb.AppStart
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -21,6 +23,10 @@ namespace DotWeb.AppStart
             //{
             //    ContextCondition = (x => (new WebInfo()).isTablet()) 
             //});
+            DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("ja-JP")
+            {
+                ContextCondition = (C => C.Request.Cookies[VarCookie + ".Lang"] != null && C.Request.Cookies[VarCookie + ".Lang"].Value.Contains("ja-JP"))
+            });
         }
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
