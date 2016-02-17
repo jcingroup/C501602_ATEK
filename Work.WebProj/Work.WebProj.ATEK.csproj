@@ -348,6 +348,7 @@
     <Content Include="Content\backstage\_admin\vendors\mask-load.css" />
     <Content Include="Content\backstage\_admin\vendors\toastr.css" />
     <Content Include="Content\css\bootstrap-datetimepicker-build.css" />
+    <Content Include="Content\css\editor-table.css" />
     <Content Include="Content\css\editor.css" />
     <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\index.css" />
@@ -428,6 +429,7 @@
     <Content Include="Content\sass\vendor\magnific-popup\_main.scss" />
     <Content Include="Content\sass\vendor\magnific-popup\_settings.scss" />
     <Content Include="Areas\Base\Views\Menu\Main.cshtml" />
+    <Content Include="Content\sass\editor-table.scss" />
     <None Include="gulpfile.js" />
     <Content Include="Content\images\noIE\bg.gif" />
     <Content Include="Content\images\noIE\brow.gif" />
