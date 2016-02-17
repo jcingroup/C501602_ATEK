@@ -261,7 +261,8 @@ namespace Product {
             if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
                 console.log('CKEDITOR');
                 CKEDITOR.replace('feature', { customConfig: '../ckeditor/inlineConfig.js' });
-                CKEDITOR.replace('technical_specification', { customConfig: '../ckeditor/inlineConfig.js' });
+                CKEDITOR.disableAutoInline = true;
+                CKEDITOR.inline('technical_specification', { customConfig: '../ckeditor/inlineTableConfig.js' });
             }
         }
         queryInitData() {
@@ -821,7 +822,7 @@ namespace Product {
 
             </div>
         <div className="col-xs-12">
-            <Tabs defaultActiveKey={1} animation={false}>
+            <Tabs defaultActiveKey={2} animation={false}>
                 <Tab eventKey={1} title="特色(Feature)">
                     <textarea type="date" className="form-control" id="feature" name="feature" value={fieldData.feature} onChange={this.changeFDValue.bind(this, 'feature') } />
                     </Tab>
