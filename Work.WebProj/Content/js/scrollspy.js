@@ -5,28 +5,35 @@ $(document).ready(function () {
     //smoothscroll
     $('a[href*="#"]').on('click', function (e) {
         e.preventDefault();
-        $(document).off("scroll");
+        var check_exit = $(this).attr("data-exist");
+        if (check_exit == 1) {
+            $(document).off("scroll");
 
-        $('a').each(function () {
-            $(this).removeClass('active');
-        })
-        $(this).addClass('active');
+            $('a').each(function () {
+                $(this).removeClass('active');
+            })
+            $(this).addClass('active');
 
-        var target = this.hash,
-            menu = target,
-            topMenuHeight = $("#sub-nav").outerHeight()+88;
+            var target = this.hash,
+                menu = target,
+                topMenuHeight = $("#sub-nav").outerHeight() + 88;
 
-        $target = $(target);
-        $('html, body').stop().animate({
-            'scrollTop': $target.offset().top+15
-        }, 500, 'swing', function () {
-            window.location.hash = target;
-            $(document).on("scroll", onScroll);
-        });
+            $target = $(target);
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top + 15
+            }, 500, 'swing', function () {
+                window.location.hash = target;
+                $(document).on("scroll", onScroll);
+            });
+        } else {
+            //console.log($(this).attr('href'),this.href);
+            var href = this.href.split("#")[0];
+            location.href=href;
+        }
     });
 });
 
-function onScroll(event){
+function onScroll(event) {
     var scrollPos = $(document).scrollTop();
     $('#sub-nav a').each(function () {
         var currLink = $(this);
@@ -35,7 +42,7 @@ function onScroll(event){
             $(this).removeClass("active");
             currLink.addClass("active");
         }
-        else{
+        else {
             currLink.removeClass("active");
         }
     });
