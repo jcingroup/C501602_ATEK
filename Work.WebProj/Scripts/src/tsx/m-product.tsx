@@ -621,7 +621,7 @@ namespace Product {
                                         <th className="col-xs-1">第一層分類</th>
                                         <th className="col-xs-2">第二層分類</th>
                                         <th className="col-xs-2">第三層分類</th>
-                                        <th className="col-xs-2">功率名稱</th>
+                                        <th className="col-xs-2">產品名稱</th>
                                         <th className="col-xs-1">排序</th>
                                         <th className="col-xs-1">狀態</th>
                                         <th className="col-xs-1">語系</th>
@@ -742,7 +742,7 @@ namespace Product {
                     </div>
                 </div>
             <div className="form-group">
-                <label className="col-xs-3 control-label">功率(Power) </label>
+                <label className="col-xs-3 control-label">產品名稱</label>
                 <div className="col-xs-6">
                     <input type="text" className="form-control" onChange={this.changeFDValue.bind(this, 'power') } value={fieldData.power} maxLength={64} required />
                     </div>
@@ -758,7 +758,7 @@ namespace Product {
             </div>
         <div className="col-xs-6">
            <div className="form-group">
-                <label className="col-xs-2 control-label">代表圖片</label>
+                <label className="col-xs-2 control-label">產品圖</label>
                 <div className="col-xs-8">
                 <CommCmpt.MasterImageUpload FileKind="img1" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
                     url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
@@ -766,7 +766,7 @@ namespace Product {
                     </div>
                </div>
            <div className="form-group">
-                <label className="col-xs-2 control-label">附件檔案</label>
+                <label className="col-xs-2 control-label">附件檔</label>
                 <div className="col-xs-8">
                 <CommCmpt.MasterFileUpload FileKind="file1" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'}
                     url_list={gb_approot + 'Active/ProductData/aj_FList'} url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} url_download={gb_approot + 'Active/ProductData/aj_FDown'} />
@@ -777,7 +777,7 @@ namespace Product {
                <div className="form-group">
                     <label className="col-xs-2 control-label">證書圖片</label>
                     <div className="col-xs-8">
-                    <small className="help-block">下列每證書最多傳1張，建議尺寸 400*514 px, 每張最大不可超過2MB</small>
+                    <small className="help-block">下列每證書最多傳1張，建議尺寸 寬度不超過 1000px, 每張最大不可超過2MB</small>
                         </div>
                    </div>
                <div className="form-group">
