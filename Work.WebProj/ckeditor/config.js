@@ -5,7 +5,7 @@ CKEDITOR.editorConfig = function (config) {
 
     //config.contentsCss = ['../../Content/css/editor.css'];
     config.extraPlugins = 'youtube';
-    config.extraAllowedContent = 'ul(text-list);';
+    config.extraAllowedContent = 'ul(*);';
     config.toolbar = [
         { name: "document", items: ["Source", "-"] },
         { name: "tools", items: ["Maximize", "-"] },

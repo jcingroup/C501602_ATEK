@@ -111,7 +111,7 @@ namespace News {
         componentDidUpdate(prevProps, prevState) {
             if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
                 console.log('CKEDITOR');
-                CKEDITOR.replace('news_content');
+                CKEDITOR.replace('news_content', { customConfig: '../ckeditor/inlineConfig.js' });
             }
         }
         queryInitData() {

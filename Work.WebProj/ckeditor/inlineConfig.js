@@ -7,7 +7,8 @@ CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
     config.language = 'zh';
     // config.uiColor = '#AADC6E';
-
+    config.extraPlugins = 'youtube';
+    config.extraAllowedContent = 'ul(*);';
     config.contentsCss = ['../../Content/css/editor.css'];
     config.toolbar = [
         {
@@ -19,7 +20,7 @@ CKEDITOR.editorConfig = function (config) {
         // { name: "styles", items: ["Styles", "Format"] },
         { name: "styles", items: ["Styles"] },
         { name: "links", items: ["Link", "Unlink", "Anchor"] },
-        { name: 'insert', items: ['Image', 'Table', 'Smiley', 'Iframe'] },
+        { name: 'insert', items: ['Image', 'Youtube', 'Table', 'Smiley', 'Iframe'] },
         {
             name: "clipboard",
             items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "Undo", "Redo"]

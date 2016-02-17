@@ -111,7 +111,7 @@ namespace Support {
         componentDidUpdate(prevProps, prevState) {
             if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
                 console.log('CKEDITOR');
-                CKEDITOR.replace('support_content');
+                CKEDITOR.replace('support_content', { customConfig: '../ckeditor/inlineConfig.js' });
             }
         }
         queryInitData() {

@@ -40,10 +40,42 @@ namespace DotWeb.WebApp.Controllers
             }
             return View("PSU_catalog", l1);
         }
-        public ActionResult PSU_content()
+        public ActionResult PSU_content(int? id)
         {
             ajax_GetProductSidebar();
-            return View();
+            ProductContent content = new ProductContent();
+            using (var db0 = getDB0())
+            {
+                #region get content
+                bool Exist = db0.Product.Any(x => x.product_id == id & !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name);
+                if (id == null || !Exist)
+                {
+                    return Redirect("~/Products");
+                }
+                else
+                {
+                    content.item = db0.Product.Find(id);
+                    content.item.models = content.item.ProductModel.OrderBy(x => x.sort).ToList();
+                    content.item.imgsrc = GetImg(id.ToString(), "img1", "Active", "ProductData", null);
+                    #region get other product
+                    content.product_list = db0.Product.Where(x => !x.i_Hide &
+                                                                  x.l1_id == content.item.l1_id &
+                                                                  x.l2_id == content.item.l2_id &
+                                                                  x.l3_id == content.item.l3_id &
+                                                                  x.product_id != id &
+                                                                  x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name)
+                                                     .OrderByDescending(x => x.sort)
+                                                     .Select(x => new m_Product()
+                                                     {
+                                                         product_id = x.product_id,
+                                                         power = x.power,
+                                                         models = x.ProductModel.OrderBy(y => y.sort).ToList()
+                                                     }).ToList();
+                    #endregion
+                }
+                #endregion
+            }
+            return View(content);
         }
         public ActionResult PSU_sidebar()
         {
@@ -128,5 +160,10 @@ namespace DotWeb.WebApp.Controllers
             }
             ViewBag.Sidebar = l1;
         }
+    }
+    public class ProductContent
+    {
+        public Product item { get; set; }
+        public List<m_Product> product_list { get; set; }
     }
 }

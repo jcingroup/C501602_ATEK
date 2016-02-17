@@ -154,6 +154,11 @@ namespace ProcCore.Business.DB0
         public string imgsrc { get; set; }
         public IList<ProductModel> models { get; set; }
     }
+    public partial class Product
+    {
+        public string imgsrc { get; set; }
+        public IList<ProductModel> models { get; set; }
+    }
     public partial class Menu
     {
         public IList<MenuRoleArray> role_array { get; set; }

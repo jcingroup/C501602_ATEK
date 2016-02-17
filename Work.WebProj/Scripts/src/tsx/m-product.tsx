@@ -251,8 +251,8 @@ namespace Product {
         componentDidUpdate(prevProps, prevState) {
             if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
                 console.log('CKEDITOR');
-                CKEDITOR.replace('feature');
-                CKEDITOR.replace('technical_specification');
+                CKEDITOR.replace('feature', { customConfig: '../ckeditor/inlineConfig.js' });
+                CKEDITOR.replace('technical_specification', { customConfig: '../ckeditor/inlineConfig.js' });
             }
         }
         queryInitData() {
