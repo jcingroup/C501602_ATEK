@@ -1,17 +1,17 @@
 ﻿@model DotWeb.WebApp.Controllers.ProductContent
 @{
-    ViewBag.Title = "Products::FEATURE OF PRODUCT::AC-DC/Constant Voltage/200W"; @* 子分類 需套程式變數的地方 *@
-    ViewBag.BodyClass = "Products";
-    ViewBag.Target = "200W";
-    Layout = "~/Views/Shared/Layout.cshtml";
+    ViewBag.Title = "Products::FEATURE OF PRODUCT::" + Model.item.l1_name + "/" + Model.item.l2_name + "/" + Model.item.power; @* 子分類 需套程式變數的地方 *@
+ViewBag.BodyClass = "Products";
+ViewBag.Target = Model.item.power;
+Layout = "~/Views/Shared/Layout.cshtml";
 }
 
 @section breadCrumb {
     <li><a href="~/Products">PRODUCTS</a></li>
     @* 子分類 需套程式變數的地方 *@
-    <li><a href="~/Products">AC-DC</a></li>
-    <li><a href="~/Products/PSU_list">Constant Voltage</a></li>
-    <li><a href="~/Products/PSU_list#p1">kind</a></li>
+    <li><a href="~/Products">@Model.item.l1_name</a></li>
+    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id">@Model.item.l2_name</a></li>
+    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id">@Model.item.l3_name</a></li>
 }
 
 @section css {
@@ -26,18 +26,18 @@
             autoplay: 4000,
             speed: 1000,
             slidesPerView: 'auto',
-            slidesPerGroup : 1,
-            slidesPerColumnFill : 'row',
+            slidesPerGroup: 1,
+            slidesPerColumnFill: 'row',
             slidesOffsetBefore: 20,
             slidesOffsetAfter: 20,
             autoplayDisableOnInteraction: false,
-            prevButton:'.btn-prev',
-            nextButton:'.btn-next',
+            prevButton: '.btn-prev',
+            nextButton: '.btn-next',
         })
         lightbox.option({
-          disableScrolling: true,
-          fadeDuration: 200,
-          resizeDuration: 200
+            disableScrolling: true,
+            fadeDuration: 200,
+            resizeDuration: 200
         })
     </script>
 }
@@ -47,19 +47,15 @@
 <div id="content">
     <header class="row">
         <div class="pro-pic">
-            <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
+            <img src="@Model.item.imgsrc" alt="產品圖">
         </div>
         <div class="pro-info">
-            <h2 class="font-sp">200W<small>FEATURE</small></h2>
-            <ul class="text-list">
-                <li>High efficiency up to 93%</li>
-                <li>Depending on the load, either constant current or constant voltage mode is applicable.</li>
-                <li>Saving Power < 0.5W</li>
-                <li>Over Voltage, Short circuit and Overload protection.</li>
-                <li>Built-in 3 in 1 dimming function, DALI, Zigbee as options.</li>
-                <li>Surge protection 4KV / 5KV.</li>
-            </ul>
-            <a href="" class="btn btn-download">DOWNLOAD</a>
+            <h2 class="font-sp">@Model.item.power<small>FEATURE</small></h2>
+            @Html.Raw(Model.item.feature)
+            @if (Model.item.filesrc != null)
+            {
+                <a href="@Model.item.filesrc" class="btn btn-download">DOWNLOAD</a>
+            }
         </div>
     </header>
 
@@ -67,78 +63,18 @@
         <h3 class="font-sp">TECHNICAL SPECIFICATION</h3>
         <p class="text-right">
             <strong>Certificate:</strong>
-            <a href="~/Content/images/Products/cert.jpg" class="btn" data-lightbox="img-set" data-title="通過CE認證">CE</a>
+            @if (Model.item.CE_src != null)
+            { <a href="@Model.item.CE_src" class="btn" data-lightbox="img-set" data-title="通過CE認證">CE</a>}
+            @if (Model.item.UL_src != null)
+            { <a href="@Model.item.UL_src" class="btn" data-lightbox="img-set" data-title="通過UL認證">UL</a>}
+            @if (Model.item.PSE_src != null)
+            { <a href="@Model.item.PSE_src" class="btn" data-lightbox="img-set" data-title="通過PSE認證">PSE</a>}
+            @if (Model.item.VDE_src != null)
+            { <a href="@Model.item.VDE_src" class="btn" data-lightbox="img-set" data-title="通過VDE認證">VDE</a>}
         </p>
         <div class="table-rwd">
             @* 下為編輯器 *@
-            <table>
-                <tr>
-                    <th colspan="2">Model</th>
-                    <th>LUX2-200-V024</th>
-                    <th>LUX2-200-V036</th>
-                    <th>LUX2-200-V048</th>
-                </tr>
-
-                <tr>
-                    <td rowspan="3" class="item">Output</td>
-                    <td>Output Voltage (DC)</td>
-                    <td>24V</td>
-                    <td>36V</td>
-                    <td>48V</td>
-                </tr>
-                <tr>
-                    <td>Current Range for CV</td>
-                    <td>0 - 8.33A</td>
-                    <td>0 - 5.56A</td>
-                    <td>0 - 4.17A</td>
-                </tr>
-                <tr>
-                    <td>Rated Power</td>
-                    <td>200W</td>
-                    <td>200W</td>
-                    <td>200W</td>
-                </tr>
-
-                <tr>
-                    <td rowspan="5" class="item">Input</td>
-                    <td>Input Voltage (Range)</td>
-                    <td colspan="3">90 - 305V</td>
-                </tr>
-                <tr>
-                    <td>Power Factor (Typ.)</td>
-                    <td colspan="3">PF > 0.97 / 100VAC, PF > 0.95 / 230VAC</td>
-                </tr>
-                <tr>
-                    <td>Total Harmonic Distortion</td>
-                    <td colspan="3">< 20%</td>
-                </tr>
-                <tr>
-                    <td>Efficiency (Typ. at 240V)</td>
-                    <td>93%</td>
-                    <td>93%</td>
-                    <td>93%</td>
-                </tr>
-                <tr>
-                    <td>Input Current (Typ.)</td>
-                    <td colspan="3">2.3A / 115VAC</td>
-                </tr>
-
-                <tr>
-                    <td class="item">Safety and EMC</td>
-                    <td>Dielectric Strength (Hi-Pot)</td>
-                    <td colspan="3">10mA / 4242 VDC 60S</td>
-                </tr>
-
-                <tr>
-                    <td rowspan="2" class="item">Other</td>
-                    <td>IP</td>
-                    <td colspan="3">65</td>
-                </tr>
-                <tr>
-                    <td>Dimming</td>
-                    <td colspan="3">1 ~ 10V&PWM</td>
-                </tr>
-            </table>
+            @Html.Raw(Model.item.technical_specification)
         </div>
     </section>
 
@@ -146,112 +82,20 @@
         <h3 class="font-sp">OTHER</h3>
         <div id="slide" class="swiper-container">
             <div class="swiper-wrapper">
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>300W</h4>
-                        <span>LUX2-300-24</span>
-                        <span>LUX2-300-36</span>
-                        <span>LUX2-300-48</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>200W</h4>
-                        <span>LUX2-200-24</span>
-                        <span>LUX2-200-36</span>
-                        <span>LUX2-200-48</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>150W</h4>
-                        <span>LUX2-150-24</span>
-                        <span>LUX2-150-36</span>
-                        <span>LUX2-150-48</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>120W</h4>
-                        <span>LUX2-120-24</span>
-                        <span>LUX2-120-36</span>
-                        <span>LUX2-120-48</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>120W</h4>
-                        <span>LUX2-120-55</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>100W</h4>
-                        <span>LUX2-100-24</span>
-                        <span>LUX2-100-36</span>
-                        <span>LUX2-100-48</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>60W</h4>
-                        <span>PRE-060-24</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>40W</h4>
-                        <span>PRE-040-55</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>30W</h4>
-                        <span>PRE-030-24</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>20W</h4>
-                        <span>PRE-020-24</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>20W</h4>
-                        <span>PRE-020-55</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
-                <figure class="swiper-slide">
-                    <img src="~/Content/images/Products/pic.jpg" alt="產品圖">
-                    <figcaption>
-                        <h4>10W</h4>
-                        <span>PRE-020-24</span>
-                        <a href="~/Products/PSU_content">READ MORE</a>
-                    </figcaption>
-                </figure>
+                @foreach (var item in Model.product_list)
+                {
+                    <figure class="swiper-slide">
+                        <img src="@item.imgsrc" alt="產品圖">
+                        <figcaption>
+                            <h4>@item.power</h4>
+                            @foreach (var md in item.models)
+                            {
+                                <span>@md.model_name</span>
+                            }
+                            <a href="~/Products/PSU_content?id=@item.product_id">READ MORE</a>
+                        </figcaption>
+                    </figure>
+                }
             </div>
             <div class="btn-prev"></div>
             <div class="btn-next"></div>

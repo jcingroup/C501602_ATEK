@@ -38,7 +38,7 @@ namespace Product {
     interface FormResult extends IResultBase {
         id: string
     }
-    class HandleProductModel extends React.Component<{ product_id: number },
+    class HandleProductModel extends React.Component<{ product_id: number, parent_edit_type: number },
         { models?: Array<server.ProductModel>, model_value?: string }> {
         constructor() {
             super();
@@ -110,11 +110,20 @@ namespace Product {
                 });
         }
         submit() {
-            if (this.state.model_value.trim() == '') {
+            if (this.state.model_value != null) {
+                if (this.state.model_value.trim() == '') {
+                    alert('型號名稱未填寫!');
+                    return;
+                }
+            } else if (this.state.model_value == null) {
                 alert('型號名稱未填寫!');
                 return;
             }
 
+            if (this.props.parent_edit_type == 1) {
+                alert('請先儲存確認產品新增完畢後，再新增型號!');
+                return;
+            }
             let sort: number = 1;
             let last_item: server.ProductModel;
 
@@ -751,7 +760,7 @@ namespace Product {
             <div className="form-group">
                 <label className="col-xs-3 control-label">型號(Model) </label>
                 <div className="col-xs-6">
-                    <HandleProductModel product_id={this.state.fieldData.product_id} />
+                    <HandleProductModel product_id={this.state.fieldData.product_id} parent_edit_type={this.state.edit_type} />
                     </div>
                 </div>
 

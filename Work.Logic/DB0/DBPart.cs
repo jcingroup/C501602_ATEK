@@ -156,8 +156,16 @@ namespace ProcCore.Business.DB0
     }
     public partial class Product
     {
+        public string l1_name { get; set; }
+        public string l2_name { get; set; }
+        public string l3_name { get; set; }
         public string imgsrc { get; set; }
+        public string filesrc { get; set; }
         public IList<ProductModel> models { get; set; }
+        public string CE_src { get; set; }
+        public string UL_src { get; set; }
+        public string PSE_src { get; set; }
+        public string VDE_src { get; set; }
     }
     public partial class Menu
     {

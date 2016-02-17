@@ -55,8 +55,16 @@ namespace DotWeb.WebApp.Controllers
                 else
                 {
                     content.item = db0.Product.Find(id);
+                    content.item.l1_name = content.item.Product_Category_L1.l1_name;
+                    content.item.l2_name = content.item.Product_Category_L2.l2_name;
+                    content.item.l3_name = content.item.Product_Category_L3.l3_name;
                     content.item.models = content.item.ProductModel.OrderBy(x => x.sort).ToList();
                     content.item.imgsrc = GetImg(id.ToString(), "img1", "Active", "ProductData", null);
+                    content.item.CE_src = GetImg(id.ToString(), "CE", "Active", "ProductData", null);
+                    content.item.UL_src = GetImg(id.ToString(), "UL", "Active", "ProductData", null);
+                    content.item.PSE_src = GetImg(id.ToString(), "PSE", "Active", "ProductData", null);
+                    content.item.VDE_src = GetImg(id.ToString(), "VDE", "Active", "ProductData", null);
+                    content.item.filesrc = GetFile(id.ToString(), "file1", "Active", "ProductData");
                     #region get other product
                     content.product_list = db0.Product.Where(x => !x.i_Hide &
                                                                   x.l1_id == content.item.l1_id &
@@ -70,11 +78,16 @@ namespace DotWeb.WebApp.Controllers
                                                          product_id = x.product_id,
                                                          power = x.power,
                                                          models = x.ProductModel.OrderBy(y => y.sort).ToList()
-                                                     }).ToList();
+                                                     }).Take(20).ToList();
+                    foreach (var i in content.product_list)
+                    {
+                        i.imgsrc = GetImg(i.product_id.ToString(), "img1", "Active", "ProductData", null);
+                    }
                     #endregion
                 }
                 #endregion
             }
+            ViewBag.l2_id = content.item.l2_id;
             return View(content);
         }
         public ActionResult PSU_sidebar()
@@ -99,6 +112,7 @@ namespace DotWeb.WebApp.Controllers
                                                 .Select(x => new m_Product_Category_L2()
                                                 {
                                                     product_category_l2_id = x.product_category_l2_id,
+                                                    l1_name = x.Product_Category_L1.l1_name,
                                                     l2_name = x.l2_name,
                                                     l2_info = x.l2_info,
                                                     l3_list = x.Product_Category_L3.Where(y => !y.i_Hide).OrderByDescending(y => y.l3_sort)
