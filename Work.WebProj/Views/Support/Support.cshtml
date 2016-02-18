@@ -40,9 +40,10 @@
             <header>@item.support_title</header>
             <div>
                 @Html.Raw(item.support_content)
-                @if (item.fileSrc != null)
+                @foreach (var src in item.fileSrcs)
                 {
-                    <a href="@item.fileSrc" class="btn btn-small" download>DOWNLOAD</a>
+                    var file_name = src.Split('/')[src.Split('/').Length - 1];
+                    <a href="@src" class="btn btn-small" download>@file_name</a>
                 }
             </div>
             <footer>@item.day.ToString("yyyy.MM.dd")</footer>

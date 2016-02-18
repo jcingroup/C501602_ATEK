@@ -33,7 +33,7 @@ namespace DotWeb.WebApp.Controllers
                 }
                 foreach (var i in info.items)
                 {
-                    i.fileSrc = GetFile(i.support_id.ToString(), "File1", "Active", "SupportData");
+                    i.fileSrcs = GetFiles(i.support_id.ToString(), "File1", "Active", "SupportData");
                 }
                 #endregion
                 #region get category

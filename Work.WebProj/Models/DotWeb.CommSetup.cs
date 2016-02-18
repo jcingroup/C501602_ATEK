@@ -223,6 +223,14 @@ namespace DotWeb.CommSetup
                 return FiUp;
             }
         }
+        public static FilesUpScope SupportFile
+        {
+            get
+            {
+                FilesUpScope FiUp = new FilesUpScope() { limitCount = 100, limitSize = 1024 * 1024 * 4 };
+                return FiUp;
+            }
+        }
     }
     #endregion
 }

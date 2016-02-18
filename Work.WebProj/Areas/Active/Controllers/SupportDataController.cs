@@ -49,7 +49,7 @@ namespace DotWeb.Areas.Active.Controllers
                 if (filekind == "img1")
                     handleImageSave(fileName, id, ImageFileUpParm.BannerRotator, filekind, "Active", "SupportData");
                 if (filekind == "File1")
-                    handleFileSave(fileName, id, SysFileUpParm.BaseLimit, filekind, "Active", "SupportData");
+                    handleFileSave(fileName, id, SysFileUpParm.SupportFile, filekind, "Active", "SupportData");
 
                 r.result = true;
                 r.file_name = fileName;

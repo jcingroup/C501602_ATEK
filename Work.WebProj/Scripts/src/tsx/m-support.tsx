@@ -518,7 +518,7 @@ namespace Support {
                 <div className="col-xs-8">
                 <MasterFileUpload FileKind="File1" MainId={fieldData.support_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/SupportData/aj_FUpload'}
                     url_list={gb_approot + 'Active/SupportData/aj_FList'} url_delete={gb_approot + 'Active/SupportData/aj_FDelete'} url_download={gb_approot + 'Active/SupportData/aj_FDown'} />
-                <small className="help-block">最多1個檔案, 每個檔案最大不可超過4MB; 接受檔案類型為pdf、doc、docx、xls、xlsx、txt、png、jpg、jpeg的檔案</small>
+                <small className="help-block">每個檔案最大不可超過4MB; 接受檔案類型為pdf、doc、docx、xls、xlsx、txt、png、jpg、jpeg的檔案</small>
                     </div>
                </div>
             <div className="form-group">
