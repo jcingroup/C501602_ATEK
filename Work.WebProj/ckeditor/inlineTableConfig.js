@@ -7,7 +7,7 @@ CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
     config.language = 'zh';
     // config.uiColor = '#AADC6E';
-    //config.extraPlugins = 'quicktable';
+    config.extraPlugins = 'tableresize';
     //config.extraAllowedContent = 'td(*);';
     config.allowedContent = true;
     config.contentsCss = ['../../Content/css/editor.css'];
