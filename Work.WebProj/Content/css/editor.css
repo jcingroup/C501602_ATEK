@@ -251,7 +251,7 @@ h4, h5, h6 {
     font-size: 75%; }
 
 h2 {
-  font-size: 3.875em; }
+  font-size: 3.4375em; }
 
 h3 {
   font-size: 2.1875em; }
@@ -328,11 +328,10 @@ a {
   text-align: center; }
 
 .text-list {
-  font-size: 1.125em;
   line-height: 1.23; }
   .text-list li {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     padding-left: 18px; }
     .text-list li::before {
       content: '';
@@ -399,8 +398,10 @@ tr:nth-of-type(odd) {
         .table-rwd table th, .table-rwd table td {
           white-space: nowrap; } }
 
-h1, h2, h3, h4, h5, h6, p, blockquote,
-ul, ol, li, dl, dt, dd {
+body {
+  padding: 10px; }
+
+h1, h2, h3, h4, h5, h6, p, blockquote, ul, ol, li, dl, dt, dd {
   text-align: left; }
 
 h2 {

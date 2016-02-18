@@ -294,7 +294,7 @@ namespace Product {
         render() {
             return (
                 <div>
-            <div className="form-group">
+            <div className="form-group"> 
                 <label className="col-xs-2 control-label"></label>
                 <div className="col-xs-8">
                     <div className="input-group">
@@ -313,7 +313,7 @@ namespace Product {
                     <CommCmpt.MasterImageUpload FileKind="Certificate" MainId={item.product_certificate_id} ParentEditType={this.props.parent_edit_type} url_upload={gb_approot + 'Active/ProductCertificate/aj_FUpload'} url_list={gb_approot + 'Active/ProductCertificate/aj_FList'}
                         url_delete={gb_approot + 'Active/ProductCertificate/aj_FDelete'} />
                      </div>
-                    <button type="button" className="btn-danger col-xs-1" onClick={this.delItem.bind(this, i) }> &times; </button>
+                    <button type="button" className="btn-danger col-xs-1" onClick={this.delItem.bind(this, i) }><i className="fa-times"></i></button>
                 </div>
         }) }
                     </div>
@@ -930,18 +930,19 @@ namespace Product {
                 <small className="help-block">最多1個檔案, 每個檔案最大不可超過4MB; 接受檔案類型為pdf、doc、docx、xls、xlsx、txt、png、jpg、jpeg的檔案</small>
                     </div>
                </div>
-           <div className="bg-info">
-               <div className="form-group">
-                    <label className="col-xs-2 control-label">證書圖片</label>
-                    <div className="col-xs-8">
-                    <small className="help-block">下列每證書最多傳1張，建議尺寸 寬度不超過 1000px, 每張最大不可超過2MB</small>
-                        </div>
-                   </div>
+        </div>
 
-                   <HandleProductCertificate product_id={this.state.fieldData.product_id} parent_edit_type={this.state.edit_type} />
-               </div>
+       <div className="form-group clear bg-warning">
+           <div className="col-xs-6">
+               <label className="col-xs-3 control-label">證書文件</label>
+               <small className="col-xs-9 help-block">每項證書最多1張圖，建議尺寸寬度不超過 1000px, 每張最大不可超過2MB</small>
+           </div>
 
-            </div>
+           <div className="col-xs-6">
+               <HandleProductCertificate product_id={this.state.fieldData.product_id} parent_edit_type={this.state.edit_type} />
+           </div>
+       </div>
+
         <div className="col-xs-12">
             <Tabs defaultActiveKey={2} animation={false}>
                 <Tab eventKey={1} title="特色(Feature)">
@@ -950,14 +951,15 @@ namespace Product {
                 <Tab eventKey={2} title="技術規格(Technical Specification)">
                     <textarea type="date" className="form-control" id="technical_specification" name="technical_specification" value={fieldData.technical_specification} onChange={this.changeFDValue.bind(this, 'technical_specification') } />
                     </Tab>
-                </Tabs>
+            </Tabs>
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-2">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button> { }
                     <button type="button" onClick={this.noneType}><i className="fa-times"></i> 回前頁</button>
-                    </div>
                 </div>
             </div>
+        </div>
+
         </form>
                         </div >
                 );

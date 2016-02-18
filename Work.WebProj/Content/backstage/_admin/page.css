@@ -8040,7 +8040,7 @@ img {
     background-color: transparent !important;
   }
 
-  /* Undo forms 
+  /* Undo forms
   .form-inline {
     [class*="-group"],
     .form-control {
@@ -12340,4 +12340,8 @@ div.editor hr {
   height: 1px;
   border: 0;
   border-top: 1px dotted #ddd;
+}
+
+.clear {
+  clear: both;
 }

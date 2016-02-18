@@ -339,11 +339,10 @@ a, body, #menu, .hover-shadow, .hover-shadow header, .new-product::before, .new-
   text-align: center; }
 
 .text-list {
-  font-size: 1.125em;
   line-height: 1.23; }
   .text-list li {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     padding-left: 18px; }
     .text-list li::before {
       content: '';

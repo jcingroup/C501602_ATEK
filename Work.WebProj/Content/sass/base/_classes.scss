@@ -29,12 +29,11 @@
 .text-list {
 	@extend %list-unstyled;
 
-	font-size: em(18px);
 	line-height: 1.23;
 
 	li {
 		position: relative;
-		margin-bottom: 15px;
+		margin-bottom: 12px;
 		padding-left: 18px;
 
 		&::before {

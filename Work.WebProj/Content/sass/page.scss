@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-$font-size-h2: 62px;
+$font-size-h2: 55px;
 $font-size-h3: 35px;
 $line:         1px solid #EAEFDE;
 
@@ -331,7 +331,11 @@ main {
     }
 }
 // 証書
-.text-right strong { margin-right: 14px; }
+.spec p {
+    margin-top: 15px;
+
+    strong { margin-right: 14px; }
+}
 
 // 系列產品(滑動特效)
 #slide, .swiper-slide { height: 260px; }

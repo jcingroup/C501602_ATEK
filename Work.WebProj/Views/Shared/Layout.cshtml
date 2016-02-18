@@ -14,8 +14,8 @@
         var gb_approot = '@Url.Content("~")';
     </script>
     <!--[if lt IE 9]><script src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><![endif]-->
+    @RenderSection("css", false)
     <link href="~/Content/css/grid.css" rel="stylesheet">
-    <link href="~/Content/css/swiper.min.css" rel="stylesheet">
     @if (ViewBag.IsFirstPage)
     {
         <link href="~/Content/css/index.css" rel="stylesheet">
@@ -24,7 +24,6 @@
     {
         <link href="~/Content/css/page.css" rel="stylesheet">
     }
-    @RenderSection("css", false)
 </head>
 
 <body class="@ViewBag.BodyClass">
@@ -100,7 +99,6 @@
     </footer><!-- footer -->
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
-    <script src="~/Content/js/swiper/swiper.min.js"></script>
     <script src="~/Content/js/common.js"></script>
     @RenderSection("Scripts", required: false)
     <script src="~/Scripts/GoogleAnalytics.js"></script>

@@ -251,7 +251,7 @@ h4, h5, h6 {
     font-size: 75%; }
 
 h2 {
-  font-size: 3.875em; }
+  font-size: 3.4375em; }
 
 h3 {
   font-size: 2.1875em; }
@@ -345,11 +345,10 @@ a, body, #menu, .hover-shadow, .hover-shadow header, .btn, figcaption, figure, f
   text-align: center; }
 
 .text-list {
-  font-size: 1.125em;
   line-height: 1.23; }
   .text-list li {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     padding-left: 18px; }
     .text-list li::before {
       content: '';
@@ -1289,8 +1288,10 @@ main {
     float: none;
     width: 100%; } }
 
-.text-right strong {
-  margin-right: 14px; }
+.spec p {
+  margin-top: 15px; }
+  .spec p strong {
+    margin-right: 14px; }
 
 #slide, .swiper-slide {
   height: 260px; }
