@@ -195,6 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Active\ActiveAreaRegistration.cs" />
+    <Compile Include="Areas\Active\Controllers\ProductCertificateController.cs" />
     <Compile Include="Areas\Active\Controllers\ProductDataController.cs" />
     <Compile Include="Areas\Active\Controllers\SupportDataController.cs" />
     <Compile Include="Areas\Active\Controllers\AboutUsDataController.cs" />
@@ -231,6 +232,7 @@
     <Content Include="Areas\Active\Views\ProductData\CategoryL1.cshtml" />
     <Content Include="Areas\Active\Views\ProductData\CategoryL2.cshtml" />
     <Content Include="Areas\Active\Views\ProductData\CategoryL3.cshtml" />
+    <Content Include="Areas\Active\Views\ProductCertificate\Main.cshtml" />
     <None Include="Areas\Base\Controllers\ReportChartController.cs" />
     <Compile Include="Areas\Base\Controllers\MenuController.cs" />
     <Compile Include="Areas\Base\Controllers\RolesController.cs" />
@@ -292,6 +294,7 @@
     <Compile Include="Controllers\Api\ProductCategoryL2Controller.cs" />
     <Compile Include="Controllers\Api\ProductCategoryL3Controller.cs" />
     <Compile Include="Controllers\Api\ProductCategoryL1Controller.cs" />
+    <Compile Include="Controllers\Api\ProductCertificateController.cs" />
     <Compile Include="Controllers\Api\ProductModelController.cs" />
     <Compile Include="Controllers\Api\ProductController.cs" />
     <Compile Include="Controllers\Api\SupportController.cs" />
@@ -706,6 +709,7 @@
     <Content Include="Areas\Active\Views\SupportData\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Base\Views\Menu\App_LocalResources\Main.cshtml.resx" />
     <Content Include="Areas\Active\Views\ProductData\App_LocalResources\Main.cshtml.resx" />
+    <Content Include="Areas\Active\Views\ProductCertificate\App_LocalResources\Main.cshtml.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

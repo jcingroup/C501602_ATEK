@@ -39,6 +39,7 @@ namespace Product {
     interface FormResult extends IResultBase {
         id: string
     }
+
     class HandleProductModel extends React.Component<{ product_id: number, parent_edit_type: number },
         { models?: Array<server.ProductModel>, model_value?: string }> {
         constructor() {
@@ -172,6 +173,149 @@ namespace Product {
         }) }
         </ul>
     <small className="help-block">ex.LUX2-200-V024、LUX2-200-V036...</small>
+                    </div>
+
+            );
+        }
+    }
+    class HandleProductCertificate extends React.Component<{ product_id: number, parent_edit_type: number },
+        { certificates?: Array<server.ProductCertificate>, name_value?: string }> {
+        constructor() {
+            super();
+            this.componentDidMount = this.componentDidMount.bind(this);
+            this.query = this.query.bind(this);
+            this.delItem = this.delItem.bind(this);
+            this.submit = this.submit.bind(this);
+            this.onChange = this.onChange.bind(this);
+            this.state = {
+                certificates: [], name_value: null
+            };
+        }
+        static defaultProps = {
+        }
+
+        private query() {
+            CommFunc.jqGet(gb_approot + 'api/ProductCertificate', { product_id: this.props.product_id })
+                .done((data: Array<server.ProductCertificate>, textStatus, jqXHRdata) => {
+                    this.setState({
+                        name_value: null,
+                        certificates: data
+                    });
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        componentDidMount() {
+            this.query();
+        }
+        addNew() {
+
+            let sort: number = 1;
+            let last_item: server.ProductCertificate;
+
+            if (this.state.certificates.length > 0) {
+                last_item = this.state.certificates[this.state.certificates.length - 1];
+
+                if (last_item.edit_type == 1) {
+                    alert('尚有資料編輯中，無法新增。');
+                    return;
+                }
+                sort = last_item.sort + 1;
+            }
+
+
+            let new_item: server.ProductCertificate = {
+                edit_type: 1,
+                product_certificate_id: 0,
+                product_id: this.props.product_id,
+                name: '',
+                sort: sort
+            };
+            let obj = this.state.certificates;
+            obj.push(new_item);
+            this.setState({ certificates: obj });
+        }
+        delItem(i: number, e: React.SyntheticEvent) {
+
+            let obj = this.state.certificates;
+            let item = obj[i];
+
+            CommFunc.jqDelete(gb_approot + 'api/ProductCertificate?id=' + item.product_certificate_id, {})
+                .done((data: Array<server.ProductCertificate>, textStatus, jqXHRdata) => {
+                    this.query();
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        submit() {
+            if (this.state.name_value != null) {
+                if (this.state.name_value.trim() == '') {
+                    alert('證書名稱未填寫!');
+                    return;
+                }
+            } else if (this.state.name_value == null) {
+                alert('證書名稱未填寫!');
+                return;
+            }
+
+            if (this.props.parent_edit_type == 1) {
+                alert('請先儲存確認產品新增完畢後，再新增證書!');
+                return;
+            }
+            let sort: number = 1;
+            let last_item: server.ProductCertificate;
+
+            if (this.state.certificates.length > 0) {
+                last_item = this.state.certificates[this.state.certificates.length - 1];
+                sort = last_item.sort + 1;
+            }
+
+            var new_obj: server.ProductCertificate = {
+                product_id: this.props.product_id,
+                name: this.state.name_value.trim(),
+                sort: sort
+            };
+
+            CommFunc.jqPost(gb_approot + 'api/ProductCertificate', new_obj)
+                .done((data, textStatus, jqXHRdata) => {
+                    this.query();
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    CommFunc.showAjaxError(errorThrown);
+                });
+        }
+        onChange(e: React.SyntheticEvent) {
+            let input: HTMLInputElement = e.target as HTMLInputElement;
+            this.setState({ name_value: input.value });
+        }
+
+        render() {
+            return (
+                <div>
+            <div className="form-group">
+                <label className="col-xs-2 control-label"></label>
+                <div className="col-xs-8">
+                    <div className="input-group">
+                        <input type="text" className="form-control" value={this.state.name_value} onChange={this.onChange} placeholder="請輸入要新增的證書名稱..." />
+                        <span className="input-group-btn">
+                            <button type="button" className="btn-success" onClick={this.submit}><i className="fa-plus"></i> 新增</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+        {this.state.certificates.map((item, i) => {
+                        return <div key={item.product_certificate_id} className="form-group">
+                 <label className="col-xs-2 control-label">{item.name}</label>
+                 <div className="col-xs-8">
+                    <CommCmpt.MasterImageUpload FileKind="Certificate" MainId={item.product_certificate_id} ParentEditType={this.props.parent_edit_type} url_upload={gb_approot + 'Active/ProductCertificate/aj_FUpload'} url_list={gb_approot + 'Active/ProductCertificate/aj_FList'}
+                        url_delete={gb_approot + 'Active/ProductCertificate/aj_FDelete'} />
+                     </div>
+                    <button type="button" className="btn-danger col-xs-1" onClick={this.delItem.bind(this, i) }> &times; </button>
+                </div>
+        }) }
                     </div>
 
             );
@@ -793,34 +937,8 @@ namespace Product {
                     <small className="help-block">下列每證書最多傳1張，建議尺寸 寬度不超過 1000px, 每張最大不可超過2MB</small>
                         </div>
                    </div>
-               <div className="form-group">
-                    <label className="col-xs-2 control-label">CE</label>
-                    <div className="col-xs-8">
-                    <CommCmpt.MasterImageUpload FileKind="CE" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
-                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
-                        </div>
-                   </div>
-               <div className="form-group">
-                    <label className="col-xs-2 control-label">UL</label>
-                    <div className="col-xs-8">
-                    <CommCmpt.MasterImageUpload FileKind="UL" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
-                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
-                        </div>
-                   </div>
-               <div className="form-group">
-                    <label className="col-xs-2 control-label">PSE</label>
-                    <div className="col-xs-8">
-                    <CommCmpt.MasterImageUpload FileKind="PSE" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
-                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
-                        </div>
-                   </div>
-               <div className="form-group">
-                    <label className="col-xs-2 control-label">VDE</label>
-                    <div className="col-xs-8">
-                    <CommCmpt.MasterImageUpload FileKind="VDE" MainId={fieldData.product_id} ParentEditType={this.state.edit_type} url_upload={gb_approot + 'Active/ProductData/aj_FUpload'} url_list={gb_approot + 'Active/ProductData/aj_FList'}
-                        url_delete={gb_approot + 'Active/ProductData/aj_FDelete'} />
-                        </div>
-                   </div>
+
+                   <HandleProductCertificate product_id={this.state.fieldData.product_id} parent_edit_type={this.state.edit_type} />
                </div>
 
             </div>

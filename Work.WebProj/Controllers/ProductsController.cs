@@ -60,10 +60,12 @@ namespace DotWeb.WebApp.Controllers
                     content.item.l3_name = content.item.Product_Category_L3.l3_name;
                     content.item.models = content.item.ProductModel.OrderBy(x => x.sort).ToList();
                     content.item.imgsrc = GetImg(id.ToString(), "img1", "Active", "ProductData", null);
-                    content.item.CE_src = GetImg(id.ToString(), "CE", "Active", "ProductData", null);
-                    content.item.UL_src = GetImg(id.ToString(), "UL", "Active", "ProductData", null);
-                    content.item.PSE_src = GetImg(id.ToString(), "PSE", "Active", "ProductData", null);
-                    content.item.VDE_src = GetImg(id.ToString(), "VDE", "Active", "ProductData", null);
+                    content.item.certificates = content.item.ProductCertificate.OrderBy(x => x.sort).ToList();
+
+                    foreach (var i in content.item.certificates)
+                    {
+                        i.imgsrc = GetImg(i.product_certificate_id.ToString(), "Certificate", "Active", "ProductCertificate", null);
+                    }
                     content.item.filesrc = GetFile(id.ToString(), "file1", "Active", "ProductData");
                     #region get other product
                     content.product_list = db0.Product.Where(x => !x.i_Hide &

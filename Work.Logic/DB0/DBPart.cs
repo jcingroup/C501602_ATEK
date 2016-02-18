@@ -162,10 +162,11 @@ namespace ProcCore.Business.DB0
         public string imgsrc { get; set; }
         public string filesrc { get; set; }
         public IList<ProductModel> models { get; set; }
-        public string CE_src { get; set; }
-        public string UL_src { get; set; }
-        public string PSE_src { get; set; }
-        public string VDE_src { get; set; }
+        public IList<ProductCertificate> certificates { get; set; }
+    }
+    public partial class ProductCertificate
+    {
+        public string imgsrc { get; set; }
     }
     public partial class Menu
     {

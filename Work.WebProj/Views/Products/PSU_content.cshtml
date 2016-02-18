@@ -63,14 +63,11 @@ Layout = "~/Views/Shared/Layout.cshtml";
         <h3 class="font-sp">TECHNICAL SPECIFICATION</h3>
         <p class="text-right">
             <strong>Certificate:</strong>
-            @if (Model.item.CE_src != null)
-            { <a href="@Model.item.CE_src" class="btn" data-lightbox="img-set" data-title="通過CE認證">CE</a>}
-            @if (Model.item.UL_src != null)
-            { <a href="@Model.item.UL_src" class="btn" data-lightbox="img-set" data-title="通過UL認證">UL</a>}
-            @if (Model.item.PSE_src != null)
-            { <a href="@Model.item.PSE_src" class="btn" data-lightbox="img-set" data-title="通過PSE認證">PSE</a>}
-            @if (Model.item.VDE_src != null)
-            { <a href="@Model.item.VDE_src" class="btn" data-lightbox="img-set" data-title="通過VDE認證">VDE</a>}
+            @foreach (var i in Model.item.certificates)
+            {
+                if (i.imgsrc != null)
+                { <a href="@i.imgsrc" class="btn" data-lightbox="img-set" data-title="通過 @i.name 認證">@i.name</a>}
+            }
         </p>
         <div class="table-rwd">
             @* 下為編輯器 *@

@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/Manage/RLayout.cshtml";
+}
+@section breadCrumb {
+    <li><a href="~/Active/Product/Product"><i class="fa-list-alt"></i> @ViewBag.MenuName</a></li>
+    <li>@ViewBag.Caption</li>
+}
+@section IncludeCSS{
+    <style>
+        .sortable-ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .sortable-ul li {
+                padding: 5px;
+                background: #eee;
+            }
+
+        div.placeholder {
+            border: 3px #ccc dashed;
+            height: 100px;
+            opacity: 0.6;
+            text-align: center;
+            font-size: large;
+        }
+
+            div.placeholder:before {
+                line-height: 75px;
+                content: "移到這裡";
+                color: rgb(128, 128, 128);
+            }
+    </style>
+}
+@section IncludeScript{
+    @Html.Partial("Manage/JSGlobalVar")
+    <script>
+        var gb_menuname = '@ViewBag.MenuName';
+        var gb_caption = '@ViewBag.Caption';
+        var gb_roles = '@ViewBag.RoleName';//Admins
+    </script>
+    <script src="~/ckeditor/ckeditor.js?v=@CommWebSetup.CacheVer"></script>
+    <script src="~/Scripts/build/app/m_aboutus.js?v=@CommWebSetup.CacheVer"></script>
+    @*<script src="~/Scripts/build/app/m_sortable.js?v=@CommWebSetup.CacheVer"></script>*@
+}
+@section sidebar{
+    @Html.Partial("Manage/vucMenu")
+}

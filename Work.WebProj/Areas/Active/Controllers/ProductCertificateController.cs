@@ -9,25 +9,10 @@ using System.Linq;
 
 namespace DotWeb.Areas.Active.Controllers
 {
-    public class ProductDataController : AdminController
+    public class ProductCertificateController : AdminController
     {
         #region Action and function section
         public ActionResult Main()
-        {
-            ActionRun();
-            return View();
-        }
-        public ActionResult CategoryL1()
-        {
-            ActionRun();
-            return View();
-        }
-        public ActionResult CategoryL2()
-        {
-            ActionRun();
-            return View();
-        }
-        public ActionResult CategoryL3()
         {
             ActionRun();
             return View();
@@ -56,12 +41,10 @@ namespace DotWeb.Areas.Active.Controllers
             string tpl_File = string.Empty;
             try
             {
-                //代表圖
-                if (filekind == "img1")
-                    handleImageSave(fileName, id, ImageFileUpParm.Product, filekind, "Active", "ProductData");
-                //附件
-                if (filekind == "file1")
-                    handleFileSave(fileName, id, SysFileUpParm.BaseLimit, filekind, "Active", "ProductData");
+                //證書
+                if (filekind == "Certificate")
+                    handleImageSave(fileName, id, ImageFileUpParm.Certificate, filekind, "Active", "ProductCertificate");
+
 
                 r.result = true;
                 r.file_name = fileName;
@@ -84,13 +67,8 @@ namespace DotWeb.Areas.Active.Controllers
         public string aj_FList(string id, string filekind)
         {
             SerializeFileList r = new SerializeFileList();
-            if (filekind == "file1")
-            {
-                r.files = listDocFiles(id, filekind, "Active", "ProductData");
-            }
-            else {
-                r.files = listImgFiles(id, filekind, "Active", "ProductData");
-            }
+
+            r.files = listImgFiles(id, filekind, "Active", "ProductCertificate");
             r.result = true;
             return defJSON(r);
         }
@@ -99,14 +77,14 @@ namespace DotWeb.Areas.Active.Controllers
         public string aj_FDelete(string id, string filekind, string filename)
         {
             ResultInfo r = new ResultInfo();
-            DeleteSysFile(id, filekind, filename, ImageFileUpParm.NewsBasicSingle, "Active", "ProductData");
+            DeleteSysFile(id, filekind, filename, ImageFileUpParm.NewsBasicSingle, "Active", "ProductCertificate");
             r.result = true;
             return defJSON(r);
         }
         [HttpGet]
         public FileResult aj_FDown(int id, string filekind, string filename)
         {
-            string path_tpl = string.Format("~/_Code/SysUpFiles/{0}/{1}/{2}/{3}/{4}", "Active", "ProductData", id, filekind, filename);
+            string path_tpl = string.Format("~/_Code/SysUpFiles/{0}/{1}/{2}/{3}/{4}", "Active", "ProductCertificate", id, filekind, filename);
             string server_path = Server.MapPath(path_tpl);
             FileInfo file_info = new FileInfo(server_path);
             FileStream file_stream = new FileStream(server_path, FileMode.Open, FileAccess.Read);

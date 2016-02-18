@@ -185,6 +185,9 @@
     <Compile Include="DB0\m_Product.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB0\m_ProductCertificate.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB0\m_ProductModel.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
@@ -204,6 +207,9 @@
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\Product.cs">
+      <DependentUpon>C50A0_ATEK.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB0\ProductCertificate.cs">
       <DependentUpon>C50A0_ATEK.tt</DependentUpon>
     </Compile>
     <Compile Include="DB0\ProductModel.cs">

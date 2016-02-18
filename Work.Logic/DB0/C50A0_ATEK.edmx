@@ -315,6 +315,15 @@
           <Property Name="i_UpdateDateTime" Type="datetime" />
           <Property Name="i_Lang" Type="char" MaxLength="5" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProductCertificate">
+          <Key>
+            <PropertyRef Name="product_certificate_id" />
+          </Key>
+          <Property Name="product_certificate_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="sort" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductModel">
           <Key>
             <PropertyRef Name="product_model_id" />
@@ -503,6 +512,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductCertificate_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductCertificate" Type="Self.ProductCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="ProductCertificate">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductModel_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductModel" Type="Self.ProductModel" Multiplicity="*" />
@@ -550,6 +571,7 @@
           <EntitySet Name="Product_Category_L1" EntityType="Self.Product_Category_L1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Category_L2" EntityType="Self.Product_Category_L2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Category_L3" EntityType="Self.Product_Category_L3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCertificate" EntityType="Self.ProductCertificate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductModel" EntityType="Self.ProductModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Support" EntityType="Self.Support" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AboutUsDetail_AboutUs" Association="Self.FK_AboutUsDetail_AboutUs">
@@ -603,6 +625,10 @@
           <AssociationSet Name="FK_Product_Product_Category_L3" Association="Self.FK_Product_Product_Category_L3">
             <End Role="Product_Category_L3" EntitySet="Product_Category_L3" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCertificate_Product" Association="Self.FK_ProductCertificate_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductCertificate" EntitySet="ProductCertificate" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductModel_Product" Association="Self.FK_ProductModel_Product">
             <End Role="Product" EntitySet="Product" />
@@ -818,6 +844,11 @@
           <AssociationSet Name="FK_ProductModel_Product" Association="C50A0_ATEKModel.FK_ProductModel_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductModel" EntitySet="ProductModel" />
+          </AssociationSet>
+          <EntitySet Name="ProductCertificate" EntityType="C50A0_ATEKModel.ProductCertificate" />
+          <AssociationSet Name="FK_ProductCertificate_Product" Association="C50A0_ATEKModel.FK_ProductCertificate_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductCertificate" EntitySet="ProductCertificate" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Banner">
@@ -1122,6 +1153,7 @@
           <NavigationProperty Name="Product_Category_L2" Relationship="C50A0_ATEKModel.FK_Product_Product_Category_L2" FromRole="Product" ToRole="Product_Category_L2" />
           <NavigationProperty Name="Product_Category_L3" Relationship="C50A0_ATEKModel.FK_Product_Product_Category_L3" FromRole="Product" ToRole="Product_Category_L3" />
           <NavigationProperty Name="ProductModel" Relationship="C50A0_ATEKModel.FK_ProductModel_Product" FromRole="Product" ToRole="ProductModel" />
+          <NavigationProperty Name="ProductCertificate" Relationship="C50A0_ATEKModel.FK_ProductCertificate_Product" FromRole="Product" ToRole="ProductCertificate" />
         </EntityType>
         <EntityType Name="ProductModel">
           <Key>
@@ -1177,6 +1209,28 @@
               <PropertyRef Name="product_id" />
             </Principal>
             <Dependent Role="ProductModel">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductCertificate">
+          <Key>
+            <PropertyRef Name="product_certificate_id" />
+          </Key>
+          <Property Name="product_certificate_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="C50A0_ATEKModel.FK_ProductCertificate_Product" FromRole="ProductCertificate" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ProductCertificate_Product">
+          <End Type="C50A0_ATEKModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="C50A0_ATEKModel.ProductCertificate" Role="ProductCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="ProductCertificate">
               <PropertyRef Name="product_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1544,6 +1598,16 @@
                 <ScalarProperty Name="model_name" ColumnName="model_name" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="product_model_id" ColumnName="product_model_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCertificate">
+            <EntityTypeMapping TypeName="C50A0_ATEKModel.ProductCertificate">
+              <MappingFragment StoreEntitySet="ProductCertificate">
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_certificate_id" ColumnName="product_certificate_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

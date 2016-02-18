@@ -214,6 +214,13 @@
         sort?: number;
         Product?: server.Product;
     }
+    interface ProductCertificate extends BaseEntityTable {
+        product_certificate_id?: number;
+        product_id?: number;
+        name?: string;
+        sort?: number;
+        Product?: server.Product;
+    }
     interface CategroySort {//分類管理排序用
         id: number;
         sort: number;

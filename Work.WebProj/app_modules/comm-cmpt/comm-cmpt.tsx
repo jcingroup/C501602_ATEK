@@ -389,15 +389,15 @@ export class MasterImageUpload extends React.Component<FileUpProps, any>{
                     bar = document.createElement('div'), // actual progress bar
                     fileSize = document.createElement('div'), // container for upload file size
                     wrapper = document.createElement('div'), // container for this progress bar
-                    progressBox = document.getElementById('progressBox-' + _this.props.MainId); // on page container for progress bars
+                    progressBox = document.getElementById('progressBox-' + _this.props.MainId + '-' + _this.props.FileKind); // on page container for progress bars
 
                 // Assign each element its corresponding class
                 progress.className = 'progress';
                 bar.className = 'progress-bar progress-bar-success progress-bar-striped active';
                 fileSize.className = 'size';
                 wrapper.className = 'wrapper';
-
                 // Assemble the progress bar and add it to the page
+
                 progress.appendChild(bar);
                 wrapper.innerHTML = '<div class="name">' + filename + '</div>'; // filename is passed to onSubmit()
                 wrapper.appendChild(fileSize);
@@ -475,7 +475,7 @@ export class MasterImageUpload extends React.Component<FileUpProps, any>{
             }, this)
             }
                 </p>
-            <div id={'progressBox-' + this.props.MainId} className="progress-wrap"></div>
+            <div id={'progressBox-' + this.props.MainId + '-' + this.props.FileKind} className="progress-wrap"></div>
                 </div>
         );
         return outHtml;

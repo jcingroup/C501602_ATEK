@@ -18,6 +18,7 @@ namespace ProcCore.Business.DB0
         public Product()
         {
             this.ProductModel = new HashSet<ProductModel>();
+            this.ProductCertificate = new HashSet<ProductCertificate>();
         }
     
         public int product_id { get; set; }
@@ -45,5 +46,7 @@ namespace ProcCore.Business.DB0
         public virtual Product_Category_L3 Product_Category_L3 { get; set; }
     	[JsonIgnore]
         public virtual ICollection<ProductModel> ProductModel { get; set; }
+    	[JsonIgnore]
+        public virtual ICollection<ProductCertificate> ProductCertificate { get; set; }
     }
 }

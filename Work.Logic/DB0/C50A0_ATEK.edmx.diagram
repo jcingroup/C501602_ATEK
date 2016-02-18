@@ -40,6 +40,8 @@
         <AssociationConnector Association="C50A0_ATEKModel.FK_Product_Product_Category_L2" />
         <AssociationConnector Association="C50A0_ATEKModel.FK_Product_Product_Category_L3" />
         <AssociationConnector Association="C50A0_ATEKModel.FK_ProductModel_Product" />
+        <EntityTypeShape EntityType="C50A0_ATEKModel.ProductCertificate" Width="1.5" PointX="21.5" PointY="5.375" />
+        <AssociationConnector Association="C50A0_ATEKModel.FK_ProductCertificate_Product" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
