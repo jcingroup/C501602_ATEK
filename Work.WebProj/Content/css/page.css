@@ -525,17 +525,17 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     box-shadow: 0 3px 0 #E1E2D7; }
     @media (max-width: 61.1875em) {
       #wrapper::before {
-        height: 70px; } }
+        height: 62px; } }
   @media (max-width: 30em) {
     #wrapper {
-      padding-bottom: 416px; } }
+      padding-bottom: 386px; } }
 
 #header {
   z-index: 3;
   height: 110px; }
   @media (max-width: 61.1875em) {
     #header {
-      height: 70px; } }
+      height: 62px; } }
   @media (max-width: 48em) {
     #header {
       margin: 0 15px; } }
@@ -554,8 +554,8 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
         left: 50%;
         margin-left: -89.5px;
         background-size: contain;
-        height: 65px;
-        top: 5px; } }
+        width: 120px;
+        top: 1.5%; } }
     @media (max-width: 29.9375em) {
       #header h1 {
         right: -10px;
@@ -566,11 +566,11 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   display: none;
   cursor: pointer;
   position: relative;
-  left: 0;
-  top: 7px;
+  left: -5px;
+  top: 6px;
   overflow: hidden;
-  width: 65px;
-  height: 56px;
+  width: 62px;
+  height: 50px;
   -webkit-transition: background 0.3s;
   transition: background 0.3s;
   -webkit-apperance: none;
@@ -581,7 +581,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
       display: block; } }
   @media (max-width: 29.9375em) {
     .menu-trigger {
-      top: 7px; } }
+      top: 6px; } }
   .menu-trigger:active, .menu-trigger.active {
     background-color: #5d891f; }
     .menu-trigger:active span, .menu-trigger.active span {
@@ -599,18 +599,18 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
         transition-delay: 0, .3s; }
   .menu-trigger span {
     position: absolute;
-    top: 25.5px;
+    top: 23px;
     right: 10px;
     left: 10px;
     display: block;
     background: #C2E57E;
-    height: 5px;
+    height: 4px;
     margin: auto;
     -webkit-transition: background 0s 0.3s;
     transition: background 0s 0.3s; }
     .menu-trigger span::before, .menu-trigger span::after {
       width: 100%;
-      height: 5px;
+      height: 4px;
       background-color: #C2E57E;
       position: absolute;
       left: 0;
@@ -619,11 +619,11 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
       -webkit-transition-delay: .3s, 0;
       transition-delay: .3s, 0; }
     .menu-trigger span::before {
-      top: -15.5px;
+      top: -13px;
       -webkit-transition-property: top, transform;
       transition-property: top, transform; }
     .menu-trigger span::after {
-      bottom: -15.5px;
+      bottom: -13px;
       -webkit-transition-property: bottom, transform;
       transition-property: bottom, transform; }
 
@@ -1011,8 +1011,8 @@ figure:hover, figure:active {
       width: 28%; } }
   @media (max-width: 29.9375em) {
     .dropdown {
-      left: 0;
-      top: 5px;
+      left: 65px;
+      top: 15%;
       width: 35%; } }
 
 .dropdown-content {
@@ -1101,13 +1101,13 @@ main {
   font-size: 1.375em;
   width: 100%;
   padding: 12px 0; }
-  @media (max-width: 39.9375em) {
+  @media (max-width: 40em) {
     .pro-menu {
       display: block; } }
 
 .sub-nav nav {
   margin-bottom: 25px; }
-  @media (max-width: 39.9375em) {
+  @media (max-width: 40em) {
     .sub-nav nav {
       position: absolute;
       right: 15px;
@@ -1146,7 +1146,7 @@ main {
       vertical-align: top;
       width: 32.8%;
       padding: 12px 15px; } }
-  @media (max-width: 39.9375em) {
+  @media (max-width: 40em) {
     .sub-nav dl {
       background: none;
       padding: 0;
@@ -1165,7 +1165,7 @@ main {
     .sub-nav dt {
       font-size: 1.25em;
       margin-bottom: 8px; } }
-  @media (max-width: 39.9375em) {
+  @media (max-width: 40em) {
     .sub-nav dt {
       font-size: 0.9375em;
       color: #fff; } }
@@ -1174,7 +1174,7 @@ main {
   padding: 8px 12px;
   font-size: 0.9375em;
   margin: 5px 0; }
-  @media (max-width: 39.9375em) {
+  @media (max-width: 40em) {
     .sub-nav a {
       background: #F1F1F1;
       color: #4C4C4C; }
@@ -1324,12 +1324,12 @@ main {
   #slide .btn-next {
     right: 0;
     background-position: -55px center; }
-  @media (min-width: 61.25em) {
+  @media (max-width: 61.1875em) {
     #slide figure {
       width: 30%; } }
   @media (max-width: 30em) {
     #slide figure {
-      width: 80%; } }
+      width: 85%; } }
 
 .tag a {
   display: inline-block;
@@ -1403,3 +1403,9 @@ main {
 .AboutUs #main p {
   color: #333;
   line-height: 1.9; }
+@media (max-width: 48em) {
+  .AboutUs #main img {
+    width: 45%; } }
+@media (max-width: 30em) {
+  .AboutUs #main img {
+    width: 86%; } }

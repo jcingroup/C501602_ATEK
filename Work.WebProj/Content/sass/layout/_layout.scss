@@ -6,7 +6,7 @@ $content-spacing:       50px !default;
 
 // header
 $header-height:         110px !default;
-$header-height-sm:      70px !default;
+$header-height-sm:      62px !default;
 $header-bg:             $brand-primary !default;
 $logo-img:              'logo.gif' !default;
 $logo-size:             179px 83px !default;
@@ -81,7 +81,7 @@ $goTop-position:        bottom 30px right 10px !default;
     }
 
     @include mq-max(phone) {
-        padding-bottom: $footer-height-sm + $content-spacing;
+        padding-bottom: $footer-height-sm + 20px;
     }
 }
 
@@ -107,8 +107,8 @@ $goTop-position:        bottom 30px right 10px !default;
             left: 50%;
             margin-left: -(nth($logo-size,1) / 2);
             background-size: contain;
-            height: $header-height-sm - 5px;
-            top: 5px;
+            width: 120px;
+            top: 1.5%;
         }
         @include mq-max(break(phone, -1)) {
             right: -10px; left: auto;
@@ -126,14 +126,14 @@ body, #menu {
     display: none;
     cursor: pointer;
 
-    $button-width: 65px;
-    $button-height: 56px;
-    $bar-thickness: 5px;
+    $button-width: 62px;
+    $button-height: 50px;
+    $bar-thickness: 4px;
     $button-pd: 10px;
     $bar-color: #C2E57E;
 
     position: relative;
-    left: 0;
+    left: -5px;
     top: ($header-height-sm - $button-height)/2;
     overflow: hidden;
     width: $button-width;

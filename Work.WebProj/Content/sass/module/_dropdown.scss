@@ -50,8 +50,8 @@ $dropdown-color:            #C2E57E !default;
         width: 28%;
     }
     @include mq-max(break(phone, -1)) {
-        left: 0;
-        top: 5px;
+        left: 65px;
+        top: 15%;
         width: 35%;
     }
 }

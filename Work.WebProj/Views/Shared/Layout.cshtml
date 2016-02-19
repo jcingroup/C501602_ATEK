@@ -15,7 +15,6 @@
     </script>
     <!--[if lt IE 9]><script src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><![endif]-->
     @RenderSection("css", false)
-    <link href="~/Content/css/grid.css" rel="stylesheet">
     @if (ViewBag.IsFirstPage)
     {
         <link href="~/Content/css/index.css" rel="stylesheet">
@@ -24,6 +23,7 @@
     {
         <link href="~/Content/css/page.css" rel="stylesheet">
     }
+    <link href="~/Content/css/grid.css" rel="stylesheet">
 </head>
 
 <body class="@ViewBag.BodyClass">

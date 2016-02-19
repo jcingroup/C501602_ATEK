@@ -57,13 +57,29 @@ $btn-padding:       12px 20px;
 }
 
 // == main
-#main img { width: 100%; }
+.new-product, .quick-nav {
+    img { width: 100%; }
+}
 
 .new-product {
     float: left;
     display: block;
     position: relative;
+    overflow: hidden;
     width: 45%;
+
+    @include mq-max(phone-plus) {
+        margin-bottom: 2%;
+        height: 180px;
+
+        img {
+            @include absolute(top 50% left 0);
+            @include prefix(transform, translateY(-50%));
+            z-index: -1;
+        }
+    }
+    @include mq-max(phone) { height: 110px; }
+    @include mq-max(mobile) { height: 90px; }
 
     @include el(all) {
         @extend %effect-all;
@@ -89,25 +105,11 @@ $btn-padding:       12px 20px;
             @include prefix(transform, scale(1.2))
         }
     }
-
-    @include mq(break(phone-plus,+1),break(desktop,-1)) {
-
-    }
-    @include mq-max(phone-plus) {
-        float: none;
-    }
 }
 
 .quick-nav {
     float: right;
     width: 55%;
-
-    @include mq(desktop, wide) { max-width: 420px; }
-    @include mq-max(phone-plus) {
-        float: none;
-        width: 100%;
-        margin-top: 20px;
-    }
 
     a {
         @extend %text-hide;
@@ -116,15 +118,9 @@ $btn-padding:       12px 20px;
         float: left;
         position: relative;
 
-        // background-size: contain;
-        // background-position: center;
-        // background-repeat: no-repeat;
-
-        // background: url(#{$img-path2}/infoBg.gif) cover no-repeat center;
         box-shadow: 1px 1px 0 #CBCBCB;
         width: 48.5%;
-        // height: 156px;
-        margin-bottom: 10px;
+        margin-bottom: 1.5%;
         margin-left: 1.5%;
 
         @include el(after) {
@@ -140,36 +136,23 @@ $btn-padding:       12px 20px;
             }
         }
 
-        @include mq(break(phone-plus, +1), break(desktop, -1)) {
-            // height: 117px;
+        @include mq-max(phone-plus) {
+            width: 49.2%;
+            &:nth-child(odd) {
+                margin-left: 0;
+            }
         }
-        @include mq-max(phone) {
-            float: none;
-            margin: 0;
-            width: 100%;
-        }
+        // @include mq-max(mobile) {
+        //     float: none;
+        //     margin-left: 0;
+        //     width: 100%;
+        // }
     }
+}
 
-
-    li {
-        @extend %effect-all;
-
-        float: left;
-        background: url(#{$img-path2}/infoBg.gif) center no-repeat;
-        box-shadow: 1px 1px 0 #CBCBCB;
-        width: 48.5%;
-        margin-bottom: 10px;
-        margin-left: 1.5%;
-
-        &:hover, &:active {
-            @include prefix(transform, translate(1px,2px))
-        }
-
-        // @include mq-max(break(desktop,-1)) { float: none; }
-        @include mq-max(phone) {
-            float: none;
-            margin: 0;
-            width: 100%;
-        }
+.new-product, .quick-nav {
+    @include mq-max(phone-plus) {
+        float: none;
+        width: 100%;
     }
 }

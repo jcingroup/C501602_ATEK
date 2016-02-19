@@ -100,7 +100,7 @@ main {
     width: 100%;
     padding: 12px 0;
 
-    @include mq-max(break(phone-plus, -1)) {
+    @include mq-max(phone-plus) {
         display: block;
     }
 }
@@ -111,7 +111,7 @@ main {
         @extend %effect-all;
         margin-bottom: 25px;
 
-        @include mq-max(break(phone-plus, -1)) {
+        @include mq-max(phone-plus) {
             @include absolute(left $gutter right $gutter);
             background: $brand-primary;
             padding: 2% 1%;
@@ -153,7 +153,7 @@ main {
             width: 32.8%;
             padding: 12px 15px;
         }
-        @include mq-max(break(phone-plus, -1)) {
+        @include mq-max(phone-plus) {
             background: none;
             padding: 0; margin: 0;
             width: 32.5%;
@@ -173,7 +173,7 @@ main {
             font-size: em(20px);
             margin-bottom: 8px;
         }
-        @include mq-max(break(phone-plus, -1)) {
+        @include mq-max(phone-plus) {
             font-size: em(15px);
             color: #fff;
         }
@@ -184,7 +184,7 @@ main {
         font-size: em(15px);
         margin: 5px 0;
 
-        @include mq-max(break(phone-plus, -1)) {
+        @include mq-max(phone-plus) {
             background: #F1F1F1;
             color: #4C4C4C;
             &:hover, &:active {
@@ -356,8 +356,8 @@ main {
     .btn-prev { left: 0; }
     .btn-next { right: 0; background-position: -55px center; }
     figure {
-        @include mq(desktop) { width: 30%; }
-        @include mq-max(phone) { width: 80%; }
+        @include mq-max(break(desktop, -1)) { width: 30%; }
+        @include mq-max(phone) { width: 85%; }
     }
 }
 
@@ -450,6 +450,10 @@ main {
     h2 { margin-top: 0; margin-bottom: 20px; }
     h3 { margin-top: 20px; }
     p { color: #333; line-height: 1.9; }
+    img {
+        @include mq-max(tablet) { width: 45%; }
+        @include mq-max(phone) { width: 86%; }
+    }
 
 //     &:nth-of-type(1) {
 //         img { margin-right: 40px; }
