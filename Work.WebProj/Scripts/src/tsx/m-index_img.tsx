@@ -16,7 +16,7 @@ namespace IndexImg {
         constructor() {
 
             super();
-            this.queryInitData = this.queryInitData.bind(this);
+            this.queryInitData = this.queryInitData.bind(this); 
             this.handleSubmit = this.handleSubmit.bind(this);
             this.componentDidMount = this.componentDidMount.bind(this);
             this.setInputValue = this.setInputValue.bind(this);
@@ -98,41 +98,41 @@ namespace IndexImg {
                    <div className="form-group">
                         <label className="col-xs-2 control-label">New Product</label>
                         <div className="col-xs-8">
+                        <small className="help-block">最多1張圖，建議尺寸 w960 x h580</small>
                         <CommCmpt.MasterImageUpload FileKind="NewProduct" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
                             url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                        <small className="help-block">最多1張圖，建議尺寸 w960 x h580</small>
                             </div>
                        </div>
                    <div className="form-group">
                         <label className="col-xs-2 control-label">ABOUT ATEK</label>
                         <div className="col-xs-8">
+                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
                         <CommCmpt.MasterImageUpload FileKind="About1" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
                             url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                        <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                    <div className="form-group">
                         <label className="col-xs-2 control-label">OEM/ODM</label>
                         <div className="col-xs-8">
+                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
                         <CommCmpt.MasterImageUpload FileKind="About2" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
                             url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                        <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                    <div className="form-group">
                         <label className="col-xs-2 control-label">EXHIBITION</label>
                         <div className="col-xs-8">
+                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
                         <CommCmpt.MasterImageUpload FileKind="EXHIBITION" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
                             url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                        <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                    <div className="form-group">
                         <label className="col-xs-2 control-label">SUPPORT</label>
                         <div className="col-xs-8">
+                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
                         <CommCmpt.MasterImageUpload FileKind="SUPPORT" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
                             url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                        <small className="help-block">最多1張圖，建議尺寸 w415 x h156</small>
                             </div>
                        </div>
                 {/*--email end--*/}

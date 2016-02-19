@@ -36,7 +36,7 @@ $btn-padding:       12px 20px;
 #banner {
     background: #F1F1F1;
     border: 1px solid #E5E5E5;
-    margin: 3.5% 20px;
+    margin: 2% 20px;
 
     @include mq(wider) {
         max-width: $max-width;
@@ -44,8 +44,7 @@ $btn-padding:       12px 20px;
         margin-right: auto;
     }
     @include mq-max(tablet) {
-        margin-left: $gutter;
-        margin-right: $gutter;
+        margin: 3.5% $gutter;
     }
 }
 .swiper-wrapper {
@@ -58,10 +57,13 @@ $btn-padding:       12px 20px;
 }
 
 // == main
+#main img { width: 100%; }
+
 .new-product {
     float: left;
     display: block;
     position: relative;
+    width: 45%;
 
     @include el(all) {
         @extend %effect-all;
@@ -88,85 +90,86 @@ $btn-padding:       12px 20px;
         }
     }
 
-    img {
-        max-width: 540px;
-        max-height: 324px;
-    }
+    @include mq(break(phone-plus,+1),break(desktop,-1)) {
 
-    @include mq-max(break(desktop,-1)) {
+    }
+    @include mq-max(phone-plus) {
         float: none;
-        img {
-            width: 100%;
-            max-height: auto;
-        }
     }
 }
 
-.list-inline {
+.quick-nav {
     float: right;
     width: 55%;
 
-    @include mq(wider) { width: 61%; }
     @include mq(desktop, wide) { max-width: 420px; }
-    @include mq-max(break(desktop, -1)) {
+    @include mq-max(phone-plus) {
         float: none;
         width: 100%;
-    }
-    @include mq(break(phone, +1), break(desktop, -1)) {
         margin-top: 20px;
     }
 
     a {
         @extend %text-hide;
-        // background-attachment: fixed;
-        // background: url(#{$img-path2}/infoPic.png) right 30px no-repeat;
 
-        // color: #00987A;
-        // font-family: $font-sp;
-        // font-size: em(31px);
-        // letter-spacing: 2px;
-        // text-align: left;
-
-        background-position: center;
-        background-repeat: no-repeat;
         display: block;
-        height: 156px;
-        // padding-top: 32px;
-        // padding-left: 20px;
+        float: left;
+        position: relative;
 
-        @include mq(break(phone, -1), break(desktop, -1)) {
-            height: 200px;
+        // background-size: contain;
+        // background-position: center;
+        // background-repeat: no-repeat;
+
+        // background: url(#{$img-path2}/infoBg.gif) cover no-repeat center;
+        box-shadow: 1px 1px 0 #CBCBCB;
+        width: 48.5%;
+        // height: 156px;
+        margin-bottom: 10px;
+        margin-left: 1.5%;
+
+        @include el(after) {
+            @extend %effect-all;
+            @include size(100%);
+            @include absolute(left 0 top 0);
         }
 
         &:hover, &:active {
-            // color: $brand-primary;
-            box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
+            @include prefix(transform, translate(1px,2px));
+            &::after {
+                box-shadow: 6px 10px 15px rgba(0,0,0,0.2) inset;
+            }
+        }
+
+        @include mq(break(phone-plus, +1), break(desktop, -1)) {
+            // height: 117px;
+        }
+        @include mq-max(phone) {
+            float: none;
+            margin: 0;
+            width: 100%;
         }
     }
+
+
     li {
         @extend %effect-all;
 
         float: left;
         background: url(#{$img-path2}/infoBg.gif) center no-repeat;
         box-shadow: 1px 1px 0 #CBCBCB;
-        width: 48.6%;
+        width: 48.5%;
         margin-bottom: 10px;
-
-        &:nth-child(even) { margin-left: 8px; }
+        margin-left: 1.5%;
 
         &:hover, &:active {
             @include prefix(transform, translate(1px,2px))
         }
 
-        @include mq-max(break(desktop,-1)) { float: none; }
-        @include mq-max(break(phone-plus,-1)) {
+        // @include mq-max(break(desktop,-1)) { float: none; }
+        @include mq-max(phone) {
+            float: none;
             margin: 0;
             width: 100%;
-            &:nth-child(even) { margin-left: 0; }
         }
-
-        // &:nth-of-type(2) a { background-position: right -210px; }
-        // &:nth-of-type(3) a { background-position: right -418px; }
-        // &:nth-of-type(4) a { background-position: right -650px; }
     }
 }

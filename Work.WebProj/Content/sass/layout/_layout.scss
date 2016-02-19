@@ -6,6 +6,7 @@ $content-spacing:       50px !default;
 
 // header
 $header-height:         110px !default;
+$header-height-sm:      70px !default;
 $header-bg:             $brand-primary !default;
 $logo-img:              'logo.gif' !default;
 $logo-size:             179px 83px !default;
@@ -29,7 +30,7 @@ $goTop-position:        bottom 30px right 10px !default;
 
 /*      layout
 -----------------------------------------------------------------------*/
-// 置中(有最大寬度限制,非滿版才需要)
+// 置中(rwd,非滿版的元素)
 %center {
     max-width: $max-width;
     margin: 0 ($gutter + 5);
@@ -73,6 +74,10 @@ $goTop-position:        bottom 30px right 10px !default;
         height: $header-height;
         background: $wrapper-bg;
         box-shadow: 0 3px 0 #E1E2D7;
+
+        @include mq-max(break(desktop,-1)) {
+            height: $header-height-sm;
+        }
     }
 
     @include mq-max(phone) {
@@ -88,6 +93,7 @@ $goTop-position:        bottom 30px right 10px !default;
     z-index: z(header);
     height: $header-height;
 
+    @include mq-max(break(desktop, -1)) { height: $header-height-sm; }
     @include mq-max(tablet) { margin: 0 $gutter; }
 
     h1 {
@@ -100,6 +106,9 @@ $goTop-position:        bottom 30px right 10px !default;
         @include mq-max(break(desktop, -1)) {
             left: 50%;
             margin-left: -(nth($logo-size,1) / 2);
+            background-size: contain;
+            height: $header-height-sm - 5px;
+            top: 5px;
         }
         @include mq-max(break(phone, -1)) {
             right: -10px; left: auto;
@@ -116,16 +125,16 @@ body, #menu {
     @extend %text-hide;
     display: none;
     cursor: pointer;
-    // z-index: z(overlay) + 1;
 
-    $button-width: 67px;
-    $button-height: 60px;
-    $bar-thickness: 6px;
+    $button-width: 65px;
+    $button-height: 56px;
+    $bar-thickness: 5px;
     $button-pd: 10px;
     $bar-color: #C2E57E;
 
     position: relative;
-    left: 0; top: 20px;
+    left: 0;
+    top: ($header-height-sm - $button-height)/2;
     overflow: hidden;
     width: $button-width;
     height: $button-height;
@@ -133,7 +142,7 @@ body, #menu {
     @include prefix(transition, background 0.3s);
     @include prefix(apperance, none, webkit moz);
     @include mq-max(break(desktop,-1)) { display: block; }
-    @include mq-max(break(phone, -1)) { top: 40px; }
+    @include mq-max(break(phone, -1)) { top: ($header-height-sm - $button-height)/2; }
 
     &:active, &.active {
         background-color: darken($brand-primary, 10%);
