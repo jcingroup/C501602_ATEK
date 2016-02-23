@@ -1,0 +1,104 @@
+﻿@model DotWeb.WebApp.Controllers.ProductContent
+@{
+    ViewBag.Title = "プロダクト::FEATURE OF PRODUCT::" + Model.item.l1_name + "/" + Model.item.l2_name + "/" + Model.item.power; @* 子分類 需套程式變數的地方 *@
+ViewBag.BodyClass = "Products";
+ViewBag.Target = Model.item.power;
+Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section breadCrumb {
+    <li><a href="~/Products">プロダクト</a></li>
+    @* 子分類 需套程式變數的地方 *@
+    <li><a href="~/Products">@Model.item.l1_name</a></li>
+    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id">@Model.item.l2_name</a></li>
+    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id">@Model.item.l3_name</a></li>
+}
+
+@section css {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="~/Content/css/lightbox.css">
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+    <script src="~/Content/js/lightbox.min.js"></script>
+    <script>
+        // searies 滑動特效
+        var mySwiper = new Swiper('#slide', {
+            autoplay: 4000,
+            speed: 1000,
+            slidesPerView: 'auto',
+            slidesPerGroup: 1,
+            slidesPerColumnFill: 'row',
+            slidesOffsetBefore: 20,
+            slidesOffsetAfter: 20,
+            autoplayDisableOnInteraction: false,
+            prevButton: '.btn-prev',
+            nextButton: '.btn-next',
+        })
+        lightbox.option({
+            disableScrolling: true,
+            fadeDuration: 200,
+            resizeDuration: 200
+        })
+    </script>
+}
+
+@Html.Partial("~/Views/Products/PSU_Sidebar.cshtml")
+
+<div id="content">
+    <header class="row">
+        <div class="pro-pic">
+            <img src="@Model.item.imgsrc" alt="プロダクト">
+        </div>
+        <div class="pro-info">
+            <h2 class="font-sp">@Model.item.power<small>特性</small></h2>
+            @Html.Raw(Model.item.feature)
+            @if (Model.item.filesrc != null)
+            {
+                <a href="@Model.item.filesrc" class="btn btn-download">DOWNLOAD</a>
+            }
+        </div>
+    </header>
+
+    <section class="spec">
+        <h3 class="font-sp">技術仕様</h3>
+        <div class="table-rwd">
+            @* 下為編輯器 *@
+            @Html.Raw(Model.item.technical_specification)
+        </div>
+        <p>
+            <strong>証明書:</strong>
+            @foreach (var i in Model.item.certificates)
+            {
+                if (i.imgsrc != null)
+                { <a href="@i.imgsrc" class="btn" data-lightbox="img-set" data-title="@i.name 認定されました">@i.name</a>}
+            }
+        </p>
+    </section>
+
+    <section class="series">
+        <h3 class="font-sp">FAMILY</h3>
+        <div id="slide" class="swiper-container">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.product_list)
+                {
+                    <figure class="swiper-slide">
+                        <img src="@item.imgsrc" alt="プロダクト">
+                        <figcaption>
+                            <h4>@item.power</h4>
+                            @foreach (var md in item.models)
+                            {
+                                <span>@md.model_name</span>
+                            }
+                            <a href="~/Products/PSU_content?id=@item.product_id">続きを読みます</a>
+                        </figcaption>
+                    </figure>
+                }
+            </div>
+            <div class="btn-prev"></div>
+            <div class="btn-next"></div>
+        </div>
+
+    </section>
+</div><!-- content //-->

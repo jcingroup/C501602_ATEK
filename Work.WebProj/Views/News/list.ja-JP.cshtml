@@ -1,0 +1,57 @@
+﻿@model DotWeb.WebApp.Controllers.NewsInfo
+@{
+    ViewBag.Title = "ニュース";
+    ViewBag.BodyClass = "News";
+    ViewBag.Target = ViewBag.l2_name;
+Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section breadCrumb {
+    <li><a href="~/News">ニュース</a></li>
+}
+
+<nav id="sidebar" class="tag">
+    @if (Request.QueryString["category"] != null)
+    {
+        <a href="~/News">すべて</a>
+    }
+    else {
+        <a href="~/News" class="current">すべて</a>
+    }
+    @foreach (var i in Model.category)
+    {
+        if (i.l2_id == ViewBag.category)
+        {
+            <a href="~/News?category=@i.l2_id" class="current">@i.l2_name</a>
+        }
+        else {
+            <a href="~/News?category=@i.l2_id">@i.l2_name</a>
+        }
+    }
+</nav>
+
+<div id="content">
+    @foreach (var item in Model.items)
+    {
+        <article class="panel hover-shadow">
+            <header>@item.news_title</header>
+            <p>@item.news_info ...more</p>
+            <a href="~/News/Content?id=@item.news_id"></a>
+            <footer>@item.day.ToString("yyyy.MM.dd")</footer>
+        </article>
+    }
+    @*<article class="panel hover-shadow">
+        <header>Annual General Meeting of Shareholders 2011</header>
+        <p>A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below...more</p>
+        <a href="~/News/Content"></a>
+        <footer>2016.1.28</footer>
+    </article>
+
+    <article class="panel hover-shadow">
+        <header>Annual General Meeting of Shareholders 2011</header>
+        <p>A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below...more</p>
+        <a href="~/News/Content"></a>
+        <footer>2016.1.28</footer>
+    </article>*@
+
+</div><!-- content //-->

@@ -33,16 +33,16 @@
 
         <header id="header">
             <h1 onclick="location.href='@Url.Content("~/index")'" title="回首頁">ATEK JAPAN</h1>
-            <button class="menu-trigger"><span>MENU</span></button>
+            <button class="menu-trigger"><span>メニュー</span></button>
             <nav id="menu">
-                <a href="~/Products">PRODUCTS</a>
-                <a href="~/AboutUs">ABOUT US</a>
-                <a href="~/Support">SUPPORT</a>
-                <a href="~/News">NEWS</a>
-                <a href="~/ContactUs">CONTACT</a>
+                <a href="~/Products">プロダクト</a>
+                <a href="~/AboutUs">会社概要</a>
+                <a href="~/Support">サポート</a>
+                <a href="~/News">ニュース</a>
+                <a href="~/ContactUs">お問い合わせ</a>
             </nav>
             <div class="dropdown">
-                <button class="dropbtn">Language</button>
+                <button class="dropbtn">言語</button>
                 <nav class="dropdown-content">
                     <a href="@Url.Action("SetLanguage")?L=en-US&A=index">English</a>
                     <a href="@Url.Action("SetLanguage")?L=ja-JP&A=index">日本語</a>
@@ -58,12 +58,12 @@
         {
             <main id="main">
                 <form action="" class="col-2 col-xs-12 input-group search">
-                    <input type="Search" placeholder="SEARCH...">
-                    <button class="input-group-btn">Search</button>
+                    <input type="Search" placeholder="検索...">
+                    <button class="input-group-btn">検索</button>
                 </form>
 
                 <ul class="breadcrumb">
-                    <li><a href="~/index">HOME</a></li>
+                    <li><a href="~/index">ホーム</a></li>
                     @RenderSection("breadCrumb", required: false)
                     <li>@ViewBag.Target</li> @* 當前頁名稱 *@
                 </ul>

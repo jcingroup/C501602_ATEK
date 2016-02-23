@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -226,10 +227,10 @@ img {
   font-family: 'trebuc';
   src: local("Trebuchet MS"), url(../font/trebucit.ttf) format("truetype"); }
 .font-sp {
-  font-family: "trebuc", sans-serif; }
+  font-family: "trebuc", "明暸體", "Meiryo", sans-serif; }
 
 h2, h3, h4, h5, h6 {
-  font-family: trebuc, sans-serifMicrosoft Jhenghei, \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif;
+  font-family: trebuc, 明暸體, Meiryo, sans-serifMicrosoft Jhenghei, \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: #79B229; }
@@ -506,7 +507,7 @@ body {
     border-left: 3px solid #D8DF2B;
     color: #fff;
     font-size: 1.125em;
-    font-family: "trebuc", sans-serif;
+    font-family: "trebuc", "明暸體", "Meiryo", sans-serif;
     letter-spacing: 2px;
     line-height: 19px;
     padding: 0 40px 0 17px; }

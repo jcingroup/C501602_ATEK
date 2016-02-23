@@ -1,0 +1,41 @@
+﻿@model DotWeb.WebApp.Controllers.NewsContent
+@{
+    ViewBag.Title = "NEWS::" + Model.item.news_title;
+    ViewBag.BodyClass = "News";
+    ViewBag.Target = Model.item.news_title;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section breadCrumb {
+    <li><a href="~/News">NEWS</a></li>
+}
+
+<nav id="sidebar" class="tag">
+    <a href="~/News">ALL</a>
+    @foreach (var i in Model.category)
+    {
+        if (i.l2_id == ViewBag.category)
+        {
+            <a href="~/News?category=@i.l2_id" class="current">@i.l2_name</a>
+        }
+        else {
+            <a href="~/News?category=@i.l2_id">@i.l2_name</a>
+        }
+    }
+</nav>
+
+<div id="content">
+
+    <article class="panel">
+        <header>@Model.item.news_title</header>
+        <div>
+            @Html.Raw(Model.item.news_content)
+        </div>
+        <footer>@Model.item.day.ToString("yyyy.MM.dd")</footer>
+    </article>
+
+    <div class="text-center">
+        <a href="~/News" class="btn btn-small">BACK</a>
+    </div>
+
+</div><!-- content //-->

@@ -1,0 +1,50 @@
+﻿@{
+
+    var sidebar = (List<ProcCore.Business.DB0.L1>)ViewBag.Sidebar;
+}
+<aside id="sidebar" class="sub-nav">
+    <button class="btn pro-menu">カタログ</button>
+    <nav>
+        @foreach (var l1 in sidebar)
+        {
+            @* 第1層 *@
+            <header class="font-sp">@l1.l1_name</header>
+            foreach (var l2 in l1.l2_list)
+            {
+                if (l2.l2_id == ViewBag.l2_id)
+                {
+                    var index = 1;
+                    <dl class="current">
+                        @* 第2層 *@
+                        <dt>@l2.l2_name</dt>
+                        <dd>
+                            @* 第3層 list後加 #p1*@
+                            @foreach (var l3 in l2.l3_list)
+                            {
+                                @*<a class="btn" href=@("PSU_list?l2_id="+l2.l2_id+"#p"+l3.l3_id)>@l3.l3_name</a>*@
+                                <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
+                                index++;
+                            }
+                        </dd>
+                    </dl>
+                }
+                else {
+                    var index = 1;
+                    <dl>
+                        @* 第2層 *@
+                        <dt>@l2.l2_name</dt>
+                        <dd>
+                            @* 第3層 list後加 #p1*@
+                            @foreach (var l3 in l2.l3_list)
+                            {
+                                <a class="btn" href=@("PSU_list?l2_id="+l2.l2_id+ "#l3-" + l3.l3_id) data-exist="0">@l3.l3_name</a>
+                                index++;
+                            }
+                        </dd>
+                    </dl>
+                }
+            }
+        }
+    </nav>
+
+</aside>

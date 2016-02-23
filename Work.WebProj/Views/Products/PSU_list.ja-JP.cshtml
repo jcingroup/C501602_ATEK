@@ -1,0 +1,47 @@
+﻿@model ProcCore.Business.DB0.m_Product_Category_L2
+@{
+    ViewBag.Title = "プロダクト::FEATURE OF PRODUCT::" + Model.l1_name;
+    ViewBag.BodyClass = "Products";
+    ViewBag.Target = Model.l2_name;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section breadCrumb {
+    <li><a href="~/Products">プロダクト</a></li>
+}
+
+@section Scripts {
+    <script src="~/Content/js/scrollspy.js"></script>
+}
+
+@Html.Partial("~/Views/Products/PSU_Sidebar.cshtml")
+
+<div id="content">
+
+    <header class="intro">
+        <h3 class="font-sp">@Model.l2_name</h3>
+        <h2 class="font-sp">特性</h2>
+        @Html.Raw(Model.l2_info)
+    </header><!-- info //-->
+    @foreach (var l3 in Model.l3_list)
+    {
+        <section id="@("l3-"+l3.product_category_l3_id)" class="kind">
+            <h3 class="font-sp">@l3.l3_name</h3>
+            @foreach (var prod in l3.product_list)
+            {
+                <figure>
+                    <img src="@prod.imgsrc" alt="プロダクト">
+                    <figcaption>
+                        <h4>@prod.power</h4>
+                        @foreach (var md in prod.models)
+                        {
+                            <span>@md.model_name</span>
+                        }
+                        <a href="~/Products/PSU_content?id=@prod.product_id">READ MORE</a>
+                    </figcaption>
+                </figure>
+            }
+        </section>
+    }
+
+</div><!-- content //-->

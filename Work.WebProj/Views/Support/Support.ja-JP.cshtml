@@ -1,0 +1,70 @@
+﻿@model DotWeb.WebApp.Controllers.SupportInfo
+@{
+    ViewBag.Title = "サポート";
+    ViewBag.BodyClass = "Support";
+    ViewBag.Target = "サポート";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/Content/js/collapse.js"></script>
+    <script>
+        var gb_id = '@Request.QueryString["category"]';
+    </script>
+}
+
+<nav id="sidebar" class="tag">
+    @if (Request.QueryString["category"] != null)
+    {
+        <a href="~/Support">すべて</a>
+    }
+    else {
+        <a href="~/Support" class="current">すべて</a>
+    }
+    @foreach (var i in Model.category)
+    {
+        if (i.l2_id == ViewBag.category)
+        {
+            <a href="~/Support?category=@i.l2_id" class="current">@i.l2_name</a>
+        }
+        else {
+            <a href="~/Support?category=@i.l2_id">@i.l2_name</a>
+        }
+    }
+</nav>
+
+<div id="content">
+    @foreach (var item in Model.items)
+    {
+        <article class="panel">
+            <header>@item.support_title</header>
+            <div>
+                @Html.Raw(item.support_content)
+                @foreach (var src in item.fileSrcs)
+                {
+                    var file_name = src.Split('/')[src.Split('/').Length - 1];
+                    <a href="@src" class="btn btn-small" download>@file_name</a>
+                }
+            </div>
+            <footer>@item.day.ToString("yyyy.MM.dd")</footer>
+        </article>
+    }
+
+    @*<article class="panel">
+            <header>Annual General Meeting of Shareholders 2011</header>
+            <div>
+                <p>A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below</p>
+                <a href="#" class="btn btn-small">DOWNLOAD</a>
+            </div>
+            <footer>2016.1.28</footer>
+        </article>
+
+        <article class="panel">
+            <header>Annual General Meeting of Shareholders 2011</header>
+            <div>
+                <p>A conference call with Frans van Houten, CEO and Ron Wirahadiraksa, CFO, to discuss the results, will start at 10:00AM CET. A live audio webcast of the conference call will be available through the link below</p>
+            </div>
+            <footer>2016.1.28</footer>
+        </article>*@
+
+</div><!-- content //-->
