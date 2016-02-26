@@ -98,10 +98,10 @@ namespace ProductCategoryL1 {
             this.queryGridData(1);
         }
         componentDidUpdate(prevProps, prevState) {
-            if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
-                console.log('CKEDITOR');
-                CKEDITOR.replace('l1_info', { customConfig: '../ckeditor/inlineConfig.js' });
-            }
+            //if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
+            //    console.log('CKEDITOR');
+            //    CKEDITOR.replace('l1_info', { customConfig: '../ckeditor/inlineConfig.js' });
+            //}
         }
         queryInitData() {
             CommFunc.jqGet(this.props.apiInitPath, { l1_id: AllCategoryL1.support })
@@ -141,7 +141,7 @@ namespace ProductCategoryL1 {
         handleSubmit(e: React.FormEvent) {
 
             e.preventDefault();
-            this.state.fieldData.l1_info = CKEDITOR.instances['l1_info'].getData();
+            //this.state.fieldData.l1_info = CKEDITOR.instances['l1_info'].getData();
             if (this.state.edit_type == 1) {
                 CommFunc.jqPost(this.props.apiPath, this.state.fieldData)
                     .done((data: FormResult, textStatus, jqXHRdata) => {
@@ -436,12 +436,12 @@ namespace ProductCategoryL1 {
                        </div>
                     </div>
                 </div>
-            <div className="form-group">
+            {/*<div className="form-group">
                 <label className="col-xs-2 control-label">介紹</label>
                 <div className="col-xs-10">
                     <textarea type="date" className="form-control" id="l1_info" name="l1_info" value={fieldData.l1_info} onChange={this.changeFDValue.bind(this, 'l1_info') } />
                     </div>
-                </div>
+                </div>*/}
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-2">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button> { }

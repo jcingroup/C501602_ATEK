@@ -107,10 +107,10 @@ namespace ProductCategoryL2 {
             this.queryInitData();
         }
         componentDidUpdate(prevProps, prevState) {
-            if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
-                console.log('CKEDITOR');
-                CKEDITOR.replace('l2_info', { customConfig: '../ckeditor/inlineConfig.js' });
-            }
+            //if ((prevState.edit_type == 0 && (this.state.edit_type == 1 || this.state.edit_type == 2))) {
+            //    console.log('CKEDITOR');
+            //    CKEDITOR.replace('l2_info', { customConfig: '../ckeditor/inlineConfig.js' });
+            //}
         }
         queryInitData() {
             CommFunc.jqGet(this.props.apiInitPath, {})
@@ -150,7 +150,7 @@ namespace ProductCategoryL2 {
         handleSubmit(e: React.FormEvent) {
 
             e.preventDefault();
-            this.state.fieldData.l2_info = CKEDITOR.instances['l2_info'].getData();
+            //this.state.fieldData.l2_info = CKEDITOR.instances['l2_info'].getData();
             if (this.state.edit_type == 1) {
                 CommFunc.jqPost(this.props.apiPath, this.state.fieldData)
                     .done((data: FormResult, textStatus, jqXHRdata) => {
@@ -500,12 +500,12 @@ namespace ProductCategoryL2 {
                        </div>
                     </div>
                 </div>
-            <div className="form-group">
+            {/*<div className="form-group">
                 <label className="col-xs-2 control-label">介紹</label>
                 <div className="col-xs-10">
                     <textarea type="date" className="form-control" id="l2_info" name="l2_info" value={fieldData.l2_info} onChange={this.changeFDValue.bind(this, 'l2_info') } />
                     </div>
-                </div>
+                </div>*/}
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-2">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button> { }
