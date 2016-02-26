@@ -20,9 +20,10 @@
 
     <header class="intro">
         <h3 class="font-sp">@Model.l2_name</h3>
-        <h2 class="font-sp">FEATURE</h2>
-        @Html.Raw(Model.l2_info)
+        @* <h2 class="font-sp">FEATURE</h2>
+        @Html.Raw(Model.l2_info) *@
     </header><!-- info //-->
+
     @foreach (var l3 in Model.l3_list)
     {
         <section id="@("l3-"+l3.product_category_l3_id)" class="kind">

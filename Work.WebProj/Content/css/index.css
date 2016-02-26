@@ -310,7 +310,7 @@ hr {
 .list-inline > li {
   display: inline-block; }
 
-a, body, #menu, .hover-shadow, .hover-shadow header, .new-product::before, .new-product::after, .quick-nav a::after {
+a, body, #menu, .hover-shadow, .hover-shadow header {
   -webkit-transition: all 0.35s;
   transition: all 0.35s; }
 
@@ -504,19 +504,21 @@ body {
   right: 0; }
   #menu a {
     display: inline-block;
+    padding: 0 40px 0 17px;
     border-left: 3px solid #D8DF2B;
     color: #fff;
     font-size: 1.125em;
     font-family: "trebuc", "明暸體", "Meiryo", sans-serif;
     letter-spacing: 2px;
     line-height: 19px;
-    padding: 0 40px 0 17px; }
-    #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
-      background: url(../images/menuBg.gif) right 0 no-repeat;
-      padding-bottom: 31px; }
+    -webkit-transition: background .5s, padding-bottom .35s;
+    transition: background .5s, padding-bottom .35s; }
     @media (min-width: 75em) {
       #menu a {
         padding-right: 70px; } }
+    #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
+      background: url(../images/menuBg.gif) right 0 no-repeat;
+      padding-bottom: 31px; }
   @media (max-width: 61.1875em) {
     #menu {
       background: #333;
@@ -677,7 +679,7 @@ body {
 .dropbtn {
   cursor: pointer;
   transition: all .5s ease;
-  background: none;
+  background: #72a827;
   border: 1px solid #93C336;
   color: #C2E57E;
   font-size: 0.75em;
@@ -794,6 +796,8 @@ body {
   .new-product::before, .new-product::after {
     position: absolute; }
   .new-product::before {
+    -webkit-transition: background 0.5s;
+    transition: background 0.5s;
     width: 100%;
     height: 100%;
     left: 0;
@@ -802,6 +806,8 @@ body {
     display: inline-block;
     width: 60px;
     height: 60px;
+    -webkit-transition: background .5s, transform 1s;
+    transition: background .5s, transform 1s;
     left: 50%;
     top: 50%;
     margin: -30px 0 0 -30px;
@@ -823,13 +829,17 @@ body {
     box-shadow: 1px 1px 0 #CBCBCB;
     width: 48.5%;
     margin-bottom: 1.5%;
-    margin-left: 1.5%; }
+    margin-left: 1.5%;
+    -webkit-transition: transform 0.5s;
+    transition: transform 0.5s; }
     .quick-nav a::after {
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
-      left: 0; }
+      left: 0;
+      -webkit-transition: box-shadow 1s;
+      transition: box-shadow 1s; }
     .quick-nav a:hover, .quick-nav a:active {
       -webkit-transform: translate(1px, 2px);
       transform: translate(1px, 2px); }

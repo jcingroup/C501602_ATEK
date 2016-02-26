@@ -1,5 +1,5 @@
 var map;
-var site = new google.maps.LatLng(35.709533, 140.223408);
+var site = new google.maps.LatLng(35.710587, 140.224966);
 
 function init() {
 
@@ -20,7 +20,7 @@ function init() {
     var marker = new google.maps.Marker({
         position: site,
         map: map,
-        title: 'ATEK JAPAN'
+        title: 'ATEK JAPAN 株式会社'
     });
 
 }

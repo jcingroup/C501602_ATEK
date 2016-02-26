@@ -12,12 +12,12 @@ $prefixes: webkit !default;
 @mixin prefix($property, $value, $pres: $prefixes, $els: false) {
     @each $prefix in $pres {
         @if $els == false {
-            -#{$prefix}-#{$property}: #{$value};
+            -#{$prefix}-#{$property}: unquote(#{$value});
         } @else {
             #{$property}: -#{$prefix}-#{$value};
         }
     }
-    #{$property}: #{$value};
+    #{$property}: unquote(#{$value});
 }
 
 // 追加 prefix 值

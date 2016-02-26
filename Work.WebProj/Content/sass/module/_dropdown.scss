@@ -9,7 +9,7 @@ $dropdown-color:            #C2E57E !default;
     cursor: pointer;
     transition: all .5s ease;
 
-    background: none;
+    background: darken(#79B229, 2.5);
     border: 1px solid #93C336;
     color: $dropdown-color;
     font-size: em(12px);

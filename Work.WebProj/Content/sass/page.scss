@@ -180,7 +180,7 @@ main {
     }
     a {
         min-width: auto;
-        padding: 8px 12px;
+        padding: 8px 10px;
         font-size: em(15px);
         margin: 5px 0;
 
@@ -194,16 +194,14 @@ main {
         }
     }
     &.fixed {
-        @include fixed(top 20px left 50%);
-        margin-left: 268px;
+        @include fixed(top 20px right 20px);
+        max-width: 270px;
         z-index: z(tooltip);
 
         @include mq(wider) {
+            left: 50%;
             max-width: 308px;
             margin-left: 393px;
-        }
-        @include mq(wide) {
-            margin-left: 342px;
         }
         @include mq-max(break(desktop, -1)) {
             background: #fff;
@@ -212,8 +210,7 @@ main {
             padding: 0 $gutter;
 
             nav:last-child { margin-bottom: 0; }
-            // header { display: none; }
-            // dl { padding: 5px 8px; }
+
             dt { margin-bottom: 2px; }
         }
     }
@@ -236,14 +233,15 @@ main {
 // 產品分類頁
 .catalog {
     text-align: center;
+
     h3, header { text-align: left; }
     // h3 { margin-top: 0; }
     dl {
         display: inline-block;
         vertical-align: top;
         background: #efefef;
-        width: 31%;
-        margin: cp(20px) cp(11px);
+        width: 31.1%;
+        margin: cp(20px) cp(8px);
         padding: 25px 7px;
         @include mq(break(phone, +1),tablet) {
             width: 47%;
@@ -257,7 +255,11 @@ main {
         color: #528446;
         margin-bottom: 30px;
     }
-    .btn { margin: 5px 0;}
+    .btn {
+        margin: 5px 0;
+        padding: 8px 10px;
+        font-size: 1em;
+    }
 }
 
 // 產品分類說明
@@ -269,7 +271,7 @@ main {
         margin-top: -35px;
         @include mq-max(tablet) { margin-top: 0; }
     }
-    h3 { margin-top: 0; }
+    h3 { margin-top: 0; margin-bottom: 0; }
 }
 
 // 產品列表

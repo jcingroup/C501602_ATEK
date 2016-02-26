@@ -216,6 +216,7 @@ body {
     }
     a {
         display: inline-block;
+        padding: 0 40px 0 17px;
 
         border-left: 3px solid #D8DF2B;
         color: $menu-link;
@@ -224,14 +225,14 @@ body {
         letter-spacing: 2px;
         line-height: 19px;
 
-        padding: 0 40px 0 17px;
+        @include prefix(transition, 'background .5s, padding-bottom .35s');
+        @include mq(wide) { padding-right: 70px; }
 
         &:hover, &:active,
         #{$selector} {
             background: url(#{$img-path}/menuBg.gif) right 0 no-repeat;
             padding-bottom: 31px;
         }
-        @include mq(wide) { padding-right: 70px; }
     }
 
     @include mq-max(break(desktop,-1)) {

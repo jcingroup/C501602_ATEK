@@ -11,10 +11,11 @@
     <section class="catalog">
         <h3 class="font-sp">@item.l1_name</h3>
 
+        @* 此為編輯器
         <header class="intro">
-            @* 此為編輯器，下列為範例 *@
             @Html.Raw(item.l1_info)
-        </header><!-- info //-->
+        </header><!-- info //--> *@
+
         @foreach (var l2 in item.l2_list)
         {
             <dl>

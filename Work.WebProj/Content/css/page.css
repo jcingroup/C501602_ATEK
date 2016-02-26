@@ -647,19 +647,21 @@ body {
   right: 0; }
   #menu a {
     display: inline-block;
+    padding: 0 40px 0 17px;
     border-left: 3px solid #D8DF2B;
     color: #fff;
     font-size: 1.125em;
     font-family: "trebuc", "明暸體", "Meiryo", sans-serif;
     letter-spacing: 2px;
     line-height: 19px;
-    padding: 0 40px 0 17px; }
-    #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
-      background: url(../images/menuBg.gif) right 0 no-repeat;
-      padding-bottom: 31px; }
+    -webkit-transition: background .5s, padding-bottom .35s;
+    transition: background .5s, padding-bottom .35s; }
     @media (min-width: 75em) {
       #menu a {
         padding-right: 70px; } }
+    #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
+      background: url(../images/menuBg.gif) right 0 no-repeat;
+      padding-bottom: 31px; }
   @media (max-width: 61.1875em) {
     #menu {
       background: #333;
@@ -962,7 +964,7 @@ figure:hover, figure:active {
 .dropbtn {
   cursor: pointer;
   transition: all .5s ease;
-  background: none;
+  background: #72a827;
   border: 1px solid #93C336;
   color: #C2E57E;
   font-size: 0.75em;
@@ -1172,7 +1174,7 @@ main {
       color: #fff; } }
 .sub-nav a {
   min-width: auto;
-  padding: 8px 12px;
+  padding: 8px 10px;
   font-size: 0.9375em;
   margin: 5px 0; }
   @media (max-width: 40em) {
@@ -1185,16 +1187,14 @@ main {
 .sub-nav.fixed {
   position: fixed;
   top: 20px;
-  left: 50%;
-  margin-left: 268px;
+  right: 20px;
+  max-width: 270px;
   z-index: 90; }
   @media (min-width: 87.5em) {
     .sub-nav.fixed {
+      left: 50%;
       max-width: 308px;
       margin-left: 393px; } }
-  @media (min-width: 75em) {
-    .sub-nav.fixed {
-      margin-left: 342px; } }
   @media (max-width: 61.1875em) {
     .sub-nav.fixed {
       background: #fff;
@@ -1226,7 +1226,7 @@ main {
     display: inline-block;
     vertical-align: top;
     background: #efefef;
-    width: 31%;
+    width: 31.1%;
     margin: 2% 1%;
     padding: 25px 7px; }
     @media (min-width: 30.0625em) and (max-width: 48em) {
@@ -1241,7 +1241,9 @@ main {
     color: #528446;
     margin-bottom: 30px; }
   .catalog .btn {
-    margin: 5px 0; }
+    margin: 5px 0;
+    padding: 8px 10px;
+    font-size: 1em; }
 
 .intro {
   padding-top: 10px; }
@@ -1251,7 +1253,8 @@ main {
       .intro img {
         margin-top: 0; } }
   .intro h3 {
-    margin-top: 0; }
+    margin-top: 0;
+    margin-bottom: 0; }
 
 @media (max-width: 61.1875em) {
   .kind {

@@ -81,17 +81,17 @@ $btn-padding:       12px 20px;
     @include mq-max(phone) { height: 110px; }
     @include mq-max(mobile) { height: 90px; }
 
-    @include el(all) {
-        @extend %effect-all;
-        position: absolute;
-    }
+    @include el(all) { position: absolute; }
     &::before {
+        @include prefix(transition, background .5s);
         @include size(100%);
         left: 0; top: 0;
     }
     &::after {
         $size: 60px;
         @include circle($size);
+        @include prefix(transition, 'background .5s, transform 1s');
+
         left: 50%; top: 50%;
         margin: (-$size/2) 0 0 (-$size/2);
         background-position: center;
@@ -123,12 +123,13 @@ $btn-padding:       12px 20px;
         margin-bottom: 1.5%;
         margin-left: 1.5%;
 
+        @include prefix(transition, transform .5s);
+
         @include el(after) {
-            @extend %effect-all;
             @include size(100%);
             @include absolute(left 0 top 0);
+            @include prefix(transition, box-shadow 1s);
         }
-
         &:hover, &:active {
             @include prefix(transform, translate(1px,2px));
             &::after {
@@ -142,11 +143,6 @@ $btn-padding:       12px 20px;
                 margin-left: 0;
             }
         }
-        // @include mq-max(mobile) {
-        //     float: none;
-        //     margin-left: 0;
-        //     width: 100%;
-        // }
     }
 }
 
