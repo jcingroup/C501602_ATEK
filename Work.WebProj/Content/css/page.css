@@ -1239,7 +1239,7 @@ main {
   .catalog dt {
     font-size: 1.375em;
     color: #528446;
-    margin-bottom: 30px; }
+    padding-bottom: 25px; }
   .catalog .btn {
     margin: 5px 0;
     padding: 8px 10px;

@@ -105,7 +105,6 @@ main {
     }
 }
 .sub-nav {
-
     nav {
         @extend %clearfix;
         @extend %effect-all;
@@ -253,7 +252,8 @@ main {
     dt {
         font-size: em(22px);
         color: #528446;
-        margin-bottom: 30px;
+        padding-bottom: 25px;
+        // min-height: 75px;
     }
     .btn {
         margin: 5px 0;
