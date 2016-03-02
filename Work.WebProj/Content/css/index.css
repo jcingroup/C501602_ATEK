@@ -501,7 +501,9 @@ body {
 #menu {
   position: absolute;
   top: 60px;
-  right: 0; }
+  right: 0;
+  -webkit-transition: none;
+  transition: none; }
   #menu a {
     display: inline-block;
     padding: 0 40px 0 17px;
@@ -510,15 +512,12 @@ body {
     font-size: 1.125em;
     font-family: "trebuc", "明暸體", "Meiryo", sans-serif;
     letter-spacing: 2px;
-    line-height: 19px;
+    line-height: 1.1;
     -webkit-transition: background .5s, padding-bottom .35s;
     transition: background .5s, padding-bottom .35s; }
-    @media (min-width: 75em) {
-      #menu a {
-        padding-right: 70px; } }
     #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
       background: url(../images/menuBg.gif) right 0 no-repeat;
-      padding-bottom: 31px; }
+      padding-bottom: 30px; }
   @media (max-width: 61.1875em) {
     #menu {
       background: #333;

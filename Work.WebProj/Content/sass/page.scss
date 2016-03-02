@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-$font-size-h2: 55px;
+$font-size-h2: 46px;
 $font-size-h3: 35px;
 $line:         1px solid #EAEFDE;
 
@@ -91,7 +91,6 @@ main {
 }
 
 // == Products
-
 // 產品子分類
 .pro-menu {
     display: none;
@@ -104,6 +103,7 @@ main {
         display: block;
     }
 }
+// 產品列表右選單
 .sub-nav {
     nav {
         @extend %clearfix;
@@ -137,14 +137,21 @@ main {
         }
     }
     dl {
-        background: #efefef;
+        background: lighten($gray-base, 96.8%);
         padding: 20px 15px;
         margin: 8px 0;
 
         &.current {
-            background: $brand-primary;
-            dt { color: #fff; }
-            a { background: #F1F1F1; color: #4C4C4C; }
+            // background: #fcfcfc;
+            // border: 1px solid #EAEFDE;
+            // dt {
+            //     color: #fff;
+            // }
+            a {
+                // background: #F1F1F1;
+                color: #fff;
+                background: $brand-primary;
+            }
         }
         @include mq-max(break(desktop, -1)) {
             display: inline-block;
@@ -165,8 +172,8 @@ main {
     }
     dt {
         color: darken($brand-primary,20%);
-        font-size: em(22px);
-        margin-bottom: 15px;
+        font-size: em(19px);
+        margin-bottom: 10px;
 
         @include mq-max(break(desktop, -1)) {
             font-size: em(20px);
@@ -182,6 +189,12 @@ main {
         padding: 8px 10px;
         font-size: em(15px);
         margin: 5px 0;
+        background: lighten($gray-base, 90%);
+        color: $gray;
+        &:hover, &:active {
+            background: $brand-primary;
+            color: #fff;
+        }
 
         @include mq-max(phone-plus) {
             background: #F1F1F1;
@@ -218,7 +231,7 @@ main {
 .Products #main {
     header h2 {
         color: $brand-secondary;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
         margin-top: 0;
         margin-bottom: 20px;
     }
@@ -238,7 +251,7 @@ main {
     dl {
         display: inline-block;
         vertical-align: top;
-        background: #efefef;
+        background: lighten($gray-base, 96.8%);
         width: 31.1%;
         margin: cp(20px) cp(8px);
         padding: 25px 7px;
@@ -259,6 +272,12 @@ main {
         margin: 5px 0;
         padding: 8px 10px;
         font-size: 1em;
+        background: lighten($gray-base, 90%);
+        color: $gray;
+        &:hover, &:active {
+            background: $brand-primary;
+            color: #fff;
+        }
     }
 }
 
@@ -310,14 +329,17 @@ main {
     width: cp(760px);
 
     small {
-        font-size: em(40px,62px);
+        display: block;
+        // font-size: em(40px, $font-size-h2);
+        font-size: 65%;
         color: #CFCFCF;
-        margin-left: 10px;
-        vertical-align: middle;
+        margin-top: 5px;
+        // margin-left: 10px;
+        // vertical-align: middle;
 
-        @include mq-max(break(tablet, -1)) {
-            display: block;
-        }
+        // @include mq-max(break(tablet, -1)) {
+        //     display: block;
+        // }
     }
     .btn-download { margin-top: 30px; }
 
@@ -366,21 +388,27 @@ main {
 // == News & Support
 .tag {
     a {
-        display: inline-block;
-        vertical-align: middle;
-        background: #79B229;
-        border-radius: 3px;
-
-        color: #fff;
+        display: block;
         font-style: normal;
         font-weight: normal;
         letter-spacing: 1px;
 
-        padding: 6px 18px;
-        margin: 7px 2px;
+        margin-bottom: 25px;
 
-        &:hover, &:active, &.current {
-            background: $brand-secondary;
+        span { padding-left: 12px; }
+
+        &.current span {
+            border-radius: 3px;
+            background: $brand-primary;
+            color: #fff;
+            padding: 5px 12px;
+        }
+
+        @include mq-max(break(desktop, -1)) {
+            display: inline-block;
+            margin: 0 10px 10px 0;
+
+            span { padding: 0; }
         }
     }
 }

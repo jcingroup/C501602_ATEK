@@ -252,7 +252,7 @@ h4, h5, h6 {
     font-size: 75%; }
 
 h2 {
-  font-size: 3.4375em; }
+  font-size: 2.875em; }
 
 h3 {
   font-size: 2.1875em; }
@@ -644,7 +644,9 @@ body {
 #menu {
   position: absolute;
   top: 60px;
-  right: 0; }
+  right: 0;
+  -webkit-transition: none;
+  transition: none; }
   #menu a {
     display: inline-block;
     padding: 0 40px 0 17px;
@@ -653,15 +655,12 @@ body {
     font-size: 1.125em;
     font-family: "trebuc", "明暸體", "Meiryo", sans-serif;
     letter-spacing: 2px;
-    line-height: 19px;
+    line-height: 1.1;
     -webkit-transition: background .5s, padding-bottom .35s;
     transition: background .5s, padding-bottom .35s; }
-    @media (min-width: 75em) {
-      #menu a {
-        padding-right: 70px; } }
     #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
       background: url(../images/menuBg.gif) right 0 no-repeat;
-      padding-bottom: 31px; }
+      padding-bottom: 30px; }
   @media (max-width: 61.1875em) {
     #menu {
       background: #333;
@@ -1133,16 +1132,12 @@ main {
     .sub-nav header {
       display: none; } }
 .sub-nav dl {
-  background: #efefef;
+  background: #f7f7f7;
   padding: 20px 15px;
   margin: 8px 0; }
-  .sub-nav dl.current {
+  .sub-nav dl.current a {
+    color: #fff;
     background: #79B229; }
-    .sub-nav dl.current dt {
-      color: #fff; }
-    .sub-nav dl.current a {
-      background: #F1F1F1;
-      color: #4C4C4C; }
   @media (max-width: 61.1875em) {
     .sub-nav dl {
       display: inline-block;
@@ -1162,8 +1157,8 @@ main {
       margin: 5px 0; } }
 .sub-nav dt {
   color: #415f16;
-  font-size: 1.375em;
-  margin-bottom: 15px; }
+  font-size: 1.1875em;
+  margin-bottom: 10px; }
   @media (max-width: 61.1875em) {
     .sub-nav dt {
       font-size: 1.25em;
@@ -1176,7 +1171,12 @@ main {
   min-width: auto;
   padding: 8px 10px;
   font-size: 0.9375em;
-  margin: 5px 0; }
+  margin: 5px 0;
+  background: #e6e6e6;
+  color: #555555; }
+  .sub-nav a:hover, .sub-nav a:active {
+    background: #79B229;
+    color: #fff; }
   @media (max-width: 40em) {
     .sub-nav a {
       background: #F1F1F1;
@@ -1209,7 +1209,7 @@ main {
 
 .Products #main header h2 {
   color: #559543;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   margin-top: 0;
   margin-bottom: 20px; }
 .Products #main section {
@@ -1225,7 +1225,7 @@ main {
   .catalog dl {
     display: inline-block;
     vertical-align: top;
-    background: #efefef;
+    background: #f7f7f7;
     width: 31.1%;
     margin: 2% 1%;
     padding: 25px 7px; }
@@ -1243,7 +1243,12 @@ main {
   .catalog .btn {
     margin: 5px 0;
     padding: 8px 10px;
-    font-size: 1em; }
+    font-size: 1em;
+    background: #e6e6e6;
+    color: #555555; }
+    .catalog .btn:hover, .catalog .btn:active {
+      background: #79B229;
+      color: #fff; }
 
 .intro {
   padding-top: 10px; }
@@ -1281,13 +1286,10 @@ main {
   float: right;
   width: 55%; }
   .pro-info small {
-    font-size: 0.64516em;
+    display: block;
+    font-size: 65%;
     color: #CFCFCF;
-    margin-left: 10px;
-    vertical-align: middle; }
-    @media (max-width: 47.9375em) {
-      .pro-info small {
-        display: block; } }
+    margin-top: 5px; }
   .pro-info .btn-download {
     margin-top: 30px; }
   @media (max-width: 48em) {
@@ -1336,18 +1338,24 @@ main {
       width: 85%; } }
 
 .tag a {
-  display: inline-block;
-  vertical-align: middle;
-  background: #79B229;
-  border-radius: 3px;
-  color: #fff;
+  display: block;
   font-style: normal;
   font-weight: normal;
   letter-spacing: 1px;
-  padding: 6px 18px;
-  margin: 7px 2px; }
-  .tag a:hover, .tag a:active, .tag a.current {
-    background: #559543; }
+  margin-bottom: 25px; }
+  .tag a span {
+    padding-left: 12px; }
+  .tag a.current span {
+    border-radius: 3px;
+    background: #79B229;
+    color: #fff;
+    padding: 5px 12px; }
+  @media (max-width: 61.1875em) {
+    .tag a {
+      display: inline-block;
+      margin: 0 10px 10px 0; }
+      .tag a span {
+        padding: 0; } }
 
 .panel {
   position: relative;
