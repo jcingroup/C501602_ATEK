@@ -303,6 +303,9 @@ namespace ProductCategoryL3 {
                 obj[name] = input.value;
             }
             this.setState({ fieldData: obj });
+            if (collentName == this.props.gdName) {
+                this.queryGridData(1);
+            }
         }
         setLangVal(collentName: string, name: string, e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
@@ -331,6 +334,9 @@ namespace ProductCategoryL3 {
                 }
             }
             this.setState(NewState);
+            if (collentName == this.props.gdName) {
+                this.queryGridData(1);
+            }
         }
         changeSearchCategoryL1(name: string, e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
@@ -349,6 +355,7 @@ namespace ProductCategoryL3 {
             obj['category_l2'] = null;//階層切換,分類搜尋條件清空
             $("#search-category-l2 option:first").attr("selected", "true");
             this.setState(NewState);
+            this.queryGridData(1);
         }
         onFieldDataL2Change(e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;

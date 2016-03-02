@@ -294,7 +294,7 @@ namespace Product {
         render() {
             return (
                 <div>
-            <div className="form-group"> 
+            <div className="form-group">
                 <label className="col-xs-2 control-label"></label>
                 <div className="col-xs-8">
                     <div className="input-group">
@@ -307,7 +307,7 @@ namespace Product {
                 </div>
 
         {this.state.certificates.map((item, i) => {
-                        return <div key={item.product_certificate_id} className="form-group">
+            return <div key={item.product_certificate_id} className="form-group">
                  <label className="col-xs-2 control-label">{item.name}</label>
                  <div className="col-xs-8">
                     <CommCmpt.MasterImageUpload FileKind="Certificate" MainId={item.product_certificate_id} ParentEditType={this.props.parent_edit_type} url_upload={gb_approot + 'Active/ProductCertificate/aj_FUpload'} url_list={gb_approot + 'Active/ProductCertificate/aj_FList'}
@@ -606,6 +606,9 @@ namespace Product {
                 obj[name] = input.value;
             }
             this.setState({ fieldData: obj });
+            if (collentName == this.props.gdName) {
+                this.queryGridData(1);
+            }
         }
         setLangVal(collentName: string, name: string, e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
@@ -644,6 +647,9 @@ namespace Product {
                 }
             }
             this.setState(NewState);
+            if (collentName == this.props.gdName) {
+                this.queryGridData(1);
+            }
         }
         changeSearchCategoryL1(name: string, e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
@@ -665,6 +671,7 @@ namespace Product {
             $("#search-category-l2 option:first").attr("selected", "true");
             $("#search-category-l3 option:first").attr("selected", "true");
             this.setState(NewState);
+            this.queryGridData(1);
         }
         changeSearchCategoryL2(name: string, e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
@@ -683,6 +690,7 @@ namespace Product {
             obj['category_l3'] = null;//階層切換,分類搜尋條件清空
             $("#search-category-l3 option:first").attr("selected", "true");
             this.setState(NewState);
+            this.queryGridData(1);
         }
         onFieldDataL3Change(e: React.SyntheticEvent) {
             let input: HTMLInputElement = e.target as HTMLInputElement;
@@ -930,18 +938,18 @@ namespace Product {
                 <small className="help-block">最多1個檔案, 每個檔案最大不可超過4MB; 接受檔案類型為pdf、doc、docx、xls、xlsx、txt、png、jpg、jpeg的檔案</small>
                     </div>
                </div>
-        </div>
+            </div>
 
        <div className="form-group clear bg-warning">
            <div className="col-xs-6">
                <label className="col-xs-3 control-label">證書文件</label>
                <small className="col-xs-9 help-block">每項證書最多1張圖，建議尺寸寬度不超過 1000px, 每張最大不可超過2MB</small>
-           </div>
+               </div>
 
            <div className="col-xs-6">
                <HandleProductCertificate product_id={this.state.fieldData.product_id} parent_edit_type={this.state.edit_type} />
+               </div>
            </div>
-       </div>
 
         <div className="col-xs-12">
             <Tabs defaultActiveKey={2} animation={false}>
@@ -951,14 +959,14 @@ namespace Product {
                 <Tab eventKey={2} title="技術規格(Technical Specification)">
                     <textarea type="date" className="form-control" id="technical_specification" name="technical_specification" value={fieldData.technical_specification} onChange={this.changeFDValue.bind(this, 'technical_specification') } />
                     </Tab>
-            </Tabs>
+                </Tabs>
             <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-2">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button> { }
                     <button type="button" onClick={this.noneType}><i className="fa-times"></i> 回前頁</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
         </form>
                         </div >

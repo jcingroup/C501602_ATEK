@@ -45,7 +45,7 @@ namespace DotWeb.Api
                     });
                 if (q.keyword != null)
                 {
-                    items = items.Where(x => x.l2_name.Contains(q.keyword));
+                    items = items.Where(x => x.l2_name.Contains(q.keyword) || x.l1_name.Contains(q.keyword));
                 }
                 if (q.i_Lang != null)
                 {

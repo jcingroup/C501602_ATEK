@@ -270,6 +270,9 @@ namespace ProductCategoryL1 {
                 obj[name] = input.value;
             }
             this.setState({ fieldData: obj });
+            if (collentName == this.props.gdName) {
+                this.queryGridData(1);
+            }
         }
         changeDatePicker(name: string, v: Date) {
             let obj = this.state.fieldData
@@ -286,6 +289,9 @@ namespace ProductCategoryL1 {
             obj[name] = input.value;
 
             this.setState(NewState);
+            if (collentName == this.props.gdName) {
+                this.queryGridData(1);
+            }
         }
         render() {
 
