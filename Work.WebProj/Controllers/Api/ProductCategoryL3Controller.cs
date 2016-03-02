@@ -61,6 +61,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.l2_id == q.category_l2);
                 }
+                if (q.i_Hide != null)
+                {
+                    items = items.Where(x => x.i_Hide == q.i_Hide);
+                }
 
                 int page = (q.page == null ? 1 : (int)q.page);
                 int startRecord = PageCount.PageInfo(page, this.defPageSize, items.Count());
@@ -202,6 +206,7 @@ namespace DotWeb.Api
     {
         public string keyword { get; set; }
         public string i_Lang { get; set; }
+        public bool? i_Hide { get; set; }
         public int? category_l1 { get; set; }
         public int? category_l2 { get; set; }
     }

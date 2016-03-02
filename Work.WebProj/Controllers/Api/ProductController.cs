@@ -49,7 +49,7 @@ namespace DotWeb.Api
                     });
                 if (q.keyword != null)
                 {
-                    items = items.Where(x => x.power.Contains(q.keyword) || x.l1_name.Contains(q.keyword) 
+                    items = items.Where(x => x.power.Contains(q.keyword) || x.l1_name.Contains(q.keyword)
                                         || x.l2_name.Contains(q.keyword) || x.l3_name.Contains(q.keyword));
 
                 }
@@ -68,6 +68,10 @@ namespace DotWeb.Api
                 if (q.category_l3 != null)
                 {
                     items = items.Where(x => x.l3_id == q.category_l3);
+                }
+                if (q.i_Hide != null)
+                {
+                    items = items.Where(x => x.i_Hide == q.i_Hide);
                 }
 
                 int page = (q.page == null ? 1 : (int)q.page);
@@ -212,6 +216,7 @@ namespace DotWeb.Api
     {
         public string keyword { get; set; }
         public string i_Lang { get; set; }
+        public bool? i_Hide { get; set; }
         public int? category_l1 { get; set; }
         public int? category_l2 { get; set; }
         public int? category_l3 { get; set; }

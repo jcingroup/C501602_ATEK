@@ -20,6 +20,7 @@ namespace ProductCategoryL1 {
         searchData?: {
             keyword: string
             i_Lang: string
+            i_Hide: boolean
         }
     }
     interface FormResult extends IResultBase {
@@ -85,7 +86,7 @@ namespace ProductCategoryL1 {
                 fieldData: {},
                 gridData: { rows: [], page: 1 },
                 edit_type: 0,
-                searchData: { keyword: null, i_Lang: null }
+                searchData: { keyword: null, i_Lang: null, i_Hide: null }
             }
         }
         static defaultProps: BaseDefine.GridFormPropsBase = {
@@ -318,6 +319,14 @@ namespace ProductCategoryL1 {
                                                 onChange={this.changeGDValue.bind(this, 'keyword') }
                                                 value={searchData.keyword}
                                                 placeholder="請輸入關鍵字..." /> { }
+                                            <label>狀態</label> { }
+                                            <select className="form-control"
+                                                onChange={this.changeGDValue.bind(this, 'i_Hide') }
+                                                value={searchData.i_Hide} >
+                                                <option value="">全部</option>
+                                                <option value="false">顯示</option>
+                                                <option value="true">隱藏</option>
+                                                </select> { }
                                             <label>語系</label> { }
                                             <select className="form-control"
                                                 onChange={this.setLangVal.bind(this, this.props.gdName, 'i_Lang') }

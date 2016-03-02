@@ -29,6 +29,7 @@ namespace Product {
             category_l1: number
             category_l2: number
             category_l3: number
+            i_Hide: boolean
         },
         all_category?: Array<server.LangOptionByProduct>,
         options_category_l1?: Array<server.L1>,
@@ -385,7 +386,7 @@ namespace Product {
                 fieldData: {},
                 gridData: { rows: [], page: 1 },
                 edit_type: 0,
-                searchData: { keyword: null, i_Lang: null, category_l1: null, category_l2: null, category_l3: null },
+                searchData: { keyword: null, i_Lang: null, category_l1: null, category_l2: null, category_l3: null, i_Hide: null },
                 all_category: [],
                 options_category_l1: [],
                 options_category_l2: [],
@@ -724,11 +725,20 @@ namespace Product {
                                 <div className="table-filter">
                                     <div className="form-inline">
                                         <div className="form-group">
-                                            <label>標題</label> { }
+                                            <label>標題/分類名稱</label> { }
                                             <input type="text" className="form-control"
                                                 onChange={this.changeGDValue.bind(this, 'keyword') }
                                                 value={searchData.keyword}
                                                 placeholder="請輸入關鍵字..." /> { }
+                                            <label>狀態</label> { }
+                                            <select className="form-control"
+                                                onChange={this.changeGDValue.bind(this, 'i_Hide') }
+                                                value={searchData.i_Hide} >
+                                                <option value="">全部</option>
+                                                <option value="false">顯示</option>
+                                                <option value="true">隱藏</option>
+                                                </select> { }
+                                            <br />
                                             <label>語系</label> { }
                                             <select className="form-control"
                                                 onChange={this.setLangVal.bind(this, this.props.gdName, 'i_Lang') }

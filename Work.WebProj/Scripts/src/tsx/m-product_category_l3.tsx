@@ -26,6 +26,7 @@ namespace ProductCategoryL3 {
             i_Lang: string
             category_l1: number
             category_l2: number
+            i_Hide: boolean
         },
         all_category?: Array<server.LangOptionByProduct>,
         options_category_l1?: Array<server.L1>
@@ -97,7 +98,7 @@ namespace ProductCategoryL3 {
                 fieldData: {},
                 gridData: { rows: [], page: 1 },
                 edit_type: 0,
-                searchData: { keyword: null, i_Lang: null, category_l1: null, category_l2: null },
+                searchData: { keyword: null, i_Lang: null, category_l1: null, category_l2: null, i_Hide: null },
                 all_category: [],
                 options_category_l1: [],
                 options_category_l2: []
@@ -392,6 +393,14 @@ namespace ProductCategoryL3 {
                                                 onChange={this.changeGDValue.bind(this, 'keyword') }
                                                 value={searchData.keyword}
                                                 placeholder="請輸入關鍵字..." /> { }
+                                            <label>狀態</label> { }
+                                            <select className="form-control"
+                                                onChange={this.changeGDValue.bind(this, 'i_Hide') }
+                                                value={searchData.i_Hide} >
+                                                <option value="">全部</option>
+                                                <option value="false">顯示</option>
+                                                <option value="true">隱藏</option>
+                                                </select> { }
                                             <label>語系</label> { }
                                             <select className="form-control"
                                                 onChange={this.setLangVal.bind(this, this.props.gdName, 'i_Lang') }

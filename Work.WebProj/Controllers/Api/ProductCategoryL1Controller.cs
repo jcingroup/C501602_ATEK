@@ -49,6 +49,10 @@ namespace DotWeb.Api
                 {
                     items = items.Where(x => x.i_Lang == q.i_Lang);
                 }
+                if (q.i_Hide != null)
+                {
+                    items = items.Where(x => x.i_Hide == q.i_Hide);
+                }
 
                 int page = (q.page == null ? 1 : (int)q.page);
                 int startRecord = PageCount.PageInfo(page, this.defPageSize, items.Count());
@@ -187,6 +191,7 @@ namespace DotWeb.Api
     public class q_Product_Category_L1 : QueryBase
     {
         public string keyword { get; set; }
+        public bool? i_Hide { get; set; }
         public string i_Lang { get; set; }
     }
 }
