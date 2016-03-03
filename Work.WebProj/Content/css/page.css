@@ -205,7 +205,10 @@ body {
   background: #fff;
   color: #656565;
   font-family: "Microsoft Jhenghei", \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif;
-  line-height: 1.25; }
+  line-height: 1.25;
+  position: relative;
+  overflow-x: hidden;
+  left: 0; }
 
 a {
   color: #656565;
@@ -316,7 +319,7 @@ figure::before, .pro-pic::before {
   vertical-align: middle;
   height: 100%; }
 
-a, body, #menu, .hover-shadow, .hover-shadow header, .btn, figcaption, figure, figure h4, figure span, .search button, .sub-nav nav {
+a, .hover-shadow, .hover-shadow header, .btn, figcaption, figure, figure h4, figure span, .search button, .sub-nav nav {
   -webkit-transition: all 0.35s;
   transition: all 0.35s; }
 
@@ -563,6 +566,10 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
         left: auto;
         margin-left: 0; } }
 
+body {
+  -webkit-transition: left 0.35s;
+  transition: left 0.35s; }
+
 .menu-trigger {
   display: none;
   cursor: pointer;
@@ -628,11 +635,6 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
       -webkit-transition-property: bottom, transform;
       transition-property: bottom, transform; }
 
-body {
-  position: relative;
-  overflow-x: hidden;
-  left: 0; }
-
 .push {
   left: 250px;
   overflow-y: hidden; }
@@ -644,9 +646,7 @@ body {
 #menu {
   position: absolute;
   top: 60px;
-  right: 0;
-  -webkit-transition: none;
-  transition: none; }
+  right: 0; }
   #menu a {
     display: inline-block;
     padding: 0 40px 0 17px;
@@ -663,6 +663,8 @@ body {
       padding-bottom: 30px; }
   @media (max-width: 61.1875em) {
     #menu {
+      -webkit-transition: left 0.35s;
+      transition: left 0.35s;
       background: #333;
       width: 250px;
       height: 100%;
@@ -1098,92 +1100,102 @@ main {
     float: none;
     width: 100%; } }
 
+.Products #main header h2 {
+  color: #559543;
+  letter-spacing: 2px;
+  margin-top: 0;
+  margin-bottom: 20px; }
+.Products #main section {
+  border-top: 1px solid #EAEFDE;
+  margin-top: 35px; }
+.Products #main .catalog, .Products #main .series {
+  border: none; }
+
+.catalog dl, .sub-nav dl {
+  background: #f7f7f7; }
+  .catalog dl .btn, .sub-nav dl .btn {
+    margin: 5px 0;
+    padding: 8px 10px;
+    background: #e6e6e6;
+    color: #555555; }
+    .catalog dl .btn:hover, .catalog dl .btn:active, .sub-nav dl .btn:hover, .sub-nav dl .btn:active {
+      background: #79B229;
+      color: #fff; }
+.catalog dt, .sub-nav dt {
+  color: #415f16; }
+
 .pro-menu {
   display: none;
-  font-size: 1.375em;
+  font-size: 1.125em;
   width: 100%;
   padding: 12px 0; }
-  @media (max-width: 40em) {
+  @media (max-width: 48em) {
     .pro-menu {
       display: block; } }
 
 .sub-nav nav {
   margin-bottom: 25px; }
-  @media (max-width: 40em) {
+  @media (max-width: 48em) {
     .sub-nav nav {
       position: absolute;
       right: 15px;
       left: 15px;
-      background: #79B229;
-      padding: 2% 1%;
+      background: whitesmoke;
+      padding: 2%;
       opacity: 0;
       visibility: hidden;
-      z-index: 80; }
+      z-index: 999; }
       .sub-nav nav.open {
         opacity: 1;
-        visibility: visible; }
-      .sub-nav nav a:hover, .sub-nav nav a:active, .sub-nav nav a.current {
-        background: #f6f6f6; } }
+        visibility: visible; } }
 .sub-nav header {
   color: #79B229;
   font-size: 2.1875em;
   margin-bottom: 5px; }
   @media (max-width: 61.1875em) {
     .sub-nav header {
-      display: none; } }
+      font-size: 1.25em; } }
 .sub-nav dl {
-  background: #f7f7f7;
   padding: 20px 15px;
   margin: 8px 0; }
-  .sub-nav dl.current a {
+  .sub-nav dl.current .btn {
     color: #fff;
     background: #79B229; }
   @media (max-width: 61.1875em) {
     .sub-nav dl {
       display: inline-block;
       vertical-align: top;
-      width: 32.8%;
+      width: 33%;
       padding: 12px 15px; } }
-  @media (max-width: 40em) {
+  @media (max-width: 48em) {
     .sub-nav dl {
-      background: none;
-      padding: 0;
-      margin: 0;
-      width: 32.5%;
+      width: 32.6%;
+      padding: 8px 5px;
+      margin-left: 1px;
+      background: #fcfcfc;
       text-align: center; } }
-  @media (max-width: 29.9375em) {
+  @media (max-width: 30em) {
     .sub-nav dl {
       width: 100%;
-      margin: 5px 0; } }
+      margin: 3px 0; } }
+  .sub-nav dl .btn {
+    min-width: auto;
+    font-size: 0.9375em; }
+    @media (max-width: 48em) {
+      .sub-nav dl .btn {
+        font-size: 0.8125em;
+        margin-bottom: 2px; } }
 .sub-nav dt {
-  color: #415f16;
   font-size: 1.1875em;
   margin-bottom: 10px; }
   @media (max-width: 61.1875em) {
     .sub-nav dt {
-      font-size: 1.25em;
+      font-size: 1em;
       margin-bottom: 8px; } }
-  @media (max-width: 40em) {
+  @media (max-width: 48em) {
     .sub-nav dt {
       font-size: 0.9375em;
-      color: #fff; } }
-.sub-nav a {
-  min-width: auto;
-  padding: 8px 10px;
-  font-size: 0.9375em;
-  margin: 5px 0;
-  background: #e6e6e6;
-  color: #555555; }
-  .sub-nav a:hover, .sub-nav a:active {
-    background: #79B229;
-    color: #fff; }
-  @media (max-width: 40em) {
-    .sub-nav a {
-      background: #F1F1F1;
-      color: #4C4C4C; }
-      .sub-nav a:hover, .sub-nav a:active {
-        color: #559543;
-        background: #fff; } }
+      margin-bottom: 5px; } }
 .sub-nav.fixed {
   position: fixed;
   top: 20px;
@@ -1200,23 +1212,14 @@ main {
       background: #fff;
       left: 0;
       top: 0;
+      right: 0;
       margin-left: 0;
+      max-width: 100%;
       padding: 0 15px; }
       .sub-nav.fixed nav:last-child {
         margin-bottom: 0; }
       .sub-nav.fixed dt {
         margin-bottom: 2px; } }
-
-.Products #main header h2 {
-  color: #559543;
-  letter-spacing: 2px;
-  margin-top: 0;
-  margin-bottom: 20px; }
-.Products #main section {
-  border-top: 1px solid #EAEFDE;
-  margin-top: 35px; }
-.Products #main .catalog, .Products #main .series {
-  border: none; }
 
 .catalog {
   text-align: center; }
@@ -1225,10 +1228,12 @@ main {
   .catalog dl {
     display: inline-block;
     vertical-align: top;
-    background: #f7f7f7;
     width: 31.1%;
     margin: 2% 1%;
     padding: 25px 7px; }
+    @media (max-width: 61.1875em) {
+      .catalog dl {
+        width: 28%; } }
     @media (min-width: 30.0625em) and (max-width: 48em) {
       .catalog dl {
         width: 47%; } }
@@ -1238,17 +1243,9 @@ main {
         margin: 2% 0; } }
   .catalog dt {
     font-size: 1.375em;
-    color: #528446;
     padding-bottom: 25px; }
   .catalog .btn {
-    margin: 5px 0;
-    padding: 8px 10px;
-    font-size: 1em;
-    background: #e6e6e6;
-    color: #555555; }
-    .catalog .btn:hover, .catalog .btn:active {
-      background: #79B229;
-      color: #fff; }
+    font-size: 1em; }
 
 .intro {
   padding-top: 10px; }

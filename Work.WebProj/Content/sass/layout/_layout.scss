@@ -118,8 +118,8 @@ $goTop-position:        bottom 30px right 10px !default;
 }
 
 // == 行動版主選單
-body, #menu {
-    @extend %effect-all;
+body {
+    @include prefix(transition, left .35s)
 }
 .menu-trigger {
     @extend %text-hide;
@@ -189,11 +189,6 @@ body, #menu {
         }
     }
 }
-body {
-    position: relative;
-    overflow-x: hidden;
-    left: 0;
-}
 .push {
     left: $menu-trigger-width;
     overflow-y: hidden;
@@ -208,7 +203,6 @@ body {
 // 主選單
 #menu {
     @include absolute(right 0 top 60px);
-    @include prefix(transition, none);
 
     $selector: ();
     @each $item in $pages {
@@ -236,6 +230,7 @@ body {
     }
 
     @include mq-max(break(desktop,-1)) {
+        @include prefix(transition, left .35s);
         background: #333;
         width: $menu-trigger-width;
         height: 100%;

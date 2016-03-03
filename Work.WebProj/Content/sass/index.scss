@@ -55,6 +55,13 @@ $btn-padding:       12px 20px;
     text-align: center;
     img { width: 100%; }
 }
+.swiper-pagination-bullet {
+    background: #fff;
+    opacity: .4;
+}
+.swiper-pagination-bullet-active {
+    opacity: .8;
+}
 
 // == main
 .new-product, .quick-nav {

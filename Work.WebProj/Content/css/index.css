@@ -205,7 +205,10 @@ body {
   background: #fff;
   color: #656565;
   font-family: "Microsoft Jhenghei", \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif;
-  line-height: 1.25; }
+  line-height: 1.25;
+  position: relative;
+  overflow-x: hidden;
+  left: 0; }
 
 a {
   color: #656565;
@@ -310,7 +313,7 @@ hr {
 .list-inline > li {
   display: inline-block; }
 
-a, body, #menu, .hover-shadow, .hover-shadow header {
+a, .hover-shadow, .hover-shadow header {
   -webkit-transition: all 0.35s;
   transition: all 0.35s; }
 
@@ -420,6 +423,10 @@ a, body, #menu, .hover-shadow, .hover-shadow header {
         left: auto;
         margin-left: 0; } }
 
+body {
+  -webkit-transition: left 0.35s;
+  transition: left 0.35s; }
+
 .menu-trigger {
   display: none;
   cursor: pointer;
@@ -485,11 +492,6 @@ a, body, #menu, .hover-shadow, .hover-shadow header {
       -webkit-transition-property: bottom, transform;
       transition-property: bottom, transform; }
 
-body {
-  position: relative;
-  overflow-x: hidden;
-  left: 0; }
-
 .push {
   left: 250px;
   overflow-y: hidden; }
@@ -501,9 +503,7 @@ body {
 #menu {
   position: absolute;
   top: 60px;
-  right: 0;
-  -webkit-transition: none;
-  transition: none; }
+  right: 0; }
   #menu a {
     display: inline-block;
     padding: 0 40px 0 17px;
@@ -520,6 +520,8 @@ body {
       padding-bottom: 30px; }
   @media (max-width: 61.1875em) {
     #menu {
+      -webkit-transition: left 0.35s;
+      transition: left 0.35s;
       background: #333;
       width: 250px;
       height: 100%;
@@ -765,6 +767,13 @@ body {
   text-align: center; }
   .swiper-slide img {
     width: 100%; }
+
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: .4; }
+
+.swiper-pagination-bullet-active {
+  opacity: .8; }
 
 .new-product img, .quick-nav img {
   width: 100%; }
