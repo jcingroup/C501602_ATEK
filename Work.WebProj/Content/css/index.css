@@ -586,16 +586,16 @@ body {
       color: #808080; }
     #footer .contact .col-5 {
       color: #545454;
-      font-size: 1.875em;
-      line-height: 1.85; }
+      font-size: 1.5625em;
+      line-height: 1.9; }
       @media (max-width: 29.9375em) {
         #footer .contact .col-5 {
-          font-size: 1.4375em; } }
+          font-size: 1.1875em; } }
       #footer .contact .col-5 li:nth-of-type(2) em {
         background-position: 0 -54px; }
     #footer .contact .col-7 {
-      font-size: 0.8125em;
-      line-height: 1.75; }
+      font-size: 0.875em;
+      line-height: 1.6; }
       #footer .contact .col-7 li {
         margin: 10px 0; }
 

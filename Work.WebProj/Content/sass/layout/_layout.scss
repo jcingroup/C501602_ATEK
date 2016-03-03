@@ -307,18 +307,18 @@ body {
         a { color: $footer-color; }
         .col-5 {
             color: #545454;
-            font-size: em(30px);
-            line-height: 1.85;
+            font-size: em(25px);
+            line-height: 1.9;
 
             @include mq-max(break(phone, -1)) {
-                font-size: em(23px);
+                font-size: em(19px);
             }
 
             li:nth-of-type(2) em { background-position: 0 -54px; }
         }
         .col-7 {
-            font-size: em(13px);
-            line-height: 1.75;
+            font-size: em(14px);
+            line-height: 1.6;
 
             li { margin: 10px 0; }
         }

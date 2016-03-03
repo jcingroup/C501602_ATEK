@@ -111,19 +111,13 @@ figure {
     &:hover, &:active {
         border-color: #D7DD19;
 
-        img {
-            @include prefix(transform, scale3d(1.2,1.2,1));
-        }
-        h4 {
-            color: #333;
-        }
+        img { @include prefix(transform, scale3d(1.2,1.2,1)); }
+        h4 { color: #333; }
         span {
             @include prefix(transform, translateY(80px));
             opacity: 1;
         }
-        figcaption {
-            background: rgba(#fff,.8);
-        }
+        figcaption { background: rgba(#fff,.8); }
     }
 }
 
@@ -131,6 +125,12 @@ figure {
 .kind figure {
     border: 1px solid $figure-border-color;
 
+    h3 {
+        @extend %effect-all;
+        font-size: em(13px);
+        color: #ccc;
+        margin-top: 5px;
+    }
     span {
         color: #D8DF2B;
     }
@@ -138,6 +138,7 @@ figure {
     &:hover, &:active {
         border: 4px solid #D7DD19;
 
+        h3 { opacity: 0; }
         h4 {
             color: #fff;
             font-size: em(34px);

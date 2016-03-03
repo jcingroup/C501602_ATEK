@@ -319,7 +319,7 @@ figure::before, .pro-pic::before {
   vertical-align: middle;
   height: 100%; }
 
-a, .hover-shadow, .hover-shadow header, .btn, figcaption, figure, figure h4, figure span, .search button, .sub-nav nav {
+a, .hover-shadow, .hover-shadow header, .btn, figcaption, figure, figure h4, figure span, .kind figure h3, .search button, .sub-nav nav {
   -webkit-transition: all 0.35s;
   transition: all 0.35s; }
 
@@ -729,16 +729,16 @@ body {
       color: #808080; }
     #footer .contact .col-5 {
       color: #545454;
-      font-size: 1.875em;
-      line-height: 1.85; }
+      font-size: 1.5625em;
+      line-height: 1.9; }
       @media (max-width: 29.9375em) {
         #footer .contact .col-5 {
-          font-size: 1.4375em; } }
+          font-size: 1.1875em; } }
       #footer .contact .col-5 li:nth-of-type(2) em {
         background-position: 0 -54px; }
     #footer .contact .col-7 {
-      font-size: 0.8125em;
-      line-height: 1.75; }
+      font-size: 0.875em;
+      line-height: 1.6; }
       #footer .contact .col-7 li {
         margin: 10px 0; }
 
@@ -947,10 +947,16 @@ figure:hover, figure:active {
 
 .kind figure {
   border: 1px solid #9CD217; }
+  .kind figure h3 {
+    font-size: 0.8125em;
+    color: #ccc;
+    margin-top: 5px; }
   .kind figure span {
     color: #D8DF2B; }
   .kind figure:hover, .kind figure:active {
     border: 4px solid #D7DD19; }
+    .kind figure:hover h3, .kind figure:active h3 {
+      opacity: 0; }
     .kind figure:hover h4, .kind figure:active h4 {
       color: #fff;
       font-size: 2.125em;

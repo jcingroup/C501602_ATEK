@@ -307,6 +307,7 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -556,6 +557,7 @@
     <Content Include="Views\Products\PSU_list.ja-JP.cshtml" />
     <Content Include="Views\Products\PSU_sidebar.ja-JP.cshtml" />
     <Content Include="Views\Support\Support.ja-JP.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
