@@ -50,7 +50,7 @@ namespace DotWeb.AppStart
             if (WebLang != null)
             {
 
-                if (WebLang.Value != "ja-JP" && WebLang.Value != "en-US")
+                if (WebLang.Value != "ja" && WebLang.Value != "ja-JP" && WebLang.Value != "en-US")
                 {//強制預設語系只能為英文及日文
                     HttpCookie setWebLang = new HttpCookie(DotWeb.CommSetup.CommWebSetup.WebCookiesId + ".Lang", "en-US");
                     System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(setWebLang.Value);
@@ -59,6 +59,7 @@ namespace DotWeb.AppStart
                 }
                 else
                 {
+                    if (WebLang.Value == "ja") { WebLang.Value = "ja-JP"; }
                     System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(WebLang.Value);
                     System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.Name, false);
                 }

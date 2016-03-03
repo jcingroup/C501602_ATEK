@@ -876,7 +876,7 @@ namespace Product {
                 <div className="col-xs-6">
                     <select className="form-control" id="field-category"
                         onChange={this.onFieldDataL3Change.bind(this) }
-                        value={fieldData.l2_id} required>
+                        value={fieldData.l3_id} required>
                         {options}
                         </select>
                     </div>
