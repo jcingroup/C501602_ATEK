@@ -959,7 +959,12 @@ namespace Product {
            <div className="col-xs-6">
                <HandleProductCertificate product_id={this.state.fieldData.product_id} parent_edit_type={this.state.edit_type} />
                </div>
-           </div>
+       </div>
+
+       <div className="alert alert-warning alert-dismissible" role="alert">
+         編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除)，以免行動裝置顯示時會跑版。<br/>
+         ps. youtube 可勾選「用自適應縮放模式」
+       </div>
 
         <div className="col-xs-12">
             <Tabs defaultActiveKey={2} animation={false}>

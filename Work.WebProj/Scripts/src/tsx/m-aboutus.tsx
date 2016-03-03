@@ -90,6 +90,7 @@ namespace AboutUs {
                         <ol>
                             <li>點選 <strong className="fa-bars"></strong> 並<strong>拖曳</strong>，可修改排列順序。</li>
                             <li>點選 <strong className="fa-chevron-up"></strong> 可收合/展開，點選 <strong className="fa-times"></strong> 可刪除。</li>
+                            <li>編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除)，以免行動裝置顯示時會跑版。<br/>ps. youtube 可勾選「用自適應縮放模式」</li>
                             </ol>
                         </div>
                     <GridDetailForm

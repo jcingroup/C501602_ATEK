@@ -521,10 +521,10 @@ namespace News {
                 </div>
             <div className="form-group">
                 <label className="col-xs-2 control-label">內容</label>
-                <div className="col-xs-10">
+                <div className="col-xs-10"> 
                     <div className="alert alert-warning alert-dismissible" role="alert">
                       編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除)，以免行動裝置顯示時會跑版。<br/>
-                      ps. youtube 可勾選"使用自適應縮放模式"
+                      ps. youtube 可勾選「用自適應縮放模式」
                     </div>
                     <textarea type="date" className="form-control" id="news_content" name="news_content"
                         value={fieldData.news_content} onChange={this.changeFDValue.bind(this, 'news_content') }
