@@ -558,6 +558,7 @@
     <Content Include="Views\Products\PSU_sidebar.ja-JP.cshtml" />
     <Content Include="Views\Support\Support.ja-JP.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Search\Search.ja-JP.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
