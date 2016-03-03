@@ -838,16 +838,16 @@ namespace Product {
                 //分類-選單內容
                 let options = [];
                 option_l1.forEach((l1, i) => {
-                    let options_l1_html = <optgroup className="text-danger" key={'l1-' + i} label={l1.l1_name}></optgroup>;
+                    let options_l1_html = <optgroup className="text-danger" key={'l1-' + l1.l1_id} label={l1.l1_name}></optgroup>;
                     options.push(options_l1_html);
                     let options_l2_html: JSX.Element = null;
                     l1.l2_list.forEach((l2, j) => {
                         let detail = [];
                         l2.l3_list.forEach((l3, k) => {
-                            let options_l3_html = < option className="text-success" key= { 'l3-' + k } data-l1={l1.l1_id} data-l2={l2.l2_id} value= { l3.l3_id } > {l3.l3_name }</option>;
+                            let options_l3_html = < option className="text-success" key= { 'l3-' + l3.l3_id } data-l1={l1.l1_id} data-l2={l2.l2_id} value= { l3.l3_id } > {l3.l3_name }</option>;
                             detail.push(options_l3_html);
                         });
-                        options_l2_html = <optgroup className="text-warning" key={'l2-' + j} label={l2.l2_name}>{detail}</optgroup>;
+                        options_l2_html = <optgroup className="text-warning" key={'l2-' + l2.l2_id} label={l2.l2_name}>{detail}</optgroup>;
                         options.push(options_l2_html);
                     });
                 });
