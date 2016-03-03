@@ -1221,31 +1221,30 @@ main {
       .sub-nav.fixed dt {
         margin-bottom: 2px; } }
 
-.catalog {
-  text-align: center; }
-  .catalog h3, .catalog header {
-    text-align: left; }
-  .catalog dl {
-    display: inline-block;
-    vertical-align: top;
-    width: 31.1%;
-    margin: 2% 1%;
-    padding: 25px 7px; }
-    @media (max-width: 61.1875em) {
-      .catalog dl {
-        width: 28%; } }
-    @media (min-width: 30.0625em) and (max-width: 48em) {
-      .catalog dl {
-        width: 47%; } }
-    @media (max-width: 30em) {
-      .catalog dl {
-        width: 100%;
-        margin: 2% 0; } }
-  .catalog dt {
-    font-size: 1.375em;
-    padding-bottom: 25px; }
-  .catalog .btn {
-    font-size: 1em; }
+.catalog dl {
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  width: 31.1%;
+  margin: 2% 1%;
+  padding: 25px 7px; }
+  @media (max-width: 61.1875em) {
+    .catalog dl {
+      width: 28%; } }
+  @media (min-width: 30.0625em) and (max-width: 48em) {
+    .catalog dl {
+      width: 47%; } }
+  @media (max-width: 30em) {
+    .catalog dl {
+      width: 100%;
+      margin: 2% 0; } }
+  .catalog dl:nth-of-type(3n+1) {
+    margin-left: 0; }
+.catalog dt {
+  font-size: 1.375em;
+  padding-bottom: 25px; }
+.catalog .btn {
+  font-size: 1em; }
 
 .intro {
   padding-top: 10px; }

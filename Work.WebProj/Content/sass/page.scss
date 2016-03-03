@@ -239,10 +239,8 @@ main {
 
 // 產品分類頁
 .catalog {
-    text-align: center;
-
-    h3, header { text-align: left; }
     dl {
+        text-align: center;
         display: inline-block;
         vertical-align: top;
         width: 31.1%;
@@ -251,6 +249,10 @@ main {
         @include mq-max(break(desktop, -1)) { width: 28%; }
         @include mq(break(phone, +1),tablet) { width: 47%; }
         @include mq-max(phone) { width: 100%; margin: cp(20px) 0; }
+
+        &:nth-of-type(3n+1) {
+            margin-left: 0;
+        }
     }
     dt {
         font-size: em(22px);
