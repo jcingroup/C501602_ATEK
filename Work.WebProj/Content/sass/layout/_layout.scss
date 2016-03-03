@@ -118,8 +118,8 @@ $goTop-position:        bottom 30px right 10px !default;
 }
 
 // == 行動版主選單
-body, #menu {
-    @extend %effect-all;
+body {
+    @include prefix(transition, left .35s)
 }
 .menu-trigger {
     @extend %text-hide;
@@ -189,11 +189,6 @@ body, #menu {
         }
     }
 }
-body {
-    position: relative;
-    overflow-x: hidden;
-    left: 0;
-}
 .push {
     left: $menu-trigger-width;
     overflow-y: hidden;
@@ -223,19 +218,19 @@ body {
         font-size: em(18px);
         font-family: $font-sp;
         letter-spacing: 2px;
-        line-height: 19px;
+        line-height: 1.1;
 
         @include prefix(transition, 'background .5s, padding-bottom .35s');
-        @include mq(wide) { padding-right: 70px; }
 
         &:hover, &:active,
         #{$selector} {
             background: url(#{$img-path}/menuBg.gif) right 0 no-repeat;
-            padding-bottom: 31px;
+            padding-bottom: 30px;
         }
     }
 
     @include mq-max(break(desktop,-1)) {
+        @include prefix(transition, left .35s);
         background: #333;
         width: $menu-trigger-width;
         height: 100%;

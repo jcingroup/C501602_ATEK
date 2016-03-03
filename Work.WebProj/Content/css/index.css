@@ -205,7 +205,10 @@ body {
   background: #fff;
   color: #656565;
   font-family: "Microsoft Jhenghei", \5FAE\8EDF\6B63\9ED1\9AD4, Helvetica, Arial, sans-serif;
-  line-height: 1.25; }
+  line-height: 1.25;
+  position: relative;
+  overflow-x: hidden;
+  left: 0; }
 
 a {
   color: #656565;
@@ -310,7 +313,7 @@ hr {
 .list-inline > li {
   display: inline-block; }
 
-a, body, #menu, .hover-shadow, .hover-shadow header {
+a, .hover-shadow, .hover-shadow header {
   -webkit-transition: all 0.35s;
   transition: all 0.35s; }
 
@@ -420,6 +423,10 @@ a, body, #menu, .hover-shadow, .hover-shadow header {
         left: auto;
         margin-left: 0; } }
 
+body {
+  -webkit-transition: left 0.35s;
+  transition: left 0.35s; }
+
 .menu-trigger {
   display: none;
   cursor: pointer;
@@ -485,11 +492,6 @@ a, body, #menu, .hover-shadow, .hover-shadow header {
       -webkit-transition-property: bottom, transform;
       transition-property: bottom, transform; }
 
-body {
-  position: relative;
-  overflow-x: hidden;
-  left: 0; }
-
 .push {
   left: 250px;
   overflow-y: hidden; }
@@ -510,17 +512,16 @@ body {
     font-size: 1.125em;
     font-family: "trebuc", "明暸體", "Meiryo", sans-serif;
     letter-spacing: 2px;
-    line-height: 19px;
+    line-height: 1.1;
     -webkit-transition: background .5s, padding-bottom .35s;
     transition: background .5s, padding-bottom .35s; }
-    @media (min-width: 75em) {
-      #menu a {
-        padding-right: 70px; } }
     #menu a:hover, #menu a:active, .Products #menu a:nth-of-type(1), .AboutUs #menu a:nth-of-type(2), .Support #menu a:nth-of-type(3), .News #menu a:nth-of-type(4), .ContactUs #menu a:nth-of-type(5) {
       background: url(../images/menuBg.gif) right 0 no-repeat;
-      padding-bottom: 31px; }
+      padding-bottom: 30px; }
   @media (max-width: 61.1875em) {
     #menu {
+      -webkit-transition: left 0.35s;
+      transition: left 0.35s;
       background: #333;
       width: 250px;
       height: 100%;
@@ -766,6 +767,13 @@ body {
   text-align: center; }
   .swiper-slide img {
     width: 100%; }
+
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: .4; }
+
+.swiper-pagination-bullet-active {
+  opacity: .8; }
 
 .new-product img, .quick-nav img {
   width: 100%; }

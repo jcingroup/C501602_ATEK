@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-$font-size-h2: 55px;
+$font-size-h2: 46px;
 $font-size-h3: 35px;
 $line:         1px solid #EAEFDE;
 
@@ -91,16 +91,48 @@ main {
 }
 
 // == Products
+.Products #main {
+    header h2 {
+        color: $brand-secondary;
+        letter-spacing: 2px;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    section {
+        border-top: $line;
+        margin-top: 35px;
+    }
+    .catalog, .series { border: none; }
+}
 
-// 產品子分類
+// 產品分類選單
+.catalog, .sub-nav {
+    dl {
+        background: lighten($gray-base, 96.8%);
+        .btn {
+            margin: 5px 0;
+            padding: 8px 10px;
+            background: lighten($gray-base, 90%);
+            color: $gray;
+            &:hover, &:active {
+                background: $brand-primary;
+                color: #fff;
+            }
+        }
+    }
+    dt { color: darken($brand-primary,20%); }
+}
+
+// 產品列表右選單
+// 手機用按鈕
 .pro-menu {
     display: none;
 
-    font-size: em(22px);
+    font-size: em(18px);
     width: 100%;
     padding: 12px 0;
 
-    @include mq-max(phone-plus) {
+    @include mq-max(tablet) {
         display: block;
     }
 }
@@ -110,21 +142,16 @@ main {
         @extend %effect-all;
         margin-bottom: 25px;
 
-        @include mq-max(phone-plus) {
+        @include mq-max(tablet) {
             @include absolute(left $gutter right $gutter);
-            background: $brand-primary;
-            padding: 2% 1%;
+            background: lighten($gray-base, 96%);
+            padding: 2%;
 
             opacity: 0;
             visibility: hidden;
-            z-index: z(dropdown);
+            z-index: z(overlay);
 
             &.open { opacity: 1; visibility: visible; }
-            a {
-                &:hover, &:active, &.current {
-                    background: lighten($gray,63%);
-                }
-            }
         }
     }
     header {
@@ -133,65 +160,60 @@ main {
         margin-bottom: 5px;
 
         @include mq-max(break(desktop, -1)) {
-            display: none;
+            font-size: em(20px);
         }
     }
     dl {
-        background: #efefef;
         padding: 20px 15px;
         margin: 8px 0;
 
         &.current {
-            background: $brand-primary;
-            dt { color: #fff; }
-            a { background: #F1F1F1; color: #4C4C4C; }
+            .btn {
+                color: #fff;
+                background: $brand-primary;
+            }
         }
         @include mq-max(break(desktop, -1)) {
             display: inline-block;
             vertical-align: top;
-            width: 32.8%;
+            width: 33%;
             padding: 12px 15px;
         }
-        @include mq-max(phone-plus) {
-            background: none;
-            padding: 0; margin: 0;
-            width: 32.5%;
+        @include mq-max(tablet) {
+            width: 32.6%;
+            padding: 8px 5px;
+            margin-left: 1px;
+            background: lighten($gray-base, 99%);
             text-align: center;
         }
-        @include mq-max(break(phone, -1)) {
+        @include mq-max(phone) {
             width: 100%;
-            margin: 5px 0;
+            margin: 3px 0;
         }
-    }
-    dt {
-        color: darken($brand-primary,20%);
-        font-size: em(22px);
-        margin-bottom: 15px;
-
-        @include mq-max(break(desktop, -1)) {
-            font-size: em(20px);
-            margin-bottom: 8px;
-        }
-        @include mq-max(phone-plus) {
+        .btn {
+            min-width: auto;
             font-size: em(15px);
-            color: #fff;
-        }
-    }
-    a {
-        min-width: auto;
-        padding: 8px 10px;
-        font-size: em(15px);
-        margin: 5px 0;
 
-        @include mq-max(phone-plus) {
-            background: #F1F1F1;
-            color: #4C4C4C;
-            &:hover, &:active {
-                color: $brand-secondary;
-                background: #fff;
+            @include mq-max(tablet) {
+                font-size: em(13px);
+                margin-bottom: 2px;
             }
         }
     }
+    dt {
+        font-size: em(19px);
+        margin-bottom: 10px;
+
+        @include mq-max(break(desktop, -1)) {
+            font-size: em(16px);
+            margin-bottom: 8px;
+        }
+        @include mq-max(tablet) {
+            font-size: em(15px);
+            margin-bottom: 5px;
+        }
+    }
+
     &.fixed {
         @include fixed(top 20px right 20px);
         max-width: 270px;
@@ -204,8 +226,8 @@ main {
         }
         @include mq-max(break(desktop, -1)) {
             background: #fff;
-            left: 0; top: 0;
-            margin-left: 0;
+            left: 0; top: 0; right: 0;
+            margin-left: 0; max-width: 100%;
             padding: 0 $gutter;
 
             nav:last-child { margin-bottom: 0; }
@@ -215,54 +237,31 @@ main {
     }
 }
 
-.Products #main {
-    header h2 {
-        color: $brand-secondary;
-        letter-spacing: 3px;
-        margin-top: 0;
-        margin-bottom: 20px;
-    }
-    section {
-        border-top: $line;
-        margin-top: 35px;
-    }
-    .catalog, .series { border: none; }
-}
-
 // 產品分類頁
 .catalog {
     text-align: center;
 
     h3, header { text-align: left; }
-    // h3 { margin-top: 0; }
     dl {
         display: inline-block;
         vertical-align: top;
-        background: #efefef;
         width: 31.1%;
         margin: cp(20px) cp(8px);
         padding: 25px 7px;
-        @include mq(break(phone, +1),tablet) {
-            width: 47%;
-        }
-        @include mq-max(phone) {
-            width: 100%; margin: cp(20px) 0;
-        }
+        @include mq-max(break(desktop, -1)) { width: 28%; }
+        @include mq(break(phone, +1),tablet) { width: 47%; }
+        @include mq-max(phone) { width: 100%; margin: cp(20px) 0; }
     }
     dt {
         font-size: em(22px);
-        color: #528446;
         padding-bottom: 25px;
-        // min-height: 75px;
     }
     .btn {
-        margin: 5px 0;
-        padding: 8px 10px;
         font-size: 1em;
     }
 }
 
-// 產品分類說明
+// 產品分類&列表介紹
 .intro {
     @extend %clearfix;
     padding-top: 10px;
@@ -310,14 +309,17 @@ main {
     width: cp(760px);
 
     small {
-        font-size: em(40px,62px);
+        display: block;
+        // font-size: em(40px, $font-size-h2);
+        font-size: 65%;
         color: #CFCFCF;
-        margin-left: 10px;
-        vertical-align: middle;
+        margin-top: 5px;
+        // margin-left: 10px;
+        // vertical-align: middle;
 
-        @include mq-max(break(tablet, -1)) {
-            display: block;
-        }
+        // @include mq-max(break(tablet, -1)) {
+        //     display: block;
+        // }
     }
     .btn-download { margin-top: 30px; }
 
@@ -364,23 +366,30 @@ main {
 }
 
 // == News & Support
+// 右選單
 .tag {
     a {
-        display: inline-block;
-        vertical-align: middle;
-        background: #79B229;
-        border-radius: 3px;
-
-        color: #fff;
+        display: block;
         font-style: normal;
         font-weight: normal;
         letter-spacing: 1px;
 
-        padding: 6px 18px;
-        margin: 7px 2px;
+        margin-bottom: 25px;
 
-        &:hover, &:active, &.current {
-            background: $brand-secondary;
+        span { padding-left: 12px; }
+
+        &.current span {
+            border-radius: 3px;
+            background: $brand-primary;
+            color: #fff;
+            padding: 5px 12px;
+        }
+
+        @include mq-max(break(desktop, -1)) {
+            display: inline-block;
+            margin: 0 10px 10px 0;
+
+            span { padding: 0; }
         }
     }
 }

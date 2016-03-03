@@ -21,6 +21,11 @@ body {
     color: $text-color;
     font-family: $font-family-base;
     line-height: $line-height-base;
+
+    // 手機版動畫
+    position: relative;
+    overflow-x: hidden;
+    left: 0;
 }
 
 a {

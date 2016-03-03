@@ -14,7 +14,7 @@ namespace News {
         check_del?: boolean,
         news_title?: string;
         l2_name?: string;
-        day?: any;
+        day?: any; 
         sort?: number;
         i_Hide?: boolean;
         i_Lang: string;
@@ -515,13 +515,17 @@ namespace News {
             <div className="form-group">
                 <label className="col-xs-2 control-label">簡介</label>
                 <div className="col-xs-8">
-                    <textarea type="text" className="form-control" rows={3} value={fieldData.news_info} onChange={this.changeFDValue.bind(this, 'news_info') } />               
+                    <textarea type="text" className="form-control" rows={3} value={fieldData.news_info} onChange={this.changeFDValue.bind(this, 'news_info') } />
                     </div>
                 <small className="col-xs-2 help-inline">最多512字</small>
                 </div>
             <div className="form-group">
                 <label className="col-xs-2 control-label">內容</label>
                 <div className="col-xs-10">
+                    <div className="alert alert-warning alert-dismissible" role="alert">
+                      編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除)，以免行動裝置顯示時會跑版。<br/>
+                      ps. youtube 可勾選"使用自適應縮放模式"
+                    </div>
                     <textarea type="date" className="form-control" id="news_content" name="news_content"
                         value={fieldData.news_content} onChange={this.changeFDValue.bind(this, 'news_content') }
                         maxLength={512}/>

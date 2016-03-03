@@ -16,19 +16,19 @@
 <nav id="sidebar" class="tag">
     @if (Request.QueryString["category"] != null)
     {
-        <a href="~/Support">ALL</a>
+        <a href="~/Support"><span>ALL</span></a>
     }
     else {
-        <a href="~/Support" class="current">ALL</a>
+        <a href="~/Support" class="current"><span>ALL</span></a>
     }
     @foreach (var i in Model.category)
     {
         if (i.l2_id == ViewBag.category)
         {
-            <a href="~/Support?category=@i.l2_id" class="current">@i.l2_name</a>
+            <a href="~/Support?category=@i.l2_id" class="current"><span>@i.l2_name</span></a>
         }
         else {
-            <a href="~/Support?category=@i.l2_id">@i.l2_name</a>
+            <a href="~/Support?category=@i.l2_id"><span>@i.l2_name</span></a>
         }
     }
 </nav>
