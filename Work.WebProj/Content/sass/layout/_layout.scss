@@ -305,10 +305,10 @@ body {
             margin-right: 7px;
         }
         a { color: $footer-color; }
-        .col-5 {
+        .col-3 {
             color: #545454;
-            font-size: em(25px);
-            line-height: 1.9;
+            font-size: em(17px);
+            line-height: 2.5;
 
             @include mq-max(break(phone, -1)) {
                 font-size: em(19px);
@@ -316,9 +316,9 @@ body {
 
             li:nth-of-type(2) em { background-position: 0 -54px; }
         }
-        .col-7 {
+        .col-9 {
             font-size: em(14px);
-            line-height: 1.6;
+            line-height: 1.2;
 
             li { margin: 10px 0; }
         }

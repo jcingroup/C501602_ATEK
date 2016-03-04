@@ -584,19 +584,19 @@ body {
       margin-right: 7px; }
     #footer .contact a {
       color: #808080; }
-    #footer .contact .col-5 {
+    #footer .contact .col-3 {
       color: #545454;
-      font-size: 1.5625em;
-      line-height: 1.9; }
+      font-size: 1.0625em;
+      line-height: 2.5; }
       @media (max-width: 29.9375em) {
-        #footer .contact .col-5 {
+        #footer .contact .col-3 {
           font-size: 1.1875em; } }
-      #footer .contact .col-5 li:nth-of-type(2) em {
+      #footer .contact .col-3 li:nth-of-type(2) em {
         background-position: 0 -54px; }
-    #footer .contact .col-7 {
+    #footer .contact .col-9 {
       font-size: 0.875em;
-      line-height: 1.6; }
-      #footer .contact .col-7 li {
+      line-height: 1.2; }
+      #footer .contact .col-9 li {
         margin: 10px 0; }
 
 .copyright {

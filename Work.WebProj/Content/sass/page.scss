@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-$font-size-h2: 46px;
-$font-size-h3: 35px;
+$font-size-h2: 40px;
+$font-size-h3: 30px;
 $line:         1px solid #EAEFDE;
 
 @import "helper/function";
@@ -239,12 +239,13 @@ main {
 
 // 產品分類頁
 .catalog {
+    h3 { margin-bottom: 0 }
     dl {
         text-align: center;
         display: inline-block;
         vertical-align: top;
         width: 31.1%;
-        margin: cp(20px) cp(8px);
+        margin: cp(10px) cp(8px) cp(20px) cp(8px);
         padding: 25px 7px;
         @include mq-max(break(desktop, -1)) { width: 28%; }
         @include mq(break(phone, +1),tablet) { width: 47%; }
