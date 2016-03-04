@@ -623,6 +623,7 @@
     <TypeScriptCompile Include="app_modules\Pikaday\pikadaydef.ts" />
     <TypeScriptCompile Include="app_modules\react-datepicker.d\react-datepicker.d.ts" />
     <TypeScriptCompile Include="app_modules\simple-ajax-uploader\SimpleAjaxUploader.def.ts" />
+    <TypeScriptCompile Include="Scripts\src\tsx\w-search.ts" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-all_category.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-menu_set.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-index_img.tsx" />

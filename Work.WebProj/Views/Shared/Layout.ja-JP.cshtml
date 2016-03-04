@@ -57,9 +57,9 @@
         else
         {
             <main id="main">
-                <form action="" class="col-2 col-xs-12 input-group search">
-                    <input type="Search" placeholder="検索...">
-                    <button class="input-group-btn">検索</button>
+                <form action="" class="col-2 col-xs-12 input-group search" id="Search">
+                    <input type="Search" name="keyword" placeholder="検索...">
+                    <button type="submit" form="Search" class="input-group-btn">検索</button>
                 </form>
 
                 <ul class="breadcrumb">
@@ -104,5 +104,6 @@
     <script src="~/Content/js/common.js"></script>
     @RenderSection("Scripts", required: false)
     <script src="~/Scripts/GoogleAnalytics.js"></script>
+    <script src="~/Scripts/src/tsx/w-search.js"></script>
 </body>
 </html>
