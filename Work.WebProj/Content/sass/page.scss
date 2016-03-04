@@ -156,7 +156,7 @@ main {
     }
     header {
         color: $brand-primary;
-        font-size: em(35px);
+        font-size: em(27px);
         margin-bottom: 5px;
 
         @include mq-max(break(desktop, -1)) {

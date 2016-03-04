@@ -45,10 +45,10 @@ img {
     @include mq-max(break(tablet, -1)) { width: 100%; }
 }
 
-@font-face {
-    font-family: 'trebuc';
-    src: local("Trebuchet MS"), url(../font/trebucit.ttf) format("truetype");
-}
+// @font-face {
+//     font-family: 'trebuc';
+//     src: local("Trebuchet MS"), url(../font/trebucit.ttf) format("truetype");
+// }
 
 .font-sp { font-family: $font-sp; }
 
