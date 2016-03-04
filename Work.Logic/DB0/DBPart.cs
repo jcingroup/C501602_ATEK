@@ -19,6 +19,11 @@ namespace ProcCore.Business.DB0
         Support = 1,
         News = 2
     }
+    public enum IndexImgType
+    {
+        US = 1,
+        JP = 2
+    }
     #region set CodeSheet
 
     public static class CodeSheet
@@ -198,6 +203,12 @@ namespace ProcCore.Business.DB0
     public class Param
     {
         public string Email { get; set; }
+        public string url_1 { get; set; }
+        public string url_2 { get; set; }
+        public string url_3 { get; set; }
+        public string url_4 { get; set; }
+        public string url_5 { get; set; }
+        public int? type { get; set; }
     }
     public class option
     {

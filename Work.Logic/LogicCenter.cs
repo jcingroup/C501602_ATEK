@@ -51,7 +51,9 @@ namespace ProcCore.Business.LogicConect
     #region Parm Section
     public enum ParmDefine
     {
-        Open, Email, Table
+        Open, Email, Table,
+        url_1, url_2, url_3, url_4, url_5,
+        url_1_jp, url_2_jp, url_3_jp, url_4_jp, url_5_jp
     }
     #endregion
 

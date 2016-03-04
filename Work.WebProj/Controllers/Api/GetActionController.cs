@@ -288,15 +288,30 @@ namespace DotWeb.Api
         #endregion
         #region 後台-參數設定
         [HttpPost]
-        public ResultInfo PostAboutUs([FromBody]AboutUsParm md)
+        public ResultInfo PostIndexUrl([FromBody]Param md)
         {
             ResultInfo rAjaxResult = new ResultInfo();
             try
             {
                 var open = openLogic();
-                md.aboutus = RemoveScriptTag(md.aboutus);//移除script標籤
+                md.type = md.type == null ? (int)IndexImgType.US : md.type;
 
-                //open.setParmValue(ParmDefine.AboutUs, md.aboutus);
+                if (md.type == (int)IndexImgType.US)
+                {
+                    open.setParmValue(ParmDefine.url_1, md.url_1);
+                    open.setParmValue(ParmDefine.url_2, md.url_2);
+                    open.setParmValue(ParmDefine.url_3, md.url_3);
+                    open.setParmValue(ParmDefine.url_4, md.url_4);
+                    open.setParmValue(ParmDefine.url_5, md.url_5);
+                }
+                else if (md.type == (int)IndexImgType.JP)
+                {
+                    open.setParmValue(ParmDefine.url_1_jp, md.url_1);
+                    open.setParmValue(ParmDefine.url_2_jp, md.url_2);
+                    open.setParmValue(ParmDefine.url_3_jp, md.url_3);
+                    open.setParmValue(ParmDefine.url_4_jp, md.url_4);
+                    open.setParmValue(ParmDefine.url_5_jp, md.url_5);
+                }
 
                 rAjaxResult.result = true;
             }

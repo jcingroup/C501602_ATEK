@@ -43,22 +43,22 @@
 
 <section id="main">
 
-    <a class="new-product" href="~/Products/PSU_list">
+    <a class="new-product" href="@Model.url_1">
         @* 後台可換圖 w960 x h580 *@
         <img src="@Model.NewProuctImgSrc">
     </a>
     <nav class="quick-nav">
         @* 後台可換圖 w420 x h206  style="background-image: url(@Model.About1ImgSrc) *@
-        <a href="~/AboutUs">
+        <a href="@Model.url_2">
             <img src="@Model.About1ImgSrc" alt="ABOUT ATEK">
         </a>
-        <a href="~/AboutUs">
+        <a href="@Model.url_3">
             <img src="@Model.About2ImgSrc" alt="OEM/ODM">
         </a>
-        <a href="~/News?category=6">
+        <a href="@Model.url_4">
             <img src="@Model.NewsImgSrc" alt="EXHIBITION">
         </a>
-        <a href="~/Support">
+        <a href="@Model.url_5">
             <img src="@Model.SupportImgSrc" alt="SUPPORT">
         </a>
     </nav>

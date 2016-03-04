@@ -25,13 +25,30 @@ namespace DotWeb.Areas.Active.Controllers
         #endregion
 
         #region ajax call section
-        public string aj_Init()
+        public string aj_Init(int? type)
         {
+            Param item = new Param();
             var open = openLogic();
             using (var db0 = getDB0())
             {
-                //string AboutUs = (string)open.getParmValue(ParmDefine.AboutUs);
-                return defJSON(new { });
+                type = type == null ? (int)IndexImgType.US : type;
+                if (type == (int)IndexImgType.US)
+                {
+                    item.url_1 = (string)open.getParmValue(ParmDefine.url_1);
+                    item.url_2 = (string)open.getParmValue(ParmDefine.url_2);
+                    item.url_3 = (string)open.getParmValue(ParmDefine.url_3);
+                    item.url_4 = (string)open.getParmValue(ParmDefine.url_4);
+                    item.url_5 = (string)open.getParmValue(ParmDefine.url_5);
+                }
+                else if (type == (int)IndexImgType.JP)
+                {
+                    item.url_1 = (string)open.getParmValue(ParmDefine.url_1_jp);
+                    item.url_2 = (string)open.getParmValue(ParmDefine.url_2_jp);
+                    item.url_3 = (string)open.getParmValue(ParmDefine.url_3_jp);
+                    item.url_4 = (string)open.getParmValue(ParmDefine.url_4_jp);
+                    item.url_5 = (string)open.getParmValue(ParmDefine.url_5_jp);
+                }
+                return defJSON(item);
             }
         }
         public string aj_ParamInit()
@@ -65,6 +82,17 @@ namespace DotWeb.Areas.Active.Controllers
                 if (filekind == "EXHIBITION")
                     handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
                 if (filekind == "SUPPORT")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+
+                if (filekind == "NewProduct_jp")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexNewProduct, filekind, "Active", "ParmData");
+                if (filekind == "About1_jp")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+                if (filekind == "About2_jp")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+                if (filekind == "EXHIBITION_jp")
+                    handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
+                if (filekind == "SUPPORT_jp")
                     handleImageSave(fileName, id, ImageFileUpParm.IndexInfo, filekind, "Active", "ParmData");
 
 

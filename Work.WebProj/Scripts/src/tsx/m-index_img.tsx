@@ -5,37 +5,50 @@ import Moment = require('moment');
 import ReactBootstrap = require("react-bootstrap");
 import CommCmpt = require('comm-cmpt');
 import CommFunc = require('comm-func');
+import DT = require('dt');
 
 namespace IndexImg {
     interface ParamData {
-        Email?: string;
+        url_1?: string;
+        url_2?: string;
+        url_3?: string;
+        url_4?: string;
+        url_5?: string;
+        type?: number;
     }
-    export class GridForm extends React.Component<any, { param?: ParamData }>{
+    export class GridForm extends React.Component<any, { param?: ParamData, i_Lang?: string }>{
 
 
         constructor() {
 
             super();
-            this.queryInitData = this.queryInitData.bind(this); 
+            this.queryInitData = this.queryInitData.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
             this.componentDidMount = this.componentDidMount.bind(this);
             this.setInputValue = this.setInputValue.bind(this);
+            this.setLangValue = this.setLangValue.bind(this);
             this.render = this.render.bind(this);
             this.state = {
                 param: {
-                    Email: null
-                }
+                    url_1: null,
+                    url_2: null,
+                    url_3: null,
+                    url_4: null,
+                    url_5: null,
+                    type: IndexImgType.US
+                },
+                i_Lang: "en-US"
             }
         }
         static defaultProps = {
-            apiInitPath: gb_approot + 'Active/ParmData/aj_ParamInit',
-            apiPath: gb_approot + 'api/GetAction/PostParamData'
+            apiInitPath: gb_approot + 'Active/ParmData/aj_Init',
+            apiPath: gb_approot + 'api/GetAction/PostIndexUrl'
         }
         componentDidMount() {
-            this.queryInitData();
+            this.queryInitData(IndexImgType.US);
         }
-        queryInitData() {
-            CommFunc.jqGet(this.props.apiInitPath, {})
+        queryInitData(type: number) {
+            CommFunc.jqGet(this.props.apiInitPath, { type: type })
                 .done((data, textStatus, jqXHRdata) => {
                     this.setState({ param: data });
                 })
@@ -46,6 +59,11 @@ namespace IndexImg {
         handleSubmit(e: React.FormEvent) {
 
             e.preventDefault();
+            if (this.state.i_Lang == "ja-JP") {
+                this.state.param.type = IndexImgType.JP;
+            } else if (this.state.i_Lang == "en-US") {
+                this.state.param.type = IndexImgType.US;
+            }
             CommFunc.jqPost(this.props.apiPath, this.state.param)
                 .done((data, textStatus, jqXHRdata) => {
                     if (data.result) {
@@ -68,81 +86,224 @@ namespace IndexImg {
             obj[name] = input.value;
             this.setState({ param: obj });
         }
+        setLangValue(e: React.SyntheticEvent) {
+            let input: HTMLInputElement = e.target as HTMLInputElement;
+            let obj = this.state.i_Lang;
+            obj = input.value;
+            this.setState({ i_Lang: obj });
+            let type = IndexImgType.US;
+            if (obj == "ja-JP") {
+                type = IndexImgType.JP;
+            } else if (obj == "en-US") {
+                type = IndexImgType.US;
+            }
+            this.queryInitData(type);
+        }
         render() {
 
             var outHtml: JSX.Element = null;
 
             let param = this.state.param;
             let InputDate = CommCmpt.InputDate;
-
+            let img_html: JSX.Element = null;
+            if (this.state.i_Lang == "en-US") {
+                img_html = (
+                    <div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">New Product</label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_1}
+                                    onChange={this.setInputValue.bind(this, 'url_1') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="NewProduct" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group clear bg-info">
+                   <div className="form-group"><label className="col-xs-2 text-primary control-label strong">首頁四小圖</label></div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖1(左上) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_2}
+                                    onChange={this.setInputValue.bind(this, 'url_2') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="About1" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖2(右上) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_3}
+                                    onChange={this.setInputValue.bind(this, 'url_3') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="About2" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖3(左下) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_4}
+                                    onChange={this.setInputValue.bind(this, 'url_4') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="EXHIBITION" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖4(右下) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_5}
+                                    onChange={this.setInputValue.bind(this, 'url_5') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="SUPPORT" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                       </div>
+                        </div>
+                );
+            } else if (this.state.i_Lang == "ja-JP") {
+                img_html = (
+                    <div>
+                        日文切換...
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">New Product</label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_1}
+                                    onChange={this.setInputValue.bind(this, 'url_1') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="NewProduct_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group clear bg-info">
+                   <div className="form-group"><label className="col-xs-2 text-primary control-label strong">首頁四小圖</label></div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖1(左上) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_2}
+                                    onChange={this.setInputValue.bind(this, 'url_2') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="About1_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖2(右上) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_3}
+                                    onChange={this.setInputValue.bind(this, 'url_3') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="About2_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖3(左下) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_4}
+                                    onChange={this.setInputValue.bind(this, 'url_4') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="EXHIBITION_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖4(右下) </label>
+                       <div className="col-xs-5">
+                                <input className="form-control" type="text"
+                                    value={param.url_5}
+                                    onChange={this.setInputValue.bind(this, 'url_5') }
+                                    maxLength={256}
+                                    required/>
+                           </div>
+                        <div className="col-xs-5">
+                        <CommCmpt.MasterImageUpload FileKind="SUPPORT_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                       </div>
+                        </div>
+                );
+            }
             outHtml = (
                 <div>
-    <ul className="breadcrumb">
-        <li><i className="fa-list-alt"></i>
-            {this.props.menuName}
-            </li>
-        </ul>
-    <h4 className="title"> {this.props.caption} 基本資料維護</h4>
+                    <h3 className="title clearfix">
+                    <span className="pull-left">{this.props.caption}</span>
+                        <div className="form-inline pull-left col-xs-offset-1">
+                        <label><small>選擇語系：</small></label>
+                        <select className="form-control"
+                            value={this.state.i_Lang}
+                            onChange={this.setLangValue.bind(this) }
+                            >
+                            {
+                            DT.LangData.map(function (itemData, i) {
+                                return <option key={itemData.id} value={itemData.id}>{itemData.label}</option>;
+                            })
+                            }
+                            </select>
+                            </div>
+                        </h3>
     <form className="form-horizontal" onSubmit={this.handleSubmit}>
         <div className="col-xs-12">
-            <div className="item-box">
+                    <div className="item-box">
                 {/*--email--*/}
                 <div className="item-title text-center">
                 <h5>首頁其他圖片設定</h5>
                     </div>
                     <div className="alert alert-warning" role="alert">
                         <ol>
-                            <li> 每張圖最大不可超過<strong className="text-danger">2MB</strong></li>
+                            <li> 每個連結最多1張圖，每張圖最大不可超過<strong className="text-danger">2MB</strong></li>
+                            <li> <strong>New Product</strong> 建議尺寸<strong className="text-danger">w960 x h580</strong></li>
+                            <li> <strong>四小圖</strong> 建議尺寸<strong className="text-danger">w420 x h206</strong></li>
                             </ol>
                         </div>
-                   <div className="form-group">
-                        <label className="col-xs-2 control-label">New Product</label>
-                        <div className="col-xs-8">
-                        <small className="help-block">最多1張圖，建議尺寸 w960 x h580</small>
-                        <CommCmpt.MasterImageUpload FileKind="NewProduct" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
-                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                            </div>
-                       </div>
-                   <div className="form-group">
-                        <label className="col-xs-2 control-label">ABOUT ATEK</label>
-                        <div className="col-xs-8">
-                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
-                        <CommCmpt.MasterImageUpload FileKind="About1" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
-                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                            </div>
-                       </div>
-                   <div className="form-group">
-                        <label className="col-xs-2 control-label">OEM/ODM</label>
-                        <div className="col-xs-8">
-                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
-                        <CommCmpt.MasterImageUpload FileKind="About2" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
-                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                            </div>
-                       </div>
-                   <div className="form-group">
-                        <label className="col-xs-2 control-label">EXHIBITION</label>
-                        <div className="col-xs-8">
-                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
-                        <CommCmpt.MasterImageUpload FileKind="EXHIBITION" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
-                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                            </div>
-                       </div>
-                   <div className="form-group">
-                        <label className="col-xs-2 control-label">SUPPORT</label>
-                        <div className="col-xs-8">
-                        <small className="help-block">最多1張圖，建議尺寸 w420 x h206</small>
-                        <CommCmpt.MasterImageUpload FileKind="SUPPORT" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
-                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
-                            </div>
-                       </div>
+                        {img_html}
                 {/*--email end--*/}
-                </div>
-
-            {/*<div className="form-action">
+                        </div>
+            <div className="form-action">
                 <div className="col-xs-4 col-xs-offset-5">
                     <button type="submit" className="btn-primary"><i className="fa-check"></i> 儲存</button>
                     </div>
-                </div>*/}
+                </div>
             </div>
         </form>
                     </div>
