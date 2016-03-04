@@ -8,15 +8,15 @@
 
         if (keyword != null) {
             if (keyword.trim() == '') {
-                alert('搜尋內容不可空白');
+                alert('Not be empty!');
                 return;
             }
         } else if (keyword == null) {
-            alert('搜尋內容不可空白!');
+            alert('Not be empty!');
             return;
         }
         if (keyword.length < 2) {
-            alert('搜尋條件請輸入兩個字(含兩個字)以上!');
+            alert('Inputting at least two or more!');
             return;
         }
         document.location.href = gb_approot + 'Search?keyword=' + keyword;
