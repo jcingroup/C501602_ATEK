@@ -643,7 +643,6 @@
     <TypeScriptCompile Include="Scripts\src\tsx\m-news.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\m-users.tsx" />
     <TypeScriptCompile Include="Scripts\src\tsx\w-contactus_email.ts" />
-    <TypeScriptCompile Include="Scripts\src\tsx\w-shopping_cart.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\commfunc.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\commwww.ts" />
     <TypeScriptCompile Include="Scripts\ts-def\ConsoleIe8.ts" />
