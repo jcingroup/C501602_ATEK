@@ -377,7 +377,7 @@ a, .hover-shadow, .hover-shadow header {
 
 #wrapper {
   min-height: 100%;
-  padding-bottom: 298px; }
+  padding-bottom: 266px; }
   #wrapper::before {
     position: absolute;
     width: 100%;
@@ -389,7 +389,7 @@ a, .hover-shadow, .hover-shadow header {
         height: 62px; } }
   @media (max-width: 30em) {
     #wrapper {
-      padding-bottom: 386px; } }
+      padding-bottom: 320px; } }
 
 #header {
   z-index: 3;
@@ -557,13 +557,13 @@ body {
   z-index: 1;
   background: #ECECEC;
   color: #808080;
-  min-height: 248px;
-  margin-top: -248px;
+  min-height: 216px;
+  margin-top: -216px;
   padding: 43px 0;
   text-align: left; }
   @media (max-width: 30em) {
     #footer {
-      margin-top: -366px; } }
+      margin-top: -300px; } }
   #footer .contact {
     border: 1px solid #fff;
     padding: 20px 30px;
