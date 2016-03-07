@@ -97,7 +97,7 @@ namespace DotWeb.WebApp.Controllers
         {
             return View();
         }
-        public ActionResult PSU_list(int? l2_id)
+        public ActionResult PSU_list(int? l2_id, int? l3_id)
         {
             ajax_GetProductSidebar();
             m_Product_Category_L2 l2 = new m_Product_Category_L2();
@@ -105,7 +105,8 @@ namespace DotWeb.WebApp.Controllers
             {
                 #region get content
                 bool Exist = db0.Product_Category_L2.Any(x => x.product_category_l2_id == l2_id & !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name);
-                if (l2_id == null || !Exist)
+                bool Exist_l3 = db0.Product_Category_L3.Any(x => x.product_category_l3_id == l3_id & !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name);
+                if (l2_id == null || !Exist || !Exist_l3)
                 {
                     return Redirect("~/Products");
                 }
@@ -144,6 +145,7 @@ namespace DotWeb.WebApp.Controllers
                 #endregion
             }
             ViewBag.l2_id = l2_id;
+            ViewBag.l3_id = l3_id;
             return View(l2);
         }
         /// <summary>

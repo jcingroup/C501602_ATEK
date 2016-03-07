@@ -24,17 +24,11 @@
                                 {
                                     if (l3.l3_id == ViewBag.l3_id)
                                     {
-                                        <a class="btn current" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
+                                        <a class="btn current" href=@("PSU_list?l2_id=" + l2.l2_id +"&l3_id="+l3.l3_id+ "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
                                     }
                                     else {
-                                        <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
+                                        <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id +"&l3_id="+l3.l3_id+ "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
                                     }
-                                }
-                            }
-                            else {
-                                foreach (var l3 in l2.l3_list)
-                                {
-                                    <a class="btn current" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
                                 }
                             }
                         </dd>
@@ -48,7 +42,7 @@
                             @* 第3層 list後加 #p1*@
                             @foreach (var l3 in l2.l3_list)
                             {
-                                <a class="btn" href=@("PSU_list?l2_id="+l2.l2_id+ "#l3-" + l3.l3_id) data-exist="0">@l3.l3_name</a>
+                                <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id +"&l3_id="+l3.l3_id+ "#l3-" + l3.l3_id) data-exist="0">@l3.l3_name</a>
                             }
                         </dd>
                     </dl>

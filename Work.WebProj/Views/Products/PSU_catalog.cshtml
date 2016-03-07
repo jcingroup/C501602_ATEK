@@ -12,9 +12,9 @@
         <h3 class="font-sp">@item.l1_name</h3>
 
         @* 此為編輯器
-        <header class="intro">
-            @Html.Raw(item.l1_info)
-        </header><!-- info //--> *@
+            <header class="intro">
+                @Html.Raw(item.l1_info)
+            </header><!-- info //--> *@
 
         @foreach (var l2 in item.l2_list)
         {
@@ -23,7 +23,7 @@
                 <dd>
                     @foreach (var l3 in l2.l3_list)
                     {
-                        <a href="~/Products/PSU_list?l2_id=@l2.product_category_l2_id" class="btn">@l3.l3_name</a>
+                        <a href=@("Products/PSU_list?l2_id="+l2.product_category_l2_id+"&l3_id="+l3.product_category_l3_id+"#l3-"+l3.product_category_l3_id) class="btn">@l3.l3_name</a>
                     }
                 </dd>
             </dl>
