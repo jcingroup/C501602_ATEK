@@ -114,7 +114,7 @@ main {
             padding: 8px 10px;
             background: lighten($gray-base, 90%);
             color: $gray;
-            &:hover, &:active {
+            &:hover, &:active, &.current {
                 background: $brand-primary;
                 color: #fff;
             }
@@ -167,12 +167,12 @@ main {
         padding: 20px 15px;
         margin: 8px 0;
 
-        &.current {
-            .btn {
-                color: #fff;
-                background: $brand-primary;
-            }
-        }
+        // &.current {
+        //     .btn {
+        //         color: #fff;
+        //         background: $brand-primary;
+        //     }
+        // }
         @include mq-max(break(desktop, -1)) {
             display: inline-block;
             vertical-align: top;

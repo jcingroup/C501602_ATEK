@@ -1121,7 +1121,7 @@ main {
     padding: 8px 10px;
     background: #e6e6e6;
     color: #555555; }
-    .catalog dl .btn:hover, .catalog dl .btn:active, .sub-nav dl .btn:hover, .sub-nav dl .btn:active {
+    .catalog dl .btn:hover, .catalog dl .btn:active, .catalog dl .btn.current, .sub-nav dl .btn:hover, .sub-nav dl .btn:active, .sub-nav dl .btn.current {
       background: #79B229;
       color: #fff; }
 .catalog dt, .sub-nav dt {
@@ -1161,9 +1161,6 @@ main {
 .sub-nav dl {
   padding: 20px 15px;
   margin: 8px 0; }
-  .sub-nav dl.current .btn {
-    color: #fff;
-    background: #79B229; }
   @media (max-width: 61.1875em) {
     .sub-nav dl {
       display: inline-block;
