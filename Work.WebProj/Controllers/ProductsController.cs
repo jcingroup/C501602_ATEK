@@ -90,6 +90,7 @@ namespace DotWeb.WebApp.Controllers
                 #endregion
             }
             ViewBag.l2_id = content.item.l2_id;
+            ViewBag.l3_id = content.item.l3_id;
             return View(content);
         }
         public ActionResult PSU_sidebar()
