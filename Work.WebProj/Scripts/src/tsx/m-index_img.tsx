@@ -106,9 +106,10 @@ namespace IndexImg {
             let param = this.state.param;
             let InputDate = CommCmpt.InputDate;
             let img_html: JSX.Element = null;
-            if (this.state.i_Lang == "en-US") {
-                img_html = (
-                    <div>
+            if (gb_roles == "Admins") {
+                if (this.state.i_Lang == "en-US") {
+                    img_html = (
+                        <div>
                    <div className="form-group">
                         <label className="col-xs-2 control-label">New Product</label>
                        <div className="col-xs-5">
@@ -182,13 +183,13 @@ namespace IndexImg {
                             </div>
                        </div>
                        </div>
-                        </div>
-                );
-            } else if (this.state.i_Lang == "ja-JP") {
-                img_html = (
-                    <div>
-                        日文切換...
-                   <div className="form-group">
+                            </div>
+                    );
+                } else if (this.state.i_Lang == "ja-JP") {
+                    img_html = (
+                        <div>
+                            日文切換...
+                            <div className="form-group">
                         <label className="col-xs-2 control-label">New Product</label>
                        <div className="col-xs-5">
                                 <input className="form-control" type="text"
@@ -201,7 +202,7 @@ namespace IndexImg {
                         <CommCmpt.MasterImageUpload FileKind="NewProduct_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
                             url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
                             </div>
-                       </div>
+                                </div>
                    <div className="form-group clear bg-info">
                    <div className="form-group"><label className="col-xs-2 text-primary control-label strong">首頁四小圖</label></div>
                    <div className="form-group">
@@ -261,9 +262,100 @@ namespace IndexImg {
                             </div>
                        </div>
                        </div>
-                        </div>
-                );
+                            </div>
+                    );
+                }
+            } else {
+                if (this.state.i_Lang == "en-US") {
+                    img_html = (
+                        <div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">New Product</label>
+                        <div className="col-xs-7">
+                        <CommCmpt.MasterImageUpload FileKind="NewProduct" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group clear bg-info">
+                   <div className="form-group"><label className="col-xs-2 text-primary control-label strong">首頁四小圖</label></div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖1(左上) </label>
+                        <div className="col-xs-7">
+                        <CommCmpt.MasterImageUpload FileKind="About1" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖2(右上) </label>
+                        <div className="col-xs-7">
+                        <CommCmpt.MasterImageUpload FileKind="About2" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖3(左下) </label>
+                        <div className="col-xs-7">
+                        <CommCmpt.MasterImageUpload FileKind="EXHIBITION" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖4(右下) </label>
+                        <div className="col-xs-7">
+                        <CommCmpt.MasterImageUpload FileKind="SUPPORT" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                       </div>
+                            </div>
+                    );
+                } else if (this.state.i_Lang == "ja-JP") {
+                    img_html = (
+                        <div>
+                            日文切換...
+                            <div className="form-group">
+                        <label className="col-xs-2 control-label">New Product</label>
+                        <div className="col-xs-8">
+                        <CommCmpt.MasterImageUpload FileKind="NewProduct_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                                </div>
+                   <div className="form-group clear bg-info">
+                   <div className="form-group"><label className="col-xs-2 text-primary control-label strong">首頁四小圖</label></div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖1(左上) </label>
+                        <div className="col-xs-8">
+                        <CommCmpt.MasterImageUpload FileKind="About1_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖2(右上) </label>
+                        <div className="col-xs-8">
+                        <CommCmpt.MasterImageUpload FileKind="About2_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖3(左下) </label>
+                        <div className="col-xs-8">
+                        <CommCmpt.MasterImageUpload FileKind="EXHIBITION_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                   <div className="form-group">
+                        <label className="col-xs-2 control-label">小圖4(右下) </label>
+                        <div className="col-xs-8">
+                        <CommCmpt.MasterImageUpload FileKind="SUPPORT_jp" MainId={'IndexImg'} ParentEditType={2} url_upload={gb_approot + 'Active/ParmData/aj_FUpload'} url_list={gb_approot + 'Active/ParmData/aj_FList'}
+                            url_delete={gb_approot + 'Active/ParmData/aj_FDelete'} />
+                            </div>
+                       </div>
+                       </div>
+                            </div>
+                    );
+                }
             }
+
             outHtml = (
                 <div>
                     <h3 className="title clearfix">
