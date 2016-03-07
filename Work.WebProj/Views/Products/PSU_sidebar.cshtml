@@ -13,7 +13,7 @@
             {
                 if (l2.l2_id == ViewBag.l2_id)
                 {
-                    <dl class="current">
+                    <dl>
                         @* 第2層 *@
                         <dt>@l2.l2_name</dt>
                         <dd>
@@ -24,6 +24,9 @@
                                 {
                                     if (l3.l3_id == ViewBag.l3_id)
                                     {
+                                        <a class="btn current" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
+                                    }
+                                    else {
                                         <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
                                     }
                                 }
@@ -31,7 +34,7 @@
                             else {
                                 foreach (var l3 in l2.l3_list)
                                 {
-                                    <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
+                                    <a class="btn current" href=@("PSU_list?l2_id=" + l2.l2_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
                                 }
                             }
                         </dd>
