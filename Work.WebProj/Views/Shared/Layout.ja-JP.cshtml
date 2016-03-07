@@ -16,6 +16,7 @@
     <!--[if lt IE 9]><script src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><![endif]-->
     <link href="~/Content/css/grid.css" rel="stylesheet">
     <link href="~/Content/css/swiper.min.css" rel="stylesheet">
+    @RenderSection("css", false)
     @if (ViewBag.IsFirstPage)
     {
         <link href="~/Content/css/index.css" rel="stylesheet">
@@ -23,8 +24,7 @@
     else
     {
         <link href="~/Content/css/page.css" rel="stylesheet">
-    }
-    @RenderSection("css", false)
+    }    
 </head>
 
 <body class="@ViewBag.BodyClass">
