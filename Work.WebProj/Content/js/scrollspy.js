@@ -27,8 +27,8 @@ $(document).ready(function () {
             });
         } else {
             //console.log($(this).attr('href'),this.href);
-            var href = this.href.split("#")[0];
-            location.href=href;
+            //var href = this.href.split("#")[0];
+            location.href = this.href;
         }
     });
 });
