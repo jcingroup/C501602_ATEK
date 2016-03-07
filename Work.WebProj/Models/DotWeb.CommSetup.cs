@@ -104,6 +104,13 @@ namespace DotWeb.CommSetup
                     return v;
             }
         }
+        public static string IsDemo
+        {
+            get
+            {
+                return GetKeyValue("IsDemo");
+            }
+        }
         public static string MailServer
         {
             get
