@@ -191,12 +191,16 @@ namespace AboutUs {
             let input: HTMLInputElement = e.target as HTMLInputElement;
             let gridData = this.state.gridData;
             let obj = gridData[i];
-            if (input.value == 'true') {
-                obj[name] = true;
-            } else if (input.value == 'false') {
-                obj[name] = false;
+            if (name == "detail_content") {
+                obj[name] = CKEDITOR.instances['content-' + i].getData();
             } else {
-                obj[name] = input.value;
+                if (input.value == 'true') {
+                    obj[name] = true;
+                } else if (input.value == 'false') {
+                    obj[name] = false;
+                } else {
+                    obj[name] = input.value;
+                }
             }
             this.setState({ gridData: gridData });
         }
@@ -380,9 +384,10 @@ namespace AboutUs {
             editorObj = CKEDITOR.replace(editorName, cfg2);
             editorObj.setData(content);//一開始載入會沒資料
 
+            let _this = this;
             editorObj.on('change', function (evt) {
-                this.state.fieldData.detail_content = editorObj.getData();
-            }.bind(this));
+                _this.changeFDValue('detail_content', evt);
+            });
         }
         render() {
 
