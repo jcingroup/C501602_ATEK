@@ -24,6 +24,7 @@ namespace MenuSet {
         searchData?: {
             keyword: string
             is_folder: boolean
+            parent_id: number
         }
         folder?: server.Option[]
     }
@@ -93,7 +94,7 @@ namespace MenuSet {
                 fieldData: {},
                 gridData: { rows: [], page: 1 },
                 edit_type: 0,
-                searchData: { keyword: null, is_folder: null },
+                searchData: { keyword: null, is_folder: null, parent_id: null },
                 folder: []
             }
         }
@@ -313,6 +314,18 @@ namespace MenuSet {
                                                 <option value="">全部</option>
                                                 <option value="true">父選單</option>
                                                 <option value="false">子選單</option>
+                                                </select> { }
+                                            <label>父選單</label> { }
+                                            <select className="form-control"
+                                                onChange={this.changeGDValue.bind(this, 'parent_id') }
+                                                value={searchData.parent_id} >
+                                                <option value="">全部</option>
+                                                <option value="0">無</option>
+                                                {
+                                                this.state.folder.map(function (itemData, i) {
+                                                    return <option key={i} value={itemData.val}>{itemData.Lname}</option>;
+                                                })
+                                                }
                                                 </select> { }
                                             <button className="btn-primary" type="submit"><i className="fa-search"></i> 搜尋</button>
                                             </div>

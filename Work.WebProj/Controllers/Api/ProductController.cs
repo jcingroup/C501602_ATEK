@@ -177,6 +177,11 @@ namespace DotWeb.Api
                 r = new ResultInfo<Product>();
                 foreach (var id in ids)
                 {
+                    var get_m = db0.ProductModel.Where(x => x.product_id == id);
+                    db0.ProductModel.RemoveRange(get_m);
+                    var get_c = db0.ProductCertificate.Where(x => x.product_id == id);
+                    db0.ProductCertificate.RemoveRange(get_c);
+
                     item = new Product() { product_id = id };
                     db0.Product.Attach(item);
                     db0.Product.Remove(item);

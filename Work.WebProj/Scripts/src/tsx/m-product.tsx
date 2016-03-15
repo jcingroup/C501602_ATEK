@@ -379,6 +379,8 @@ namespace Product {
             this.changeSearchCategoryL1 = this.changeSearchCategoryL1.bind(this);
             this.changeSearchCategoryL2 = this.changeSearchCategoryL2.bind(this);
             this.onFieldDataL3Change = this.onFieldDataL3Change.bind(this);
+
+            this.changeFieldCategory = this.changeFieldCategory.bind(this);
             this.render = this.render.bind(this);
 
 
@@ -532,7 +534,8 @@ namespace Product {
         }
         insertType() {
             let options = this.state.all_category[0].items;
-
+            let options_l2 = options[0].l2_list;
+            let optoins_l3 = options_l2[0].l3_list;
             this.setState({
                 edit_type: 1, fieldData: {
                     i_Hide: false,
@@ -542,20 +545,36 @@ namespace Product {
                     l2_id: options[0].l2_list[0].l2_id,
                     l3_id: options[0].l2_list[0].l3_list[0].l3_id,
                     technical_specification: this.state.table_tmple
-                }, options_category_l1: options
+                },
+                options_category_l1: options,
+                options_category_l2: options_l2,
+                options_category_l3: optoins_l3
             });
         }
         updateType(id: number | string) {
 
             CommFunc.jqGet(this.props.apiPath, { id: id })
                 .done((data, textStatus, jqXHRdata) => {
-                    let options = [];
+                    let options: Array<server.L1> = [];
+                    let options_l2: Array<server.L2> = [];
+                    let options_l3: Array<server.L3> = [];
                     this.state.all_category.forEach((item, i) => {
                         if (data.data.i_Lang == item.lang) {
                             options = item.items;
                         }
                     });
-                    this.setState({ edit_type: 2, fieldData: data.data, options_category_l1: options });
+                    options.forEach((l1, i) => {
+                        if (l1.l1_id == data.data.l1_id) { options_l2 = l1.l2_list; }
+                    });
+                    options_l2.forEach((l2, i) => {
+                        if (l2.l2_id == data.data.l2_id) { options_l3 = l2.l3_list; }
+                    });
+                    this.setState({
+                        edit_type: 2, fieldData: data.data,
+                        options_category_l1: options,
+                        options_category_l2: options_l2,
+                        options_category_l3: options_l3
+                    });
                 })
                 .fail((jqXHR, textStatus, errorThrown) => {
                     CommFunc.showAjaxError(errorThrown);
@@ -701,6 +720,46 @@ namespace Product {
             obj['l2_id'] = parseInt(select.attr('data-l2'));
             obj['l3_id'] = parseInt(input.value);
             this.setState({ fieldData: obj });
+        }
+        changeFieldCategory(name: string, e: React.SyntheticEvent) {
+            let input: HTMLInputElement = e.target as HTMLInputElement;
+            let NewState = this.state;
+
+            let obj = this.state.fieldData;
+            obj[name] = input.value;
+            if (name == 'l1_id') {
+                NewState.options_category_l1.forEach((item, i) => {
+                    if (item.l1_id == parseInt(input.value)) {
+                        NewState.options_category_l2 = item.l2_list;
+                        if (item.l2_list.length > 0) {
+                            NewState.options_category_l3 = item.l2_list[0].l3_list;
+                        } else { NewState.options_category_l3 = []; }
+                    }
+                });
+                if (NewState.options_category_l2.length > 0 &&
+                    NewState.options_category_l3.length > 0) {
+                    obj['l2_id'] = NewState.options_category_l2[0].l2_id;
+                    obj['l3_id'] = NewState.options_category_l3[0].l3_id;
+                } else {
+                    obj['l2_id'] = null;
+                    obj['l3_id'] = null;
+                }
+            } else if (name == 'l2_id') {
+                NewState.options_category_l3 = [];
+                NewState.options_category_l2.forEach((item, i) => {
+                    if (item.l2_id == parseInt(input.value)) {
+                        NewState.options_category_l3 = item.l3_list;
+                    }
+                });
+                if (NewState.options_category_l3.length > 0) {
+                    obj['l3_id'] = NewState.options_category_l3[0].l3_id;
+                } else {
+                    obj['l3_id'] = null;
+                }
+            }
+
+
+            this.setState(NewState);
         }
         render() {
 
@@ -873,14 +932,41 @@ namespace Product {
                 </div>
             <div className="form-group">
                 <label className="col-xs-3 control-label">分類</label>
-                <div className="col-xs-6">
+                <div className="col-xs-2">
+                    <select className="form-control" id="field-category-l1"
+                        onChange={this.changeFieldCategory.bind(this, 'l1_id') }
+                        value={fieldData.l1_id} required>
+                        {
+                        option_l1.map((l1, i) => <option key={'l1-' + l1.l1_id} className="text-danger" value={l1.l1_id}>{l1.l1_name}</option>)
+                        }
+                        </select>
+                    </div>
+                <div className="col-xs-3">
+                    <select className="form-control" id="field-category-l2"
+                        onChange={this.changeFieldCategory.bind(this, 'l2_id') }
+                        value={fieldData.l2_id} required>
+                        {
+                        option_l2.map((l2, i) => <option key={'l2-' + l2.l2_id} className="text-success" value={l2.l2_id}>{l2.l2_name}</option>)
+                        }
+                        </select>
+                    </div>
+                <div className="col-xs-3">
+                    <select className="form-control" id="field-category-l3"
+                        onChange={this.changeFDValue.bind(this, 'l3_id') }
+                        value={fieldData.l3_id} required>
+                        {
+                        option_l3.map((l3, i) => <option key={'l3-' + l3.l3_id}  value={l3.l3_id}>{l3.l3_name}</option>)
+                        }
+                        </select>
+                    </div>
+                {/*<div className="col-xs-2">
                     <select className="form-control" id="field-category"
                         onChange={this.onFieldDataL3Change.bind(this) }
                         value={fieldData.l3_id} required>
                         {options}
                         </select>
-                    </div>
-                <small className="help-inline col-xs-3 text-danger">(必填) </small>
+                    </div>*/}
+                <small className="help-inline col-xs-1 text-danger">(必填) </small>
                 </div>
             <div className="form-group">
                 <label className="col-xs-3 control-label">排序</label>
@@ -959,12 +1045,12 @@ namespace Product {
            <div className="col-xs-6">
                <HandleProductCertificate product_id={this.state.fieldData.product_id} parent_edit_type={this.state.edit_type} />
                </div>
-       </div>
+           </div>
 
        <div className="alert alert-warning alert-dismissible" role="alert">
-         編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除)，以免行動裝置顯示時會跑版。<br/>
-         ps. youtube 可勾選「用自適應縮放模式」
-       </div>
+           編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除) ，以免行動裝置顯示時會跑版。<br/>
+           ps.youtube 可勾選「用自適應縮放模式」
+           </div>
 
         <div className="col-xs-12">
             <Tabs defaultActiveKey={2} animation={false}>

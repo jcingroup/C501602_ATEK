@@ -29,10 +29,12 @@
     <input type="email" id="m_email" placeholder="メール" required>
 
     <textarea rows="8" id="m_content" placeholder="この中で記入してください"></textarea>
-    <div class="g-recaptcha" data-sitekey="6LexIhoTAAAAAINPFxaeQCa_6XJhKbAx8PtwTviK"></div>
+    @if (CommWebSetup.IsDemo == "0")
+    {
+        <div class="g-recaptcha" data-sitekey="6LexIhoTAAAAAINPFxaeQCa_6XJhKbAx8PtwTviK"></div>
+    }
     <div id="err" style="color:red" hidden></div>
 
     <button class="btn btn-small">送る</button>
 </form>
-
 <div id="map-canvas"></div>
