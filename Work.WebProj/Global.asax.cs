@@ -35,14 +35,14 @@ namespace DotWeb.AppStart
             if (WebLang == null)
             {
                 //強制預設語系
-                WebLang = new HttpCookie(VarCookie + ".Lang", "en-US");
-                //if (Request.UserLanguages != null)
-                //    if (Request.UserLanguages.Length > 0)
-                //        WebLang = new HttpCookie(VarCookie + ".Lang", Request.UserLanguages[0]);
-                //    else
-                //        WebLang = new HttpCookie(VarCookie + ".Lang", System.Threading.Thread.CurrentThread.CurrentCulture.Name);
-                //else
-                //    WebLang = new HttpCookie(VarCookie + ".Lang", System.Threading.Thread.CurrentThread.CurrentCulture.Name);
+                //WebLang = new HttpCookie(VarCookie + ".Lang", "en-US");
+                if (Request.UserLanguages != null)
+                    if (Request.UserLanguages.Length > 0)
+                        WebLang = new HttpCookie(VarCookie + ".Lang", Request.UserLanguages[0]);
+                    else
+                        WebLang = new HttpCookie(VarCookie + ".Lang", System.Threading.Thread.CurrentThread.CurrentCulture.Name);
+                else
+                    WebLang = new HttpCookie(VarCookie + ".Lang", System.Threading.Thread.CurrentThread.CurrentCulture.Name);
 
                 Response.Cookies.Add(WebLang);
             }
