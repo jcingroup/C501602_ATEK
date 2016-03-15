@@ -1,16 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <document>
+
   <file>
-    <sort>2</sort>
-    <name>申報進度與統計.docx</name>
-    <!--須和檔名相同*/-->
-    <memo>文件說明，補充說明2。</memo>
+    <name>productsEdit.html</name>
+    <sort>1</sort>
+    <memo>【產品管理-資料】編輯教學。</memo>
   </file>
 
   <file>
-    <name>資料庫使用說明.docx</name>
-    <sort>1</sort>
-    <memo>文件說明，補充說明1testtest。</memo>
+    <sort>2</sort>
+    <name>productstTable.html</name>
+    <memo>【產品管理-資料】技術規格表格教學。</memo>
+  </file>
+
+  <file>
+    <sort>3</sort>
+    <name>productstData.html</name>
+    <memo>【產品管理-資料】新增/刪除教學。</memo>
+  </file>
+
+  <file>
+    <sort>4</sort>
+    <name>productstKind.html</name>
+    <memo>【產品管理-分類】新增/修改/刪除教學。</memo>
+  </file>
+
+  <file>
+    <sort>5</sort>
+    <name>indexBanner.html</name>
+    <memo>【首頁管理-Banner】新增/修改/刪除教學。</memo>
+  </file>
+
+  <file>
+    <sort>6</sort>
+    <name>indexPic.html</name>
+    <memo>【首頁管理-小圖】修改教學。</memo>
+  </file>
+
+  <file>
+    <sort>7</sort>
+    <name>SupportKind.html</name>
+    <memo>【支援.最新消息管理-分類】新增/修改/刪除教學。</memo>
+  </file>
+
+  <file>
+    <sort>8</sort>
+    <name>SupportData.html</name>
+    <memo>【支援管理-資料】新增/修改/刪除教學。</memo>
+  </file>
+
+  <file>
+    <sort>9</sort>
+    <name>News.html</name>
+    <memo>【最新消息管理-資料】新增/修改/刪除教學。</memo>
+  </file>
+
+  <file>
+    <sort>10</sort>
+    <name>AboutUs.html</name>
+    <memo>【關於我們】資料編輯修改教學。</memo>
   </file>
 
 </document>
