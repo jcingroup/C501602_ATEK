@@ -202,6 +202,7 @@
     <Compile Include="Areas\Active\Controllers\BannerDataController.cs" />
     <Compile Include="Areas\Active\Controllers\ParmDataController.cs" />
     <Compile Include="Areas\Active\Controllers\NewsDataController.cs" />
+    <Compile Include="Areas\Base\Controllers\DocController.cs" />
     <Compile Include="Areas\Base\Controllers\LoginController.cs" />
     <Content Include="app_modules\comm-cmpt\package.js" />
     <Content Include="app_modules\comm-func\package.js" />
