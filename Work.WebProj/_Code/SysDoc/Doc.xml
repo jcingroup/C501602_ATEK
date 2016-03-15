@@ -9,19 +9,19 @@
 
   <file>
     <sort>2</sort>
-    <name>productstTable.html</name>
+    <name>productsTable.html</name>
     <memo>【產品管理-資料】技術規格表格教學。</memo>
   </file>
 
   <file>
     <sort>3</sort>
-    <name>productstData.html</name>
+    <name>productsData.html</name>
     <memo>【產品管理-資料】新增/刪除教學。</memo>
   </file>
 
   <file>
     <sort>4</sort>
-    <name>productstKind.html</name>
+    <name>productsKind.html</name>
     <memo>【產品管理-分類】新增/修改/刪除教學。</memo>
   </file>
 
@@ -40,7 +40,7 @@
   <file>
     <sort>7</sort>
     <name>SupportKind.html</name>
-    <memo>【支援.最新消息管理-分類】新增/修改/刪除教學。</memo>
+    <memo>【支援管理-分類】新增/修改/刪除教學。(同最新消息)</memo>
   </file>
 
   <file>
