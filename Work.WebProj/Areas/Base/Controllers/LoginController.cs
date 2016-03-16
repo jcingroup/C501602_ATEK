@@ -122,7 +122,7 @@ namespace DotWeb.Areas.Base.Controllers
             //}
 
             //getLoginResult.vildate = Session["CheckCode"].Equals(model.validate) ? true : false;
-            ValidateResponse Validate = ValidateCaptcha(model.validate, "6LexIhoTAAAAAL-SrVm8_fYcL7pTnovF4T7GozRx");//6LexIhoTAAAAAL-SrVm8_fYcL7pTnovF4T7GozRx
+            ValidateResponse Validate = ValidateCaptcha(model.validate, "6LexIhoTAAAAAL-SrVm8_fYcL7pTnovF4T7GozRx");//正式:6LexIhoTAAAAAL-SrVm8_fYcL7pTnovF4T7GozRx,Demo:6LfOXBcTAAAAAOqEElEieoCCTQmHAmtRfnqSS141
             getLoginResult.vildate = Validate.Success;
             
 #endif
