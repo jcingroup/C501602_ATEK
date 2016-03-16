@@ -512,6 +512,7 @@
     <Content Include="Scripts\cdn\swfobject.js" />
     <Content Include="Scripts\cdn\toastr.js" />
     <Content Include="Scripts\GoogleCustomSearch.js" />
+    <Content Include="Scripts\googleReCAPTCHA.js" />
     <Content Include="Scripts\src\xformat.html" />
     <Content Include="Views\Index\Index.cshtml" />
     <Content Include="Scripts\cdn\BrowerInfo.js" />

@@ -33,15 +33,8 @@
             data: data,
             dataType: 'json'
         }).done(function (result: LoginResult, textStatus, jqXHRdata) {
-            if (result.result) {
-                $("#err").hide();
-                alert(result.message);
-            }
-            else {
-                $("#err").show();
-                $("#err").text(result.message);
-                alert(result.message);
-            }
+            alert(result.message);
+            grecaptcha.reset(widgetId);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert(errorThrown);
         });

@@ -7,7 +7,7 @@ namespace Login {
     export class GridForm extends React.Component<any,
         {
             field: { account?: string, password?: string, validate?: string, rememberme?: boolean },
-        validateUrl?: string
+            validateUrl?: string
         }>
     {
         constructor() {
@@ -40,7 +40,7 @@ namespace Login {
             let input: HTMLInputElement = e.target as HTMLInputElement;
             let obj = this.state.field;
             obj.validate = input.value.toUpperCase();
-            this.setState({ field:obj });
+            this.setState({ field: obj });
         }
         getValidateUrl() {
             return gb_approot + '_Code/Ashx/ValidateCode.ashx?vn=CheckCode&t=' + CommFunc.uniqid();
@@ -57,7 +57,7 @@ namespace Login {
             var data = {
                 account: this.state.field.account,
                 password: this.state.field.password,
-                validate: this.state.field.validate,
+                validate: $("#g-recaptcha-response").val(),
                 rememberme: this.state.field.rememberme,
                 lang: 'zh-TW'
             };
@@ -69,58 +69,59 @@ namespace Login {
                 data: data,
                 dataType: 'json'
             })
-            .done( (data, textStatus, jqXHRdata) =>{
-                if (data.result) {
-                    document.location.href = data.url;
-                } else {
-                    let obj = this.state;
-                    obj.validateUrl = this.getValidateUrl();
-                    obj.field.password = '';
-                    this.setState(obj);
+                .done((data, textStatus, jqXHRdata) => {
+                    if (data.result) {
+                        document.location.href = data.url;
+                    } else {
+                        let obj = this.state;
+                        obj.validateUrl = this.getValidateUrl();
+                        obj.field.password = '';
+                        this.setState(obj);
+                        $("body").unmask();
+                        alert(data.message);
+                        grecaptcha.reset(widgetId);
+                    }
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
                     $("body").unmask();
-                    alert(data.message);
+                    showAjaxError(errorThrown);
                 }
-            })
-            .fail((jqXHR, textStatus, errorThrown)=> {
-                $("body").unmask();
-                showAjaxError(errorThrown);
-            }
 
-            );
+                );
             return;
         }
         render() {
 
             return (
-            <div>
+                <div>
                 <h3>System Login</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group has-feedback">
                         <label className="control-label">帳號 Username</label>
                         <input className="form-control"
-                        type="text"
-                        value={this.state.field.account}
-                        tabIndex={1}
-                        placeholder="帳號"
-                        onChange={this.onChange.bind(this, 'account') }
-                        required />
+                            type="text"
+                            value={this.state.field.account}
+                            tabIndex={1}
+                            placeholder="帳號"
+                            onChange={this.onChange.bind(this, 'account') }
+                            required />
                         <i className="fa-user form-control-feedback"></i>
-                    </div>
+                        </div>
                     <div className="form-group has-feedback">
                         <label className="control-label">密碼 Password</label>
                         <input className="form-control"
-                        type="password"
-                        value={this.state.field.password}
-                        tabIndex={2}
-                        placeholder="密碼"
-                        onChange={this.onChange.bind(this, 'password') }
-                        required />
+                            type="password"
+                            value={this.state.field.password}
+                            tabIndex={2}
+                            placeholder="密碼"
+                            onChange={this.onChange.bind(this, 'password') }
+                            required />
                         <i className="fa-lock form-control-feedback"></i>
-                    </div>
+                        </div>
                     <div className="form-group">
                         <label className="control-label">驗證碼 Code</label>
                         <div className="row">
-                            <div className="col-xs-3">
+                            {/* <div className="col-xs-3">
                                 <img alt="驗證碼" src={this.state.validateUrl} />
                             </div>
                             <div className="col-xs-5">
@@ -132,16 +133,20 @@ namespace Login {
                                 required
                                 placeholder="驗證碼" />
                             </div>
-                            <div className="col-xs-4">
+                           <div className="col-xs-4">
                                 <button className="btn btn-warning"
                                 type="button"
                                 tabIndex={-1}
                                 onClick={this.reLoadValidateUrl}>
                                 <i className="fa-refresh"></i> 重取
                             </button>
+                        </div> */}
+                           
+                            <div className="col-xs-12">
+                                    <div id="Validate"></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
                 <div className="form-action">
                     <div className="row">
                         <div className="col-xs-4">
@@ -149,21 +154,21 @@ namespace Login {
                                 <label>
                                     <input type="checkbox" tabIndex={-1} />
                                     <span>記住</span>
-                                </label>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
                         <div className="col-xs-3 col-xs-offset-1">
                             <button className="btn btn-info" tabIndex={4} type="submit"><i className="fa-key"></i> 登錄</button>
-                        </div>
+                            </div>
                         <div className="col-xs-4">
                             <button tabIndex={-1} type="button"><i className="fa-question-circle"></i> 忘記密碼</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-                );
-}
+                    </form>
+                    </div>
+            );
+        }
     }
 }
 

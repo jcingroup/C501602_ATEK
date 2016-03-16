@@ -17,3 +17,7 @@ var gb_MainId: number;//all_category_l1_id
 var gb_rank: number;
 var gb_sales_no: string;
 var gb_roles: string;
+
+//google reCAPTCHA
+var grecaptcha: any;
+var widgetId: any;
