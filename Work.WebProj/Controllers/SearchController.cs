@@ -13,8 +13,11 @@ namespace DotWeb.WebApp.Controllers
         // GET: Search
         public ActionResult Index(string keyword)
         {
-            keyword = keyword.Replace("\r\n", "");
-            keyword = keyword.Trim();
+            if (keyword != null) {
+                keyword = keyword.Replace("\r\n", "");
+                keyword = keyword.Trim();
+            }
+
             List<m_Product> items = new List<m_Product>();
             using (var db0 = getDB0())
             {
