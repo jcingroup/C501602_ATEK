@@ -17,19 +17,31 @@
 <form action="" class="contacts" id="ContactUsInfo">
     <h3 class="font-sp">お問い合わせへようこそ</h3>
 
-    <input type="text" id="m_title" placeholder="タイトル" required>
+    <label class="col-6">
+        <em>*</em> テーマ
+        <input type="text" id="m_title" required>
+    </label>
 
-    <input type="text" id="m_name" placeholder="名前" required>
+    <label class="col-6">
+        <em>*</em> 名前
+        <input type="text" id="m_name" required>
+    </label>
 
-    <input type="text" id="m_company" placeholder="会社">
+    <label class="col-6">
+        <em>*</em> 会社
+        <input type="text" id="m_company" required>
+    </label>
 
-    <input type="tel" id="m_tel" placeholder="電話番号" required>
+    <label class="col-6">
+        電話番号
+        <input type="tel" id="m_tel">
+    </label>
 
-    <input type="tel" id="m_fax" placeholder="ファックス">
+    <label><em>*</em> メール</label>
+    <input type="email" id="m_email" required>
 
-    <input type="email" id="m_email" placeholder="メール" required>
-
-    <textarea rows="8" id="m_content" placeholder="この中で記入してください"></textarea>
+    <label><em>*</em> この中で記入してください</label>
+    <textarea rows="8" id="m_content" required></textarea>
 
     <div id="Validate"></div>
 
