@@ -17,19 +17,36 @@
 <form action="" class="contacts" id="ContactUsInfo">
     <h3 class="font-sp">Welcome to Contact Us</h3>
 
-    <input type="text" id="m_title" placeholder="Title" required>
+    <label class="col-6">
+        <em>*</em> Subject
+        <input type="text" id="m_title" required>
+    </label>
 
-    <input type="text" id="m_name" placeholder="Name" required>
+    <label class="col-6">
+        <em>*</em> Name
+        <input type="text" id="m_name" required>
+    </label>
 
-    <input type="text" id="m_company" placeholder="Company">
+    <label class="col-6">
+        <em>*</em> Company
+        <input type="text" id="m_company" required>
+    </label>
 
-    <input type="tel" id="m_tel" placeholder="Tel" required>
+    <label class="col-6">
+        Tel
+        <input type="tel" id="m_tel">
+    </label>
 
-    <input type="tel" id="m_fax" placeholder="Fax">
+    <!-- <label class="col-6">
+        Fax
+        <input type="tel" id="m_fax" placeholder="Fax">
+    </label> -->
 
-    <input type="email" id="m_email" placeholder="E-mail" required>
+    <label><em>*</em> E-mail</label>
+    <input type="email" id="m_email" required>
 
-    <textarea rows="8" id="m_content" placeholder="Please fill in this"></textarea>
+    <label><em>*</em> Please fill in this</label>
+    <textarea rows="8" id="m_content" required></textarea>
 
     <div id="Validate"></div>
 

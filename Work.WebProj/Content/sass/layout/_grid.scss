@@ -4,46 +4,25 @@ $cols: 12 !default;
 
 // 函數程式
 // ------------------------------------------------------------
-// tin
-$one_col: (100% - (cp($gutter) * ($cols - 1))) / $cols;
-@mixin cols($num) {
-    width: ($one_col * $num) + (cp($gutter) * ($num - 1));
-}
-
-// stacy
-// $one_col: 100% / $cols;
-// @mixin cols($num) {
-//     width: ($one_col * $num);
-//     // float: left;
-//     display: inline-block;
-//     padding-left: $gutter/2;
-//     padding-right: $gutter/2;
-// }
+$one_col: 100% / $cols;
 
 @mixin make-cols($class: md) {
     @for $i from 1 through $cols {
-        @if($class == md) {
-            .col-#{$i} { @include cols($i); }
-        }
-        @else {
-            .col-#{$class}-#{$i} { @include cols($i); }
+        $selector: if($class == 'md', '.col-#{$i}', '.col-#{$class}-#{$i}');
+
+        #{$selector} {
+            width: ($one_col * $i);
         }
     }
 }
 
 // 偏移
-@mixin offset($num) {
-    $one_col: 100% / $cols;
-    margin-left: ($one_col * $num);
-}
-
 @mixin make-offset($class: md) {
-    @for $i from 0 through $cols {
-        @if($class == md) {
-            .offset-#{$i} { @include offset($i); }
-        }
-        @else {
-            .offset-#{$class}-#{$i} { @include offset($i); }
+    @for $i from 0 through ($cols - 1) {
+        $selector: if($class == 'md', '.offset-#{$i}', '.offset-#{$class}-#{$i}');
+
+        #{$selector} {
+            margin-left: ($one_col * $i);
         }
     }
 }
@@ -51,6 +30,19 @@ $one_col: (100% - (cp($gutter) * ($cols - 1))) / $cols;
 
 // output
 // ------------------------------------------------------------
+[class*="col-"] {
+    // float: left;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: $gutter/2;
+    padding-right: $gutter/2;
+
+    // hack
+    // inline-block模式時 刪除多出間距
+    margin-right: -4px;
+    @if $lte7 { *display: inline; zoom: 1 }
+}
+
 .row {
     @extend %clearfix;
     // @extend %center;
@@ -63,15 +55,22 @@ $one_col: (100% - (cp($gutter) * ($cols - 1))) / $cols;
     // }
 
     margin-bottom: $gutter;
+
+    [class*="col-"] {
+        &:first-child { padding-left: 0; }
+        &:last-child { padding-right: 0; }
+    }
 }
 
-[class*="col-"] {
-    // float: left;
-    display: inline-block;
-    vertical-align: middle;
-    padding-left: $gutter/2;
-    padding-right: $gutter/2;
-}
+[data-col*="first"],
+.col-6:nth-of-type(2n+1),
+.col-4:nth-of-type(3n+1),
+.col-3:nth-of-type(4n+1) { padding-left: 0;}
+
+[data-col*="last"],
+.col-6:nth-of-type(2n),
+.col-4:nth-of-type(3n),
+.col-3:nth-of-type(4n) { padding-right: 0; }
 
 @include make-cols(md); // 預設: md
 @include mq-max(break(tablet,-1))  { @include make-cols(xs); }

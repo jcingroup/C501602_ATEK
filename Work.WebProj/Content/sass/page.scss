@@ -446,11 +446,9 @@ main {
     width: cp(700px);
 
     h3 { margin-top: 0; }
-    input, textarea, button { margin: 15px 0; }
-
-    @include mq-max(tablet) {
-
-    }
+    em { color: $error; font-style: normal; }
+    input, textarea, button { margin-bottom: $gutter; }
+    button { margin-top: $gutter; }
 }
 #map-canvas, .contacts {
     @include mq-max(tablet) {

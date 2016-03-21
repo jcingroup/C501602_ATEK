@@ -93,7 +93,7 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
 
-    &[class*="col-"] {margin-bottom:0;}
+    // &[class*="col-"] {margin-bottom:0;}
 }
 
 #{text-inputs(radio checkbox)} {
