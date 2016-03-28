@@ -365,7 +365,7 @@
     <value>此筆訂單編號已付款，請重新檢查訂單編號!</value>
   </data>
   <data name="System_FrontName" xml:space="preserve">
-    <value>ATEK JAPAN::Be your energy saving parter::</value>
+    <value>ATEK JAPAN</value>
   </data>
   <data name="Button_ReturnIndex" xml:space="preserve">
     <value>回首頁</value>

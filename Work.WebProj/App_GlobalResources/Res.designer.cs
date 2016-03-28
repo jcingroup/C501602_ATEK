@@ -808,7 +808,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   查詢類似 ATEK JAPAN::Be your energy saving parter:: 的當地語系化字串。
+        ///   查詢類似 ATEK JAPAN 的當地語系化字串。
         /// </summary>
         internal static string System_FrontName {
             get {
