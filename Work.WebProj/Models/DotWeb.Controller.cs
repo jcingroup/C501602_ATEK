@@ -423,9 +423,27 @@ namespace DotWeb.Controller
                 string server_path_parm = Server.MapPath(web_path_parm);
                 foreach (ImageSizeParm imSize in fp.Parm)
                 {
-                    MemoryStream sm = resizeImage(upload_file, imSize.width, imSize.heigh);
-                    System.IO.File.WriteAllBytes(server_path_parm + "\\" + Path.GetFileName(file_name), sm.ToArray());
-                    sm.Dispose();
+                    TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
+                    Bitmap im = (Bitmap)tc.ConvertFrom(upload_file);
+                    bool reSize = false;
+
+                    if (imSize.width != 0 & im.Width > imSize.width) { reSize = true; }
+                    if (imSize.heigh != 0 & im.Height > imSize.heigh) { reSize = true; }
+
+                    if (reSize)
+                    {
+                        MemoryStream sm = resizeImage(upload_file, imSize.width, imSize.heigh);
+                        System.IO.File.WriteAllBytes(server_path_parm + "\\" + Path.GetFileName(file_name), sm.ToArray());
+                        sm.Dispose();
+                    }
+                    else {
+                        FileStream file_stream_p = new FileStream(server_path_parm + "\\" + Path.GetFileName(file_name), FileMode.Create);
+                        BinaryWriter binary_write_p = new BinaryWriter(file_stream_p);
+                        binary_write_p.Write(upload_file);
+
+                        file_stream_p.Close();
+                        binary_write_p.Close();
+                    }
                 }
             }
             #endregion

@@ -178,7 +178,7 @@ namespace DotWeb.Areas.Base.Controllers
 
             //語系使用
             HttpCookie WebLang = Request.Cookies[CommWebSetup.WebCookiesId + ".Lang"];
-            WebLang.Value = model.lang;
+            //WebLang.Value = model.lang;
             Response.Cookies.Add(WebLang);
 
             try
