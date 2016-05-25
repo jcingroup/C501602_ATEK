@@ -449,6 +449,7 @@ main {
     em { color: $error; font-style: normal; }
     input, textarea, button { margin-bottom: $gutter; }
     button { margin-top: $gutter; }
+    p { margin: 0; }
 }
 #map-canvas, .contacts {
     @include mq-max(tablet) {

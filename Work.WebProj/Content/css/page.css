@@ -1407,6 +1407,8 @@ main {
     margin-bottom: 15px; }
   .contacts button {
     margin-top: 15px; }
+  .contacts p {
+    margin: 0; }
 
 @media (max-width: 48em) {
   #map-canvas, .contacts {
