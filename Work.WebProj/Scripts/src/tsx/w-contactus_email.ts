@@ -6,7 +6,8 @@
         tel: string,
         fax: string,
         email: string,
-        content: string
+        content: string,
+        country: string,
         response: string
     }
     interface LoginResult {
@@ -21,9 +22,10 @@
             "name": $("#m_name").val().replace(/<|>/g, ""),
             "company": $("#m_company").val().replace(/<|>/g, ""),
             "tel": $("#m_tel").val().replace(/<|>/g, ""),
-            "fax": $("#m_fax").val().replace(/<|>/g, ""),
+            "fax": $("#m_fax").val(),
             "email": $("#m_email").val().replace(/<|>/g, ""),
             "content": $("#m_content").val().replace(/<|>/g, ""),
+            "country": $("#m_country").val().replace(/<|>/g, ""),
             "response": $("#g-recaptcha-response").val()
         };
 

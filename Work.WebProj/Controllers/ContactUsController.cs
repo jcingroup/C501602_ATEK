@@ -45,7 +45,7 @@ namespace DotWeb.WebApp.Controllers
 
                     mail = Mail_Send(mailfrom, //寄信人
                                     openLogic().getReceiveMails(), //收信人
-                                    CommWebSetup.MailTitle, //信件標題
+                                    string.Format(CommWebSetup.MailTitle, md.country, md.company, md.title), //信件標題
                                     Body, //信件內容
                                     true); //是否為html格式
                     if (mail == false)
@@ -76,6 +76,7 @@ namespace DotWeb.WebApp.Controllers
         public string fax { get; set; }
         public string email { get; set; }
         public string content { get; set; }
+        public string country { get; set; }
         public string response { get; set; }
     }
 
