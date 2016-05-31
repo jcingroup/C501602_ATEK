@@ -49,7 +49,7 @@ Layout = "~/Views/Shared/Layout.cshtml";
 <div id="content">
     <header class="row">
         <div class="pro-pic">
-            <img src="@Model.item.imgsrc" alt="產品圖">
+            <img src="@Model.item.imgsrc" alt="@Model.item.power">
         </div>
         <div class="pro-info">
             <h2 class="font-sp">@Model.item.power<small>FEATURE</small></h2>
@@ -84,7 +84,7 @@ Layout = "~/Views/Shared/Layout.cshtml";
                 @foreach (var item in Model.product_list)
                 {
                     <figure class="swiper-slide">
-                        <img src="@item.imgsrc" alt="產品圖">
+                        <img src="@item.imgsrc" alt="@item.power">
                         <figcaption>
                             <h4>@item.power</h4>
                             @foreach (var md in item.models)

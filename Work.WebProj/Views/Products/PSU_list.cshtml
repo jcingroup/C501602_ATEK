@@ -31,7 +31,7 @@
             @foreach (var prod in l3.product_list)
             {
                 <figure>
-                    <img src="@prod.imgsrc" alt="產品圖">
+                    <img src="@prod.imgsrc" alt="@prod.power">
                     <figcaption>
                         <h4>@prod.power</h4>
                         @foreach (var md in prod.models)
