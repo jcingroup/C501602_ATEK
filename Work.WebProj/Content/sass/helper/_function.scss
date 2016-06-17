@@ -18,15 +18,6 @@
     @return ceil(($target / $container) * 100%);
 }
 
-// 取第n個之後的pages值
-@function page($item) {
-    $page: ();
-    @for $i from $item through length($pages) {
-        $page: append($page, nth($pages, $i));
-    }
-    @return $page;
-}
-
 
 // var Maps
 // -----------------------------------------------------------------

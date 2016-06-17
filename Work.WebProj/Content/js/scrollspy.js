@@ -10,9 +10,9 @@ $(document).ready(function () {
             $(document).off("scroll");
 
             $('a').each(function () {
-                $(this).removeClass('current');
+                $(this).removeClass('active');
             })
-            $(this).addClass('current');
+            $(this).addClass('active');
 
             var target = this.hash,
                 menu = target,
@@ -39,11 +39,11 @@ function onScroll(event) {
         var currLink = $(this);
         var refElement = $(currLink.attr("href"));
         if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-            $(this).removeClass("current");
-            currLink.addClass("current");
+            $(this).removeClass("active");
+            currLink.addClass("active");
         }
         else {
-            currLink.removeClass("current");
+            currLink.removeClass("active");
         }
     });
 }

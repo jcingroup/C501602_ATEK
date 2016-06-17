@@ -106,7 +106,7 @@ main {
 }
 
 // 產品分類選單
-.catalog, .sub-nav {
+.catalog, .pro-nav {
     dl {
         background: lighten($gray-base, 96.8%);
         .btn {
@@ -114,7 +114,7 @@ main {
             padding: 8px 10px;
             background: lighten($gray-base, 90%);
             color: $gray;
-            &:hover, &:active, &.current {
+            &:hover, &:active, &.active {
                 background: $brand-primary;
                 color: #fff;
             }
@@ -132,26 +132,27 @@ main {
     width: 100%;
     padding: 12px 0;
 
-    @include mq-max(tablet) {
-        display: block;
-    }
+    // @include mq-max(tablet) {
+    //     display: block;
+    // }
 }
-.sub-nav {
+.pro-nav {
     nav {
         @extend %clearfix;
         @extend %effect-all;
         margin-bottom: 25px;
 
         @include mq-max(tablet) {
-            @include absolute(left $gutter right $gutter);
-            background: lighten($gray-base, 96%);
-            padding: 2%;
+            display: none;
+            // @include absolute(left $gutter right $gutter);
+            // background: lighten($gray-base, 96%);
+            // padding: 2%;
 
-            opacity: 0;
-            visibility: hidden;
-            z-index: z(overlay);
+            // opacity: 0;
+            // visibility: hidden;
+            // z-index: z(overlay);
 
-            &.open { opacity: 1; visibility: visible; }
+            // &.open { opacity: 1; visibility: visible; }
         }
     }
     header {
@@ -159,9 +160,9 @@ main {
         font-size: em(27px);
         margin-bottom: 5px;
 
-        @include mq-max(break(desktop, -1)) {
-            font-size: em(20px);
-        }
+        // @include mq-max(break(desktop, -1)) {
+        //     font-size: em(20px);
+        // }
     }
     dl {
         padding: 20px 15px;
@@ -173,45 +174,45 @@ main {
         //         background: $brand-primary;
         //     }
         // }
-        @include mq-max(break(desktop, -1)) {
-            display: inline-block;
-            vertical-align: top;
-            width: 33%;
-            padding: 12px 15px;
-        }
-        @include mq-max(tablet) {
-            width: 32.6%;
-            padding: 8px 5px;
-            margin-left: 1px;
-            background: lighten($gray-base, 99%);
-            text-align: center;
-        }
-        @include mq-max(phone) {
-            width: 100%;
-            margin: 3px 0;
-        }
+        // @include mq-max(break(desktop, -1)) {
+        //     display: inline-block;
+        //     vertical-align: top;
+        //     width: 33%;
+        //     padding: 12px 15px;
+        // }
+        // @include mq-max(tablet) {
+        //     width: 32.6%;
+        //     padding: 8px 5px;
+        //     margin-left: 1px;
+        //     background: lighten($gray-base, 99%);
+        //     text-align: center;
+        // }
+        // @include mq-max(phone) {
+        //     width: 100%;
+        //     margin: 3px 0;
+        // }
         .btn {
             min-width: auto;
             font-size: em(15px);
 
-            @include mq-max(tablet) {
-                font-size: em(13px);
-                margin-bottom: 2px;
-            }
+            // @include mq-max(tablet) {
+            //     font-size: em(13px);
+            //     margin-bottom: 2px;
+            // }
         }
     }
     dt {
         font-size: em(19px);
         margin-bottom: 10px;
 
-        @include mq-max(break(desktop, -1)) {
-            font-size: em(16px);
-            margin-bottom: 8px;
-        }
-        @include mq-max(tablet) {
-            font-size: em(15px);
-            margin-bottom: 5px;
-        }
+        // @include mq-max(break(desktop, -1)) {
+        //     font-size: em(16px);
+        //     margin-bottom: 8px;
+        // }
+        // @include mq-max(tablet) {
+        //     font-size: em(15px);
+        //     margin-bottom: 5px;
+        // }
     }
 
     &.fixed {
@@ -224,16 +225,16 @@ main {
             max-width: 308px;
             margin-left: 393px;
         }
-        @include mq-max(break(desktop, -1)) {
-            background: #fff;
-            left: 0; top: 0; right: 0;
-            margin-left: 0; max-width: 100%;
-            padding: 0 $gutter;
+        // @include mq-max(break(desktop, -1)) {
+        //     background: #fff;
+        //     left: 0; top: 0; right: 0;
+        //     margin-left: 0; max-width: 100%;
+        //     padding: 0 $gutter;
 
-            nav:last-child { margin-bottom: 0; }
+        //     nav:last-child { margin-bottom: 0; }
 
-            dt { margin-bottom: 2px; }
-        }
+        //     dt { margin-bottom: 2px; }
+        // }
     }
 }
 

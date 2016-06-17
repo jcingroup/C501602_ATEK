@@ -2,7 +2,7 @@
 
     var sidebar = (List<ProcCore.Business.DB0.L1>)ViewBag.Sidebar;
 }
-<aside id="sidebar" class="sub-nav">
+<aside id="sidebar" class="pro-nav">
     <button class="btn pro-menu">Products</button>
     <nav>
         @foreach (var l1 in sidebar)
@@ -14,17 +14,17 @@
                 if (l2.l2_id == ViewBag.l2_id)
                 {
                     <dl>
-                        @* 第2層 *@
+                        @*  第2層  *@
                         <dt>@l2.l2_name</dt>
                         <dd>
-                            @* 第3層 list後加 #p1*@
+                             @* 第3層 list後加 #p1 *@
                             @if (ViewBag.l3_id != null)
                             {
                                 foreach (var l3 in l2.l3_list)
                                 {
                                     if (l3.l3_id == ViewBag.l3_id)
                                     {
-                                        <a class="btn current" href=@("PSU_list?l2_id=" + l2.l2_id +"&l3_id="+l3.l3_id+ "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
+                                        <a class="btn active" href=@("PSU_list?l2_id=" + l2.l2_id +"&l3_id="+l3.l3_id+ "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
                                     }
                                     else {
                                         <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id + "&l3_id=" + l3.l3_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>
@@ -39,7 +39,7 @@
                         @* 第2層 *@
                         <dt>@l2.l2_name</dt>
                         <dd>
-                            @* 第3層 list後加 #p1*@
+                            @* 第3層 list後加 #p1 *@
                             @foreach (var l3 in l2.l3_list)
                             {
                                 <a class="btn" href=@("PSU_list?l2_id=" + l2.l2_id + "&l3_id=" + l3.l3_id + "#l3-" + l3.l3_id) data-exist="0">@l3.l3_name</a>

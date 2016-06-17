@@ -1,3 +1,57 @@
+// 判斷是否為行動裝置
+var browser={
+versions:function(){
+var u = navigator.userAgent, app = navigator.appVersion;
+return {
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+            iPad: u.indexOf('iPad') > -1 //是否iPad
+        };
+    }()
+}
+
+
+// 行動裝置的主選單
+$menuLeft = $('#menu');
+$trigger = $('.menu-trigger');
+
+$trigger.click(function() {
+    $(this).toggleClass('active');
+    $('body').toggleClass('push');
+});
+$('.toggle').click(function() {
+    $('body').removeClass('push');
+});
+
+// 行動裝置的子選單
+var dropbtn = $("[data-dropdown='btn']");
+var dropcontent = $("[data-dropdown='content']");
+if(browser.versions.iPad || browser.versions.iPhone || browser.versions.android) {
+    $(dropcontent).hide();
+    $(dropbtn).click(function(event) {
+        $(dropbtn).not(this).removeClass('active').siblings(dropcontent).slideUp();
+        $(this).toggleClass('active').siblings(dropcontent).slideToggle();
+        event.preventDefault();
+    });
+} else {
+    var subW = ($("#menu dl").width() + 24) * $("#menu dl").length;
+    $(".sub-nav").width(subW);
+}
+
+// 行動裝置的產品分類選單
+$(".pro-menu").click(function() {
+    $(this).toggleClass("active");
+    $('#sidebar nav').toggleClass('open');
+});
+
+// 語系下拉選單
+$(".dropbtn").click(function(){
+    $(this).next().slideToggle("300");
+});
+$(".dropbtn").blur(function(){
+    $(this).next().slideUp("300");
+});
+
 $(window).scroll(function(){
     // 沒有卷軸時不出現 goTop 按鈕
     if ($(this).scrollTop() > 100) {
@@ -20,30 +74,4 @@ $('.scroll, .scroll a').click(function () {
         scrollTop: $($.attr(this, 'href')).offset().top
     }, 750);
     return false;
-});
-
-$(document).ready(function() {
-    // 行動裝置的主選單
-    $menuLeft = $('#menu');
-    $trigger = $('.menu-trigger');
-
-    $trigger.click(function() {
-        $(this).toggleClass('active');
-        $('body').toggleClass('push');
-    });
-    $('.toggle').click(function() {
-        $('body').removeClass('push');
-    });
-
-    // 行動裝置的產品分類選單
-    $(".pro-menu").click(function() {
-        $(this).toggleClass("active");
-        // $('aside nav').slideToggle(750);
-        $('#sidebar nav').toggleClass('open');
-    });
-
-    // 下拉選單
-    $(".dropbtn").click(function(){
-        $(".dropdown-content").toggle("300");
-    });
 });

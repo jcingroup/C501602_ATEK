@@ -19,6 +19,8 @@ $dropdown-color:            #C2E57E !default;
     width: 100%;
 
     &::after {
+        content: '';
+        display: block;
         @include arrow(down,5px,7px,#93C336);
         @include absolute(right 8px top 10px);
     }

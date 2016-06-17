@@ -37,17 +37,50 @@
         <header id="header">
             <h1 onclick="location.href='@Url.Content("~/index")'" title="回首頁">ATEK JAPAN</h1>
             <button class="menu-trigger"><span>MENU</span></button>
-            <nav id="menu">
-                <a href="~/Products">PRODUCTS</a>
-                <a href="~/AboutUs">ABOUT US</a>
-                <a href="~/Support">SUPPORT</a>
-                <a href="~/News">NEWS</a>
-                <a href="~/ContactUs">CONTACT</a>
-            </nav>
+            <ul id="menu" class="list-inline">
+                <li>
+                    <a href="~/Products" data-dropdown="btn">PRODUCTS</a>
+                    <nav class="sub-nav" data-dropdown="content">
+                        @* 第一層分類 *@
+                        <dl>
+                            <dt>AC-DC</dt> @* 第一層分類名稱 *@
+
+                            @* 第二層分類 *@
+                            <dd>
+                                <h5>C.V. & C.C.</h5> @* 第二層分類名稱 *@
+                                @* 第三層分類名稱 當前選單加 class="current"
+                                <a href="~/Products/PSU_list" class="current">LUX2 Series</a>  *@
+                                <a href="~/Products/PSU_list">LUX2 Series</a>
+                                <a href="~/Products/PSU_list">LUX1 Series</a>
+                            </dd>
+
+                            <dd>
+                                <h5>DALI</h5>
+                                <a href="~/Products/PSU_list">LUX2 Series</a>
+                                <a href="~/Products/PSU_list">PRE2 Series</a>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt>Wireless Control</dt>
+                            <dd>
+                                <h5>Zigbee</h5>
+                                <a href="~/Products/PSU_list">LUX2 Series</a>
+                                <a href="~/Products/PSU_list">PRE2 Series</a>
+                                <a href="~/Products/PSU_list">COM5 Series</a>
+                            </dd>
+                        </dl>
+                    </nav>
+                </li>
+                <li><a href="~/AboutUs">ABOUT US</a></li>
+                <li><a href="~/Support">SUPPORT</a></li>
+                <li><a href="~/News">NEWS</a></li>
+                <li><a href="~/ContactUs">CONTACT</a></li>
+            </ul>
             <div class="dropdown">
-                <button class="dropbtn">Language</button>
+                <button class="dropbtn">English</button> @* Language *@
                 <nav class="dropdown-content">
-                    <a href="@Url.Action("SetLanguage")?L=en-US&A=index">English</a>
+                    @* <a href="@Url.Action("SetLanguage")?L=en-US&A=index" class="current">English</a> *@
                     <a href="@Url.Action("SetLanguage")?L=ja-JP&A=index">日本語</a>
                 </nav>
             </div>

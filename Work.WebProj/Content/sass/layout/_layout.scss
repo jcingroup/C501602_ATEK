@@ -10,7 +10,7 @@ $header-height-sm:      62px !default;
 $header-bg:             $brand-primary !default;
 $logo-img:              'logo.gif' !default;
 $logo-size:             179px 83px !default;
-$logo-position:         left 0 top 15px !default;
+$logo-position:         left 0 top 15px !default; // false
 
 $menu-height:           51px;
 $menu-height-sm:        100%;
@@ -33,7 +33,7 @@ $goTop-position:        bottom 30px right 10px !default;
 // 置中(rwd,非滿版的元素)
 %center {
     max-width: $max-width;
-    margin: 0 ($gutter + 5);
+    margin: 0 $gutter + 5;
 
     @include mq(wider) { margin: 0 auto; }
 }
@@ -101,7 +101,14 @@ $goTop-position:        bottom 30px right 10px !default;
         z-index: z(logo);
 
         @include text-pic($logo-img, nth($logo-size,1), nth($logo-size,2));
-        @include absolute($logo-position);
+
+        @if $logo-position {
+            @include absolute($logo-position);
+        }
+        @else {
+            float: left;
+            margin-top: 15px;
+        }
 
         @include mq-max(break(desktop, -1)) {
             left: 50%;
@@ -119,7 +126,7 @@ $goTop-position:        bottom 30px right 10px !default;
 
 // == 行動版主選單
 body {
-    @include prefix(transition, left .35s)
+    @include transition(left .35s)
 }
 .menu-trigger {
     @extend %text-hide;
@@ -139,22 +146,22 @@ body {
     width: $button-width;
     height: $button-height;
 
-    @include prefix(transition, background 0.3s);
+    @include transition(background 0.3s);
     @include prefix(apperance, none, webkit moz);
     @include mq-max(break(desktop,-1)) { display: block; }
     @include mq-max(break(phone, -1)) { top: ($header-height-sm - $button-height)/2; }
 
     &:active, &.active {
-        background-color: darken($brand-primary, 10%);
+        // background-color: darken($brand-primary, 2.5);
         span {
             background: none;
             &::before {
                 top: 0;
-                @include prefix(transform, rotate(45deg));
+                @include transform(rotate(45deg));
             }
             &::after {
                 bottom: 0;
-                @include prefix(transform, rotate(-45deg));
+                @include transform(rotate(-45deg));
             }
             &::before, &::after {
                 @include prefix(transition-delay, '0, .3s');
@@ -169,7 +176,7 @@ body {
         background: $bar-color;
         height: $bar-thickness;
         margin: auto;
-        @include prefix(transition, background 0s 0.3s);
+        @include transition(background 0s 0.3s);
 
         @include el(all) {
             width: 100%;
@@ -200,45 +207,70 @@ body {
     }
 }
 
+%nav-acitve {
+    background: url(#{$img-path}/menuBg.gif) right 0 no-repeat;
+    padding-bottom: 30px;
+}
+
 // 主選單
 #menu {
-    @include absolute(right 0 top 60px);
+    float: right;
+    // text-align: right;
+    top: 60px;
+    position: relative;
 
-    $selector: ();
+    $current: ();
     @each $item in $pages {
         $i: index($pages, $item);
-        $selector: append($selector, unquote(".#{$item} &:nth-of-type(#{$i})"), comma);
+        $current: append($current, unquote(".#{$item} &:nth-of-type(#{$i}) > a"), comma);
     }
-    a {
-        display: inline-block;
-        padding: 0 40px 0 17px;
 
-        border-left: 3px solid #D8DF2B;
-        color: $menu-link;
-        font-size: em(18px);
-        font-family: $font-sp;
-        letter-spacing: 2px;
-        line-height: 1.1;
+    > li {
+        position: relative;
 
-        @include prefix(transition, 'background .5s, padding-bottom .35s');
+        > a {
+            display: block;
+            padding: 0 45px 0 17px;
 
-        &:hover, &:active,
-        #{$selector} {
-            background: url(#{$img-path}/menuBg.gif) right 0 no-repeat;
-            padding-bottom: 30px;
+            border-left: 3px solid #D8DF2B;
+            color: $menu-link;
+            font-size: em(18px);
+            font-family: $font-sp;
+            letter-spacing: 2px;
+            line-height: 1.1;
+
+            @include transition('background .5s, padding-bottom .35s');
+
+            &:hover, &:active { @extend %nav-acitve; }
+
+            @include mq-max(break(wide,-1)) { padding-right: 27px; }
+        }
+
+        #{$current} { @extend %nav-acitve; }
+
+        &:hover, &:active {
+            > a { @extend %nav-acitve; }
+
+            .sub-nav {
+                opacity: 1;
+                visibility: visible;
+                // display: block; 測試用
+            }
         }
     }
 
     @include mq-max(break(desktop,-1)) {
-        @include prefix(transition, left .35s);
+        @include fixed(top 0 left (-$menu-trigger-width));
+        @include transition(left .35s);
+
         background: #333;
         width: $menu-trigger-width;
         height: 100%;
         overflow-y: auto;
+
         z-index: z(overlay) + 1;
 
-        @include fixed(top 0);
-        left: -$menu-trigger-width;
+        .push & { left: 0; }
 
         .toggle {
             display: block;
@@ -251,24 +283,127 @@ body {
 
             padding: 20px 0;
         }
-        .push & { left: 0; }
 
-        a {
+        > li {
             border-bottom: 1px solid #454545;
-            color: #fff;
-
-            font-size: em(18px);
-            font-weight: normal;
-            text-align: left;
-
             width: 100%;
-            padding: $gutter;
 
-            &:hover, &:active,
-            #{$selector} {
-                background: $brand-primary;
-                padding: ($gutter + 10) $gutter;
+            > a {
+                color: #fff;
+                border-left-width: 4px;
+
+                font-size: em(18px);
+                font-weight: normal;
+                text-align: left;
+
+                padding: $gutter;
             }
+
+            > a:hover, > a:active,
+            &:hover > a, &:active > a, &.active > a,
+            #{$current} {
+                padding: ($gutter + 10) $gutter;
+                background: $brand-primary;
+                border-left-color: #C2E57E;
+            }
+        }
+    }
+}
+
+// 第二層選單
+.sub-nav {
+    background: #f7f7f7;
+    box-shadow: 1px 2px 3px rgba(#000,.3);
+
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px $gutter;
+    text-align: left;
+    max-width: 770px;
+
+    @include absolute(top 50px);
+    @include transition(opacity .5s);
+    // @include transform(translateX(-50%));
+
+    @include mq-max(break(desktop,-1)) {
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        position: static;
+        transform: none;
+
+        top: 100%;
+        // border-left: 3px solid darken(#D8DF2B,15);
+        background: #222;
+        box-shadow: inset 3px 6px 15px rgba(#000,.5);
+        padding-top: 12px;
+        padding-bottom: 12px;
+        max-width: 100%;
+    }
+
+    dl {
+        // float: left;
+        // overflow: hidden;
+        width: 160px;
+        margin: 0 1%;
+        margin-bottom: 20px;
+
+        @include mq(desktop) {
+            display: inline-block;
+            vertical-align: top;
+        }
+        @include mq-max(break(desktop,-1)) {
+            width: 98%;
+        }
+    }
+    dt {
+        font-size: em(19px);
+        line-height: 1.7;
+        color: #222;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 15px;
+
+        @include mq-max(break(desktop,-1)) {
+            color: #eee;
+            border-bottom-color: #333;
+        }
+    }
+    dd {
+        margin-bottom: 20px;
+
+        &:last-of-type { margin-bottom: 0; }
+    }
+
+    h5 { margin-bottom: 3px; line-height: 1.1;}
+
+    a {
+        display: block;
+        padding: 6px 0;
+        // padding-left: $gutter - 2px;
+        text-align: left;
+        font-size: em(15px);
+        color: #000;
+
+        position: relative;
+
+        @include el(before) {
+            @include absolute(left 0 top 35%);
+            @include arrow($color: lighten(#000,65));
+            @include transition('left .3s, opacity .6s');
+            opacity: 0;
+        }
+
+        &:hover, &:active, &.current {
+            color: $brand-primary;
+
+            &::before {
+                left: -10px;
+                opacity: 1;
+            }
+        }
+
+        @include mq-max(break(desktop,-1)) {
+            color: #ccc;
         }
     }
 }
@@ -350,7 +485,7 @@ body {
         &:hover, &:active {
             background-color: lighten($brand-secondary,10%);
             box-shadow: 5px 8px 16px rgba(0,0,0,0.2);
-            @include prefix(transform,translate(-2px,-2px));
+            @include transform(translate(-2px,-2px));
         }
     }
 }

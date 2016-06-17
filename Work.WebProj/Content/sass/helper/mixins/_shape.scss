@@ -49,40 +49,36 @@
 }
 
 // 用偽類做三角形
-@mixin arrow($dir:right, $width:5px, $height: $width/2, $color: inherit, $display: inline-block) {
-    @extend %pseudos;
+@mixin arrow($dir:right, $width: 5px, $height: $width, $color: inherit) {
     @include size(0);
-    @if $display != block {
-        display: $display;
-    }
     border: $width solid transparent;
 
     @if ($dir == "top" or $dir =="up") {
         border-bottom: $height solid $color;
 
         @if $height != $width {
-            border-top-width: $height;
+            border-top-width: $width - $height;
         }
     }
     @else if ($dir == "bottom" or $dir == "down") {
         border-top: $height solid $color;
 
         @if $height != $width {
-            border-bottom-width: $height;
+            border-bottom-width: $width - $height;
         }
     }
     @else if ($dir == "right") {
         border-left: $height solid $color;
 
         @if $height != $width {
-            border-right-width: $height;
+            border-right-width: $width - $height;
         }
     }
     @else if ($dir == "left") {
         border-right: $width solid $color;
 
         @if $height != $width {
-            border-left-width: $height;
+            border-left-width: $width - $height;
         }
     }
 }
