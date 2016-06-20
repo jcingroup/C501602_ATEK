@@ -110,7 +110,6 @@ namespace DotWeb.WebApp.Controllers
                 }
                 else
                 {
-                    ajax_Getrightsidebar();
                     l2 = db0.Product_Category_L2.Where(x => x.product_category_l2_id == l2_id)
                                                 .Select(x => new m_Product_Category_L2()
                                                 {
@@ -147,26 +146,11 @@ namespace DotWeb.WebApp.Controllers
             ViewBag.l3_id = l3_id;
             return View(l2);
         }
-        public void ajax_Getrightsidebar()
-        {
-            #region get category 
-            List<L3> l3 = new List<L3>();
-            using (var db0 = getDB0())
-            {
-                l3 = db0.Product_Category_L3.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.l3_sort)
-                    .Select(x => new L3()
-                    {
-                        l3_id = x.product_category_l3_id,
-                        l3_name = x.l3_name
-                    }).ToList();
-                #endregion
-            }
-        }
-    }
 
-    public class ProductContent
-    {
-        public Product item { get; set; }
-        public List<m_Product> product_list { get; set; }
+        public class ProductContent
+        {
+            public Product item { get; set; }
+            public List<m_Product> product_list { get; set; }
+        }
     }
 }

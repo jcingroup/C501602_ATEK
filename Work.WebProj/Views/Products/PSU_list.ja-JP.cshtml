@@ -11,7 +11,7 @@
 }
 
 @section Scripts {
-    <script src="~/Content/js/scrollspy.js"></script>
+    @*<script src="~/Content/js/scrollspy.js"></script>*@
 }
 
 @Html.Partial("~/Views/Products/PSU_Sidebar.cshtml")
@@ -35,7 +35,7 @@
                         <h4>@prod.power</h4>
                         @foreach (var md in prod.models)
                         {
-                            <span>@md.model_name</span>
+                            <span >@md.model_name</span>
                         }
                         <a href="~/Products/PSU_content?id=@prod.product_id">READ MORE</a>
                     </figcaption>
