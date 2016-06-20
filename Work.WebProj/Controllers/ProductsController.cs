@@ -146,11 +146,10 @@ namespace DotWeb.WebApp.Controllers
             ViewBag.l3_id = l3_id;
             return View(l2);
         }
-
-        public class ProductContent
-        {
-            public Product item { get; set; }
-            public List<m_Product> product_list { get; set; }
-        }
+    }
+    public class ProductContent
+    {
+        public Product item { get; set; }
+        public List<m_Product> product_list { get; set; }
     }
 }
