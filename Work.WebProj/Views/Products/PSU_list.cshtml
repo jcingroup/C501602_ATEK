@@ -22,12 +22,13 @@
     <header class="intro">
         <h3 class="font-sp"><small>@Model.l1_name/</small> @Model.l2_name</h3>
         @* <h2 class="font-sp">FEATURE</h2>
-        @Html.Raw(Model.l2_info) *@
+            @Html.Raw(Model.l2_info) *@
     </header><!-- info //-->
 
     @foreach (var l3 in Model.l3_list)
     {
         <section id="@("l3-"+l3.product_category_l3_id)" class="kind">
+
             <h3 class="font-sp">@l3.l3_name</h3>
             @foreach (var prod in l3.product_list)
             {
@@ -37,7 +38,7 @@
                         <h4>@prod.power</h4>
                         @foreach (var md in prod.models)
                         {
-                            <span>@md.model_name</span>
+                            <span id="@md.product_id">@md.model_name</span>
                         }
                         <a href="~/Products/PSU_content?id=@prod.product_id">READ MORE</a>
                     </figcaption>

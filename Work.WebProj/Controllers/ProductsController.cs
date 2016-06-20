@@ -112,6 +112,7 @@ namespace DotWeb.WebApp.Controllers
                 }
                 else
                 {
+                    ajax_Getrightsidebar();
                     l2 = db0.Product_Category_L2.Where(x => x.product_category_l2_id == l2_id)
                                                 .Select(x => new m_Product_Category_L2()
                                                 {
@@ -119,17 +120,17 @@ namespace DotWeb.WebApp.Controllers
                                                     l1_name = x.Product_Category_L1.l1_name,
                                                     l2_name = x.l2_name,
                                                     l2_info = x.l2_info,
-                                                    l3_list = x.Product_Category_L3.Where(y => !y.i_Hide).OrderByDescending(y => y.l3_sort)
+                                                    l3_list = x.Product_Category_L3.Where(y => !y.i_Hide & y.product_category_l3_id == l3_id).OrderByDescending(y => y.l3_sort)
                                                                                  .Select(y => new m_Product_Category_L3()
                                                                                  {
                                                                                      product_category_l3_id = y.product_category_l3_id,
                                                                                      l3_name = y.l3_name,
-                                                                                     product_list = y.Product.Where(z => !z.i_Hide).OrderByDescending(z => z.sort)
+                                                                                     product_list = y.Product.Where(z => !z.i_Hide & z.Product_Category_L3.product_category_l3_id == l3_id).OrderByDescending(z => z.sort)
                                                                                                            .Select(z => new m_Product()
                                                                                                            {
                                                                                                                product_id = z.product_id,
                                                                                                                power = z.power,
-                                                                                                               models = z.ProductModel.OrderBy(w => w.sort).ToList()
+                                                                                                               models = z.ProductModel.ToList()
                                                                                                            }).ToList()
                                                                                  }).ToList()
                                                 }).FirstOrDefault();
@@ -179,7 +180,23 @@ namespace DotWeb.WebApp.Controllers
             }
             ViewBag.Sidebar = l1;
         }
+        public void ajax_Getrightsidebar()
+        {
+            #region get category 
+            List<L3> l3 = new List<L3>();
+            using (var db0 = getDB0())
+            {
+                l3 = db0.Product_Category_L3.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.l3_sort)
+                    .Select(x => new L3()
+                    {
+                        l3_id = x.product_category_l3_id,
+                        l3_name = x.l3_name
+                    }).ToList();
+                #endregion
+            }
+        }
     }
+
     public class ProductContent
     {
         public Product item { get; set; }
