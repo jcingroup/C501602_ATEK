@@ -42,7 +42,6 @@ namespace DotWeb.WebApp.Controllers
         }
         public ActionResult PSU_content(int? id)
         {
-            ajax_GetProductSidebar();
             ProductContent content = new ProductContent();
             using (var db0 = getDB0())
             {
@@ -99,7 +98,6 @@ namespace DotWeb.WebApp.Controllers
         }
         public ActionResult PSU_list(int? l2_id, int? l3_id)
         {
-            ajax_GetProductSidebar();
             m_Product_Category_L2 l2 = new m_Product_Category_L2();
             using (var db0 = getDB0())
             {
@@ -148,37 +146,6 @@ namespace DotWeb.WebApp.Controllers
             ViewBag.l2_id = l2_id;
             ViewBag.l3_id = l3_id;
             return View(l2);
-        }
-        /// <summary>
-        /// 取得產品左選單內容
-        /// </summary>
-        public void ajax_GetProductSidebar()
-        {
-            List<L1> l1 = new List<L1>();
-            using (var db0 = getDB0())
-            {
-                #region get category 
-                l1 = db0.Product_Category_L1.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.l1_sort)
-                                         .Select(x => new L1()
-                                         {
-                                             l1_id = x.product_category_l1_id,
-                                             l1_name = x.l1_name,
-                                             l2_list = x.Product_Category_L2.Where(y => !y.i_Hide).OrderByDescending(y => y.l2_sort)
-                                                                            .Select(y => new L2()
-                                                                            {
-                                                                                l2_id = y.product_category_l2_id,
-                                                                                l2_name = y.l2_name,
-                                                                                l3_list = y.Product_Category_L3.Where(z => !z.i_Hide).OrderByDescending(z => z.l3_sort)
-                                                                                                             .Select(z => new L3()
-                                                                                                             {
-                                                                                                                 l3_id = z.product_category_l3_id,
-                                                                                                                 l3_name = z.l3_name
-                                                                                                             }).ToList()
-                                                                            }).ToList()
-                                         }).ToList();
-                #endregion
-            }
-            ViewBag.Sidebar = l1;
         }
         public void ajax_Getrightsidebar()
         {

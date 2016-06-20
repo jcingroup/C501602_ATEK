@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+    var sidebar = (List<ProcCore.Business.DB0.L1>)ViewBag.Sidebar;
+}
+<!DOCTYPE html>
 <html lang="zh-TW">
 <!-- saved from url=(0014)about:internet -->
 
@@ -41,35 +45,39 @@
                 <li>
                     <a href="~/Products" data-dropdown="btn">PRODUCTS</a>
                     <nav class="sub-nav" data-dropdown="content">
-                        @* 第一層分類 *@
-                        <dl>
-                            <dt>AC-DC</dt> @* 第一層分類名稱 *@
+                        @foreach (var l1 in sidebar)
+                        {
+                            <dl>
+                                <dt>
+                                    @l1.l1_name
+                                </dt>
+                                @foreach (var l2 in l1.l2_list)
+                                {
+                                    <dd>
+                                        <h5>@l2.l2_name</h5>
 
-                            @* 第二層分類 *@
-                            <dd>
-                                <h5>C.V. & C.C.</h5> @* 第二層分類名稱 *@
-                                @* 第三層分類名稱 當前選單加 class="current"
-                                <a href="~/Products/PSU_list" class="current">LUX2 Series</a>  *@
-                                <a href="~/Products/PSU_list">LUX2 Series</a>
-                                <a href="~/Products/PSU_list">LUX1 Series</a>
-                            </dd>
 
-                            <dd>
-                                <h5>DALI</h5>
-                                <a href="~/Products/PSU_list">LUX2 Series</a>
-                                <a href="~/Products/PSU_list">PRE2 Series</a>
-                            </dd>
-                        </dl>
+                                        @foreach (var l3 in l2.l3_list)
+                                        {
 
-                        <dl>
-                            <dt>Wireless Control</dt>
-                            <dd>
-                                <h5>Zigbee</h5>
-                                <a href="~/Products/PSU_list">LUX2 Series</a>
-                                <a href="~/Products/PSU_list">PRE2 Series</a>
-                                <a href="~/Products/PSU_list">COM5 Series</a>
-                            </dd>
-                        </dl>
+                                            if (l3.l3_id == ViewBag.l3_id)
+                                            {
+                                                <a class="btn active" href="~/Products/PSU_list?l2_id=@l2.l2_id&l3_id=@l3.l3_id#l3-@l3.l3_id" data-exist="1">@l3.l3_name</a>
+                                                @*<a class="btn active" href=@("~/Products/PSU_list?l2_id=" + l2.l2_id +"&l3_id="+l3.l3_id+ "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>*@
+                                            }
+                                            else
+                                            {
+                                                <a class="btn active" href="~/Products/PSU_list?l2_id=@l2.l2_id&l3_id=@l3.l3_id#l3-@l3.l3_id" >@l3.l3_name</a>
+                                                @*<a class="btn" href=@("~/Products/PSU_list?l2_id=" + l2.l2_id + "&l3_id=" + l3.l3_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>*@
+                                            }
+                                        }
+
+                                    </dd>
+                                }
+
+                            </dl>
+                        }
+                        
                     </nav>
                 </li>
                 <li><a href="~/AboutUs">ABOUT US</a></li>

@@ -935,7 +935,7 @@ namespace DotWeb.Controller
 
                 ViewBag.VisitCount = visitCount;
                 ViewBag.IsFirstPage = false; //是否為首頁，請在首頁的Action此值設為True
-                //ajax_GetSidebarData();//取得左選單內容
+                ajax_GetProductSidebar();//取得左選單內容
                 this.isTablet = (new WebInfo()).isTablet();
             }
             catch (Exception ex)
@@ -1148,31 +1148,35 @@ namespace DotWeb.Controller
             return r;
         }
         /// <summary>
-        /// 取得前台每頁左選單內容
+        /// 取得產品左選單內容
         /// </summary>
-        public void ajax_GetSidebarData()
+        public void ajax_GetProductSidebar()
         {
-            //List<L1> l1 = new List<L1>();
-            //using (var db = getDB0())
-            //{
-            //    l1 = db.ProductCategory_l1.Where(x => !x.i_Hide).OrderByDescending(x => x.sort)
-            //                    .Select(x => new L1()
-            //                    {
-            //                        l1_id = x.product_category_l1_id,
-            //                        l1_name = x.category_l1_name
-            //                    }).ToList();
-            //    foreach (var item in l1)
-            //    {
-            //        item.l2_list = db.ProductCategory_l2.Where(x => !x.i_Hide & x.product_category_l1_id == item.l1_id).OrderByDescending(x => x.sort)
-            //                            .Select(x => new L2()
-            //                            {
-            //                                l2_id = x.product_category_l2_id,
-            //                                l2_name = x.category_l2_name
-            //                            }).ToList();
-            //    }
-
-            //}
-            //ViewBag.Sidebar = l1;
+            List<L1> l1 = new List<L1>();
+            using (var db0 = getDB0())
+            {
+                #region get category 
+                l1 = db0.Product_Category_L1.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.l1_sort)
+                                         .Select(x => new L1()
+                                         {
+                                             l1_id = x.product_category_l1_id,
+                                             l1_name = x.l1_name,
+                                             l2_list = x.Product_Category_L2.Where(y => !y.i_Hide).OrderByDescending(y => y.l2_sort)
+                                                                            .Select(y => new L2()
+                                                                            {
+                                                                                l2_id = y.product_category_l2_id,
+                                                                                l2_name = y.l2_name,
+                                                                                l3_list = y.Product_Category_L3.Where(z => !z.i_Hide).OrderByDescending(z => z.l3_sort)
+                                                                                                             .Select(z => new L3()
+                                                                                                             {
+                                                                                                                 l3_id = z.product_category_l3_id,
+                                                                                                                 l3_name = z.l3_name
+                                                                                                             }).ToList()
+                                                                            }).ToList()
+                                         }).ToList();
+                #endregion
+            }
+            ViewBag.Sidebar = l1;
         }
         #region 前台抓取圖片
         public string[] GetImgs(string id, string file_kind, string category1, string category2, string size)
