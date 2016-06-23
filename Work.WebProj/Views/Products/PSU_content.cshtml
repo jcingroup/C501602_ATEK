@@ -10,8 +10,8 @@ Layout = "~/Views/Shared/Layout.cshtml";
     <li><a href="#">PRODUCTS</a></li>
     @* 子分類 需套程式變數的地方 *@
     <li><a href="~/Products">@Model.item.l1_name</a></li>
-    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id">@Model.item.l2_name</a></li>
-    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id">@Model.item.l3_name</a></li>
+    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id&l3_id=@Model.item.l3_id">@Model.item.l2_name</a></li>
+    <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id&l3_id=@Model.item.l3_id">@Model.item.l3_name</a></li>
 }
 
 @section css {
