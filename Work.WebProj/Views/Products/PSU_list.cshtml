@@ -2,12 +2,14 @@
 @{
     ViewBag.Title = "Products::FEATURE OF PRODUCT::" + Model.l1_name;
     ViewBag.BodyClass = "Products";
-    ViewBag.Target = Model.l2_name;
+    ViewBag.Target = Model.l3_list[0].l3_name;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
 @section breadCrumb {
     <li><a href="#">PRODUCTS</a></li>
+    <li><a href="#">@Model.l1_name</a></li>
+    <li><a href="#">@Model.l2_name</a></li>
 }
 
 @section Scripts {
@@ -20,7 +22,7 @@
 <div id="content">
 
     <header class="intro">
-        <h3 class="font-sp"><small>@Model.l1_name/</small> @Model.l2_name</h3>
+        <h3 class="font-sp">@*<small>@Model.l1_name/</small> *@@Model.l2_name</h3>
         @* <h2 class="font-sp">FEATURE</h2>
             @Html.Raw(Model.l2_info) *@
     </header><!-- info //-->
@@ -38,7 +40,7 @@
                         <h4>@prod.power</h4>
                         @foreach (var md in prod.models)
                         {
-                            <span >@md.model_name</span>
+                            <span>@md.model_name</span>
                         }
                         <a href="~/Products/PSU_content?id=@prod.product_id">READ MORE</a>
                     </figcaption>
