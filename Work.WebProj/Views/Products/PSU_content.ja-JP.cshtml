@@ -7,7 +7,7 @@ Layout = "~/Views/Shared/Layout.cshtml";
 }
 
 @section breadCrumb {
-    <li><a href="~/Products">プロダクト</a></li>
+    <li><a href="#">プロダクト</a></li>
     @* 子分類 需套程式變數的地方 *@
     <li><a href="~/Products">@Model.item.l1_name</a></li>
     <li><a href="~/Products/PSU_list?l2_id=@Model.item.l2_id">@Model.item.l2_name</a></li>
