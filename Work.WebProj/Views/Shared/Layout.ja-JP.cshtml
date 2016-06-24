@@ -63,12 +63,12 @@
 
                                             if (l3.l3_id == ViewBag.l3_id)
                                             {
-                                                <a class="current" href="~/Products/PSU_list?l2_id=@l2.l2_id&l3_id=@l3.l3_id#l3-@l3.l3_id">@l3.l3_name</a>
+                                                <a class="current" href="~/Products/PSU_list?l1_id=@l1.l1_id&l2_id=@l2.l2_id&l3_id=@l3.l3_id#l3-@l3.l3_id">@l3.l3_name</a>
                                                 @*<a class="btn active" href=@("~/Products/PSU_list?l2_id=" + l2.l2_id +"&l3_id="+l3.l3_id+ "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>*@
                                             }
                                             else
                                             {
-                                                <a href="~/Products/PSU_list?l2_id=@l2.l2_id&l3_id=@l3.l3_id#l3-@l3.l3_id">@l3.l3_name</a>
+                                                <a href="~/Products/PSU_list?l1_id=@l1.l1_id&l2_id=@l2.l2_id&l3_id=@l3.l3_id#l3-@l3.l3_id">@l3.l3_name</a>
                                                 @*<a class="btn" href=@("~/Products/PSU_list?l2_id=" + l2.l2_id + "&l3_id=" + l3.l3_id + "#l3-" + l3.l3_id) data-exist="1">@l3.l3_name</a>*@
                                             }
                                         }

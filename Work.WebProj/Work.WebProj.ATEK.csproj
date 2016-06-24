@@ -322,6 +322,7 @@
     <Compile Include="Models\DotWeb.CommSetup.cs" />
     <Compile Include="Models\DotWeb.CrossMessage.cs" />
     <Compile Include="Models\DotWeb.WebPageToImage.cs" />
+    <Compile Include="Models\DynamicLibrary.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IFileHandle.cs" />
     <Compile Include="Models\IGetDetailNewId.cs" />
