@@ -1,15 +1,15 @@
-﻿@model ProcCore.Business.DB0.m_Product_Category_L2
+﻿@model ProcCore.Business.DB0.m_Product_Category_L1
 @{
     ViewBag.Title = "Products::FEATURE OF PRODUCT::" + Model.l1_name;
     ViewBag.BodyClass = "Products";
-    ViewBag.Target = Model.l3_list[0].l3_name;
+    ViewBag.Target = Model.l2_list[0].l3_list[0].l3_name;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
 @section breadCrumb {
     <li><a href="#">PRODUCTS</a></li>
     <li><a href="#">@Model.l1_name</a></li>
-    <li><a href="#">@Model.l2_name</a></li>
+    <li><a href="#">@Model.l2_list[0].l2_name</a></li>
 }
 
 @section Scripts {
@@ -22,12 +22,12 @@
 <div id="content">
 
     <header class="intro">
-        <h3 class="font-sp">@*<small>@Model.l1_name/</small> *@@Model.l2_name</h3>
+        <h3 class="font-sp">@*<small>@Model.l1_name/</small> *@@Model.l2_list[0].l2_name</h3>
         @* <h2 class="font-sp">FEATURE</h2>
             @Html.Raw(Model.l2_info) *@
     </header><!-- info //-->
 
-    @foreach (var l3 in Model.l3_list)
+    @foreach (var l3 in Model.l2_list[0].l3_list)
     {
         <section id="@("l3-"+l3.product_category_l3_id)" class="kind">
 

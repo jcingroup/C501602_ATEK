@@ -11,18 +11,20 @@ namespace ProcCore.Business.DB0
 {
     using System;
     using System.Collections.Generic;
-    public partial class m_Product_Category_L1 :BaseEntityTable {
-    public int product_category_l1_id { get; set; }
-    public string l1_name { get; set; }
-    public string l1_info { get; set; }
-    public int l1_sort { get; set; }
-    public bool i_Hide { get; set; }
-    public string i_InsertUserID { get; set; }
-    public Nullable<int> i_InsertDeptID { get; set; }
-    public Nullable<System.DateTime> i_InsertDateTime { get; set; }
-    public string i_UpdateUserID { get; set; }
-    public Nullable<int> i_UpdateDeptID { get; set; }
-    public Nullable<System.DateTime> i_UpdateDateTime { get; set; }
-    public string i_Lang { get; set; }
+    public partial class m_Product_Category_L1 : BaseEntityTable
+    {
+        public int product_category_l1_id { get; set; }
+        public int l1_id { get; set; }
+        public string l1_name { get; set; }
+        public string l1_info { get; set; }
+        public int l1_sort { get; set; }
+        public bool i_Hide { get; set; }
+        public string i_InsertUserID { get; set; }
+        public Nullable<int> i_InsertDeptID { get; set; }
+        public Nullable<System.DateTime> i_InsertDateTime { get; set; }
+        public string i_UpdateUserID { get; set; }
+        public Nullable<int> i_UpdateDeptID { get; set; }
+        public Nullable<System.DateTime> i_UpdateDateTime { get; set; }
+        public string i_Lang { get; set; }
     }
 }
