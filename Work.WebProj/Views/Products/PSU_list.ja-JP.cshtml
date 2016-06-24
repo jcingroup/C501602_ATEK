@@ -2,16 +2,26 @@
 @{
     ViewBag.Title = "プロダクト::FEATURE OF PRODUCT::" + Model.l1_name;
     ViewBag.BodyClass = "Products";
-    ViewBag.Target = Model.l2_list.FirstOrDefault().l3_list.FirstOrDefault().l3_name;
+    if (Request.QueryString["l3_id"] != null)
+    {
+        ViewBag.Target = Model.l2_list.FirstOrDefault().l3_list.FirstOrDefault().l3_name;
+    }
+    else
+    {
+        ViewBag.Target = Model.l2_list.FirstOrDefault().l2_name;
+    }
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
 @section breadCrumb {
     <li><a href="#">プロダクト</a></li>
-    <li><a href="~/Products/PSU_list?l1_id=@Model.product_category_l1_id">@Model.l1_name</a></li>
-    @if (Request.QueryString["l2_id"] != null)
+    @if (Request.QueryString["l1_id"] != null & Request.QueryString["l2_id"] == null)
     {
-        <li><a href="~/Products/PSU_list?l1_id=@Model.product_category_l1_id&l2_id=@Model.l2_list[0].product_category_l2_id">@Model.l2_list.FirstOrDefault().l2_name</a></li>
+        <li><a href="~/Products/PSU_list?l1_id=@Model.product_category_l1_id">@Model.l1_name</a></li>
+        if (Request.QueryString["l2_id"] != null & Request.QueryString["l3_id"] != null)
+        {
+            <li><a href="~/Products/PSU_list?l1_id=@Model.product_category_l1_id&l2_id=@Model.l2_list[0].product_category_l2_id">@Model.l2_list.FirstOrDefault().l2_name</a></li>
+        }
     }
 }
 
