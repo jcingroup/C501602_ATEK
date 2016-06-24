@@ -13,32 +13,33 @@ namespace DotWeb.WebApp.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            List<m_Product_Category_L1> l1 = new List<m_Product_Category_L1>();
-            using (var db0 = getDB0())
-            {
-                #region get category 
-                l1 = db0.Product_Category_L1.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.l1_sort)
-                                         .Select(x => new m_Product_Category_L1()
-                                         {
-                                             product_category_l1_id = x.product_category_l1_id,
-                                             l1_name = x.l1_name,
-                                             l1_info = x.l1_info,
-                                             l2_list = x.Product_Category_L2.Where(y => !y.i_Hide).OrderByDescending(y => y.l2_sort)
-                                                                            .Select(y => new m_Product_Category_L2()
-                                                                            {
-                                                                                product_category_l2_id = y.product_category_l2_id,
-                                                                                l2_name = y.l2_name,
-                                                                                l3_list = y.Product_Category_L3.Where(z => !z.i_Hide).OrderByDescending(z => z.l3_sort)
-                                                                                                             .Select(z => new m_Product_Category_L3()
-                                                                                                             {
-                                                                                                                 product_category_l3_id = z.product_category_l3_id,
-                                                                                                                 l3_name = z.l3_name
-                                                                                                             }).ToList()
-                                                                            }).ToList()
-                                         }).ToList();
-                #endregion
-            }
-            return View("PSU_catalog", l1);
+            //List<m_Product_Category_L1> l1 = new List<m_Product_Category_L1>();
+            //using (var db0 = getDB0())
+            //{
+            //    #region get category 
+            //    l1 = db0.Product_Category_L1.Where(x => !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name).OrderByDescending(x => x.l1_sort)
+            //                             .Select(x => new m_Product_Category_L1()
+            //                             {
+            //                                 product_category_l1_id = x.product_category_l1_id,
+            //                                 l1_name = x.l1_name,
+            //                                 l1_info = x.l1_info,
+            //                                 l2_list = x.Product_Category_L2.Where(y => !y.i_Hide).OrderByDescending(y => y.l2_sort)
+            //                                                                .Select(y => new m_Product_Category_L2()
+            //                                                                {
+            //                                                                    product_category_l2_id = y.product_category_l2_id,
+            //                                                                    l2_name = y.l2_name,
+            //                                                                    l3_list = y.Product_Category_L3.Where(z => !z.i_Hide).OrderByDescending(z => z.l3_sort)
+            //                                                                                                 .Select(z => new m_Product_Category_L3()
+            //                                                                                                 {
+            //                                                                                                     product_category_l3_id = z.product_category_l3_id,
+            //                                                                                                     l3_name = z.l3_name
+            //                                                                                                 }).ToList()
+            //                                                                }).ToList()
+            //                             }).ToList();
+            //    #endregion
+            //}
+            //return View("PSU_catalog", l1);
+            return Redirect("~/Products/PSU_list");
         }
         public ActionResult PSU_content(int? id)
         {
@@ -49,7 +50,7 @@ namespace DotWeb.WebApp.Controllers
                 bool Exist = db0.Product.Any(x => x.product_id == id & !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name);
                 if (id == null || !Exist)
                 {
-                    return Redirect("~/Products");
+                    return Redirect("~/Products/PSU_list");
                 }
                 else
                 {
@@ -104,42 +105,51 @@ namespace DotWeb.WebApp.Controllers
                 #region get content
                 bool Exist = db0.Product_Category_L2.Any(x => x.product_category_l2_id == l2_id & !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name);
                 bool Exist_l3 = db0.Product_Category_L3.Any(x => x.product_category_l3_id == l3_id & !x.i_Hide & x.i_Lang == System.Globalization.CultureInfo.CurrentCulture.Name);
-                if (l2_id == null || !Exist || !Exist_l3)
+                if (l2_id == null || Exist == false)
                 {
-                    return Redirect("~/Products");
+                    // Redirect("/Products/PSU_list?id="+l2_id+"&"+l3_id);
+                    //return Redirect("~/Products");
+                    l2_id = db0.Product_Category_L2.OrderBy(x => x.l2_sort).FirstOrDefault().product_category_l2_id;
                 }
-                else
+                if (l3_id == null || Exist_l3 == false)
                 {
-                    l2 = db0.Product_Category_L2.Where(x => x.product_category_l2_id == l2_id)
-                                                .Select(x => new m_Product_Category_L2()
-                                                {
-                                                    product_category_l2_id = x.product_category_l2_id,
-                                                    l1_name = x.Product_Category_L1.l1_name,
-                                                    l2_name = x.l2_name,
-                                                    l2_info = x.l2_info,
-                                                    l3_list = x.Product_Category_L3.Where(y => !y.i_Hide & y.product_category_l3_id == l3_id).OrderByDescending(y => y.l3_sort)
-                                                                                 .Select(y => new m_Product_Category_L3()
-                                                                                 {
-                                                                                     product_category_l3_id = y.product_category_l3_id,
-                                                                                     l3_name = y.l3_name,
-                                                                                     product_list = y.Product.Where(z => !z.i_Hide & z.Product_Category_L3.product_category_l3_id == l3_id).OrderByDescending(z => z.sort)
-                                                                                                           .Select(z => new m_Product()
-                                                                                                           {
-                                                                                                               product_id = z.product_id,
-                                                                                                               power = z.power,
-                                                                                                               models = z.ProductModel.ToList()
-                                                                                                           }).ToList()
-                                                                                 }).ToList()
-                                                }).FirstOrDefault();
+                    l3_id = db0.Product_Category_L3.Where(x=>x.l2_id==l2_id).OrderBy(x => x.l3_sort).FirstOrDefault().product_category_l3_id;
+                }
 
-                    foreach (var i in l2.l3_list)
+                l2 = db0.Product_Category_L2.Where(x => x.product_category_l2_id == l2_id)
+                                    .Select(x => new m_Product_Category_L2()
+                                    {
+                                        product_category_l2_id = x.product_category_l2_id,
+                                        l1_name = x.Product_Category_L1.l1_name,
+                                        l2_name = x.l2_name,
+                                        l2_info = x.l2_info,
+                                        l3_list = x.Product_Category_L3.Where(y => !y.i_Hide & y.product_category_l3_id == l3_id).OrderByDescending(y => y.l3_sort)
+                                                                     .Select(y => new m_Product_Category_L3()
+                                                                     {
+                                                                         product_category_l3_id = y.product_category_l3_id,
+                                                                         l3_name = y.l3_name,
+                                                                         product_list = y.Product.Where(z => !z.i_Hide & z.Product_Category_L3.product_category_l3_id == l3_id).OrderByDescending(z => z.sort)
+                                                                                               .Select(z => new m_Product()
+                                                                                               {
+                                                                                                   product_id = z.product_id,
+                                                                                                   power = z.power,
+                                                                                                   models = z.ProductModel.ToList()
+                                                                                               }).ToList()
+                                                                     }).ToList()
+                                    }).FirstOrDefault();
+
+
+
+
+
+                foreach (var i in l2.l3_list)
+                {
+                    foreach (var j in i.product_list)
                     {
-                        foreach (var j in i.product_list)
-                        {
-                            j.imgsrc = GetImg(j.product_id.ToString(), "img1", "Active", "ProductData", null);
-                        }
+                        j.imgsrc = GetImg(j.product_id.ToString(), "img1", "Active", "ProductData", null);
                     }
                 }
+
                 #endregion
             }
             ViewBag.l2_id = l2_id;
