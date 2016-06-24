@@ -1200,17 +1200,6 @@ main {
     float: none;
     width: 100%; } }
 
-.Products #main header h2 {
-  color: #559543;
-  letter-spacing: 2px;
-  margin-top: 0;
-  margin-bottom: 20px; }
-.Products #main section {
-  border-top: 1px solid #EAEFDE;
-  margin-top: 35px; }
-.Products #main .catalog, .Products #main .series {
-  border: none; }
-
 .catalog dl, .pro-nav dl {
   background: #f7f7f7; }
   .catalog dl .btn, .pro-nav dl .btn {
@@ -1287,17 +1276,19 @@ main {
 .catalog .btn {
   font-size: 1em; }
 
-.intro {
-  padding-top: 10px; }
-  .intro img {
-    margin-top: -35px; }
-    @media (max-width: 48em) {
-      .intro img {
-        margin-top: 0; } }
-  .intro h3 {
-    margin-top: 0;
-    margin-bottom: 0; }
+.kind + .intro {
+  margin-top: 30px;
+  padding-top: 35px;
+  border-top: 1px dashed #ebef6d; }
+.intro h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #415f16;
+  font-size: 1.5625em; }
 
+.intro + .kind {
+  border-top: 1px solid #EAEFDE;
+  margin-top: 15px; }
 @media (max-width: 61.1875em) {
   .kind {
     text-align: center; } }
