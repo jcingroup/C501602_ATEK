@@ -1,30 +1,37 @@
-﻿@model ProcCore.Business.DB0.m_Product_Category_L1
+﻿@model List<ProcCore.Business.DB0.m_Product_Category_L1>
 @{
-    ViewBag.Title = "プロダクト::FEATURE OF PRODUCT::" + Model.l1_name;
+    ViewBag.Title = "プロダクト::FEATURE OF PRODUCT::" + Model.FirstOrDefault().l1_name;
     ViewBag.BodyClass = "Products";
     if (Request.QueryString["l3_id"] != null)
     {
-        ViewBag.Target = Model.l2_list.FirstOrDefault().l3_list.FirstOrDefault().l3_name;
+        ViewBag.Target = ViewBag.l3_name;
     }
     else if (Request.QueryString["l2_id"] != null)
     {
-        ViewBag.Target = Model.l2_list.FirstOrDefault().l2_name;
+        ViewBag.Target = ViewBag.l2_name;
+    }
+    else if (Request.QueryString["l1_id"] != null)
+    {
+        ViewBag.Target = ViewBag.l1_name;
     }
     else
     {
-        ViewBag.Target = Model.l1_name;
+        ViewBag.Target = "PRODUCTS";
     }
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
 @section breadCrumb {
-    <li><a href="#">プロダクト</a></li>
-    @if (Request.QueryString["l2_id"] != null)
+    @if (Request.QueryString["l1_id"] != null)
     {
-        <li><a href="~/Products/PSU_list?l1_id=@Model.product_category_l1_id">@Model.l1_name</a></li>
-        if (Request.QueryString["l2_id"] != null & Request.QueryString["l3_id"] != null)
+        <li><a href="~/Products/PSU_list">プロダクト</a></li>
+        if (Request.QueryString["l2_id"] != null)
         {
-            <li><a href="~/Products/PSU_list?l1_id=@Model.product_category_l1_id&l2_id=@Model.l2_list[0].product_category_l2_id">@Model.l2_list.FirstOrDefault().l2_name</a></li>
+            <li><a href="~/Products/PSU_list?l1_id=@Model.FirstOrDefault().product_category_l1_id">@Model.FirstOrDefault().l1_name</a></li>
+            if (Request.QueryString["l2_id"] != null & Request.QueryString["l3_id"] != null)
+            {
+                <li><a href="~/Products/PSU_list?l1_id=@Model.FirstOrDefault()l.product_category_l1_id&l2_id=@Model.FirstOrDefault().l2_list[0].product_category_l2_id">@Model.FirstOrDefault().l2_list.FirstOrDefault().l2_name</a></li>
+            }
         }
     }
 }
@@ -36,36 +43,38 @@
 @Html.Partial("~/Views/Products/PSU_Sidebar.cshtml")
 
 <div id="content">
-    @foreach (var l2 in Model.l2_list)
+    @foreach (var l1 in Model)
     {
         <header class="intro">
-            <h3 class="font-sp">@*<small>@Model.l1_name/</small> *@@l2.l2_name</h3>
-            @* <h2 class="font-sp">FEATURE</h2>
-                @Html.Raw(Model.l2_info) *@
+            <h2 class="font-sp">@l1.l1_name</h2>
         </header><!-- info //-->
-
-
-        foreach (var l3 in l2.l3_list)
+        foreach (var l2 in l1.l2_list)
         {
-            <section id="@("l3-" + l3.product_category_l3_id)" class="kind">
+            <header class="intro">
+                <h3 class="font-sp">@l2.l2_name</h3>
+            </header><!-- info //-->
+            foreach (var l3 in l2.l3_list)
+            {
+                <section id="@("l3-"+l3.product_category_l3_id)" class="kind">
 
-                <h3 class="font-sp">@l3.l3_name</h3>
-                @foreach (var prod in l3.product_list)
-                {
-                    <figure>
-                        <img src="@prod.imgsrc" alt="@prod.power">
-                        <figcaption>
-                            <h4>@prod.power</h4>
-                            @foreach (var md in prod.models)
-                        {
-                                <span>@md.model_name</span>
-                            }
-                            <a href="~/Products/PSU_content?id=@prod.product_id">READ MORE</a>
-                        </figcaption>
-                    </figure>
-                }
-            </section>
+                    <h4 class="font-sp">@l3.l3_name</h4>
+                    @foreach (var prod in l3.product_list)
+                    {
+                        <figure>
+                            <img src="@prod.imgsrc" alt="@prod.power">
+                            <figcaption>
+                                <h5>@prod.power</h5>
+                                @foreach (var md in prod.models)
+                                {
+                                    <span>@md.model_name</span>
+                                }
+                                <a href="~/Products/PSU_content?id=@prod.product_id">READ MORE</a>
+                            </figcaption>
+                        </figure>
+                    }
+                </section>
+            }
         }
-    }
 
+    }
 </div><!-- content //-->
