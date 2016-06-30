@@ -359,7 +359,7 @@ body {
     dt {
         font-size: em(19px);
         line-height: 1.7;
-        color: #222;
+        color: darken($brand-primary,5);
         border-bottom: 2px solid #ccc;
         margin-bottom: 15px;
 
@@ -374,7 +374,11 @@ body {
         &:last-of-type { margin-bottom: 0; }
     }
 
-    h5 { margin-bottom: 3px; line-height: 1.1;}
+    h5 {
+        margin-bottom: 8px;
+        line-height: 1.1;
+        color: darken($brand-primary,25);
+    }
 
     a {
         display: block;
@@ -382,7 +386,7 @@ body {
         // padding-left: $gutter - 2px;
         text-align: left;
         font-size: em(15px);
-        color: #000;
+        color: #555;
 
         position: relative;
 

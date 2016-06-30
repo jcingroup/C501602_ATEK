@@ -91,22 +91,22 @@ main {
 }
 
 // == Products
-.Products #main {
-    // header h2 {
-    //     color: $brand-secondary;
-    //     letter-spacing: 2px;
-    //     margin-top: 0;
-    //     margin-bottom: 20px;
-    // }
-    section {
-        // border-bottom: $line;
-        // margin-top: 25px;
-        // padding-bottom: 20px;
+// .Products #main {
+//     header h2 {
+//         color: $brand-secondary;
+//         letter-spacing: 2px;
+//         margin-top: 0;
+//         margin-bottom: 20px;
+//     }
+//     section {
+//         border-bottom: $line;
+//         margin-top: 25px;
+//         padding-bottom: 20px;
 
-        // &:last-of-type { border-bottom: none; }
-    }
-    // .catalog, .series { border: none; }
-}
+//         &:last-of-type { border-bottom: none; }
+//     }
+//     .catalog, .series { border: none; }
+// }
 
 // 產品分類選單
 .catalog, .pro-nav {
@@ -141,7 +141,7 @@ main {
         @extend %effect-all;
         margin-bottom: 25px;
 
-        @include mq-max(tablet) {
+        @include mq-max(break(desktop,-1)) {
             display: none;
             // @include absolute(left $gutter right $gutter);
             // background: lighten($gray-base, 96%);

@@ -48,9 +48,9 @@
 
     @foreach (var l1 in Model)
     {
-        <header class="intro">
+        @* <header class="intro">
             <h2 class="font-sp">@l1.l1_name</h2>
-        </header><!-- info //-->
+        </header><!-- info //--> *@
         foreach (var l2 in l1.l2_list)
         {
             <header class="intro">
@@ -60,13 +60,13 @@
             {
                 <section id="@("l3-"+l3.product_category_l3_id)" class="kind">
 
-                    <h4 class="font-sp">@l3.l3_name</h4>
+                    <h3 class="font-sp">@l3.l3_name</h3>
                     @foreach (var prod in l3.product_list)
                     {
                         <figure>
                             <img src="@prod.imgsrc" alt="@prod.power">
                             <figcaption>
-                                <h5>@prod.power</h5>
+                                <h4>@prod.power</h4>
                                 @foreach (var md in prod.models)
                                 {
                                     <span>@md.model_name</span>
@@ -78,10 +78,5 @@
                 </section>
             }
         }
-
     }
-
-
-
-
 </div><!-- content //-->

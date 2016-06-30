@@ -75,11 +75,14 @@ figure {
 
     @include middle(img) {
         max-width: 95%;
-        max-height: $figure-height - 45px;
-        margin-bottom: 35px;
 
         @include prefix(transition, transform .7s);
         @include prefix(transform-origin, 50% 50%);
+
+        @include mq(break(desktop,+1)) {
+            max-height: $figure-height - 45px;
+            margin-bottom: 35px;
+        }
     }
 
     h4 {

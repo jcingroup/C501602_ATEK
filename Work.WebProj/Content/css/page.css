@@ -747,7 +747,7 @@ body {
   .sub-nav dt {
     font-size: 1.1875em;
     line-height: 1.7;
-    color: #222;
+    color: #6b9d24;
     border-bottom: 2px solid #ccc;
     margin-bottom: 15px; }
     @media (max-width: 61.1875em) {
@@ -759,14 +759,15 @@ body {
     .sub-nav dd:last-of-type {
       margin-bottom: 0; }
   .sub-nav h5 {
-    margin-bottom: 3px;
-    line-height: 1.1; }
+    margin-bottom: 8px;
+    line-height: 1.1;
+    color: #334a11; }
   .sub-nav a {
     display: block;
     padding: 6px 0;
     text-align: left;
     font-size: 0.9375em;
-    color: #000;
+    color: #555;
     position: relative; }
     .sub-nav a::before {
       position: absolute;
@@ -1002,12 +1003,14 @@ figcaption {
 figure img {
   display: inline-block;
   max-width: 95%;
-  max-height: 175px;
-  margin-bottom: 35px;
   -webkit-transition: transform 0.7s;
   transition: transform 0.7s;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%; }
+  @media (min-width: 61.3125em) {
+    figure img {
+      max-height: 175px;
+      margin-bottom: 35px; } }
 figure h4 {
   position: absolute;
   right: 0;
@@ -1221,7 +1224,7 @@ main {
 
 .pro-nav nav {
   margin-bottom: 25px; }
-  @media (max-width: 48em) {
+  @media (max-width: 61.1875em) {
     .pro-nav nav {
       display: none; } }
 .pro-nav header {
