@@ -5,6 +5,36 @@
     ViewBag.Target = "PRODUCTS";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+@{
+    string jp_SetLang = Url.Action("SetLanguage") + "?L=ja-JP&A=", en_SetLang = Url.Action("SetLanguage") + "?L=L=en-US&A=";
+    if (Request.Url.Segments.Length > 2)
+    {
+        jp_SetLang = Url.Action("SetLanguage") + "?L=ja-JP&A=" + Request.Url.Segments[2];
+        en_SetLang = Url.Action("SetLanguage") + "?L=en-US&A=" + Request.Url.Segments[2];
+    }
+    if (Request.Url.Segments.Length > 1)
+    {
+        if (Request.Url.Segments[1].IndexOf("Products/PSU_list") >= 0)
+        {
+            string id = Request.QueryString["id"];
+            int[] en = { 3, 7, 8, 9 };
+            int[] jp = { 2, 4, 5, 6 };
+            int index = 0;
+            if (id != null)
+            {
+                for (var i = 0; i < jp.Length; i++)
+                {
+                    if (jp[i] == int.Parse(id))
+                    {
+                        index = i;
+                    }
+                }
+            }
+            en_SetLang = Url.Action("SetLanguage") + "?L=en-US&A=index&id=" + en[index];
+            jp_SetLang = Url.Action("SetLanguage") + "?L=ja-JP&A=index&id=" + jp[index];
+        }
+    }
+}
 
 @foreach (var item in Model)
 {
@@ -23,7 +53,7 @@
                 <dd>
                     @foreach (var l3 in l2.l3_list)
                     {
-                        <a href=@("Products/PSU_list?l2_id="+l2.product_category_l2_id+"&l3_id="+l3.product_category_l3_id+"#l3-"+l3.product_category_l3_id) class="btn">@l3.l3_name</a>
+                        <a href=@("Products/PSU_list?l1_id="+item.product_category_l1_id+"l2_id="+l2.product_category_l2_id+"&l3_id="+l3.product_category_l3_id+"#l3-"+l3.product_category_l3_id) class="btn">@l3.l3_name</a>
                     }
                 </dd>
             </dl>

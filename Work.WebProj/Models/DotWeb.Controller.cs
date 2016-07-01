@@ -1122,6 +1122,14 @@ namespace DotWeb.Controller
             Response.Cookies.Add(WebLang);
             return Redirect(Url.Action(A));
         }
+        public RedirectResult SetLanguageForP(string L, string A,int l1_id)
+        {
+            HttpCookie WebLang = new HttpCookie(DotWeb.CommSetup.CommWebSetup.WebCookiesId + ".Lang", L);
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(WebLang.Value);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(WebLang.Value);
+            Response.Cookies.Add(WebLang);
+            return Redirect(Url.Content(A+"?l1_id="+l1_id));
+        }
         protected override string getRecMessage(string MsgId)
         {
             return Resources.Res.ResourceManager.GetString(MsgId);

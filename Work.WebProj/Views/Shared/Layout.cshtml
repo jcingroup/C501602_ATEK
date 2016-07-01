@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<ProcCore.Business.DB0.m_Product_Category_L1>
+@{
 
     var sidebar = (List<ProcCore.Business.DB0.L1>)ViewBag.Sidebar;
 }
@@ -28,6 +29,38 @@
         <link href="~/Content/css/page.css" rel="stylesheet">
     }
     <link href="~/Content/css/grid.css" rel="stylesheet">
+    @{
+        string jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=index"
+            , en_SetLang = Url.Action("SetLanguageForP") + "?L=L=en-US&A=index";
+        int l1id = Model.FirstOrDefault().product_category_l1_id;
+        if (Request.Url.Segments.Length > 2)
+        {
+            jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=" + Request.Url.Segments[2]+"&l1_id="  + l1id;
+            en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=" + Request.Url.Segments[2] + "&l1_id=" + l1id;
+        }
+        if (Request.Url.Segments.Length > 1)
+        {
+            if (Request.Url.Segments[1].IndexOf("Products/PSU_list?l1_id=") >= 0)
+            {
+                string id = Request.QueryString["l1_id"];
+                int[] en = { 3, 7, 8, 9 };
+                int[] jp = { 2, 4, 5, 6 };
+                int index = 0;
+                if (id != null)
+                {
+                    for (var i = 0; i < jp.Length; i++)
+                    {
+                        if (jp[i] == int.Parse(id))
+                        {
+                            index = i;
+                        }
+                    }
+                }
+                en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=" + en[index] + "&l1_id=" + l1id;
+                jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=" + jp[index] + "&l1_id=" + l1id;
+            }
+        }
+    }
 </head>
 
 <body class="@ViewBag.BodyClass">
@@ -88,8 +121,7 @@
             <div class="dropdown">
                 <button class="dropbtn">English</button> @* Language *@
                 <nav class="dropdown-content">
-                    @* <a href="@Url.Action("SetLanguage")?L=en-US&A=index" class="current">English</a> *@
-                    <a href="@Url.Action("SetLanguage")?L=ja-JP&A=index">日本語</a>
+                    <a href="@jp_SetLang">日本語</a>
                 </nav>
             </div>
         </header><!-- header //-->
