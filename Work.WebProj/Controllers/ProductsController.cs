@@ -103,6 +103,7 @@ namespace DotWeb.WebApp.Controllers
             // m_Product_Category_L1 l1 = new m_Product_Category_L1();
             List<m_Product_Category_L1> L1_list = new List<m_Product_Category_L1>();
             string l1_name = string.Empty, l2_name = string.Empty, l3_name = string.Empty;
+            ajax_GetProductLang();
             try
             {
                 using (var db0 = getDB0())
@@ -131,18 +132,18 @@ namespace DotWeb.WebApp.Controllers
                             product_category_l1_id = x.product_category_l1_id,
                             l1_name = x.l1_name,
                             l1_info = x.l1_info,
-                            l2_list = x.Product_Category_L2.Where(y => !y.i_Hide).OrderByDescending(y => y.l2_sort )
+                            l2_list = x.Product_Category_L2.Where(y => !y.i_Hide).OrderByDescending(y => y.l2_sort)
                                 .Select(y => new m_Product_Category_L2()
                                 {
                                     product_category_l2_id = y.product_category_l2_id,
                                     l2_name = y.l2_name,
                                     l2_info = y.l2_info,
-                                    l3_list = y.Product_Category_L3.Where(z => !z.i_Hide).OrderByDescending(z => z.l3_sort )
+                                    l3_list = y.Product_Category_L3.Where(z => !z.i_Hide).OrderByDescending(z => z.l3_sort)
                                         .Select(z => new m_Product_Category_L3()
                                         {
                                             product_category_l3_id = z.product_category_l3_id,
                                             l3_name = z.l3_name,
-                                            product_list = z.Product.Where(a => !a.i_Hide).OrderByDescending(a =>  a.sort)
+                                            product_list = z.Product.Where(a => !a.i_Hide).OrderByDescending(a => a.sort)
                                                 .Select(a => new m_Product()
                                                 {
                                                     product_id = a.product_id,
@@ -152,7 +153,7 @@ namespace DotWeb.WebApp.Controllers
                                         }).ToList()
                                 }).ToList()
                         }).ToList();
-                    
+
                     if (l1_id != null & Exist_l1)
                     {
                         L1_list = L1_list.Where(x => x.product_category_l1_id == l1_id).ToList();
@@ -161,15 +162,15 @@ namespace DotWeb.WebApp.Controllers
 
                     if (l2_id != null & Exist)
                     {
-                        L1_list.FirstOrDefault().l2_list= L1_list.FirstOrDefault().l2_list.Where(x => x.product_category_l2_id == l2_id).ToList();
+                        L1_list.FirstOrDefault().l2_list = L1_list.FirstOrDefault().l2_list.Where(x => x.product_category_l2_id == l2_id).ToList();
                         l2_name = L1_list.FirstOrDefault().l2_list.Where(x => x.product_category_l2_id == l2_id).FirstOrDefault().l2_name;
                     }
                     if (l3_id != null & Exist_l3)
                     {
                         L1_list.FirstOrDefault().l2_list[0].l3_list = L1_list.FirstOrDefault().l2_list[0].l3_list.Where(x => x.product_category_l3_id == l3_id).ToList();
-                        l3_name = L1_list.FirstOrDefault().l2_list.FirstOrDefault().l3_list.Where(x=>x.product_category_l3_id==l3_id).FirstOrDefault().l3_name;
+                        l3_name = L1_list.FirstOrDefault().l2_list.FirstOrDefault().l3_list.Where(x => x.product_category_l3_id == l3_id).FirstOrDefault().l3_name;
                     }
-                    
+
                     foreach (var i in L1_list)
                     {
                         foreach (var j in i.l2_list)
@@ -200,10 +201,36 @@ namespace DotWeb.WebApp.Controllers
             ViewBag.l3_name = l3_name;
             return View(L1_list);
         }
+        public void ajax_GetProductLang()
+        {
+            List<ProductLang> item = new List<ProductLang>();
+            using (var db0 = getDB0())
+            {
+                #region get category 
+                //var studentName = db0.Database.SqlQuery<Product>("Select * from Product").ToList();
+
+
+
+               item = db0.Product_Category_L1.Where(x => !x.i_Hide).OrderByDescending(x => x.l1_sort)
+                                       .GroupBy(x => x.i_Lang)
+                                       .Select(x => new ProductLang()
+                                       {
+                                           lang = x.Key,
+                                           data = x.Select(y => y.product_category_l1_id).ToList()
+                                       }).ToList();
+                #endregion
+            }
+            ViewBag.lang = item;
+        }
     }
     public class ProductContent
     {
         public Product item { get; set; }
         public List<m_Product> product_list { get; set; }
+    }
+    public class ProductLang
+    {
+        public string lang { get; set; }
+        public List<int> data { get; set; }
     }
 }

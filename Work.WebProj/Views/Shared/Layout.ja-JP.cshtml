@@ -1,6 +1,4 @@
-﻿@model List<ProcCore.Business.DB0.m_Product_Category_L1>
-@{
-
+﻿@{
     var sidebar = (List<ProcCore.Business.DB0.L1>)ViewBag.Sidebar;
 }
 <!DOCTYPE html>
@@ -30,35 +28,38 @@
     {
         <link href="~/Content/css/page.css" rel="stylesheet">
     }
+    <link href="~/Content/css/grid.css" rel="stylesheet">
     @{
-        string jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=index" 
-            , en_SetLang = Url.Action("SetLanguageForP") + "?L=L=en-US&A=index" ;
-        int l1id =  Model.FirstOrDefault().product_category_l1_id;
+        string jp_SetLang = Url.Action("SetLanguage") + "?L=ja-JP&A=index"
+            , en_SetLang = Url.Action("SetLanguage") + "?L=en-US&A=index";
+
         if (Request.Url.Segments.Length > 2)
         {
-            jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=" + Request.Url.Segments[2] + "&l1_id=" + l1id;
-            en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=" + Request.Url.Segments[2] + "&l1_id=" + l1id;
-        }
-        if (Request.Url.Segments.Length > 1)
-        {
-            if (Request.Url.Segments[1].IndexOf("Products/PSU_list?l1_id=") >= 0)
+            if (Request.Url.Segments[2].IndexOf("PSU_list") >= 0)
             {
+                var lang = (List<DotWeb.WebApp.Controllers.ProductLang>)ViewBag.lang;
                 string id = Request.QueryString["l1_id"];
-                int[] en = { 3, 7, 8, 9 };
-                int[] jp = { 2, 4, 5, 6 };
+                int[] en ;
+                int[] jp ;
                 int index = 0;
-                if (id != null)
+                foreach (var la in lang)
                 {
-                    for (var i = 0; i < jp.Length; i++)
+                    jp = la.data.ToArray();
+                    en = la.data.ToArray();
+                    if (id != null)
                     {
-                        if (jp[i] == int.Parse(id))
-                        {
-                            index = i;
+                        for (var i = 0; i < jp.Length; i++)
+                         {
+                            if (jp[i] == int.Parse(id))
+                            {
+                                index = i;
+                            }
                         }
                     }
+                    
+                en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=PSU_list" + "&l1_id=" + en[index];
+                jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=PSU_list" + "&l1_id=" + jp[index];
                 }
-                en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=" + en[index] + "&l1_id=" + l1id;
-                jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=" + jp[index] + "&l1_id=" + l1id;
             }
         }
     }
