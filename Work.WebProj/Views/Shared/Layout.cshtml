@@ -39,27 +39,23 @@
             {
                 var lang = (List<DotWeb.WebApp.Controllers.ProductLang>)ViewBag.lang;
                 string id = Request.QueryString["l1_id"];
-                int[] en;
-                int[] jp;
+                int[] en= lang.Where(x=>x.lang== "en-US").First().data.ToArray();
+                int[] jp= lang.Where(x => x.lang == "ja-JP").First().data.ToArray();
                 int index = 0;
-                foreach (var la in lang)
+
+                if (id != null)
                 {
-                    jp = la.data.ToArray();
-                    en = la.data.ToArray();
-                    if (id != null)
+                    for (var i = 0; i < en.Length; i++)
                     {
-                        for (var i = 0; i < en.Length; i++)
+                        if (en[i] == int.Parse(id))
                         {
-                            if (en[i] == int.Parse(id))
-                            {
-                                index = i;
-                            }
+                            index = i;
                         }
                     }
+                }
 
                 en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=PSU_list" + "&l1_id=" + en[index];
                 jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=PSU_list" + "&l1_id=" + jp[index];
-                }
             }
         }
     }
