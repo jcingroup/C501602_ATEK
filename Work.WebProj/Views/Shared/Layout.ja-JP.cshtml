@@ -17,6 +17,8 @@
         var gb_approot = '@Url.Content("~")';
     </script>
     <!--[if lt IE 9]><script src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="bookmark" href="/favicon.ico" />
     <link href="~/Content/css/grid.css" rel="stylesheet">
     <link href="~/Content/css/swiper.min.css" rel="stylesheet">
     @RenderSection("css", false)
@@ -56,7 +58,7 @@
                             }
                         }
                     }
-                    
+
                 en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=PSU_list" + "&l1_id=" + en[index];
                 jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=PSU_list" + "&l1_id=" + jp[index];
                 }
