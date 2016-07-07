@@ -30,7 +30,7 @@
             <li><a href="~/Products/PSU_list?l1_id=@Model.FirstOrDefault().product_category_l1_id">@Model.FirstOrDefault().l1_name</a></li>
             if (Request.QueryString["l2_id"] != null & Request.QueryString["l3_id"] != null)
             {
-                <li><a href="~/Products/PSU_list?l1_id=@Model.FirstOrDefault()l.product_category_l1_id&l2_id=@Model.FirstOrDefault().l2_list[0].product_category_l2_id">@Model.FirstOrDefault().l2_list.FirstOrDefault().l2_name</a></li>
+                <li><a href="~/Products/PSU_list?l1_id=@Model.FirstOrDefault().product_category_l1_id&l2_id=@Model.FirstOrDefault().l2_list[0].product_category_l2_id">@Model.FirstOrDefault().l2_list.FirstOrDefault().l2_name</a></li>
             }
         }
     }
