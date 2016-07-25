@@ -30,8 +30,8 @@
     }
     <link href="~/Content/css/grid.css" rel="stylesheet">
     @{
-        string jp_SetLang = Url.Action("SetLanguage") + "?L=ja-JP&A=index"
-            , en_SetLang = Url.Action("SetLanguage") + "?L=en-US&A=index";
+        string jp_SetLang = Url.Action("index") + "?lang=ja-JP"
+            , en_SetLang = Url.Action("index") + "?lang=en-US";
 
         if (Request.Url.Segments.Length > 2)
         {
@@ -54,8 +54,8 @@
                     }
                 }
 
-                en_SetLang = Url.Action("SetLanguageForP") + "?L=en-US&A=PSU_list" + "&l1_id=" + en[index];
-                jp_SetLang = Url.Action("SetLanguageForP") + "?L=ja-JP&A=PSU_list" + "&l1_id=" + jp[index];
+                en_SetLang = Url.Content("~/Products/PSU_list?lang=en-US&l1_id=" + en[index]);
+                jp_SetLang = Url.Content("~/Products/PSU_list?lang=ja-JP&l1_id=" + jp[index]);
             }
         }
     }
