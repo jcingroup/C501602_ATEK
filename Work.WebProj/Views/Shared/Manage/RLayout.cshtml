@@ -34,12 +34,15 @@
     <div id="container">
         <div id="header">
             <div class="wrap">
-                @if (CommWebSetup.IsDemo == "1")
-            {
-                    @*<div class="text-center" style="background-color:#D9534F;color:white;font-size:large;">網站已正式上線，此為內部demo站</div>*@
-                }
                 <h1>
-                    <a href="#" title="@Resources.Res.Info_Home" tabindex="-1">@Resources.Res.System_Name::網站已正式上線，此為內部demo站</a>
+                    <a href="#" title="@Resources.Res.Info_Home" tabindex="-1">
+                        @Resources.Res.System_Name
+
+                        @if (CommWebSetup.IsDemo == "1")
+                        {
+                            <span>::網站已正式上線，此為內部demo站</span>
+                        }
+                    </a>
                 </h1><!-- logo -->
                 <div id="menu">
                     <ul class="menu">
