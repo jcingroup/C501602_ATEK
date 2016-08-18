@@ -15,6 +15,7 @@ namespace DotWeb.WebApp.Controllers
         public ActionResult Index()
         {
             List<m_Product_Category_L1> l1 = new List<m_Product_Category_L1>();
+
             using (var db0 = getDB0())
             {
                 #region get category 
