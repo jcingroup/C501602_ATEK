@@ -395,6 +395,7 @@
     <Content Include="Content\js\lightbox.min.js" />
     <Content Include="Content\js\map.js" />
     <Content Include="Content\js\scrollspy.js" />
+    <Content Include="Content\js\tab.js" />
     <Content Include="Content\sass\editor.scss" />
     <Content Include="Content\sass\grid.scss" />
     <Content Include="Content\sass\index.scss" />
@@ -438,6 +439,7 @@
     <Content Include="Content\sass\vendor\magnific-popup\_settings.scss" />
     <Content Include="Areas\Base\Views\Menu\Main.cshtml" />
     <Content Include="Content\sass\editor-table.scss" />
+    <Content Include="Content\sass\module\_tab.scss" />
     <None Include="gulpfile.js" />
     <Content Include="Content\images\noIE\bg.gif" />
     <Content Include="Content\images\noIE\brow.gif" />
